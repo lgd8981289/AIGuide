@@ -4,6 +4,7 @@ import Topbar from "../components/Topbar.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Footer from "../components/Footer.astro";
 import SearchDialog from "../components/SearchDialog.astro";
+import FollowModal from "../components/FollowModal.astro";
 import { SITE, moduleOfPath } from "../data/site";
 import { url, absoluteUrl } from "../utils";
 
@@ -83,5 +84,6 @@ const canonical = absoluteUrl(path);
     </div>
     <Footer />
     <SearchDialog />
+    <FollowModal />
   </body>
 </html>

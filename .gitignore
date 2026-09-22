@@ -11,3 +11,6 @@ npm-debug.log*
 # environment
 .DS_Store
 操作手册.md
+
+# 本地发布脚本（含服务器密码，切勿提交）
+deploy.sh

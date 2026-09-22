@@ -37,44 +37,31 @@ const fmt = (d: Date) =>
       <a href={url("/")}>首页</a> / {meta.title}
     </div>
     <h1>{meta.title}</h1>
-    <p class="desc">{meta.description}</p>
-    <div class="stats" style="margin-top: 18px;">
+    <p class="desc">{meta.shortIntro}</p>
+    <div class="stats" style="margin-top: 16px;">
       <span><b>{cats.length}</b>个分类</span>
       <span><b>{list.length}</b>{meta.countUnit}</span>
       <span><b>{started}</b>个分类已开更</span>
     </div>
   </div>
 
-  <section>
-    <h2 class="section-title">{meta.groupTitle}<small>按分类进入</small></h2>
-    <div class="cat-grid">
-      {
-        cats.map((c) => {
-          const items = byCat.get(c.slug) ?? [];
-          return (
-            <a class="cat-card" href={url(`/${c.slug}/`)}>
-              <h3>{c.name}</h3>
-              <p>{c.intro}</p>
-              <div class="meta">
-                <b>{items.length}</b> {meta.countUnit}
-              </div>
-            </a>
-          );
-        })
-      }
-    </div>
-  </section>
+  <nav class="cat-chips" data-pagefind-ignore>
+    {
+      cats.map((c) => (
+        <a href={`#${c.slug}`}>
+          {c.name}
+          <span>{byCat.get(c.slug)?.length ?? 0}</span>
+        </a>
+      ))
+    }
+  </nav>
 
-  <section style="margin-top: 46px;">
-    <h2 class="section-title">
-      {list.length > 0 ? "全部内容" : "内容筹备中"}
-      <small>按分类分组</small>
-    </h2>
+  <div style="padding-bottom: 20px;">
     {
       cats.map((c) => {
         const items = byCat.get(c.slug) ?? [];
         return (
-          <div class="series-group">
+          <div class="series-group" id={c.slug}>
             <h3 class="series-group-title">
               <a href={url(`/${c.slug}/`)}>{c.name}</a>
               <span class="cnt">
@@ -94,17 +81,15 @@ const fmt = (d: Date) =>
                 ))}
               </ul>
             ) : (
-              <div class="empty-hint">
-                这个分类正在筹备中，内容会在写作完成后第一时间发布。
-              </div>
+              <div class="empty-hint compact">这个分类正在筹备中</div>
             )}
           </div>
         );
       })
     }
-  </section>
+  </div>
 
-  <div style="margin-top: 40px;">
+  <div>
     <ResumeCta variant="inline" />
   </div>
 </BaseLayout>

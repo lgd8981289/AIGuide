@@ -29,11 +29,12 @@ export interface ModuleMeta {
 	name: string
 	/** 模块落地页 */
 	href: string
-	/** 落地页标题与描述 */
+	/** 页面标题 */
 	title: string
+	/** 页面 meta description（较长，给搜索引擎） */
 	description: string
-	/** 列表区标题（「面试题系列」/「教程分类」） */
-	groupTitle: string
+	/** 页面顶部的一句话说明（列表页只留一句，别做成介绍页） */
+	shortIntro: string
 	/** 计数单位（道题 / 篇文章） */
 	countUnit: string
 	/** 上下篇文案 */
@@ -49,7 +50,8 @@ export const MODULE_META: Record<ModuleKey, ModuleMeta> = {
 		title: 'AI 面试题',
 		description:
 			'按六个系列系统刷题。每道题都从一个真实工程场景出发，先还原面试官的追问链路，再给出能落地、经得起追问的回答。',
-		groupTitle: '面试题系列',
+		shortIntro:
+			'六个系列，按分类刷题：每道题都从真实工程场景出发，给出能落地、经得起追问的回答。',
 		countUnit: '道题',
 		prevLabel: '上一题',
 		nextLabel: '下一题'
@@ -61,7 +63,8 @@ export const MODULE_META: Record<ModuleKey, ModuleMeta> = {
 		title: 'AI 编程教程',
 		description:
 			'0 基础也能上手的 AI 编程与 AI 工具教程：工具安装配置、Agent 能力扩展、工程方法与实践、模型实测，每篇讲清一个完整主题。',
-		groupTitle: '教程分类',
+		shortIntro:
+			'四类教程，0 基础也能跟着做：从工具安装配置到实际使用与效果判断，每篇讲清一个完整主题。',
 		countUnit: '篇文章',
 		prevLabel: '上一篇',
 		nextLabel: '下一篇'

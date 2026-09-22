@@ -1,0 +1,67 @@
+---
+// 关注公众号弹窗
+// 任何带 data-follow-open 的元素点击后都会打开它（目前用在页脚的「程序员Sunday」按钮）
+// 图片延迟到首次打开才加载，避免给正常浏览增加流量
+import { url } from "../utils";
+
+const qrcode = url("/wechat-qrcode.jpg");
+---
+
+<div class="follow-modal" id="follow-modal" hidden data-pagefind-ignore>
+  <div class="fm-panel" role="dialog" aria-modal="true" aria-label="关注公众号 程序员Sunday">
+    <button class="fm-close" type="button" aria-label="关闭">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+    <img
+      class="fm-img"
+      data-src={qrcode}
+      alt="微信搜一搜或扫码关注公众号：程序员Sunday"
+      width="600"
+      height="192"
+    />
+    <p class="fm-title">微信搜一搜「程序员Sunday」，或扫码关注</p>
+    <p class="fm-tip">
+      新文章第一时间推送；站点文章需要解锁时，在公众号里回复「验证码」即可领取链接。
+    </p>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById("follow-modal") as HTMLElement | null;
+
+  if (modal) {
+    const img = modal.querySelector<HTMLImageElement>(".fm-img")!;
+
+    const open = () => {
+      if (!img.getAttribute("src")) img.src = img.dataset.src || "";
+      modal.hidden = false;
+      requestAnimationFrame(() => modal.classList.add("open"));
+      document.documentElement.classList.add("fm-lock");
+    };
+
+    const close = () => {
+      modal.classList.remove("open");
+      document.documentElement.classList.remove("fm-lock");
+      window.setTimeout(() => {
+        modal.hidden = true;
+      }, 180);
+    };
+
+    document.querySelectorAll("[data-follow-open]").forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        event.preventDefault();
+        open();
+      });
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) close();
+    });
+    modal.querySelector(".fm-close")?.addEventListener("click", close);
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !modal.hidden) close();
+    });
+  }
+</script>
