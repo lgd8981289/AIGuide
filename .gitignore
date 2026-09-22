@@ -14,3 +14,7 @@ npm-debug.log*
 
 # 本地发布脚本（含服务器密码，切勿提交）
 deploy.sh
+
+# 图片原图（由 npm run sync 生成，可重建，不进仓库）
+img-src/
+public/img/.manifest.json

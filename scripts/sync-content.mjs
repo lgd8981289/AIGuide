@@ -19,7 +19,8 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const OUT_DIR = path.join(ROOT, "src", "content", "articles");
-const IMG_DIR = path.join(ROOT, "public", "img");
+// 原图（打水印后的）先落到 img-src/，再由 optimize-images.py 压成 WebP 输出到 public/img/
+const IMG_SRC_DIR = path.join(ROOT, "img-src");
 const BASE = "/note";
 
 const SOURCES = JSON.parse(
@@ -172,7 +173,7 @@ function rewriteImages(md, num) {
 function main() {
   // 幂等：先清空旧产物
   fs.rmSync(OUT_DIR, { recursive: true, force: true });
-  fs.rmSync(IMG_DIR, { recursive: true, force: true });
+  fs.rmSync(IMG_SRC_DIR, { recursive: true, force: true });
 
   let total = 0;
 
@@ -254,7 +255,7 @@ function main() {
         // 拷贝图片（实验素材等子目录不处理，只拷贝 正文.assets）
         const assets = path.join(catDir, entry.name, "正文.assets");
         if (fs.existsSync(assets)) {
-          fs.cpSync(assets, path.join(IMG_DIR, num), { recursive: true });
+          fs.cpSync(assets, path.join(IMG_SRC_DIR, num), { recursive: true });
         }
 
         count++;

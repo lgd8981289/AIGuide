@@ -10,7 +10,7 @@ import CodeTabs from "../../components/CodeTabs.astro";
 import CopyGuard from "../../components/CopyGuard.astro";
 import CodeCopy from "../../components/CodeCopy.astro";
 import ImageZoom from "../../components/ImageZoom.astro";
-import { CATEGORIES, COPY_GUARD, MODULE_META, SITE } from "../../data/site";
+import { CATEGORIES, COPY_GUARD, MODULE_META, SITE, categoriesOf } from "../../data/site";
 import { getArticlesByCategory } from "../../data/articles";
 import { url, absoluteUrl } from "../../utils";
 
@@ -45,6 +45,14 @@ const idx = siblings.findIndex((s) => s.entry.id === entry.id);
 const prev = idx > 0 ? siblings[idx - 1] : null;
 const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
 
+// 相关文章（内链）：先同分类的其他文章，不够再从同模块补齐
+const byCat = await getArticlesByCategory();
+const sameCat = siblings.filter((s) => s.entry.id !== entry.id);
+const sameModule = categoriesOf(cat.module)
+  .flatMap((c) => (c.slug === cat.slug ? [] : byCat.get(c.slug) ?? []))
+  .filter((s) => s.entry.id !== entry.id);
+const related = [...sameCat, ...sameModule].slice(0, 4);
+
 const fmt = (d: Date) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
     d.getDate()
@@ -59,8 +67,28 @@ const jsonLd = [
     description: entry.data.description,
     datePublished: dateISO,
     dateModified: dateISO,
-    author: { "@type": "Person", name: SITE.author, url: SITE.mainSite },
+    inLanguage: "zh-CN",
+    articleSection: cat.name,
+    author: {
+      "@type": "Person",
+      name: SITE.author,
+      url: SITE.mainSite,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE.name,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl(SITE.logo || "/favicon.svg"),
+      },
+    },
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE.name,
+      url: absoluteUrl("/"),
+    },
     mainEntityOfPage: pageUrl,
+    image: absoluteUrl("/og-cover.jpg"),
   },
   {
     "@context": "https://schema.org",
@@ -109,6 +137,7 @@ if (entry.data.faqAnswer) {
   description={entry.data.description}
   path={pagePath}
   sidebar
+  ogType="article"
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd[0])} />
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd[1])} />
@@ -168,6 +197,24 @@ if (entry.data.faqAnswer) {
           )
         }
       </article>
+
+      {
+        related.length > 0 && (
+          <nav class="related" aria-label="相关文章">
+            <h2 class="related-title">相关阅读</h2>
+            <ul>
+              {related.map(({ entry: item, displayNum }) => (
+                <li>
+                  <a href={url(`/${item.id}/`)}>
+                    <span class="qnum">{displayNum}</span>
+                    <span class="t">{item.data.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
 
       <ResumeCta variant="inline" />
     </div>

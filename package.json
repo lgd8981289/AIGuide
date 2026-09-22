@@ -5,12 +5,14 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "sync": "node scripts/sync-content.mjs && node scripts/watermark-images.mjs",
+    "sync": "node scripts/sync-content.mjs && npm run img:watermark",
     "sync:content": "node scripts/sync-content.mjs",
-    "sync:img": "node scripts/watermark-images.mjs",
-    "build": "astro build && pagefind --site dist",
+    "img:watermark": "node scripts/py.mjs scripts/watermark-images.py",
+    "img:optimize": "node scripts/py.mjs scripts/optimize-images.py",
+    "build": "npm run img:optimize && astro build && npm run build:post && pagefind --site dist",
     "build:fast": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "build:post": "node scripts/postbuild.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.1",

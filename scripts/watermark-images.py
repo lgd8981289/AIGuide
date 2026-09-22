@@ -46,7 +46,8 @@ SKIP_SUFFIXES = {".gif"}  # 动图跳过，避免丢帧
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
-IMG_DIR = ROOT / "public" / "img"
+# 打水印后的原图先落到 img-src/（不直接进 public/），再由 optimize-images.py 压成 WebP
+IMG_DIR = ROOT / "img-src"
 
 # 来源配置与正文同步共用一份（scripts/sources.json）
 SOURCES = json.loads((SCRIPT_DIR / "sources.json").read_text(encoding="utf-8"))["sources"]

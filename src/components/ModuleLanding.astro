@@ -5,7 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ResumeCta from "./ResumeCta.astro";
 import { MODULE_META, categoriesOf, type ModuleKey } from "../data/site";
 import { getArticlesByCategory, getArticlesByModule } from "../data/articles";
-import { url } from "../utils";
+import { url, absoluteUrl } from "../utils";
 
 interface Props {
   module: ModuleKey;
@@ -32,6 +32,23 @@ const fmt = (d: Date) =>
   description={meta.description}
   path={meta.href}
 >
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: meta.title,
+      description: meta.description,
+      numberOfItems: list.length,
+      itemListElement: list.map((item, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: item.entry.data.title,
+        url: absoluteUrl(`/${item.entry.id}/`),
+      })),
+    })}
+  />
+
   <div class="page-head">
     <div class="crumbs">
       <a href={url("/")}>首页</a> / {meta.title}

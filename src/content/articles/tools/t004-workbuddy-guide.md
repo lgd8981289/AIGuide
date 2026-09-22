@@ -4,7 +4,7 @@ description: "教你理解 WorkBuddy 与聊天 AI 的差别；安全选择工作
 category: "tools"
 module: "tutorial"
 qnum: "T004"
-date: 2026-09-17
+date: 2026-09-22
 ---
 大家好，我是 Sunday。
 
@@ -428,12 +428,4 @@ WorkBuddy 就可以直接远程执行任务了：
 文章写到这里，大家应该已经能看出来，WorkBuddy 的价值并不在某一个功能上，而在于 **它和国内软件生态的匹配！**
 
 而这种软件生态的匹配优势，是目前 Codex 和 CC 都做不到的！
-
-### 我在做的事
-
-- [Agent 大模型训练营（前端方向），运行三年已帮助上千位同学拿到中大厂 offer](https://mp.weixin.qq.com/s/W3jt2j-YCVc6irX3fhpqcw)
-- [JAVA + Python 大模型训练营，我们出成绩了！！！](https://mp.weixin.qq.com/s/KOQ-qePjqpw_KYE91cgTaw)
-- [全新的 Agent 大模型 0 ～ 1 系统课！倾力打造～～](https://mp.weixin.qq.com/s/bsCdSVKmiBFhWBAnHpujzQ)
-- [11 万用户 - Agent 商业级应用实战课 -- 面试汪](https://mp.weixin.qq.com/s/ak625tfAU_JUT6G_MC6n4Q)
-- [永久免费的简历制作平台](https://mp.weixin.qq.com/s/539JoxxQH1jdW0H4F-hv5A)
 

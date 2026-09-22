@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ResumeCta from "../components/ResumeCta.astro";
 import { SITE, categoriesOf, MODULE_META } from "../data/site";
 import { getArticlesByCategory, getOrderedArticles } from "../data/articles";
-import { url } from "../utils";
+import { url, absoluteUrl } from "../utils";
 
 // 分类内序号（展示编号）由 data/articles.ts 统一计算
 const all = await getOrderedArticles();
@@ -56,6 +56,25 @@ const VALUES = [
 ---
 
 <BaseLayout title={SITE.name} path="/">
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: SITE.name,
+      url: absoluteUrl("/"),
+      description: SITE.description,
+      inLanguage: "zh-CN",
+      publisher: {
+        "@type": "Organization",
+        name: SITE.author,
+        logo: {
+          "@type": "ImageObject",
+          url: absoluteUrl(SITE.logo || "/favicon.svg"),
+        },
+      },
+    })}
+  />
   <section class="hero">
     <h1>{SITE.name}</h1>
     <p>{SITE.description}</p>
