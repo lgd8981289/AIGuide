@@ -1,0 +1,145 @@
+---
+// 搜索弹层：基于 Pagefind（构建时生成索引，零后端）
+// 快捷键：⌘K / Ctrl+K 打开，Esc 关闭
+// 注意：Pagefind 索引是构建产物，npm run dev 下搜索不可用（会提示），构建部署后生效
+import { BASE } from "../utils";
+---
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-panel" role="dialog" aria-label="搜索文档">
+    <input
+      id="search-input"
+      type="search"
+      placeholder="搜索题目、关键词……"
+      autocomplete="off"
+    />
+    <div class="search-results" id="search-results">
+      <div class="search-hint">
+        输入关键词搜索；按 <span class="search-kbd">Esc</span> 关闭
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ basePath: BASE }}>
+  (function () {
+    var overlay = document.getElementById("search-overlay");
+    var input = document.getElementById("search-input");
+    var results = document.getElementById("search-results");
+    var openBtn = document.getElementById("search-open");
+    if (!overlay || !input || !results) return;
+
+    var pfPromise = null;
+    var timer = null;
+    var defaultHint =
+      '输入关键词搜索；按 <span class="search-kbd">Esc</span> 关闭';
+
+    function hint(html) {
+      results.innerHTML = '<div class="search-hint">' + html + "</div>";
+    }
+
+    function loadPagefind() {
+      if (!pfPromise) {
+        pfPromise = import(basePath + "/pagefind/pagefind.js")
+          .then(function (pf) {
+            // baseUrl 让搜索结果链接带上子目录前缀（/note/）
+            return pf.options({ baseUrl: basePath + "/" }).then(function () {
+              return pf;
+            });
+          })
+          .catch(function () {
+            return null;
+          });
+      }
+      return pfPromise;
+    }
+
+    function open() {
+      overlay.classList.add("open");
+      input.value = "";
+      hint(defaultHint);
+      input.focus();
+      loadPagefind();
+    }
+
+    function close() {
+      overlay.classList.remove("open");
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function run(q) {
+      loadPagefind().then(function (pf) {
+        if (!pf) {
+          hint("搜索索引未就绪。开发模式下不提供搜索，构建并部署后即可使用。");
+          return;
+        }
+        pf.search(q).then(function (search) {
+          return Promise.all(
+            search.results.slice(0, 12).map(function (r) {
+              return r.data();
+            })
+          ).then(function (items) {
+            if (!items.length) {
+              hint("没有找到相关内容，换个关键词试试。");
+              return;
+            }
+            results.innerHTML = items
+              .map(function (d) {
+                var title = escapeHtml(
+                  d.meta && d.meta.title ? d.meta.title : d.url
+                );
+                var cat =
+                  d.meta && d.meta.category ? escapeHtml(d.meta.category) : "";
+                return (
+                  '<a href="' +
+                  d.url +
+                  '"><div class="r-title">' +
+                  title +
+                  '</div><div class="r-excerpt">' +
+                  d.excerpt +
+                  "</div>" +
+                  (cat ? '<div class="r-meta">' + cat + "</div>" : "") +
+                  "</a>"
+                );
+              })
+              .join("");
+          });
+        });
+      });
+    }
+
+    input.addEventListener("input", function () {
+      clearTimeout(timer);
+      var q = input.value.trim();
+      if (!q) {
+        hint(defaultHint);
+        return;
+      }
+      timer = setTimeout(function () {
+        run(q);
+      }, 180);
+    });
+
+    if (openBtn) openBtn.addEventListener("click", open);
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) close();
+    });
+    document.addEventListener("keydown", function (e) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        if (overlay.classList.contains("open")) {
+          close();
+        } else {
+          open();
+        }
+      }
+      if (e.key === "Escape" && overlay.classList.contains("open")) close();
+    });
+  })();
+</script>

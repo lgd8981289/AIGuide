@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { CATEGORIES } from "../../data/site";
+import { getArticlesByCategory } from "../../data/articles";
+import { url } from "../../utils";
+
+export function getStaticPaths() {
+  return CATEGORIES.map((c) => ({
+    params: { category: c.slug },
+    props: { cat: c },
+  }));
+}
+
+const { cat } = Astro.props;
+
+const byCat = await getArticlesByCategory();
+const list = byCat.get(cat.slug) ?? [];
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
+    d.getDate()
+  ).padStart(2, "0")}`;
+---
+
+<BaseLayout
+  title={cat.name}
+  description={cat.intro}
+  path={`/${cat.slug}/`}
+  sidebar
+>
+  <div class="page-head">
+    <div class="crumbs">
+      <a href={url("/")}>首页</a> / {cat.name}
+    </div>
+    <h1>{cat.name}</h1>
+    <p class="desc">{cat.intro}</p>
+  </div>
+
+  <div style="padding-bottom: 60px; max-width: 760px;">
+    {
+      list.length > 0 ? (
+        <ul class="post-list">
+          {list.map(({ entry, displayNum }) => (
+            <li>
+              <a href={url(`/${entry.id}/`)}>
+                <span class="qnum">{displayNum}</span>
+                <span class="t">{entry.data.title}</span>
+                <span class="d">{fmt(entry.data.date)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="empty-hint">
+          这个系列正在筹备中，题目会在写作完成后第一时间发布。
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>

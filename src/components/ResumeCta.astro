@@ -1,0 +1,65 @@
+---
+// 简历汪推广位：全站可复用的求职闭环入口
+// variant 三档：
+//   banner  —— 首页主推位（大卡片，视觉最重）
+//   inline  —— 文章末尾（贴合「读完这题去改简历」的场景）
+//   sidebar —— 左侧栏底部（常驻小卡片）
+import { SITE } from "../data/site";
+
+interface Props {
+  variant?: "banner" | "inline" | "sidebar";
+}
+
+const { variant = "inline" } = Astro.props;
+---
+
+<a
+  class:list={["resume-cta", `is-${variant}`]}
+  href={SITE.mainSite}
+  rel="noopener"
+  target="_blank"
+  data-pagefind-ignore
+>
+  <span class="rc-icon" aria-hidden="true">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.7"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+      ></path>
+      <path d="M14 2v6h6"></path>
+      <path d="M8.5 13h5"></path>
+      <path d="M8.5 17h7"></path>
+    </svg>
+  </span>
+
+  <span class="rc-body">
+    <span class="rc-head">
+      <b class="rc-name">{SITE.mainSiteName}</b>
+      <span class="rc-badge">永久免费</span>
+    </span>
+    <span class="rc-desc">
+      在线制作简历，模板直接套用、导出无水印，永久免费、下载免费，不需要付费解锁任何功能。
+    </span>
+  </span>
+
+  <span class="rc-go">
+    去写简历
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M5 12h13"></path>
+      <path d="m12 5 7 7-7 7"></path>
+    </svg>
+  </span>
+</a>

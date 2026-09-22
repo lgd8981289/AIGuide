@@ -1,0 +1,49 @@
+---
+import { CATEGORIES } from "../data/site";
+import { getArticlesByCategory } from "../data/articles";
+import ResumeCta from "./ResumeCta.astro";
+import { url } from "../utils";
+
+const currentPath = Astro.url.pathname;
+
+const byCat = await getArticlesByCategory();
+---
+
+<aside class="sidebar" data-pagefind-ignore>
+  <p class="sb-title">面试题系列</p>
+  {
+    CATEGORIES.map((c) => {
+      const items = byCat.get(c.slug) ?? [];
+      const isCurrentCat = currentPath.startsWith(url(`/${c.slug}/`));
+      return (
+        <details open={isCurrentCat || items.length > 0}>
+          <summary>
+            {c.name}
+            <span class="sb-count">{items.length}</span>
+          </summary>
+          <ul>
+            {items.length > 0 ? (
+              items.map(({ entry, displayNum }) => (
+                <li>
+                  <a
+                    href={url(`/${entry.id}/`)}
+                    class={currentPath === url(`/${entry.id}/`) ? "current" : ""}
+                  >
+                    <span class="sb-qnum">{displayNum}</span>
+                    {entry.data.title}
+                  </a>
+                </li>
+              ))
+            ) : (
+              <li>
+                <span class="sb-all">筹备中</span>
+              </li>
+            )}
+          </ul>
+        </details>
+      );
+    })
+  }
+
+  <ResumeCta variant="sidebar" />
+</aside>

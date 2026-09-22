@@ -1,0 +1,121 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ResumeCta from "../components/ResumeCta.astro";
+import { SITE, CATEGORIES } from "../data/site";
+import { getOrderedArticles } from "../data/articles";
+import { url } from "../utils";
+
+// 分类内序号（展示题号）由 data/articles.ts 统一计算
+const all = await getOrderedArticles();
+
+const countByCat: Record<string, number> = {};
+for (const { entry } of all) {
+  countByCat[entry.data.category] = (countByCat[entry.data.category] ?? 0) + 1;
+}
+
+const latest = [...all]
+  .sort((a, b) => b.entry.data.date.getTime() - a.entry.data.date.getTime())
+  .slice(0, 8);
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
+    d.getDate()
+  ).padStart(2, "0")}`;
+
+const VALUES = [
+  {
+    title: "「一题一系统」，不考名词解释",
+    body: "每道题都还原成一个完整的技术系统：它解决什么问题、有哪些替代方案、边界划在哪。答完一题，顺手拿走一套判断框架，而不是一个定义。",
+  },
+  {
+    title: "先暴露漏洞，再给出答案",
+    body: "开头用面试官的连续追问把常见回答推到崩点，让你先看见自己会错在哪一步，再看站得住的回答长什么样。",
+  },
+  {
+    title: "60 秒能说出口",
+    body: "每篇都配「面试速答」，把答案压到现场能一口气讲完的长度。背得下来，也说得出口。",
+  },
+  {
+    title: "文末速记卡，随时复习",
+    body: "判断标准、选型原则、关键概念逐条列成速记卡，通勤路上扫一眼就能过一遍，面试前十分钟也来得及。",
+  },
+];
+---
+
+<BaseLayout title={SITE.name} path="/">
+  <section class="hero">
+    <h1>{SITE.name}</h1>
+    <p>{SITE.description}</p>
+    <div class="stats">
+      <span><b>{CATEGORIES.length}</b>大系列</span>
+      <span><b>{all.length}</b>道题</span>
+      <span><b>持续</b>更新</span>
+    </div>
+  </section>
+
+  <ResumeCta variant="banner" />
+
+  <section style="margin-top: 46px;">
+    <h2 class="section-title">
+      为什么值得看<small>不是又一份八股题库</small>
+    </h2>
+    <div class="value-grid">
+      {
+        VALUES.map((v) => (
+          <div class="value-card">
+            <h3>{v.title}</h3>
+            <p>{v.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">面试题系列<small>按分类系统刷题</small></h2>
+    <div class="cat-grid">
+      {
+        CATEGORIES.map((c) => (
+          <a class="cat-card" href={url(`/${c.slug}/`)}>
+            <h3>{c.name}</h3>
+            <p>{c.intro}</p>
+            <div class="meta">
+              <b>{countByCat[c.slug] ?? 0}</b> 道题
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  {
+    latest.length > 0 && (
+      <section style="margin-top: 46px;">
+        <h2 class="section-title">最新更新</h2>
+        <ul class="post-list">
+          {latest.map(({ entry, displayNum }) => (
+            <li>
+              <a href={url(`/${entry.id}/`)}>
+                <span class="qnum">{displayNum}</span>
+                <span class="t">{entry.data.title}</span>
+                <span class="d">{fmt(entry.data.date)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <section class="about-block">
+    <h2>关于本站</h2>
+    <p>
+      这里是我（{SITE.author}
+      ）整理 AI 工程面试题的长期项目。题目来源是我自己在准备和面试中反复遇到的真问题，答案则回到官方文档、论文与源码核验过，不搬运、不臆造。
+    </p>
+    <p>
+      站内题目与 <a href={SITE.mainSite} rel="noopener">{SITE.mainSiteName}</a
+      >（永久免费的简历制作工具）同属一个求职生态：简历写好，来这里把面试也准备好。
+    </p>
+  </section>
+</BaseLayout>
