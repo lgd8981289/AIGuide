@@ -209,7 +209,7 @@ export const COPY_GUARD = {
 //   3. 补齐下方 name / keyword / qrcode，把 enabled 改为 true，重新构建部署
 // 未开启时，本站不加载任何引流脚本，文章全文直接可见
 export const TECHGROW = {
-	enabled: false,
+	enabled: true,
 	blogId: '77647-4526721610548-557',
 	name: '程序员Sunday', // 微信公众号名称
 	keyword: '验证码', // 读者在公众号里回复的关键词

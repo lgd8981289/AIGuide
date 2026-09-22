@@ -38,12 +38,19 @@ const cfg = {
               if (!container) return;
               var height = "auto";
               var heads = container.querySelectorAll("h2");
+              var marker = null;
               for (var i = 0; i < heads.length; i++) {
                 if (heads[i].textContent.indexOf("知识点详解") !== -1) {
-                  var top = heads[i].offsetTop - container.offsetTop;
-                  if (top > 100) height = String(top);
+                  marker = heads[i];
                   break;
                 }
+              }
+              // 面试题：遮罩从「知识点详解」开始，让「面试速答」保持免费可见作为钩子
+              // 教程类没有这个标题，退到第一个小节标题（开头一段导语仍然可读）
+              if (!marker && heads.length > 0) marker = heads[0];
+              if (marker) {
+                var top = marker.offsetTop - container.offsetTop;
+                if (top > 100) height = String(top);
               }
               var plugin = new ReadmorePlugin();
               plugin.init({
