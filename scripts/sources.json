@@ -1,0 +1,28 @@
+{
+  "sources": [
+    {
+      "module": "interview",
+      "label": "AI 面试题",
+      "root": "../文章",
+      "categories": {
+        "大模型基础面试题": "llm",
+        "RAG面试题": "rag",
+        "Agent面试题": "agent",
+        "AI应用工程面试题": "engineering",
+        "AI项目与系统设计面试题": "system-design",
+        "LangChain生态面试题": "langchain"
+      }
+    },
+    {
+      "module": "tutorial",
+      "label": "AI 编程教程",
+      "root": "../../一起来玩 AI 呀～/文章",
+      "categories": {
+        "01-AI编程工具与平台": "tools",
+        "02-Agent能力扩展": "agent-ext",
+        "03-AI编程方法与工程实践": "practice",
+        "04-模型与热点实测": "reviews"
+      }
+    }
+  ]
+}

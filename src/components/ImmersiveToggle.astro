@@ -1,0 +1,42 @@
+---
+// 沉浸式阅读：隐藏侧边栏与右侧目录，正文居中聚焦
+// 开关在文章 meta 行；Esc 或左下角悬浮按钮可退出。纯前端 class 切换，不影响 SEO。
+---
+
+<button id="immersive-toggle" class="immersive-btn" aria-pressed="false" data-pagefind-ignore>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 5h16"></path>
+    <path d="M7 12h10"></path>
+    <path d="M10 19h4"></path>
+  </svg>
+  沉浸阅读
+</button>
+
+<button id="immersive-exit" class="immersive-exit" data-pagefind-ignore hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <path d="M6 6l12 12M18 6L6 18"></path>
+  </svg>
+  退出沉浸模式 · Esc
+</button>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.getElementById("immersive-toggle");
+  const exit = document.getElementById("immersive-exit");
+
+  const setImmersive = (on: boolean) => {
+    root.classList.toggle("immersive", on);
+    toggle?.setAttribute("aria-pressed", String(on));
+    if (exit) exit.hidden = !on;
+  };
+
+  toggle?.addEventListener("click", () => {
+    setImmersive(!root.classList.contains("immersive"));
+  });
+  exit?.addEventListener("click", () => setImmersive(false));
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && root.classList.contains("immersive")) {
+      setImmersive(false);
+    }
+  });
+</script>

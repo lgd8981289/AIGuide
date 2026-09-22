@@ -1,0 +1,23 @@
+{
+  "name": "aiguide",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "sync": "node scripts/sync-content.mjs && node scripts/watermark-images.mjs",
+    "sync:content": "node scripts/sync-content.mjs",
+    "sync:img": "node scripts/watermark-images.mjs",
+    "build": "astro build && pagefind --site dist",
+    "build:fast": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.1",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.3"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2"
+  }
+}

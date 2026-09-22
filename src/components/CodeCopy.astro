@@ -1,0 +1,66 @@
+---
+// 代码块「复制代码」按钮
+//
+// 文章正文开启了复制防护，代码粘贴因此走这里的程序化写入：
+// 优先 navigator.clipboard，非安全上下文退回到临时 textarea + execCommand。
+// 按钮由脚本注入，不改动 Markdown 内容。
+---
+
+<script>
+  const copyText = async (text: string): Promise<boolean> => {
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // 落到下面的兜底方案
+      }
+    }
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "-1000px";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.focus({ preventScroll: true });
+      ta.select();
+      const ok = document.execCommand("copy");
+      ta.remove();
+      return ok;
+    } catch {
+      return false;
+    }
+  };
+
+  document.querySelectorAll<HTMLElement>(".prose pre").forEach((pre) => {
+    if (pre.dataset.copyReady === "1") return;
+    pre.dataset.copyReady = "1";
+    pre.classList.add("has-copy");
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "code-copy";
+    btn.textContent = "复制";
+    btn.setAttribute("aria-label", "复制代码");
+    pre.appendChild(btn);
+
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      // 只取 <code> 里的内容，避免把按钮文字也算进去
+      const code = pre.querySelector("code");
+      const text = ((code ? code.textContent : pre.textContent) || "").replace(/\s+$/, "");
+
+      void copyText(text).then((ok) => {
+        btn.textContent = ok ? "已复制" : "复制失败";
+        btn.classList.toggle("is-done", ok);
+        window.setTimeout(() => {
+          btn.textContent = "复制";
+          btn.classList.remove("is-done");
+        }, 1600);
+      });
+    });
+  });
+</script>

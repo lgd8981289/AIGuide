@@ -1,0 +1,110 @@
+---
+// 模块落地页（AI 面试题 / AI 编程教程共用）
+// 内容：模块介绍 + 分类卡片 + 该模块全部文章分组列表 + 简历汪推广位
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ResumeCta from "./ResumeCta.astro";
+import { MODULE_META, categoriesOf, type ModuleKey } from "../data/site";
+import { getArticlesByCategory, getArticlesByModule } from "../data/articles";
+import { url } from "../utils";
+
+interface Props {
+  module: ModuleKey;
+}
+
+const { module } = Astro.props;
+const meta = MODULE_META[module];
+const cats = categoriesOf(module);
+
+const byCat = await getArticlesByCategory();
+const byModule = await getArticlesByModule();
+const list = byModule.get(module) ?? [];
+
+const started = cats.filter((c) => (byCat.get(c.slug) ?? []).length > 0).length;
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
+    d.getDate()
+  ).padStart(2, "0")}`;
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  path={meta.href}
+>
+  <div class="page-head">
+    <div class="crumbs">
+      <a href={url("/")}>首页</a> / {meta.title}
+    </div>
+    <h1>{meta.title}</h1>
+    <p class="desc">{meta.description}</p>
+    <div class="stats" style="margin-top: 18px;">
+      <span><b>{cats.length}</b>个分类</span>
+      <span><b>{list.length}</b>{meta.countUnit}</span>
+      <span><b>{started}</b>个分类已开更</span>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="section-title">{meta.groupTitle}<small>按分类进入</small></h2>
+    <div class="cat-grid">
+      {
+        cats.map((c) => {
+          const items = byCat.get(c.slug) ?? [];
+          return (
+            <a class="cat-card" href={url(`/${c.slug}/`)}>
+              <h3>{c.name}</h3>
+              <p>{c.intro}</p>
+              <div class="meta">
+                <b>{items.length}</b> {meta.countUnit}
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section style="margin-top: 46px;">
+    <h2 class="section-title">
+      {list.length > 0 ? "全部内容" : "内容筹备中"}
+      <small>按分类分组</small>
+    </h2>
+    {
+      cats.map((c) => {
+        const items = byCat.get(c.slug) ?? [];
+        return (
+          <div class="series-group">
+            <h3 class="series-group-title">
+              <a href={url(`/${c.slug}/`)}>{c.name}</a>
+              <span class="cnt">
+                {items.length} {meta.countUnit}
+              </span>
+            </h3>
+            {items.length > 0 ? (
+              <ul class="post-list">
+                {items.map(({ entry, displayNum }) => (
+                  <li>
+                    <a href={url(`/${entry.id}/`)}>
+                      <span class="qnum">{displayNum}</span>
+                      <span class="t">{entry.data.title}</span>
+                      <span class="d">{fmt(entry.data.date)}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div class="empty-hint">
+                这个分类正在筹备中，内容会在写作完成后第一时间发布。
+              </div>
+            )}
+          </div>
+        );
+      })
+    }
+  </section>
+
+  <div style="margin-top: 40px;">
+    <ResumeCta variant="inline" />
+  </div>
+</BaseLayout>

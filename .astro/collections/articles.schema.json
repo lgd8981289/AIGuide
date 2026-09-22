@@ -11,6 +11,14 @@
     "category": {
       "type": "string"
     },
+    "module": {
+      "default": "interview",
+      "type": "string",
+      "enum": [
+        "interview",
+        "tutorial"
+      ]
+    },
     "qnum": {
       "type": "string"
     },

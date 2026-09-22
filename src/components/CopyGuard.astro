@@ -1,0 +1,103 @@
+---
+// 文章正文的复制防护（软防护）+ 提示条 —— 由 site.ts 的 COPY_GUARD.enabled 控制，默认关闭
+//
+// 说明：这是前端层面的「劝阻」，不是技术上的绝对保护——HTML 源码始终是公开的。
+// 目的是让随手整段搬运变得麻烦，真正的防搬运靠图片水印 + 转载署名。
+// 代码块不受影响：走「复制代码」按钮（见 CodeCopy.astro），它是程序化写入剪贴板。
+import { COPY_GUARD } from "../data/site";
+---
+
+{
+  COPY_GUARD.enabled && (
+    <div
+      class="copy-toast"
+      id="copy-toast"
+      role="status"
+      aria-live="polite"
+      data-pagefind-ignore
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 9v4" />
+        <path d="M12 17h.01" />
+        <circle cx="12" cy="12" r="9.2" />
+      </svg>
+      内容受保护，转载请注明出处
+    </div>
+  )
+}
+
+<script>
+  const guard = document.querySelector<HTMLElement>(".article-guard");
+  const toast = document.getElementById("copy-toast");
+
+  if (guard) {
+    let timer = 0;
+    const warn = () => {
+      if (!toast) return;
+      toast.classList.add("show");
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => toast.classList.remove("show"), 2200);
+    };
+
+    // 输入框 / 可编辑区域不拦（搜索框等）
+    const isEditable = (el: EventTarget | null) =>
+      el instanceof HTMLElement &&
+      (el.tagName === "INPUT" ||
+        el.tagName === "TEXTAREA" ||
+        el.isContentEditable);
+
+    // 选区是否落在正文里
+    const selectionInGuard = () => {
+      const sel = window.getSelection();
+      if (!sel || sel.rangeCount === 0) return false;
+      const node = sel.getRangeAt(0).commonAncestorContainer;
+      return guard.contains(node);
+    };
+
+    const block = (event: Event) => {
+      if (isEditable(event.target)) return;
+      if (!guard.contains(event.target as Node) && !selectionInGuard()) return;
+      event.preventDefault();
+      warn();
+    };
+
+    document.addEventListener("copy", block, true);
+    document.addEventListener("cut", block, true);
+
+    // 右键菜单（含「复制图片」「查看源代码」）
+    guard.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+      warn();
+    });
+
+    // 图片拖拽
+    guard.addEventListener("dragstart", (event) => {
+      event.preventDefault();
+      warn();
+    });
+
+    // 选中拦截，配合 CSS 的 user-select: none
+    guard.addEventListener("selectstart", (event) => {
+      if (isEditable(event.target)) return;
+      event.preventDefault();
+      warn();
+    });
+
+    // 键盘兜底：正文范围内 Cmd/Ctrl + C / X
+    document.addEventListener("keydown", (event) => {
+      if (!(event.metaKey || event.ctrlKey)) return;
+      const key = event.key.toLowerCase();
+      if (key !== "c" && key !== "x") return;
+      if (isEditable(event.target)) return;
+      if (guard.contains(event.target as Node) || selectionInGuard()) warn();
+    });
+  }
+</script>

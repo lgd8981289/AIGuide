@@ -1,0 +1,15 @@
+---
+import { SITE } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer" data-pagefind-ignore>
+  <div class="inner">
+    <div>
+      {SITE.name} 由 <a href="https://lgdsunday.club/" rel="noopener">{SITE.author}</a> 维护，内容持续更新。
+      正在准备简历？试试同门的 <a href={SITE.mainSite} rel="noopener">{SITE.mainSiteName}</a>，永久免费的简历制作工具。
+    </div>
+    <div>© {year} {SITE.name} · 转载请注明出处</div>
+  </div>
+</footer>

@@ -1,2 +1,12 @@
-dist
-node_modules
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment
+.DS_Store

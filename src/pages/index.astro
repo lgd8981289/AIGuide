@@ -1,0 +1,157 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ResumeCta from "../components/ResumeCta.astro";
+import { SITE, categoriesOf, MODULE_META } from "../data/site";
+import { getArticlesByCategory, getOrderedArticles } from "../data/articles";
+import { url } from "../utils";
+
+// 分类内序号（展示编号）由 data/articles.ts 统一计算
+const all = await getOrderedArticles();
+const byCat = await getArticlesByCategory();
+
+const interviewCats = categoriesOf("interview");
+const tutorialCats = categoriesOf("tutorial");
+
+const countByCat: Record<string, number> = {};
+for (const { entry } of all) {
+  countByCat[entry.data.category] = (countByCat[entry.data.category] ?? 0) + 1;
+}
+
+const interviewCount = interviewCats.reduce(
+  (n, c) => n + (byCat.get(c.slug)?.length ?? 0),
+  0
+);
+const tutorialCount = tutorialCats.reduce(
+  (n, c) => n + (byCat.get(c.slug)?.length ?? 0),
+  0
+);
+
+const latest = [...all]
+  .sort((a, b) => b.entry.data.date.getTime() - a.entry.data.date.getTime())
+  .slice(0, 8);
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
+    d.getDate()
+  ).padStart(2, "0")}`;
+
+const VALUES = [
+  {
+    title: "「一题一系统」，不考名词解释",
+    body: "每道题都还原成一个完整的技术系统：它解决什么问题、有哪些替代方案、边界划在哪。答完一题，顺手拿走一套判断框架，而不是一个定义。",
+  },
+  {
+    title: "先暴露漏洞，再给出答案",
+    body: "开头用面试官的连续追问把常见回答推到崩点，让你先看见自己会错在哪一步，再看站得住的回答长什么样。",
+  },
+  {
+    title: "60 秒能说出口",
+    body: "每篇都配「面试速答」，把答案压到现场能一口气讲完的长度。背得下来，也说得出口。",
+  },
+  {
+    title: "教程类内容，0 基础也能跟着做",
+    body: "AI 编程教程从安装配置讲到实际使用与判断标准，每篇讲清一个完整主题，看完就能自己上手跑通。",
+  },
+];
+---
+
+<BaseLayout title={SITE.name} path="/">
+  <section class="hero">
+    <h1>{SITE.name}</h1>
+    <p>{SITE.description}</p>
+    <div class="stats">
+      <span><b>{interviewCats.length}</b>大面试题系列</span>
+      <span><b>{interviewCount}</b>道面试题</span>
+      <span><b>{tutorialCount}</b>篇 AI 编程教程</span>
+    </div>
+  </section>
+
+  <ResumeCta variant="banner" />
+
+  <section style="margin-top: 46px;">
+    <h2 class="section-title">
+      为什么值得看<small>不是又一份八股题库</small>
+    </h2>
+    <div class="value-grid">
+      {
+        VALUES.map((v) => (
+          <div class="value-card">
+            <h3>{v.title}</h3>
+            <p>{v.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">
+      {MODULE_META.interview.name}
+      <small>按分类系统刷题</small>
+    </h2>
+    <div class="cat-grid">
+      {
+        interviewCats.map((c) => (
+          <a class="cat-card" href={url(`/${c.slug}/`)}>
+            <h3>{c.name}</h3>
+            <p>{c.intro}</p>
+            <div class="meta">
+              <b>{countByCat[c.slug] ?? 0}</b> {MODULE_META.interview.countUnit}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section style="margin-top: 46px;">
+    <h2 class="section-title">
+      {MODULE_META.tutorial.name}
+      <small>0 基础也能跟着做</small>
+    </h2>
+    <div class="cat-grid">
+      {
+        tutorialCats.map((c) => (
+          <a class="cat-card" href={url(`/${c.slug}/`)}>
+            <h3>{c.name}</h3>
+            <p>{c.intro}</p>
+            <div class="meta">
+              <b>{countByCat[c.slug] ?? 0}</b> {MODULE_META.tutorial.countUnit}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  {
+    latest.length > 0 && (
+      <section style="margin-top: 46px;">
+        <h2 class="section-title">最新更新</h2>
+        <ul class="post-list">
+          {latest.map(({ entry, displayNum }) => (
+            <li>
+              <a href={url(`/${entry.id}/`)}>
+                <span class="qnum">{displayNum}</span>
+                <span class="t">{entry.data.title}</span>
+                <span class="d">{fmt(entry.data.date)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <section class="about-block">
+    <h2>关于本站</h2>
+    <p>
+      这里是我（{SITE.author}
+      ）整理 AI 内容的长期项目：一边是 AI 工程面试题，一边是 0 基础的 AI 编程教程。内容都回到官方文档、源码与真实操作核验过，不搬运、不臆造。
+    </p>
+    <p>
+      站内内容与 <a href={SITE.mainSite} rel="noopener">{SITE.mainSiteName}</a
+      >（永久免费的简历制作工具）同属一个求职生态：简历写好，来这里把面试也准备好。
+    </p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,100 @@
+---
+import { SITE, MODULES, type ModuleKey } from "../data/site";
+import { url } from "../utils";
+
+// 模块高亮：由页面所属模块决定（分类页/文章页归属于其模块，而不是靠路径前缀硬匹配）
+interface Props {
+  activeModule?: ModuleKey | "home";
+}
+
+const { activeModule = "home" } = Astro.props;
+---
+
+<header class="topbar" data-pagefind-ignore>
+  <div class="topbar-inner">
+    <label for="sidebar-toggle" class="nav-btn" aria-label="展开系列目录">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </label>
+
+    <a class="brand" href={url("/")}>
+      {
+        SITE.logo && (
+          <img class="brand-logo" src={url(SITE.logo)} alt="" width="26" height="26" />
+        )
+      }
+      <span>{SITE.name}</span>
+    </a>
+
+    <nav class="modules">
+      {
+        MODULES.map((m) => {
+          const isActive = m.key === activeModule;
+          return (
+            <a href={url(m.href)} class={isActive ? "active" : ""} aria-current={isActive ? "page" : undefined}>
+              {m.name}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <div class="tools">
+      <button class="icon-btn" id="search-open" aria-label="搜索文档" title="搜索文档（⌘K / Ctrl+K）">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="M16.2 16.2L21 21" />
+        </svg>
+      </button>
+
+      <button class="icon-btn" id="theme-toggle" aria-label="切换亮色 / 暗色主题" title="切换亮色 / 暗色主题">
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.5 13.2A8.2 8.2 0 1110.8 3.5a6.6 6.6 0 009.7 9.7z" />
+        </svg>
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+        </svg>
+      </button>
+
+      {
+        SITE.github && (
+          <a
+            class="icon-btn"
+            href={SITE.github}
+            target="_blank"
+            rel="noopener"
+            aria-label="GitHub 仓库"
+            title="GitHub 仓库"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 015.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14 0 1.55-.02 2.79-.02 3.17 0 .31.21.67.8.55A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z" />
+            </svg>
+          </a>
+        )
+      }
+    </div>
+  </div>
+</header>
+
+<script>
+  // 主题切换：亮 / 暗（首次访问跟随系统，之后记住选择）
+  const toggle = document.getElementById("theme-toggle");
+  toggle?.addEventListener("click", () => {
+    const root = document.documentElement;
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem("theme", next);
+    } catch {}
+  });
+
+  // 移动端：点击侧边栏链接后自动收起抽屉
+  const sidebarToggle = document.getElementById("sidebar-toggle") as HTMLInputElement | null;
+  document.querySelectorAll(".sidebar a").forEach((a) => {
+    a.addEventListener("click", () => {
+      if (sidebarToggle) sidebarToggle.checked = false;
+    });
+  });
+</script>

@@ -1,0 +1,78 @@
+---
+import { CATEGORIES, categoriesOf, type ModuleKey } from "../data/site";
+import { getArticlesByCategory } from "../data/articles";
+import ResumeCta from "./ResumeCta.astro";
+import { url } from "../utils";
+
+// 左侧系列目录：只展示当前模块下的分类（跨模块页面回退到全部分类）
+interface Props {
+  module?: ModuleKey | "home";
+}
+
+const { module = "home" } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const cats = module === "home" ? CATEGORIES : categoriesOf(module);
+
+const byCat = await getArticlesByCategory();
+---
+
+<aside class="sidebar" data-pagefind-ignore>
+  <p class="sb-title">系列目录</p>
+  {
+    cats.map((c) => {
+      const items = byCat.get(c.slug) ?? [];
+      const isCurrentCat = currentPath.startsWith(url(`/${c.slug}/`));
+      return (
+        // name 相同 = 原生手风琴，展开一个会自动收起其他；默认只展开当前所在分类
+        <details name="sidebar-cat" open={isCurrentCat}>
+          <summary>
+            {c.name}
+            <span class="sb-count">{items.length}</span>
+          </summary>
+          <ul>
+            {items.length > 0 ? (
+              items.map(({ entry, displayNum }) => (
+                <li>
+                  <a
+                    href={url(`/${entry.id}/`)}
+                    class={currentPath === url(`/${entry.id}/`) ? "current" : ""}
+                  >
+                    <span class="sb-qnum">{displayNum}</span>
+                    {entry.data.title}
+                  </a>
+                </li>
+              ))
+            ) : (
+              <li>
+                <span class="sb-all">筹备中</span>
+              </li>
+            )}
+          </ul>
+        </details>
+      );
+    })
+  }
+
+  <ResumeCta variant="sidebar" />
+</aside>
+
+<script>
+  // 兼容：不支持 <details name>（原生手风琴）的浏览器，用脚本补齐「展开一个收起其他」
+  const sidebar = document.querySelector(".sidebar");
+  const supportsAccordion =
+    typeof HTMLDetailsElement !== "undefined" &&
+    "name" in HTMLDetailsElement.prototype;
+
+  if (sidebar && !supportsAccordion) {
+    const groups = Array.from(sidebar.querySelectorAll("details"));
+    for (const group of groups) {
+      group.addEventListener("toggle", () => {
+        if (!group.open) return;
+        for (const other of groups) {
+          if (other !== group) other.open = false;
+        }
+      });
+    }
+  }
+</script>

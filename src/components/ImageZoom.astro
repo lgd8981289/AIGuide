@@ -1,0 +1,93 @@
+---
+// 文章配图点击放大（lightbox）
+// 点击正文图片全屏查看，支持 Esc 关闭、左右方向键切换、点击遮罩关闭
+---
+
+<div class="lightbox" id="lightbox" hidden data-pagefind-ignore>
+  <button class="lb-btn lb-close" type="button" aria-label="关闭（Esc）">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18"></path>
+    </svg>
+  </button>
+  <button class="lb-btn lb-prev" type="button" aria-label="上一张（←）">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m15 5-7 7 7 7"></path>
+    </svg>
+  </button>
+  <button class="lb-btn lb-next" type="button" aria-label="下一张（→）">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m9 5 7 7-7 7"></path>
+    </svg>
+  </button>
+  <img class="lb-img" alt="" />
+  <p class="lb-count"></p>
+</div>
+
+<script>
+  const box = document.getElementById("lightbox") as HTMLElement | null;
+
+  if (box) {
+    const img = box.querySelector<HTMLImageElement>(".lb-img")!;
+    const counter = box.querySelector<HTMLElement>(".lb-count")!;
+    const images = Array.from(
+      document.querySelectorAll<HTMLImageElement>(".prose img")
+    ).filter((el) => el.src);
+    let index = 0;
+
+    const render = () => {
+      const current = images[index];
+      if (!current) return;
+      img.src = current.currentSrc || current.src;
+      img.alt = current.alt || "";
+      counter.textContent =
+        images.length > 1 ? `${index + 1} / ${images.length}` : "";
+      const many = images.length > 1;
+      box.querySelector(".lb-prev")!.toggleAttribute("hidden", !many);
+      box.querySelector(".lb-next")!.toggleAttribute("hidden", !many);
+    };
+
+    const open = (i: number) => {
+      index = i;
+      render();
+      box.hidden = false;
+      // 等一帧再加 class，保证过渡动画生效
+      requestAnimationFrame(() => box.classList.add("open"));
+      document.documentElement.classList.add("lb-lock");
+    };
+
+    const close = () => {
+      box.classList.remove("open");
+      document.documentElement.classList.remove("lb-lock");
+      window.setTimeout(() => {
+        box.hidden = true;
+        img.removeAttribute("src");
+      }, 180);
+    };
+
+    const step = (delta: number) => {
+      if (images.length < 2) return;
+      index = (index + delta + images.length) % images.length;
+      render();
+    };
+
+    images.forEach((el, i) => {
+      el.classList.add("zoomable");
+      el.addEventListener("click", () => open(i));
+    });
+
+    box.querySelector(".lb-close")!.addEventListener("click", close);
+    box.querySelector(".lb-prev")!.addEventListener("click", () => step(-1));
+    box.querySelector(".lb-next")!.addEventListener("click", () => step(1));
+    box.addEventListener("click", (event) => {
+      // 点击图片本身不关闭，点遮罩才关
+      if (event.target === box) close();
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (box.hidden) return;
+      if (event.key === "Escape") close();
+      else if (event.key === "ArrowLeft") step(-1);
+      else if (event.key === "ArrowRight") step(1);
+    });
+  }
+</script>
