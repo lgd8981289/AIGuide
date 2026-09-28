@@ -17,4 +17,16 @@ deploy.sh
 
 # 图片原图（由 npm run sync 生成，可重建，不进仓库）
 img-src/
-public/img/.manifest.json
+
+# 私有文章及配图：保留在本地用于构建、部署，不提交到 GitHub
+/src/content/articles/
+/public/img/
+
+# 浏览器调试产物可能包含文章正文或截图
+/.playwright-mcp/
+
+# IndexNow 站点验证文件由本地部署配置管理
+public/*.txt
+
+# Python 校验脚本缓存
+__pycache__/
