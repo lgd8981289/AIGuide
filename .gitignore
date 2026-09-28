@@ -30,3 +30,7 @@ public/*.txt
 
 # Python 校验脚本缓存
 __pycache__/
+
+# Bing 所有权验证文件由本地发布配置管理
+/public/BingSiteAuth.xml
+docs

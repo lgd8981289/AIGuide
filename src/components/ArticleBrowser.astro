@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ResumeCta from "./ResumeCta.astro";
+import { getOrderedArticles } from "../data/articles";
+import { CATEGORIES, MODULE_META, SITE, type Category, type ModuleKey } from "../data/site";
+import { absoluteUrl, url } from "../utils";
+import "../styles/article-browser.css";
+
+interface Props {
+  module?: ModuleKey;
+  category?: Category;
+}
+
+const { module, category } = Astro.props;
+const meta = module ? MODULE_META[module] : undefined;
+const scopePath = meta?.href ?? "/";
+const pagePath = category ? `/${category.slug}/` : scopePath;
+const defaultTitle = meta?.name ?? "最新文章";
+const defaultIntro = module === "interview"
+  ? "从工程场景出发，讲清每道面试题。"
+  : module === "tutorial"
+    ? "从工具配置到工程实践，每篇讲清一个完整主题。"
+    : "AI 面试题与 AI 编程教程，记录从理解到实践的过程。";
+const cats = CATEGORIES.filter((c) => !module || c.module === module);
+const categoryBySlug = new Map(cats.map((c) => [c.slug, c]));
+const ordered = (await getOrderedArticles()).filter((a) => !module || a.module === module);
+const sequence = new Map(ordered.map((a, i) => [a.entry.id, i]));
+const latest = [...ordered].sort((a, b) =>
+  b.entry.data.date.getTime() - a.entry.data.date.getTime()
+  || b.entry.data.qnum.localeCompare(a.entry.data.qnum)
+);
+const initialList = latest.filter((a) => !category || a.entry.data.category === category.slug);
+const counts = new Map(cats.map((c) => [c.slug, ordered.filter((a) => a.entry.data.category === c.slug).length]));
+const groups: ModuleKey[] = module ? [module] : ["interview", "tutorial"];
+const fmt = (date: Date) => date.toISOString().slice(0, 10);
+
+const jsonLd: Record<string, unknown>[] = [{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: category?.name ?? defaultTitle,
+  numberOfItems: initialList.length,
+  itemListElement: initialList.map(({ entry }, i) => ({
+    "@type": "ListItem", position: i + 1,
+    name: entry.data.title, url: absoluteUrl(`/${entry.id}/`),
+  })),
+}];
+if (!module) jsonLd.unshift({
+  "@context": "https://schema.org", "@type": "WebSite",
+  "@id": `${absoluteUrl("/")}#website`,
+  name: SITE.name, url: absoluteUrl("/"), description: SITE.description, inLanguage: "zh-CN",
+  alternateName: "AIGuide",
+  publisher: { "@type": "Organization", name: SITE.author },
+});
+if (module) {
+  const crumbs = [
+    { "@type": "ListItem", position: 1, name: "首页", item: absoluteUrl("/") },
+    { "@type": "ListItem", position: 2, name: meta!.title, item: absoluteUrl(meta!.href) },
+    ...(category ? [{ "@type": "ListItem", position: 3, name: category.name, item: absoluteUrl(pagePath) }] : []),
+  ];
+  jsonLd.push({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: crumbs });
+}
+jsonLd.push({
+  "@context": "https://schema.org", "@type": "CollectionPage",
+  name: category?.name ?? meta?.title ?? SITE.name,
+  description: category?.intro ?? meta?.description ?? SITE.description,
+  url: absoluteUrl(pagePath), inLanguage: "zh-CN",
+  isPartOf: { "@type": "WebSite", "@id": `${absoluteUrl("/")}#website`, name: SITE.name, url: absoluteUrl("/") },
+});
+---
+
+<BaseLayout title={category?.name ?? meta?.title ?? SITE.name} description={category?.intro ?? meta?.description ?? SITE.description} path={pagePath}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")} />
+  <div class="article-browser" data-article-browser data-scope-path={url(scopePath)} data-default-path={url(pagePath)} data-default-category={category?.slug ?? ""} data-title={defaultTitle} data-intro={defaultIntro}>
+    <aside class="browse-sidebar" aria-label="文章分类" data-pagefind-ignore>
+      <details class="browse-filters" open>
+        <summary><span>文章分类</span><span class="browse-selected" data-selected-category>{category?.nav ?? "全部文章"}</span></summary>
+        <nav aria-label="按主题阅读" class="browse-categories">
+          <p class="browse-sidebar-label">按主题阅读</p>
+          <a href={url(scopePath)} class="browse-category" data-filter-category="" aria-current={!category ? "true" : undefined}>
+            <span>全部文章</span><span class="browse-count">{ordered.length}</span>
+          </a>
+          {groups.map((group) => (
+            <div class="browse-group">
+              {!module && <p class="browse-group-label">{MODULE_META[group].name}</p>}
+              {cats.filter((c) => c.module === group).map((c) => (
+                <a href={url(`/${c.slug}/`)} class="browse-category" data-filter-category={c.slug} data-category-title={c.name} data-category-label={c.nav} data-category-intro={c.intro} aria-current={category?.slug === c.slug ? "true" : undefined}>
+                  <span>{c.nav}</span><span class="browse-count">{counts.get(c.slug)}</span>
+                </a>
+              ))}
+            </div>
+          ))}
+        </nav>
+      </details>
+      {!module ? (
+        <div class="browse-recommendation">
+          <ResumeCta variant="sidebar" />
+        </div>
+      ) : (
+        <div class="browse-author">
+          <div class="browse-author-name">
+            {SITE.logo && <img src={url(SITE.logo)} width="30" height="30" alt="" />}
+            <span>{SITE.author}</span>
+          </div>
+          <p>分享 AI 应用、编程实践与面试思考。</p>
+          <button type="button" class="follow-link" data-follow-open>关注公众号 <span aria-hidden="true">↗</span></button>
+        </div>
+      )}
+    </aside>
+    <section class="browse-content" aria-labelledby="browse-title" data-pagefind-ignore>
+      <header class="browse-heading">
+        <h1 id="browse-title" tabindex="-1">{category?.name ?? defaultTitle}</h1>
+        <p class="browse-intro" data-browser-intro>{category?.intro ?? defaultIntro}</p>
+      </header>
+      <div class="browse-toolbar">
+        <p class="browse-result-count" data-result-count aria-live="polite" aria-atomic="true">共 {initialList.length} 篇文章</p>
+        <label class="browse-sort" data-browser-enhanced hidden>
+          <span>排序</span>
+          <select data-browser-sort aria-label="文章排序"><option value="latest">最近更新</option><option value="series">按分类顺序</option></select>
+        </label>
+      </div>
+      <ul class="browse-posts" data-browser-posts>
+        {latest.map(({ entry, module: articleModule }, i) => {
+          const cat = categoryBySlug.get(entry.data.category)!;
+          return (
+            <li class="browse-post" data-article-category={cat.slug} data-latest-order={i} data-series-order={sequence.get(entry.id)} hidden={!!category && cat.slug !== category.slug}>
+              <article>
+                <div class="browse-post-meta">
+                  <a class="browse-module" href={url(MODULE_META[articleModule].href)}>{MODULE_META[articleModule].name}</a><span aria-hidden="true">·</span>
+                  <a href={url(`/${cat.slug}/`)} data-filter-category={cat.slug}>{cat.nav}</a><span aria-hidden="true">·</span>
+                  <time datetime={fmt(entry.data.date)}>更新于 {fmt(entry.data.date)}</time>
+                </div>
+                <h2><a href={url(`/${entry.id}/`)}>{entry.data.title}</a></h2>
+                <p class="browse-excerpt">{entry.data.description}</p>
+              </article>
+            </li>
+          );
+        })}
+      </ul>
+      <div class="browse-empty" data-browser-empty hidden={initialList.length > 0}>
+        <h2>这个分类还没有文章</h2><p>先看看其他主题，内容会持续更新。</p>
+        <a href={url(scopePath)} data-filter-category="">查看全部文章 <span aria-hidden="true">→</span></a>
+      </div>
+      <nav class="browse-pagination" aria-label="文章分页" data-browser-pagination hidden>
+        <span data-page-status></span>
+        <div><button type="button" data-page-prev>← 上一页</button><button type="button" data-page-next>下一页 →</button></div>
+      </nav>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  import "../scripts/article-browser";
+</script>

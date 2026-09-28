@@ -17,8 +17,11 @@ const cats = module === "home" ? CATEGORIES : categoriesOf(module);
 const byCat = await getArticlesByCategory();
 ---
 
-<aside class="sidebar" data-pagefind-ignore>
-  <p class="sb-title">系列目录</p>
+<aside class="sidebar" id="article-sidebar" aria-label="系列文章目录" data-pagefind-ignore>
+  <div class="sidebar-heading">
+    <p class="sb-title">系列目录</p>
+    <button type="button" class="sidebar-close" data-sidebar-close aria-label="关闭系列目录">关闭 ×</button>
+  </div>
   {
     cats.map((c) => {
       const items = byCat.get(c.slug) ?? [];
@@ -37,6 +40,7 @@ const byCat = await getArticlesByCategory();
                   <a
                     href={url(`/${entry.id}/`)}
                     class={currentPath === url(`/${entry.id}/`) ? "current" : ""}
+                    aria-current={currentPath === url(`/${entry.id}/`) ? "page" : undefined}
                   >
                     <span class="sb-qnum">{displayNum}</span>
                     {entry.data.title}

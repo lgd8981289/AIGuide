@@ -1,8 +1,7 @@
 ---
 // TechGrow 公众号引流组件
-// 默认关闭（enabled: false），不加载任何外部脚本，文章全文直接可见。
-// 开启步骤见 src/data/site.ts 中 TECHGROW 的注释。
-// 机制说明：锁定发生在浏览器端（JS 遮罩），HTML 源码始终完整，对 SEO 无损。
+// 开关与生效设备见 src/data/site.ts。HTML 保留全文，受限区域通过 Article.hasPart 标记；
+// 搜索引擎的实际渲染和收录仍需在站长平台验证。
 import { TECHGROW } from "../data/site";
 
 const enabled = TECHGROW.enabled;
@@ -37,19 +36,9 @@ const cfg = {
               var container = document.getElementById("readmore-container");
               if (!container) return;
               var height = "auto";
-              var heads = container.querySelectorAll("h2");
-              var marker = null;
-              for (var i = 0; i < heads.length; i++) {
-                if (heads[i].textContent.indexOf("知识点详解") !== -1) {
-                  marker = heads[i];
-                  break;
-                }
-              }
-              // 面试题：遮罩从「知识点详解」开始，让「面试速答」保持免费可见作为钩子
-              // 教程类没有这个标题，退到第一个小节标题（开头一段导语仍然可读）
-              if (!marker && heads.length > 0) marker = heads[0];
+              var marker = container.querySelector(".gated-content");
               if (marker) {
-                var top = marker.offsetTop - container.offsetTop;
+                var top = marker.getBoundingClientRect().top - container.getBoundingClientRect().top;
                 if (top > 100) height = String(top);
               }
               var plugin = new ReadmorePlugin();

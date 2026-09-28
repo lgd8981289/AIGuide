@@ -17,6 +17,7 @@ interface Props {
   sidebar?: boolean;
   /** og:type：文章页用 article，其余用 website */
   ogType?: "website" | "article";
+  noindex?: boolean;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   path = "/",
   sidebar = false,
   ogType = "website",
+  noindex = false,
 } = Astro.props;
 
 // 当前页面所属模块：顶部导航高亮与侧边栏分组都用它
@@ -42,8 +44,9 @@ const canonical = absoluteUrl(path);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href={url("/favicon.svg")} />
+    <link rel="icon" type="image/png" sizes="180x180" href={url("/apple-touch-icon.png")} />
     <link rel="apple-touch-icon" href={url("/apple-touch-icon.png")} />
     <link rel="sitemap" href={url("/sitemap-index.xml")} />
     <meta name="generator" content={Astro.generator} />
@@ -86,7 +89,8 @@ const canonical = absoluteUrl(path);
       aria-hidden="true"
       tabindex="-1"
     />
-    <Topbar activeModule={activeModule} />
+    <Topbar activeModule={activeModule} showSidebar={sidebar} />
+    {sidebar && <button type="button" class="sidebar-backdrop" aria-label="关闭系列目录" tabindex="-1" data-sidebar-close />}
     <div class:list={["shell", !sidebar && "no-sidebar"]}>
       {sidebar && <Sidebar module={activeModule} />}
       <main>

@@ -6,11 +6,11 @@ import { BASE } from "../utils";
 ---
 
 <div class="search-overlay" id="search-overlay">
-  <div class="search-panel" role="dialog" aria-label="搜索文档">
+  <div class="search-panel" role="dialog" aria-label="搜索文章">
     <input
       id="search-input"
       type="search"
-      placeholder="搜索题目、关键词……"
+      placeholder="搜索文章、题目、关键词……"
       autocomplete="off"
     />
     <div class="search-results" id="search-results">
@@ -42,7 +42,7 @@ import { BASE } from "../utils";
       if (!pfPromise) {
         pfPromise = import(basePath + "/pagefind/pagefind.js")
           .then(function (pf) {
-            // baseUrl 让搜索结果链接带上子目录前缀（/note/）
+            // 与 Astro 的部署路径一致，根目录部署时为 /。
             return pf.options({ baseUrl: basePath + "/" }).then(function () {
               return pf;
             });

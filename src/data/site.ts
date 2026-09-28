@@ -9,7 +9,7 @@ export const SITE = {
 	author: '程序员 Sunday',
 	// 站点 logo（public 目录下的相对路径，留空则不显示）
 	logo: '/avatar.jpg',
-	url: 'https://lgdsunday.club',
+	url: 'https://note.lgdsunday.club',
 	// 右上角 GitHub 图标（留空则不显示）
 	github: 'https://github.com/lgd8981289/AIGuide',
 	// 主站入口（简历汪），站内互链形成求职闭环
@@ -181,7 +181,7 @@ export function categoriesOf(module: ModuleKey): Category[] {
 
 /**
  * 根据路径判断属于哪个模块（顶部导航高亮、侧边栏分组都用它）
- * 传站内路径（"/agent/q001-x/"）或带 base 的完整路径（"/note/agent/q001-x/"）都可以。
+ * 接受站内路径；如以后设置了 base，也会先剥离部署前缀。
  */
 export function moduleOfPath(pathname: string): ModuleKey | 'home' {
 	const rel = pathname.startsWith(BASE) ? pathname.slice(BASE.length) : pathname
@@ -220,5 +220,5 @@ export const TECHGROW = {
 	type: 'website',
 	expires: '30', // 验证码解锁后有效天数
 	random: '1.0', // 引流功能生效的文章比例
-	allowMobile: true // 移动端默认关闭引流，保护移动搜索体验
+	allowMobile: true // 当前移动端也启用解锁；false 时移动端直接显示全文
 }

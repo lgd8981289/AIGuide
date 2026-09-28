@@ -1,5 +1,6 @@
 /* ============ 主题变量：亮色 / 暗色由 html[data-theme] 控制 ============ */
 :root {
+  color-scheme: light;
   --bg: #ffffff;
   --bg-soft: #f7f7f4;
   --bg-code: #f2f2ef;
@@ -22,6 +23,7 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg: #16161a;
   --bg-soft: #1e1e23;
   --bg-code: #26262c;
@@ -211,7 +213,13 @@ button {
 
 .nav-btn {
   display: none;
+  border: 0;
+  background: none;
+  flex: none;
 }
+
+.sidebar-backdrop, .sidebar-close { display: none; }
+.sidebar-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 
 /* ============ 主体骨架：左栏 + 内容 ============ */
 .shell {
@@ -1888,6 +1896,26 @@ html.fm-lock body {
     z-index: 10005;
   }
 
+  .sidebar-close {
+    display: block;
+    color: var(--text-2);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  .nav-toggle-input:checked~.sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: var(--topbar-h) 0 0;
+    z-index: 10004;
+    border: 0;
+    background: rgb(0 0 0 / 35%);
+  }
+
   .nav-toggle-input:checked~.shell .sidebar {
     transform: translateX(0);
   }
@@ -1895,6 +1923,23 @@ html.fm-lock body {
   .brand {
     font-size: 15.5px;
   }
+}
+
+/* 手机顶部保留完整栏目行，避免品牌和操作按钮挤掉栏目入口。 */
+@media (max-width: 700px) {
+  :root { --topbar-h: 96px; }
+  .topbar-inner { flex-wrap: wrap; gap: 4px 10px; padding: 8px 16px; align-content: center; }
+  .brand { flex: 1; min-width: 0; font-size: 14px; }
+  .brand-logo { flex: none; }
+  .brand span { overflow: hidden; text-overflow: ellipsis; }
+  .tools { flex: none; margin-left: auto; }
+  .modules { order: 3; flex: 0 0 100%; min-width: 0; min-height: 32px; }
+  .modules a { padding: 4px 10px; font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .sidebar { transition: none; }
 }
 
 @media (max-width: 600px) {

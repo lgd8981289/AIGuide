@@ -1,6 +1,5 @@
-// 站内 URL 工具：部署在子目录 /note 下，所有内部链接都要带上 base 前缀
-// 注意：trailingSlash: "always" 时 BASE_URL 自带尾斜杠（"/note/"），统一去掉再拼
-export const BASE = import.meta.env.BASE_URL.replace(/\/$/, ""); // "/note"
+// 根目录部署时 BASE 为 ""；统一去掉尾斜杠，避免内部链接出现双斜杠。
+export const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 export function url(path: string): string {
   const p = path.startsWith("/") ? path : `/${path}`;
@@ -9,5 +8,5 @@ export function url(path: string): string {
 
 export function absoluteUrl(path: string): string {
   // 用于 canonical 与结构化数据
-  return `https://lgdsunday.club${url(path)}`;
+  return new URL(url(path), import.meta.env.SITE).href;
 }

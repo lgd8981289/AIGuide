@@ -6,10 +6,10 @@
 // 做四件事：
 //   1. 按 scripts/sources.json 配置，读取各来源 {分类}/{编号-主题}/正文.md
 //   2. 自动提取元数据：H1 → 标题；描述与 FAQ 答案；文件修改时间 → 日期
-//   3. 改写图片路径（正文.assets/ → /note/img/{编号}/），并把图片拷贝到 public/img/
+//   3. 改写图片路径（正文.assets/ → /img/{编号}/），并把图片拷贝到 public/img/
 //   4. 生成带 frontmatter 的 Markdown 到 src/content/articles/{分类}/{编号}-{slug}.md
 //
-// 注意：新增题目时在下方 SLUGS 里补一行英文 slug（URL 里带关键词，对 SEO 有利）
+// 注意：已发布文章的 slug 必须保持稳定；更换地址时需要先安排永久重定向。
 //      新增来源/分类：改 scripts/sources.json（分类 slug 需与 src/data/site.ts 的 CATEGORIES 一致）
 
 import fs from "node:fs";
@@ -21,7 +21,7 @@ const ROOT = path.resolve(__dirname, "..");
 const OUT_DIR = path.join(ROOT, "src", "content", "articles");
 // 原图（打水印后的）先落到 img-src/，再由 optimize-images.py 压成 WebP 输出到 public/img/
 const IMG_SRC_DIR = path.join(ROOT, "img-src");
-const BASE = "/note";
+const BASE = "";
 
 const SOURCES = JSON.parse(
   fs.readFileSync(path.join(__dirname, "sources.json"), "utf-8")
@@ -161,10 +161,11 @@ function fromTopicCard(dir) {
 }
 
 function rewriteImages(md, num) {
-  // 兼容 URL 编码（%E6%AD%A3%E6%96%87 = 正文）与中文原文两种引用形态
+  // Markdown 图片和正文中的 HTML <img src="..."> 都要改写。
+  // 保留原稿不动，避免每次 --sync 又把 HTML 图片变回失效的相对路径。
   return md.replace(
-    /\((?:%E6%AD%A3%E6%96%87\.assets|正文\.assets)\//g,
-    `(${BASE}/img/${num}/`
+    /(\(|\bsrc\s*=\s*["'])(?:\.\/)?(?:%E6%AD%A3%E6%96%87\.assets|正文\.assets)\//gi,
+    `$1${BASE}/img/${num}/`
   );
 }
 
@@ -229,7 +230,7 @@ function main() {
           fileStem = `${num.toLowerCase()}-${SLUGS[num]}`;
         } else {
           console.warn(
-            `  提示：${num} 未配置英文 slug，URL 将是 /${catSlug}/${fileStem}/（建议在 scripts/sync-content.mjs 的 SLUGS 中补充）`
+            `  ${num} 使用稳定地址 /${catSlug}/${fileStem}/`
           );
         }
 

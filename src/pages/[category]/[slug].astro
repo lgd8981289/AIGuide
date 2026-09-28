@@ -10,7 +10,7 @@ import CodeTabs from "../../components/CodeTabs.astro";
 import CopyGuard from "../../components/CopyGuard.astro";
 import CodeCopy from "../../components/CodeCopy.astro";
 import ImageZoom from "../../components/ImageZoom.astro";
-import { CATEGORIES, COPY_GUARD, MODULE_META, SITE, categoriesOf } from "../../data/site";
+import { CATEGORIES, COPY_GUARD, MODULE_META, SITE, TECHGROW, categoriesOf } from "../../data/site";
 import { getArticlesByCategory } from "../../data/articles";
 import { url, absoluteUrl } from "../../utils";
 
@@ -58,13 +58,24 @@ const fmt = (d: Date) =>
     d.getDate()
   ).padStart(2, "0")}`;
 
-// 结构化数据：Article + BreadcrumbList（+ FAQPage）
+const gated = TECHGROW.enabled && headings.some((heading) => heading.depth === 2);
+
+// 速答属于文章摘要；受限内容与实际正文 .gated-content 对应。
 const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: entry.data.title,
     description: entry.data.description,
+    ...(entry.data.faqAnswer ? { abstract: entry.data.faqAnswer } : {}),
+    isAccessibleForFree: !gated,
+    ...(gated ? {
+      hasPart: {
+        "@type": "WebPageElement",
+        isAccessibleForFree: false,
+        cssSelector: ".gated-content",
+      },
+    } : {}),
     datePublished: dateISO,
     dateModified: dateISO,
     inLanguage: "zh-CN",
@@ -72,7 +83,6 @@ const jsonLd = [
     author: {
       "@type": "Person",
       name: SITE.author,
-      url: SITE.mainSite,
     },
     publisher: {
       "@type": "Organization",
@@ -117,19 +127,6 @@ const jsonLd = [
   },
 ];
 
-if (entry.data.faqAnswer) {
-  jsonLd.push({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: entry.data.title,
-        acceptedAnswer: { "@type": "Answer", text: entry.data.faqAnswer },
-      },
-    ],
-  });
-}
 ---
 
 <BaseLayout
@@ -139,28 +136,29 @@ if (entry.data.faqAnswer) {
   sidebar
   ogType="article"
 >
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd[0])} />
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd[1])} />
-  {
-    jsonLd.length > 2 && (
-      <script type="application/ld+json" set:html={JSON.stringify(jsonLd[2])} />
-    )
-  }
+  <Fragment slot="head">
+    <meta property="article:published_time" content={dateISO} />
+    <meta property="article:modified_time" content={dateISO} />
+    <meta property="article:author" content={SITE.author} />
+    <meta property="article:section" content={cat.name} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")} />
+  </Fragment>
 
   <div class="article-layout with-toc">
     <div class="article-col">
       <article
+        data-pagefind-body
         class={COPY_GUARD.enabled ? "article-guard" : ""}
         style="padding-bottom: 30px;"
       >
         <div class="page-head">
-          <div class="crumbs">
+          <div class="crumbs" data-pagefind-ignore>
             <a href={url("/")}>首页</a> /{" "}
             <a href={url(meta.href)}>{meta.title}</a> /{" "}
             <a href={url(`/${cat.slug}/`)}>{cat.name}</a>
           </div>
           <h1 data-pagefind-meta="title">{entry.data.title}</h1>
-          <div class="article-meta">
+          <div class="article-meta" data-pagefind-ignore>
             <a class="cat" data-pagefind-meta="category" href={url(`/${cat.slug}/`)}>
               {cat.name}
             </a>
@@ -176,7 +174,7 @@ if (entry.data.faqAnswer) {
 
         {
           (prev || next) && (
-            <nav class="prev-next">
+            <nav class="prev-next" data-pagefind-ignore>
               {prev ? (
                 <a href={url(`/${prev.entry.id}/`)}>
                   <span class="label">{meta.prevLabel} · {prev.displayNum}</span>

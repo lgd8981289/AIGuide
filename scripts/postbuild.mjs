@@ -12,7 +12,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = path.join(ROOT, "dist");
-const BASE = "/note";
+const BASE = "";
 const SITEMAP = path.join(DIST, "sitemap-0.xml");
 
 // ---------------------------------------------------------------- 图片处理
@@ -159,7 +159,7 @@ function injectLastmod() {
   const xml = fs.readFileSync(SITEMAP, "utf-8").replace(
     /<url>\s*<loc>([^<]+)<\/loc>\s*<\/url>/g,
     (whole, loc) => {
-      const url = loc.replace("https://lgdsunday.club", "");
+      const url = new URL(loc).pathname;
       let date = byUrl.get(url) || byCategory.get(url) || byModule.get(url);
       if (!date && url === `${BASE}/`) date = latest || today;
       if (!date) date = today; // 其他页面（404 等）用构建日
@@ -170,6 +170,18 @@ function injectLastmod() {
 
   fs.writeFileSync(SITEMAP, xml);
   return count;
+}
+
+// ------------------------------------------------- sitemap.xml 兼容别名
+
+// @astrojs/sitemap 默认产出 sitemap-index.xml + sitemap-0.xml。
+// 但站长后台（尤其 Google Search Console）习惯让用户提交 sitemap.xml，
+// 且手填相对路径时容易被解析到错误的路径上；这里额外产一份同内容的
+// /sitemap.xml（urlset，不是索引，单文件即可用），省掉一层跳转。
+function emitSitemapAlias() {
+  if (!fs.existsSync(SITEMAP)) return 0;
+  fs.writeFileSync(path.join(DIST, "sitemap.xml"), fs.readFileSync(SITEMAP));
+  return 1;
 }
 
 // ------------------------------------------------------------------ 主流程
@@ -199,7 +211,8 @@ if (fs.existsSync(DIST)) {
 }
 
 const sitemapCount = injectLastmod();
+const aliasWritten = emitSitemapAlias();
 
 console.log(
-  `  构建后处理：${imgChanged} 张配图已换 WebP 并补尺寸/懒加载（涉及 ${pages} 个页面）；sitemap 注入 lastmod ${sitemapCount} 条`
+  `  构建后处理：${imgChanged} 张配图已换 WebP 并补尺寸/懒加载（涉及 ${pages} 个页面）；sitemap 注入 lastmod ${sitemapCount} 条${aliasWritten ? "，另输出 sitemap.xml 别名" : ""}`
 );

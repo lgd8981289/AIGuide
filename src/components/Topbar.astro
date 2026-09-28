@@ -5,18 +5,19 @@ import { url } from "../utils";
 // 模块高亮：由页面所属模块决定（分类页/文章页归属于其模块，而不是靠路径前缀硬匹配）
 interface Props {
   activeModule?: ModuleKey | "home";
+  showSidebar?: boolean;
 }
 
-const { activeModule = "home" } = Astro.props;
+const { activeModule = "home", showSidebar = false } = Astro.props;
 ---
 
 <header class="topbar" data-pagefind-ignore>
   <div class="topbar-inner">
-    <label for="sidebar-toggle" class="nav-btn" aria-label="展开系列目录">
+    {showSidebar && <button type="button" class="nav-btn" id="sidebar-open" aria-label="展开系列目录" aria-controls="article-sidebar" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
         <path d="M4 7h16M4 12h16M4 17h16" />
       </svg>
-    </label>
+    </button>}
 
     <a class="brand" href={url("/")}>
       {
@@ -27,7 +28,7 @@ const { activeModule = "home" } = Astro.props;
       <span>{SITE.name}</span>
     </a>
 
-    <nav class="modules">
+    <nav class="modules" aria-label="网站栏目">
       {
         MODULES.map((m) => {
           const isActive = m.key === activeModule;
@@ -41,7 +42,7 @@ const { activeModule = "home" } = Astro.props;
     </nav>
 
     <div class="tools">
-      <button class="icon-btn" id="search-open" aria-label="搜索文档" title="搜索文档（⌘K / Ctrl+K）">
+      <button class="icon-btn" id="search-open" aria-label="搜索文章" title="搜索文章（⌘K / Ctrl+K）">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
           <circle cx="11" cy="11" r="6.5" />
           <path d="M16.2 16.2L21 21" />
@@ -90,11 +91,39 @@ const { activeModule = "home" } = Astro.props;
     } catch {}
   });
 
-  // 移动端：点击侧边栏链接后自动收起抽屉
+  // 移动端正文目录：按钮、遮罩和 Escape 均可关闭。
   const sidebarToggle = document.getElementById("sidebar-toggle") as HTMLInputElement | null;
-  document.querySelectorAll(".sidebar a").forEach((a) => {
-    a.addEventListener("click", () => {
-      if (sidebarToggle) sidebarToggle.checked = false;
-    });
+  const sidebarButton = document.getElementById("sidebar-open");
+  const sidebar = document.getElementById("article-sidebar");
+  const mobileSidebar = window.matchMedia("(max-width: 960px)");
+  const closeButton = sidebar?.querySelector<HTMLButtonElement>("[data-sidebar-close]");
+  const setSidebar = (open: boolean, restoreFocus = false) => {
+    if (sidebarToggle) sidebarToggle.checked = open;
+    sidebarButton?.setAttribute("aria-expanded", String(open));
+    if (sidebar) sidebar.inert = mobileSidebar.matches && !open;
+    if (open) closeButton?.focus();
+    else if (restoreFocus) sidebarButton?.focus();
+  };
+  sidebarButton?.addEventListener("click", () => setSidebar(!sidebarToggle?.checked));
+  document.querySelectorAll("[data-sidebar-close]").forEach((button) => {
+    button.addEventListener("click", () => setSidebar(false, true));
   });
+  sidebar?.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => setSidebar(false));
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && sidebarToggle?.checked) setSidebar(false, true);
+  });
+  // 抽屉打开时将键盘焦点留在目录和关闭按钮之间。
+  sidebar?.addEventListener("keydown", (event) => {
+    if (event.key !== "Tab" || !mobileSidebar.matches || !sidebarToggle?.checked) return;
+    const controls = Array.from(sidebar.querySelectorAll<HTMLElement>("button, summary, a[href]"))
+      .filter((element) => element.getClientRects().length > 0);
+    const first = controls[0];
+    const last = controls[controls.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+  });
+  mobileSidebar.addEventListener("change", () => setSidebar(false));
+  setSidebar(false);
 </script>
