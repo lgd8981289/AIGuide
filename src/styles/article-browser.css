@@ -13,11 +13,6 @@
 .browse-category:hover { background: var(--bg-soft); color: var(--text); text-decoration: none; }
 .browse-category[aria-current="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
 .browse-count { font-size: 12px; font-variant-numeric: tabular-nums; font-weight: 400; }
-.browse-author { margin: 28px 10px 0; border-top: 1px solid var(--border); padding: 20px 0 12px; }
-.browse-author-name { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
-.browse-author-name img { border-radius: 50%; }
-.browse-author p { color: var(--text-2); font-size: 12px; margin: 10px 0; }
-.browse-author .follow-link { font-size: 12px; }
 .browse-content { min-width: 0; max-width: 900px; }
 .browse-heading h1 { margin: 0; font-size: 27px; font-weight: 600; scroll-margin-top: calc(var(--topbar-h) + 24px); }
 .browse-heading h1:focus:not(:focus-visible) { outline: none; }
@@ -46,7 +41,7 @@
 @media (max-width: 960px) {
   .article-browser { grid-template-columns: minmax(0, 1fr); gap: 22px; padding-top: 20px; }
   .browse-sidebar { position: static; max-height: none; overflow: visible; border: 0; padding: 0; }
-  .browse-author, .browse-recommendation, .browse-sidebar-label { display: none; }
+  .browse-recommendation, .browse-sidebar-label { display: none; }
   .browse-filters { border-bottom: 1px solid var(--border); padding-bottom: 14px; }
   .browse-filters > summary { display: flex; align-items: center; gap: 12px; list-style: none; cursor: pointer; font-size: 13px; color: var(--text-2); min-height: 34px; }
   .browse-filters > summary::-webkit-details-marker { display: none; }

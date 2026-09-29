@@ -5,7 +5,7 @@
 //
 // 做四件事：
 //   1. 按 scripts/sources.json 配置，读取各来源 {分类}/{编号-主题}/正文.md
-//   2. 自动提取元数据：H1 → 标题；描述与 FAQ 答案；文件修改时间 → 日期
+//   2. 自动提取元数据：网站标题配置优先、H1 兜底；描述与 FAQ 答案；文件修改时间 → 日期
 //   3. 改写图片路径（正文.assets/ → /img/{编号}/），并把图片拷贝到 public/img/
 //   4. 生成带 frontmatter 的 Markdown 到 src/content/articles/{分类}/{编号}-{slug}.md
 //
@@ -26,6 +26,26 @@ const BASE = "";
 const SOURCES = JSON.parse(
   fs.readFileSync(path.join(__dirname, "sources.json"), "utf-8")
 ).sources;
+
+// 使用写作仓库的固定编号，不使用网站按分类重排后的 Q/T 展示编号。
+// 在清理产物之前校验，配置损坏时保留上一次同步结果。
+const WEBSITE_TITLES = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "article-titles.json"), "utf-8")
+);
+if (!WEBSITE_TITLES || typeof WEBSITE_TITLES !== "object" || Array.isArray(WEBSITE_TITLES)) {
+  throw new Error("article-titles.json 必须是文章编号到网站标题的对象");
+}
+const configuredTitles = new Set();
+for (const [num, title] of Object.entries(WEBSITE_TITLES)) {
+  if (!/^[QT]\d{3,}$/.test(num)) {
+    throw new Error(`网站标题编号无效：${num}（请使用原始 Q001 / T001 等编号）`);
+  }
+  if (typeof title !== "string" || !title.trim() || title !== title.trim() || /[\r\n]/.test(title)) {
+    throw new Error(`网站标题无效：${num}（需要无首尾空白的单行非空文本）`);
+  }
+  if (configuredTitles.has(title)) throw new Error(`网站标题重复：${title}`);
+  configuredTitles.add(title);
+}
 
 // 编号 → URL slug（英文关键词，新增题目时补一行）
 const SLUGS = {
@@ -177,6 +197,8 @@ function main() {
   fs.rmSync(IMG_SRC_DIR, { recursive: true, force: true });
 
   let total = 0;
+  let changedTitles = 0;
+  const appliedTitles = new Set();
 
   for (const source of SOURCES) {
     const sourceRoot = path.resolve(ROOT, source.root);
@@ -203,7 +225,10 @@ function main() {
         if (!fs.existsSync(src)) continue;
 
         const raw = fs.readFileSync(src, "utf-8");
-        const title = extractTitle(raw, entry.name);
+        const sourceTitle = extractTitle(raw, entry.name);
+        const title = WEBSITE_TITLES[num] ?? sourceTitle;
+        if (WEBSITE_TITLES[num] !== undefined) appliedTitles.add(num);
+        if (title !== sourceTitle) changedTitles++;
         const dir = path.join(catDir, entry.name);
         const answer = extractInterviewAnswer(raw);
         const cardText = fromTopicCard(dir);
@@ -215,7 +240,7 @@ function main() {
             (source.module === "interview"
               ? answer || cardText || extractBodySummary(raw)
               : cardText || extractBodySummary(raw)
-            ).trim() || title,
+            ).trim() || sourceTitle,
             120
           )
         );
@@ -269,6 +294,10 @@ function main() {
   }
 
   console.log(`完成：共同步 ${total} 篇文章。`);
+  console.log(`网站标题：${appliedTitles.size} 篇使用配置，其中 ${changedTitles} 篇与源稿标题不同；其余沿用源稿标题。`);
+  for (const num of Object.keys(WEBSITE_TITLES)) {
+    if (!appliedTitles.has(num)) console.warn(`网站标题配置 ${num} 未匹配到源稿，请核对原始编号。`);
+  }
   if (total === 0) console.warn("警告：没有同步到任何文章，请检查 sources.json 里的目录。");
 }
 

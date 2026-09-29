@@ -3,6 +3,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 import json
+import re
 import sys
 from urllib.parse import unquote, urlsplit
 import xml.etree.ElementTree as ET
@@ -26,6 +27,7 @@ class Page(HTMLParser):
         self.schemas = []
         self.classes = set()
         self.h1 = 0
+        self.h1_titles = []
         self.search_bodies = 0
         self.capture = None
         self.buffer = ""
@@ -36,7 +38,7 @@ class Page(HTMLParser):
         self.classes.update((attrs.get("class") or "").split())
         self.search_bodies += "data-pagefind-body" in attrs
         self.h1 += tag == "h1"
-        if tag == "title" or tag == "script" and attrs.get("type") == "application/ld+json":
+        if tag in ("title", "h1") or tag == "script" and attrs.get("type") == "application/ld+json":
             self.capture = tag
             self.buffer = ""
         if tag == "meta":
@@ -59,6 +61,8 @@ class Page(HTMLParser):
             return
         if tag == "title":
             self.titles.append(self.buffer)
+        elif tag == "h1":
+            self.h1_titles.append(self.buffer)
         else:
             value = json.loads(self.buffer)
             self.schemas.extend(value if isinstance(value, list) else [value])
@@ -70,6 +74,17 @@ def main():
     def check(ok, message):
         if not ok:
             errors.append(message)
+    website_titles = json.loads((ROOT / "scripts/article-titles.json").read_text())
+    content_root = ROOT / "src/content/articles"
+    sources = list(content_root.rglob("*.md"))
+    expected_titles = {}
+    for source in sources:
+        frontmatter = source.read_text().split("---", 2)[1]
+        num = json.loads(re.search(r'^qnum: (.+)$', frontmatter, re.M)[1])
+        synced_title = json.loads(re.search(r'^title: (.+)$', frontmatter, re.M)[1])
+        expected = website_titles.get(num, synced_title)
+        check(synced_title == expected, f"网站标题配置尚未同步，请先运行 npm run sync:content: {num}")
+        expected_titles[ORIGIN + "/" + source.relative_to(content_root).with_suffix("").as_posix() + "/"] = expected
     urls = [x.text for x in ET.parse(DIST / "sitemap-0.xml").findall("s:url/s:loc", NS)]
     index = [x.text for x in ET.parse(DIST / "sitemap-index.xml").findall("s:sitemap/s:loc", NS)]
     check(index == [ORIGIN + BASE + "sitemap-0.xml"], "sitemap 索引地址错误")
@@ -106,12 +121,25 @@ def main():
         article = next((s for s in page.schemas if s.get("@type") == "Article"), None)
         if article:
             article_count += 1
+            expected = expected_titles.get(url)
+            check(expected is not None, "文章缺少对应同步源稿: " + url)
+            check(page.h1_titles == [expected], "文章 H1 与网站标题不一致: " + url)
+            check(page.titles == [f"{expected}｜Sunday 的面试指南"], "文章 title 与网站标题不一致: " + url)
+            check(article.get("headline") == expected, "文章结构化标题与网站标题不一致: " + url)
+            check(page.meta.get("og:title") == page.meta.get("twitter:title") == f"{expected}｜Sunday 的面试指南", "文章分享标题不一致: " + url)
+            breadcrumb = next((s for s in page.schemas if s.get("@type") == "BreadcrumbList"), {})
+            crumbs = breadcrumb.get("itemListElement", [])
+            check(bool(crumbs) and crumbs[-1].get("name") == expected, "文章面包屑标题不一致: " + url)
             check(page.search_bodies == 1, "文章搜索正文范围不正确: " + url)
             check(article.get("mainEntityOfPage") == url, "文章结构化 URL 错误: " + url)
             if article.get("isAccessibleForFree") is False:
                 check(article.get("hasPart", {}).get("cssSelector") == ".gated-content" and "gated-content" in page.classes, "受限内容标记与正文不一致: " + url)
         else:
             check(page.search_bodies == 0, "非文章页面进入全文索引: " + url)
+        for schema in page.schemas:
+            if schema.get("@type") == "ItemList":
+                for item in schema.get("itemListElement", []):
+                    check(item.get("name") == expected_titles.get(item.get("url")), "列表结构化标题与文章不一致: " + url)
         for img in page.images:
             src = img.get("src") or img.get("data-src", "")
             # 灯箱在打开时使用被点击图片的地址；关注弹窗的 data-src 则需要检查。
@@ -132,7 +160,6 @@ def main():
                 continue
             local = DIST / unquote(target.path[len(BASE):])
             check(local.is_file() or (local / "index.html").is_file(), "站内链接不存在: " + link)
-    sources = list((ROOT / "src/content/articles").rglob("*.md"))
     check(article_count == len(sources), "构建文章数与源稿不一致")
     error_page = Page((DIST / "404.html").read_text())
     check("noindex" in error_page.meta.get("robots", ""), "404 页面缺少 noindex")

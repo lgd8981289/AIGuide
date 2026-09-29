@@ -91,20 +91,9 @@ jsonLd.push({
           ))}
         </nav>
       </details>
-      {!module ? (
-        <div class="browse-recommendation">
-          <ResumeCta variant="sidebar" />
-        </div>
-      ) : (
-        <div class="browse-author">
-          <div class="browse-author-name">
-            {SITE.logo && <img src={url(SITE.logo)} width="30" height="30" alt="" />}
-            <span>{SITE.author}</span>
-          </div>
-          <p>分享 AI 应用、编程实践与面试思考。</p>
-          <button type="button" class="follow-link" data-follow-open>关注公众号 <span aria-hidden="true">↗</span></button>
-        </div>
-      )}
+      <div class="browse-recommendation">
+        <ResumeCta variant="sidebar" />
+      </div>
     </aside>
     <section class="browse-content" aria-labelledby="browse-title" data-pagefind-ignore>
       <header class="browse-heading">
