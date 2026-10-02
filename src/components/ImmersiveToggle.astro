@@ -28,6 +28,7 @@
     root.classList.toggle("immersive", on);
     toggle?.setAttribute("aria-pressed", String(on));
     if (exit) exit.hidden = !on;
+    document.dispatchEvent(new CustomEvent("immersive:change", { detail: { on } }));
   };
 
   toggle?.addEventListener("click", () => {
@@ -35,7 +36,7 @@
   });
   exit?.addEventListener("click", () => setImmersive(false));
   window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && root.classList.contains("immersive")) {
+    if (e.key === "Escape" && !e.defaultPrevented && root.classList.contains("immersive")) {
       setImmersive(false);
     }
   });

@@ -14,6 +14,18 @@
       }
     },
     {
+      "module": "programmer",
+      "label": "全栈面试题",
+      "root": "../文章/全栈面试题",
+      "categories": {
+        "前端面试题": "frontend",
+        "后端面试题": "backend",
+        "数据库与缓存面试题": "database",
+        "计算机基础面试题": "cs-basics",
+        "系统设计面试题": "fullstack-system-design"
+      }
+    },
+    {
       "module": "tutorial",
       "label": "AI 编程教程",
       "root": "../../一起来玩 AI 呀～/文章",

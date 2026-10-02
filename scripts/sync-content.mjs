@@ -15,6 +15,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { validateArticleTopics } from "../src/lib/article-topics.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -26,6 +27,25 @@ const BASE = "";
 const SOURCES = JSON.parse(
   fs.readFileSync(path.join(__dirname, "sources.json"), "utf-8")
 ).sources;
+
+const TOPICS = JSON.parse(fs.readFileSync(path.join(ROOT, "src/data/topics.json"), "utf8"));
+const TOPIC_ASSIGNMENTS = JSON.parse(fs.readFileSync(path.join(__dirname, "article-topics.json"), "utf8"));
+const sourceArticles = new Map();
+for (const source of SOURCES) {
+  for (const [name, category] of Object.entries(source.categories)) {
+    const directory = path.resolve(ROOT, source.root, name);
+    if (!fs.existsSync(directory)) continue;
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      const num = entry.name.match(/^([A-Z]\d+)/)?.[1];
+      if (entry.isDirectory() && num && fs.existsSync(path.join(directory, entry.name, "正文.md"))) {
+        if (sourceArticles.has(num)) throw new Error(`正文编号重复：${num}`);
+        sourceArticles.set(num, category);
+      }
+    }
+  }
+}
+const ARTICLE_TOPICS = validateArticleTopics(TOPICS, TOPIC_ASSIGNMENTS,
+  SOURCES.flatMap((source) => Object.values(source.categories)), sourceArticles);
 
 // 使用写作仓库的固定编号，不使用网站按分类重排后的 Q/T 展示编号。
 // 在清理产物之前校验，配置损坏时保留上一次同步结果。
@@ -232,12 +252,13 @@ function main() {
         const dir = path.join(catDir, entry.name);
         const answer = extractInterviewAnswer(raw);
         const cardText = fromTopicCard(dir);
+        const isInterview = source.module === "interview" || source.module === "programmer";
 
         // 描述优先级：面试题用「面试速答」；教程用选题卡（描述 → 读完能掌握什么）；
         // 都没有时退回正文里有信息量的前几句（自动跳过问候语）
         const description = tidyText(
           trimAtBoundary(
-            (source.module === "interview"
+            (isInterview
               ? answer || cardText || extractBodySummary(raw)
               : cardText || extractBodySummary(raw)
             ).trim() || sourceTitle,
@@ -245,7 +266,7 @@ function main() {
           )
         );
         const faqAnswer =
-          source.module === "interview" && answer
+          isInterview && answer
             ? tidyText(answer).slice(0, 600)
             : undefined;
         const date = new Date(fs.statSync(src).mtime).toISOString().slice(0, 10);
@@ -266,6 +287,7 @@ function main() {
           `title: ${JSON.stringify(title)}`,
           `description: ${JSON.stringify(description)}`,
           `category: ${JSON.stringify(catSlug)}`,
+          ...(ARTICLE_TOPICS.has(num) ? [`topic: ${JSON.stringify(ARTICLE_TOPICS.get(num))}`] : []),
           `module: ${JSON.stringify(source.module)}`,
           `qnum: ${JSON.stringify(num)}`,
           `date: ${date}`,

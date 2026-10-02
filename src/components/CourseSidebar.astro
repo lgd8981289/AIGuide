@@ -1,0 +1,25 @@
+---
+import { getCourseChapters, lessonPath } from '../data/course-lessons';
+import { COURSE } from '../data/course';
+import { url } from '../utils';
+import SidebarCollapse from './SidebarCollapse.astro';
+const chapters = await getCourseChapters();
+const current = Astro.url.pathname;
+---
+<aside class="sidebar course-sidebar" id="article-sidebar" aria-label="课程章节目录" data-site-sidebar data-sidebar-scope="course" data-sidebar-kind="reading" data-pagefind-ignore>
+  <div class="sidebar-heading">
+    <a class="sb-title" href={url(COURSE.href)}>{COURSE.navTitle} · 目录</a>
+    <SidebarCollapse />
+  </div>
+  {chapters.map((chapter) => (
+    <details data-sidebar-node={`course:chapter-${chapter.number}`} data-sidebar-current={chapter.lessons.some((entry) => current === url(lessonPath(entry.id))) ? "true" : undefined} open={chapter.lessons.some((entry) => current === url(lessonPath(entry.id)))}>
+      <summary>第 {chapter.number} 章 · {chapter.title}<span class="sb-count">{chapter.lessons.length}</span></summary>
+      <ul>{chapter.lessons.map((entry) => (
+        <li><a href={url(lessonPath(entry.id))} class={current === url(lessonPath(entry.id)) ? 'current' : ''} aria-current={current === url(lessonPath(entry.id)) ? 'page' : undefined}>
+          <span class="sb-qnum">{chapter.number}.{entry.data.order}</span>
+          {entry.data.title}<small class="course-access-label">{entry.data.free ? '免费' : '试读'}</small>
+        </a></li>
+      ))}</ul>
+    </details>
+  ))}
+</aside>

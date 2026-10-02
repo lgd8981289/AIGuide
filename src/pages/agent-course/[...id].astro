@@ -1,0 +1,72 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CoursePurchase from '../../components/CoursePurchase.astro';
+import Toc from '../../components/Toc.astro';
+import BackTop from '../../components/BackTop.astro';
+import CodeCopy from '../../components/CodeCopy.astro';
+import CodeTabs from '../../components/CodeTabs.astro';
+import ImageZoom from '../../components/ImageZoom.astro';
+import { getCourseLessons, lessonPath } from '../../data/course-lessons';
+import { COURSE } from '../../data/course';
+import { SITE } from '../../data/site';
+import { url, absoluteUrl } from '../../utils';
+import '../../styles/course.css';
+export async function getStaticPaths() {
+  const lessons = await getCourseLessons();
+  return lessons.map((entry, index) => ({ params: { id: entry.id }, props: { entry, prev: lessons[index - 1] ?? null, next: lessons[index + 1] ?? null } }));
+}
+const { entry, prev, next } = Astro.props;
+const { Content, headings } = await render(entry);
+const { title, chapter, chapterTitle, free, description } = entry.data;
+const pagePath = lessonPath(entry.id);
+const pageTitle = `${title}｜慕课网 ${COURSE.platformTitle}`;
+const date = entry.data.date.toISOString().slice(0, 10);
+const jsonLd = [{
+  '@context': 'https://schema.org', '@type': 'Article', headline: title, description,
+  isAccessibleForFree: free,
+  ...(!free ? { hasPart: { '@type': 'WebPageElement', isAccessibleForFree: false, cssSelector: '.course-paywall' } } : {}),
+  author: { '@type': 'Person', name: SITE.author },
+  publisher: { '@type': 'Organization', name: SITE.name },
+  dateModified: date, datePublished: date, inLanguage: 'zh-CN', articleSection: chapterTitle,
+  image: absoluteUrl('/og-cover.jpg'), mainEntityOfPage: absoluteUrl(pagePath),
+  isPartOf: { '@type': 'Course', '@id': `${absoluteUrl(COURSE.href)}#course`, name: COURSE.title, url: absoluteUrl(COURSE.href) },
+}, {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/') },
+    { '@type': 'ListItem', position: 2, name: COURSE.navTitle, item: absoluteUrl(COURSE.href) },
+    { '@type': 'ListItem', position: 3, name: `第 ${chapter} 章 · ${chapterTitle}`, item: `${absoluteUrl(COURSE.href)}#chapter-${chapter}` },
+    { '@type': 'ListItem', position: 4, name: title, item: absoluteUrl(pagePath) },
+  ],
+}];
+---
+<BaseLayout title={pageTitle} description={description} path={pagePath} sidebar ogType="article" keywords={COURSE.keywords}>
+  <Fragment slot="head"><meta property="article:modified_time" content={date} /><script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} /></Fragment>
+  <div class="article-layout with-toc course-article">
+    <div class="article-col">
+      <article data-pagefind-body>
+        <header class="page-head">
+          <div class="crumbs" data-pagefind-ignore><a href={url(COURSE.href)}>{COURSE.navTitle}</a> / <a href={`${url(COURSE.href)}#chapter-${chapter}`}>第 {chapter} 章</a></div>
+          <h1 data-pagefind-meta="title">{title}</h1>
+          <div class="article-meta" data-pagefind-ignore><span data-pagefind-meta="category">{COURSE.navTitle}</span><span>{chapter}.{entry.data.order}</span><span>更新于 {date}</span><span class="lesson-access">{free ? '全文免费' : '约 15% 试读'}</span></div>
+          <p class="course-lesson-intro">《<a href={url(COURSE.href)}>{COURSE.title}</a>》 · 程序员 Sunday</p>
+        </header>
+        {!free && <p class="course-preview-note" data-pagefind-ignore>你正在阅读本节的免费试读。完整课程 ¥{COURSE.price}，可在文末添加作者微信购买。</p>}
+        <div class="prose course-prose"><Content /></div>
+        {!free && <section class="course-paywall" data-pagefind-ignore data-nosnippet aria-labelledby="paywall-title">
+          <span class="paywall-icon" aria-hidden="true">🔒</span><p class="course-eyebrow">本节试读已结束</p>
+          <h2 id="paywall-title">继续学习，解锁完整课程</h2>
+          <p>购买《{COURSE.title}》，<br />继续阅读本节剩余内容与后续课程。</p>
+          <button type="button" class="course-primary" data-course-purchase>解锁完整课程 · ¥{COURSE.price}</button>
+          <small>扫码添加作者微信，备注「Agent 课程」</small>
+        </section>}
+      </article>
+      <nav class="prev-next" aria-label="课程上下节" data-pagefind-ignore>
+        {prev ? <a href={url(lessonPath(prev.id))}><span class="label">上一节</span>{prev.data.title}</a> : <span />}
+        {next ? <a class="next" href={url(lessonPath(next.id))}><span class="label">下一节 · {next.data.free ? '免费阅读' : '试读'}</span>{next.data.title}</a> : <a class="next" href={url(COURSE.href)}>返回课程目录</a>}
+      </nav>
+    </div>
+    <Toc headings={headings} />
+  </div>
+  <CoursePurchase /><CodeCopy /><CodeTabs /><ImageZoom /><BackTop />
+</BaseLayout>

@@ -20,6 +20,9 @@ img-src/
 
 # 私有文章及配图：保留在本地用于构建、部署，不提交到 GitHub
 /src/content/articles/
+/src/content/course/
+/public/course-assets/
+/.course-sync-*/
 /public/img/
 
 # 浏览器调试产物可能包含文章正文或截图

@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Topbar from "../components/Topbar.astro";
 import Sidebar from "../components/Sidebar.astro";
+import CourseSidebar from "../components/CourseSidebar.astro";
 import Footer from "../components/Footer.astro";
 import SearchDialog from "../components/SearchDialog.astro";
 import FollowModal from "../components/FollowModal.astro";
@@ -15,9 +16,12 @@ interface Props {
   path?: string;
   /** 是否显示左侧系列目录（分类页、文章页用） */
   sidebar?: boolean;
+  /** 列表页在自己的布局内提供分类侧栏。 */
+  customSidebar?: boolean;
   /** og:type：文章页用 article，其余用 website */
   ogType?: "website" | "article";
   noindex?: boolean;
+  keywords?: string[];
 }
 
 const {
@@ -25,12 +29,15 @@ const {
   description = SITE.description,
   path = "/",
   sidebar = false,
+  customSidebar = false,
   ogType = "website",
   noindex = false,
+  keywords,
 } = Astro.props;
 
 // 当前页面所属模块：顶部导航高亮与侧边栏分组都用它
 const activeModule = moduleOfPath(path);
+const hasSidebar = sidebar || customSidebar;
 
 const pageTitle =
   path === "/" ? `${SITE.name}｜${SITE.tagline}` : `${title}｜${SITE.name}`;
@@ -44,6 +51,7 @@ const canonical = absoluteUrl(path);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords.join(", ")} />}
     <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" sizes="180x180" href={url("/apple-touch-icon.png")} />
@@ -67,6 +75,11 @@ const canonical = absoluteUrl(path);
     <script is:inline>
       !function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"3RLhnol3nj3ui0Lt",ck:"3RLhnol3nj3ui0Lt"});
     </script>
+    {hasSidebar && <script is:inline>
+      try {
+        document.documentElement.dataset.sidebarCollapsed = String(localStorage.getItem("aiguide.sidebar.v1") === "collapsed");
+      } catch {}
+    </script>}
     <script is:inline>
       // 主题初始化：优先读取用户选择，否则跟随系统（在任何内容渲染前执行，避免闪烁）
       (function () {
@@ -86,17 +99,10 @@ const canonical = absoluteUrl(path);
     <slot name="head" />
   </head>
   <body>
-    <input
-      type="checkbox"
-      id="sidebar-toggle"
-      class="nav-toggle-input"
-      aria-hidden="true"
-      tabindex="-1"
-    />
-    <Topbar activeModule={activeModule} showSidebar={sidebar} />
-    {sidebar && <button type="button" class="sidebar-backdrop" aria-label="关闭系列目录" tabindex="-1" data-sidebar-close />}
-    <div class:list={["shell", !sidebar && "no-sidebar"]}>
-      {sidebar && <Sidebar module={activeModule} />}
+    <Topbar activeModule={activeModule} showSidebar={hasSidebar} sidebarId={customSidebar ? "browse-sidebar" : "article-sidebar"} />
+    {hasSidebar && <button type="button" class="sidebar-backdrop" aria-label="关闭目录" tabindex="-1" data-sidebar-close />}
+    <div class:list={["shell", !sidebar && "no-sidebar", sidebar && "with-article-sidebar"]}>
+      {sidebar && (activeModule === "course" ? <CourseSidebar /> : <Sidebar />)}
       <main>
         <slot />
       </main>
@@ -106,3 +112,7 @@ const canonical = absoluteUrl(path);
     <FollowModal />
   </body>
 </html>
+
+<script>
+  import "../scripts/sidebar";
+</script>

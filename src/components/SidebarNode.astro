@@ -1,0 +1,19 @@
+---
+import type { SidebarBranch } from "../data/articles";
+import { url } from "../utils";
+import SidebarArticles from "./SidebarArticles.astro";
+interface Props { node: SidebarBranch; level?: number; }
+const { node, level = 0 } = Astro.props;
+const hasChildren = Boolean(node.children?.length);
+---
+{level === 0 && !hasChildren ? (
+  <SidebarArticles articles={node.articles ?? []} flat showNumber={false} />
+) : <details open={node.current} data-sidebar-node={node.id} data-sidebar-current={node.current ? "true" : undefined} class:list={["sb-branch", level > 0 && "sb-subcategory"]}>
+  <summary><span>{node.name}</span><span class="sb-count">{node.count}</span></summary>
+  {hasChildren && node.overview && <a class="sb-overview" href={url(node.overview.href)}>{node.overview.name} <span aria-hidden="true">↗</span></a>}
+  {hasChildren ? (
+    <ul class="sb-branches">{node.children?.map((child) => <li><Astro.self node={child} level={level + 1} /></li>)}</ul>
+  ) : (
+    <SidebarArticles articles={node.articles ?? []} />
+  )}
+</details>}

@@ -1,0 +1,22 @@
+---
+import { getArticleNavigationTitle, type ArticleWithOrder } from "../data/articles";
+import { url } from "../utils";
+
+interface Props {
+  articles: ArticleWithOrder[];
+  flat?: boolean;
+  showNumber?: boolean;
+}
+const { articles, flat = false, showNumber = true } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+{articles.length > 0 && <ul class:list={["sb-articles", flat && "sb-articles-flat"]}>
+  {articles.map(({ entry, displayNum }) => (
+    <li><a class:list={["sb-article", currentPath === url(`/${entry.id}/`) && "current"]}
+      href={url(`/${entry.id}/`)} title={entry.data.title}
+      aria-label={entry.data.title} data-navigation-title={entry.data.title}
+      aria-current={currentPath === url(`/${entry.id}/`) ? "page" : undefined}>
+      {showNumber && <span class="sb-qnum">{displayNum}</span>}{getArticleNavigationTitle(entry)}
+    </a></li>
+  ))}
+</ul>}

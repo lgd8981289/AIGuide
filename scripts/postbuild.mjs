@@ -119,6 +119,11 @@ function collectDates() {
     engineering: "interview",
     "system-design": "interview",
     langchain: "interview",
+    frontend: "programmer",
+    backend: "programmer",
+    database: "programmer",
+    "cs-basics": "programmer",
+    "fullstack-system-design": "programmer",
     tools: "tutorial",
     "agent-ext": "tutorial",
     practice: "tutorial",
@@ -141,10 +146,26 @@ function collectDates() {
       const catUrl = `${BASE}/${category}/`;
       if (!byCategory.has(catUrl) || byCategory.get(catUrl) < date) byCategory.set(catUrl, date);
 
-      const moduleUrl = `${BASE}/${MODULE_OF[category] === "tutorial" ? "tutorial" : "ai"}/`;
+      const modulePath = { interview: "ai", programmer: "programmer", tutorial: "tutorial" }[MODULE_OF[category]];
+      if (!modulePath) throw new Error(`分类缺少模块映射：${category}`);
+      const moduleUrl = `${BASE}/${modulePath}/`;
       if (!byModule.has(moduleUrl) || byModule.get(moduleUrl) < date) byModule.set(moduleUrl, date);
 
       if (!latest || latest < date) latest = date;
+    }
+  }
+  const courseDir = path.join(ROOT, 'src/content/course');
+  if (fs.existsSync(courseDir)) {
+    for (const chapter of fs.readdirSync(courseDir)) {
+      const chapterDir = path.join(courseDir, chapter);
+      if (!fs.statSync(chapterDir).isDirectory()) continue;
+      for (const file of fs.readdirSync(chapterDir).filter((file) => file.endsWith('.md'))) {
+        const raw = fs.readFileSync(path.join(chapterDir, file), 'utf8');
+        const date = raw.match(/^date:\s*"?(\d{4}-\d{2}-\d{2})/m)?.[1];
+        if (!date) continue;
+        byUrl.set(`/agent-course/${chapter}/${file.slice(0, -3)}/`, date);
+        if ((byModule.get('/agent-course/') ?? '') < date) byModule.set('/agent-course/', date);
+      }
     }
   }
   return { byUrl, byCategory, byModule, latest };

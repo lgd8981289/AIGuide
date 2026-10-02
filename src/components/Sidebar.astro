@@ -1,82 +1,38 @@
 ---
-import { CATEGORIES, categoriesOf, type ModuleKey } from "../data/site";
-import { getArticlesByCategory } from "../data/articles";
-import ResumeCta from "./ResumeCta.astro";
+import { CATEGORIES, MODULE_META } from "../data/site";
+import { getArticlesByCategory, getArticleTopicGroups } from "../data/articles";
+import SidebarArticles from "./SidebarArticles.astro";
+import SidebarCollapse from "./SidebarCollapse.astro";
 import { url } from "../utils";
 
-// 左侧系列目录：只展示当前模块下的分类（跨模块页面回退到全部分类）
-interface Props {
-  module?: ModuleKey | "home";
-}
-
-const { module = "home" } = Astro.props;
-
-const currentPath = Astro.url.pathname;
-const cats = module === "home" ? CATEGORIES : categoriesOf(module);
-
 const byCat = await getArticlesByCategory();
+const current = [...byCat.values()].flat().find(({ entry }) => Astro.url.pathname === url(`/${entry.id}/`));
+const category = CATEGORIES.find((item) => item.slug === current?.entry.data.category);
+const items = category ? byCat.get(category.slug) ?? [] : [];
+const topic = category && current
+  ? getArticleTopicGroups(category.slug, items).find((group) => group.articles.some(({ entry }) => entry.id === current.entry.id))
+  : undefined;
+const reading = topic?.articles ?? items;
+const module = current?.module ?? "interview";
+const meta = MODULE_META[module];
+const backHref = category ? url(`/${category.slug}/`) + (topic ? `?topic=${encodeURIComponent(topic.id)}` : "") : url(meta.href);
+const returnPaths = [url("/"), url(meta.href), ...CATEGORIES.filter((item) => item.module === module).map((item) => url(`/${item.slug}/`))];
 ---
 
-<aside class="sidebar" id="article-sidebar" aria-label="系列文章目录" data-pagefind-ignore>
+<aside class="sidebar reading-sidebar" id="article-sidebar" aria-label="阅读目录" data-site-sidebar data-sidebar-scope={module} data-sidebar-kind="reading" data-pagefind-ignore>
   <div class="sidebar-heading">
-    <p class="sb-title">系列目录</p>
-    <button type="button" class="sidebar-close" data-sidebar-close aria-label="关闭系列目录">关闭 ×</button>
+    <p class="sb-title">阅读目录</p>
+    <SidebarCollapse />
   </div>
-  {
-    cats.map((c) => {
-      const items = byCat.get(c.slug) ?? [];
-      const isCurrentCat = currentPath.startsWith(url(`/${c.slug}/`));
-      return (
-        // name 相同 = 原生手风琴，展开一个会自动收起其他；默认只展开当前所在分类
-        <details name="sidebar-cat" open={isCurrentCat}>
-          <summary>
-            {c.name}
-            <span class="sb-count">{items.length}</span>
-          </summary>
-          <ul>
-            {items.length > 0 ? (
-              items.map(({ entry, displayNum }) => (
-                <li>
-                  <a
-                    href={url(`/${entry.id}/`)}
-                    class={currentPath === url(`/${entry.id}/`) ? "current" : ""}
-                    aria-current={currentPath === url(`/${entry.id}/`) ? "page" : undefined}
-                  >
-                    <span class="sb-qnum">{displayNum}</span>
-                    {entry.data.title}
-                  </a>
-                </li>
-              ))
-            ) : (
-              <li>
-                <span class="sb-all">筹备中</span>
-              </li>
-            )}
-          </ul>
-        </details>
-      );
-    })
-  }
-
-  <ResumeCta variant="sidebar" />
+  <a class="sb-back" href={backHref} data-navigation-return
+    data-return-category={category?.slug} data-return-topic={topic?.id ?? ""}
+    data-return-paths={JSON.stringify(returnPaths)}>← 全部分类</a>
+  <p class="sb-path">{meta.name}{topic && category && <> / {category.nav}</>}</p>
+  <div class="sb-reading-heading">
+    <h2 id="reading-directory-title">{topic?.name ?? category?.nav ?? meta.name}</h2>
+    <span class="sb-reading-count">{reading.length} 篇</span>
+  </div>
+  <nav aria-labelledby="reading-directory-title">
+    <SidebarArticles articles={reading} flat showNumber={false} />
+  </nav>
 </aside>
-
-<script>
-  // 兼容：不支持 <details name>（原生手风琴）的浏览器，用脚本补齐「展开一个收起其他」
-  const sidebar = document.querySelector(".sidebar");
-  const supportsAccordion =
-    typeof HTMLDetailsElement !== "undefined" &&
-    "name" in HTMLDetailsElement.prototype;
-
-  if (sidebar && !supportsAccordion) {
-    const groups = Array.from(sidebar.querySelectorAll("details"));
-    for (const group of groups) {
-      group.addEventListener("toggle", () => {
-        if (!group.open) return;
-        for (const other of groups) {
-          if (other !== group) other.open = false;
-        }
-      });
-    }
-  }
-</script>

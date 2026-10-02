@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CoursePurchase from '../../components/CoursePurchase.astro';
+import { COURSE } from '../../data/course';
+import { SITE } from '../../data/site';
+import { getCourseChapters, lessonPath } from '../../data/course-lessons';
+import { absoluteUrl, url } from '../../utils';
+import '../../styles/course.css';
+const chapters = await getCourseChapters();
+const count = chapters.reduce((total, chapter) => total + chapter.lessons.length, 0);
+const freeCount = chapters.filter((chapter) => chapter.free).reduce((total, chapter) => total + chapter.lessons.length, 0);
+const jsonLd = [{
+  '@context': 'https://schema.org', '@type': 'Course', '@id': `${absoluteUrl(COURSE.href)}#course`,
+  name: COURSE.title, alternateName: COURSE.platformTitle, description: COURSE.seoDescription, url: absoluteUrl(COURSE.href), inLanguage: 'zh-CN',
+  provider: { '@type': 'Person', name: SITE.author },
+  isAccessibleForFree: false,
+  offers: { '@type': 'Offer', price: COURSE.price, priceCurrency: 'CNY', url: `${absoluteUrl(COURSE.href)}#purchase`, category: 'Paid' },
+  hasPart: chapters.flatMap((chapter) => chapter.lessons.map((entry) => ({
+    '@type': 'LearningResource', name: entry.data.title, url: absoluteUrl(lessonPath(entry.id)), isAccessibleForFree: entry.data.free,
+  }))),
+}, {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/') },
+    { '@type': 'ListItem', position: 2, name: COURSE.navTitle, item: absoluteUrl(COURSE.href) },
+  ],
+}];
+---
+<BaseLayout title={COURSE.seoTitle} description={COURSE.seoDescription} path={COURSE.href} keywords={COURSE.keywords}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
+  <div class="course-landing">
+    <div class="crumbs"><a href={url('/')}>首页</a> / {COURSE.navTitle}</div>
+    <header class="course-hero">
+      <div>
+        <p class="course-eyebrow">程序员 Sunday · 从基础到应用开发</p>
+        <h1>{COURSE.title}</h1>
+        <p class="course-lead">{COURSE.subtitle}</p>
+        <div class="course-stats"><span><strong>{chapters.length}</strong> 个章节</span><span><strong>{count}</strong> 节文章</span><span><strong>{freeCount}</strong> 节免费阅读</span></div>
+        <a class="course-primary" href={url(lessonPath(chapters[0].lessons[0].id))}>从第一节开始免费学习 <span aria-hidden="true">→</span></a>
+        <a class="course-secondary" href="#curriculum">查看课程目录 ↓</a>
+      </div>
+      <aside class="course-offer" id="purchase" aria-label="课程购买方式">
+        <p class="course-eyebrow">完整课程</p><p class="course-price"><span>¥</span>{COURSE.price}</p>
+        <p>前两章全文开放<br />第三章起，每节可试读约 15%</p>
+        <ul><li>大模型与 RAG 基础</li><li>MCP、Agent 与 LangChain 原理</li><li>记忆、工作流与多 Agent 实战</li></ul>
+        <button class="course-primary" type="button" data-course-purchase>添加微信 · 购买完整课程</button>
+        <small>扫码添加 Sunday，备注「Agent 课程」</small>
+      </aside>
+    </header>
+    <section id="curriculum" class="course-curriculum" aria-labelledby="curriculum-title">
+      <div class="course-section-heading"><h2 id="curriculum-title">课程目录</h2><p>按章节学习，也可以直接打开感兴趣的小节。</p></div>
+      {chapters.map((chapter) => (
+        <section class="course-chapter" id={`chapter-${chapter.number}`}>
+          <header><span class="chapter-number">{String(chapter.number).padStart(2, '0')}</span><div><h3>{chapter.title}</h3><p>{chapter.lessons.length} 节 · {chapter.free ? '本章全文免费' : '每节约 15% 免费试读'}</p></div></header>
+          <ol>{chapter.lessons.map((entry) => (
+            <li><a href={url(lessonPath(entry.id))}><span class="lesson-number">{chapter.number}.{entry.data.order}</span><span class="lesson-title">{entry.data.title}</span><span class:list={['lesson-access', chapter.free && 'is-free']}>{chapter.free ? '免费阅读' : '试读'}</span><span aria-hidden="true">↗</span></a></li>
+          ))}</ol>
+        </section>
+      ))}
+    </section>
+    <section class="course-faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">阅读与购买说明</h2>
+      <details open><summary>前两章可以免费阅读哪些内容？</summary><p>第一章大语言模型与 AI 应用基础、第二章 RAG 的所有文章和习题均可全文阅读，不需要扫码解锁。</p></details>
+      <details><summary>第三章以后的课程如何解锁？</summary><p>每节先提供约 15% 的公开试读。点击「解锁完整课程」，扫码添加作者微信，备注「Agent 课程」，价格为 499 元。购买后由 Sunday 提供完整课程的学习方式。</p></details>
+    </section>
+  </div>
+  <CoursePurchase />
+</BaseLayout>

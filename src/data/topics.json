@@ -1,0 +1,21 @@
+[
+  { "id": "frontend:html-css", "category": "frontend", "name": "HTML 与 CSS" },
+  { "id": "frontend:javascript-typescript", "category": "frontend", "name": "JS 与 TS" },
+  { "id": "frontend:browser", "category": "frontend", "name": "浏览器" },
+  { "id": "frontend:react", "category": "frontend", "name": "React" },
+  { "id": "frontend:vue", "category": "frontend", "name": "Vue" },
+  { "id": "frontend:engineering", "category": "frontend", "name": "性能与工程化" },
+  { "id": "backend:runtime", "category": "backend", "name": "语言与运行时" },
+  { "id": "backend:frameworks", "category": "backend", "name": "Web 框架" },
+  { "id": "backend:api-auth", "category": "backend", "name": "接口与鉴权" },
+  { "id": "backend:async", "category": "backend", "name": "消息队列与异步任务" },
+  { "id": "backend:services", "category": "backend", "name": "服务治理" },
+  { "id": "database:mysql", "category": "database", "name": "MySQL" },
+  { "id": "database:redis", "category": "database", "name": "Redis" },
+  { "id": "cs-basics:network", "category": "cs-basics", "name": "计算机网络" },
+  { "id": "cs-basics:os", "category": "cs-basics", "name": "操作系统" },
+  { "id": "cs-basics:algorithms", "category": "cs-basics", "name": "数据结构与算法" },
+  { "id": "fullstack-system-design:concurrency", "category": "fullstack-system-design", "name": "高并发" },
+  { "id": "fullstack-system-design:distributed", "category": "fullstack-system-design", "name": "分布式" },
+  { "id": "fullstack-system-design:architecture", "category": "fullstack-system-design", "name": "架构设计" }
+]

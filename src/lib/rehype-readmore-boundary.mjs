@@ -1,7 +1,9 @@
 // 为受限正文生成稳定的边界：结构化数据和浏览器解锁使用同一个元素。
 // 面试速答保留在外，教程从第一个二级标题起进入受限区。
 export default function rehypeReadmoreBoundary() {
-  return (tree) => {
+  return (tree, file) => {
+    // 课程已在同步阶段完成付费裁剪，不能套用公众号验证码边界。
+    if (file?.data?.astro?.frontmatter?.previewRatio !== undefined) return;
     const headingText = (node) => node.type === "text"
       ? node.value
       : (node.children ?? []).map(headingText).join("");

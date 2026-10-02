@@ -6,8 +6,18 @@
 
 import { getCollection, type CollectionEntry } from "astro:content";
 import { CATEGORIES, type ModuleKey } from "./site";
+import topics from "./topics.json";
+import navigationTitles from "./article-navigation.json";
+import { validateArticleTopics } from "../lib/article-topics.mjs";
+
+validateArticleTopics(topics, [], CATEGORIES.map((category) => category.slug));
 
 export type Article = CollectionEntry<"articles">;
+
+/** 人工维护的菜单文案；正文、SEO 和全局题号仍使用源文章数据。 */
+export function getArticleNavigationTitle(article: Article): string {
+  return (navigationTitles as Record<string, string>)[article.data.qnum] ?? article.data.title;
+}
 
 export interface ArticleWithOrder {
   entry: Article;
@@ -16,6 +26,32 @@ export interface ArticleWithOrder {
   order: number;
   /** 展示用编号：Q001、T001……（分类内编号） */
   displayNum: string;
+}
+
+export interface ArticleTopicGroup {
+  id: string;
+  name: string;
+  articles: ArticleWithOrder[];
+}
+
+/** 仅显示有正文的专题，未标记专题的旧题保留在兜底分组中。 */
+export function getArticleTopicGroups(category: string, articles: ArticleWithOrder[]): ArticleTopicGroup[] {
+  const groups = topics.filter((topic) => topic.category === category)
+    .map((topic) => ({ ...topic, articles: articles.filter((article) => article.entry.data.topic === topic.id) }))
+    .filter((topic) => topic.articles.length > 0);
+  if (groups.length === 0) return [];
+  const unassigned = articles.filter((article) => !article.entry.data.topic);
+  return [...groups, ...(unassigned.length ? [{ id: `${category}:other`, name: "综合与其他", articles: unassigned }] : [])];
+}
+
+export interface SidebarBranch {
+  id: string;
+  name: string;
+  count: number;
+  current: boolean;
+  overview?: { href: string; name: string };
+  children?: SidebarBranch[];
+  articles?: ArticleWithOrder[];
 }
 
 function prefixOf(module: ModuleKey): string {

@@ -19,6 +19,8 @@
       const panels = Array.from(
         group.querySelectorAll<HTMLElement>(".code-panel")
       );
+      // 不同文章的语言标签可能带框架说明；未知偏好不能隐藏整组代码。
+      if (!tabs.some((tab) => tab.dataset.codeLang === lang)) return false;
       let matched = false;
 
       for (const tab of tabs) {

@@ -14,7 +14,7 @@
   --shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
   --radius: 10px;
   --topbar-h: 56px;
-  --sidebar-w: 258px;
+  --sidebar-w: 280px;
   --shell-w: 1240px;
   --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC",
     "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
@@ -204,22 +204,35 @@ button {
   display: none;
 }
 
-/* 移动端目录按钮（桌面隐藏） */
-.nav-toggle-input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
+/* JavaScript 可用时，桌面与移动端共用目录入口。 */
 .nav-btn {
   display: none;
   border: 0;
   background: none;
   flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 5px 7px;
+  border-radius: 7px;
+  color: var(--text-2);
+  font-size: 12px;
+  white-space: nowrap;
 }
+.sidebar-enhanced .nav-btn { display: inline-flex; }
+.nav-btn svg { width: 17px; height: 17px; flex: none; }
+.nav-btn:hover { color: var(--accent); background: var(--accent-soft); }
 
 .sidebar-backdrop, .sidebar-close { display: none; }
 .sidebar-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sidebar-heading .sb-title { margin-bottom: 0; }
+.sidebar-heading { margin-bottom: 14px; }
+[data-site-sidebar] .sidebar-heading { position: sticky; top: 0; z-index: 1; background: var(--bg); padding-bottom: 8px; }
+.sidebar-enhanced .sidebar-close { display: inline-flex; align-items: center; gap: 4px; flex: none; border: 0; background: none; color: var(--text-2); padding: 5px; font-size: 12px; border-radius: 6px; }
+.sidebar-close svg { width: 15px; height: 15px; }
+.sidebar-close:hover { color: var(--accent); background: var(--accent-soft); }
+.sidebar-drawer-open, .sidebar-drawer-open body { overflow: hidden; }
 
 /* ============ 主体骨架：左栏 + 内容 ============ */
 .shell {
@@ -325,7 +338,30 @@ button {
   color: var(--text-2);
   font-size: 13.5px;
   line-height: 1.5;
+  position: relative;
 }
+.sidebar ul a:focus-visible { -webkit-line-clamp: unset; }
+.sb-articles { list-style: none; margin: 2px 0 8px; padding: 0 0 0 17px; }
+.sb-articles.sb-articles-flat { padding: 0; margin: 0; }
+.sb-articles .sb-article {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: var(--text-2);
+  font-size: 13.5px;
+  line-height: 1.5;
+  position: relative;
+}
+.sb-articles .sb-article:hover { color: var(--accent); background: var(--accent-soft); text-decoration: none; }
+.sb-articles .sb-article.current { color: var(--accent); background: var(--accent-soft); font-weight: 500; }
+.sb-articles .sb-article.current::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 2px; background: var(--accent); border-radius: 2px; }
+.sidebar .sb-branches { padding-left: 16px; }
+.sidebar .sb-subcategory summary { font-size: 13.5px; font-weight: 400; }
+.sidebar .sb-overview { display: block; padding: 5px 10px 5px 20px; color: var(--text-2); font-size: 12px; }
+.sidebar details[data-sidebar-current="true"] > summary { color: var(--accent); }
 
 .sidebar .sb-qnum {
   color: var(--accent);
@@ -345,6 +381,7 @@ button {
   background: var(--accent-soft);
   font-weight: 500;
 }
+.sidebar ul a.current::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 2px; background: var(--accent); border-radius: 2px; }
 
 .sidebar .sb-all {
   display: block;
@@ -356,6 +393,23 @@ button {
 .sidebar .sb-all:hover {
   color: var(--accent);
   text-decoration: none;
+}
+
+/* 阅读页只显示当前分类或专题，保留清晰的返回路径。 */
+.reading-sidebar { padding-right: 18px; scrollbar-width: thin; }
+.reading-sidebar .sidebar-heading { margin-bottom: 8px; }
+.sb-back { display: flex; align-items: center; min-height: 36px; padding: 5px 10px; margin: 0 -2px 20px; border-radius: 6px; color: var(--text-2); font-size: 13px; }
+.sb-back:hover { color: var(--accent); background: var(--bg-soft); text-decoration: none; }
+.sb-path { margin: 0 10px 8px; color: var(--text-3); font-size: 12px; line-height: 1.7; }
+.sb-reading-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 10px 16px; }
+.sb-reading-heading h2 { margin: 0; color: var(--text); font-size: 16px; font-weight: 600; }
+.sb-reading-count { flex: none; color: var(--text-3); font-size: 12px; font-variant-numeric: tabular-nums; }
+.reading-sidebar .sb-articles .sb-article { min-height: 36px; padding: 8px 10px; margin: 2px 0; line-height: 20px; }
+.sidebar-title-tooltip { position: fixed; z-index: 10020; max-width: min(360px, calc(100vw - 24px)); padding: 9px 12px; border: 1px solid var(--border); border-radius: 7px; background: var(--bg); color: var(--text); box-shadow: 0 4px 16px rgb(0 0 0 / 12%); font-size: 13px; line-height: 1.65; overflow-wrap: anywhere; pointer-events: none; }
+.sidebar-title-tooltip[hidden] { display: none; }
+@media (max-width: 960px), (pointer: coarse) {
+  .sb-back, .reading-sidebar .sb-articles .sb-article { min-height: 44px; }
+  .reading-sidebar .sb-articles .sb-article { padding-block: 12px; }
 }
 
 /* ============ 内容区 ============ */
@@ -1113,6 +1167,7 @@ main {
 html.immersive .sidebar {
   display: none !important;
 }
+html.immersive .nav-btn, html.immersive .sidebar-backdrop { display: none !important; }
 
 html.immersive .shell {
   grid-template-columns: minmax(0, 1fr);
@@ -1853,6 +1908,12 @@ html.fm-lock body {
   margin-bottom: 24px;
 }
 
+@media (min-width: 961px) {
+  html[data-sidebar-collapsed="true"] [data-site-sidebar] { display: none; }
+  html[data-sidebar-collapsed="true"] .shell.with-article-sidebar { grid-template-columns: minmax(0, 1fr); }
+  html[data-sidebar-collapsed="true"] .with-article-sidebar .article-col { max-width: 760px; width: 100%; margin-inline: auto; }
+}
+
 /* ============ 响应式：移动端侧边栏变抽屉 ============ */
 @media (max-width: 960px) {
   .shell {
@@ -1861,13 +1922,6 @@ html.fm-lock body {
   }
 
   .nav-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 8px;
-    color: var(--text-2);
     order: -1;
   }
 
@@ -1881,33 +1935,25 @@ html.fm-lock body {
     height: 18px;
   }
 
-  .sidebar {
+  html.sidebar-enhanced [data-site-sidebar] {
     position: fixed;
     top: var(--topbar-h);
     left: 0;
     bottom: 0;
-    width: 280px;
+    width: min(300px, calc(100vw - 24px));
     max-height: none;
     background: var(--bg);
     border-right: 1px solid var(--border);
     padding: 20px 16px 40px;
     transform: translateX(-102%);
-    transition: transform 0.2s ease;
+    transition: transform 0.18s ease;
     z-index: 10005;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
   }
 
-  .sidebar-close {
-    display: block;
-    color: var(--text-2);
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 6px 10px;
-    margin-bottom: 10px;
-    font-size: 12px;
-  }
-
-  .nav-toggle-input:checked~.sidebar-backdrop {
+  html[data-sidebar-open="true"] .sidebar-backdrop {
     display: block;
     position: fixed;
     inset: var(--topbar-h) 0 0;
@@ -1916,13 +1962,18 @@ html.fm-lock body {
     background: rgb(0 0 0 / 35%);
   }
 
-  .nav-toggle-input:checked~.shell .sidebar {
+  html[data-sidebar-open="true"] [data-site-sidebar] {
     transform: translateX(0);
   }
 
   .brand {
     font-size: 15.5px;
   }
+}
+
+@media (max-width: 960px), (pointer: coarse) {
+  .sidebar-enhanced .sidebar-close, .sidebar-enhanced .nav-btn, [data-site-sidebar] summary, .sidebar ul a, .sb-articles .sb-article, .sidebar .sb-overview { min-height: 44px; }
+  .sidebar-enhanced .sidebar-close, .sidebar-enhanced .nav-btn { min-width: 44px; }
 }
 
 /* 手机顶部保留完整栏目行，避免品牌和操作按钮挤掉栏目入口。 */
@@ -1939,7 +1990,7 @@ html.fm-lock body {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .sidebar { transition: none; }
+  html.sidebar-enhanced [data-site-sidebar], .sidebar summary::before { transition: none; }
 }
 
 @media (max-width: 600px) {

@@ -1,0 +1,757 @@
+{
+  "source": "../../Agent 全栈实战课/Agent 全栈课程文案",
+  "lessons": [
+    {
+      "id": "chapter-01/lesson-01",
+      "source": "01-大语言模型与 AI 应用基础/01-从聊天机器人开始认识大语言模型.md",
+      "chapter": 1,
+      "chapterTitle": "大语言模型与 AI 应用基础",
+      "order": 1,
+      "title": "从聊天机器人开始认识大语言模型"
+    },
+    {
+      "id": "chapter-01/lesson-02",
+      "source": "01-大语言模型与 AI 应用基础/02-AI、机器学习、深度学习与大语言模型.md",
+      "chapter": 1,
+      "chapterTitle": "大语言模型与 AI 应用基础",
+      "order": 2,
+      "title": "AI、机器学习、深度学习与大语言模型有什么区别？"
+    },
+    {
+      "id": "chapter-01/lesson-03",
+      "source": "01-大语言模型与 AI 应用基础/03-大语言模型如何生成内容.md",
+      "chapter": 1,
+      "chapterTitle": "大语言模型与 AI 应用基础",
+      "order": 3,
+      "title": "大语言模型如何生成内容"
+    },
+    {
+      "id": "chapter-01/lesson-04",
+      "source": "01-大语言模型与 AI 应用基础/04-Token：模型处理文本的基本单位.md",
+      "chapter": 1,
+      "chapterTitle": "大语言模型与 AI 应用基础",
+      "order": 4,
+      "title": "Token 是什么？大模型如何处理文本"
+    },
+    {
+      "id": "chapter-01/lesson-05",
+      "source": "01-大语言模型与 AI 应用基础/05-深入大模型调用原理：Prompt、Message 与模型输入.md",
+      "chapter": 1,
+      "chapterTitle": "大语言模型与 AI 应用基础",
+      "order": 5,
+      "title": "深入大模型调用原理：Prompt、Message 与模型输入"
+    },
+    {
+      "id": "chapter-01/lesson-06",
+      "source": "01-大语言模型与 AI 应用基础/06-深入上下文管理：Context Window 与  Context Budget.md",
+      "chapter": 1,
+      "chapterTitle": "大语言模型与 AI 应用基础",
+      "order": 6,
+      "title": "大模型上下文管理：Context Window 与 Context Budget"
+    },
+    {
+      "id": "chapter-01/lesson-07",
+      "source": "01-大语言模型与 AI 应用基础/07-生成随机性、模型幻觉与能力边界.md",
+      "chapter": 1,
+      "chapterTitle": "大语言模型与 AI 应用基础",
+      "order": 7,
+      "title": "大模型幻觉与生成随机性：Temperature 能解决什么？"
+    },
+    {
+      "id": "chapter-01/lesson-08",
+      "source": "01-大语言模型与 AI 应用基础/08-普通模型、推理模型与多模态模型如何选择.md",
+      "chapter": 1,
+      "chapterTitle": "大语言模型与 AI 应用基础",
+      "order": 8,
+      "title": "普通模型、推理模型与多模态模型如何选择"
+    },
+    {
+      "id": "chapter-01/lesson-09",
+      "source": "01-大语言模型与 AI 应用基础/09-深入 Transformer：大模型为什么能理解上下文与生成内容.md",
+      "chapter": 1,
+      "chapterTitle": "大语言模型与 AI 应用基础",
+      "order": 9,
+      "title": "深入 Transformer：大模型为什么能理解上下文与生成内容"
+    },
+    {
+      "id": "chapter-01/lesson-10",
+      "source": "01-大语言模型与 AI 应用基础/10-第一章总结。学到的知识如何在简历和面试中体现.md",
+      "chapter": 1,
+      "chapterTitle": "大语言模型与 AI 应用基础",
+      "order": 10,
+      "title": "大模型基础如何写进简历？常见面试问题与回答思路"
+    },
+    {
+      "id": "chapter-01/exercises",
+      "source": "01-大语言模型与 AI 应用基础/第一章习题.md",
+      "chapter": 1,
+      "chapterTitle": "大语言模型与 AI 应用基础",
+      "order": 11,
+      "title": "大模型基础练习题：Token、上下文与模型幻觉"
+    },
+    {
+      "id": "chapter-02/lesson-01",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/01-为什么模型需要 RAG：从手动补充资料到最小检索增强生成.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 1,
+      "title": "为什么模型需要 RAG：从手动补充资料到最小检索增强生成"
+    },
+    {
+      "id": "chapter-02/lesson-02",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/02-RAG 的关键流程：实战 Embedding 模型向量化语义检索方案.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 2,
+      "title": "Embedding 实战：用向量实现 RAG 语义检索"
+    },
+    {
+      "id": "chapter-02/lesson-03",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/03 - 完整向量检索实现：距离度量、相似度、 TopK 与 similarity.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 3,
+      "title": "向量检索原理与实现：距离度量、相似度与 TopK"
+    },
+    {
+      "id": "chapter-02/lesson-04",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/04-实现 文档解析、清洗和分块！设计一套完整的  Metadata、Chunk ID 与版本更新 方案.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 4,
+      "title": "RAG 文档处理：解析、清洗、分块与版本更新"
+    },
+    {
+      "id": "chapter-02/lesson-05",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/05-向量数据库选型：使用 Milvus 与 Zilliz Cloud 完成持久化、索引、过滤与更新.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 5,
+      "title": "向量数据库选型与实践：Milvus 和 Zilliz Cloud"
+    },
+    {
+      "id": "chapter-02/lesson-06",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/06-BM25 与混合检索：使用 Rerank 提高召回率.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 6,
+      "title": "RAG 混合检索原理：BM25、向量召回与融合排序"
+    },
+    {
+      "id": "chapter-02/lesson-07",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/07-实战：使用 Milvus 实现 BM25 与混合检索.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 7,
+      "title": "实战：使用 Milvus 实现 BM25 与混合检索"
+    },
+    {
+      "id": "chapter-02/lesson-08",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/08-Query Rewrite 与 Multi-Query：解决问题和文档表达不一致.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 8,
+      "title": "RAG 查询优化：Query Rewrite 与 Multi-Query"
+    },
+    {
+      "id": "chapter-02/lesson-09",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/09 - Rerank 模型深度解析：候选文档精排、TopK 筛选与 chunk 抽离.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 9,
+      "title": "RAG Rerank 重排：候选文档精排与上下文压缩"
+    },
+    {
+      "id": "chapter-02/lesson-10",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/10-被大模型坑过一次之后，咱必须得把 RAG 的答案生成、来源引用和拒答机制补全了.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 10,
+      "title": "RAG 答案生成：来源引用与拒答机制如何实现？"
+    },
+    {
+      "id": "chapter-02/lesson-11",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/11 - RAG 质量评估体系！详解：Recall@K、MRR、 Faithfulness .md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 11,
+      "title": "RAG 质量评估：Recall@K、MRR 与 Faithfulness"
+    },
+    {
+      "id": "chapter-02/lesson-12",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/12-实战：构建支持文档更新、权限隔离与混合检索的企业知识库.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 12,
+      "title": "实战：构建支持文档更新、权限隔离与混合检索的企业知识库"
+    },
+    {
+      "id": "chapter-02/lesson-13",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/13-第二章总结：RAG 学到的内容如何在简历和面试中体现？.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 13,
+      "title": "RAG 项目如何写进简历？常见面试问题与回答思路"
+    },
+    {
+      "id": "chapter-02/exercises",
+      "source": "02-RAG 原理、向量数据库、混合检索与 Rerank/第二章习题.md",
+      "chapter": 2,
+      "chapterTitle": "RAG 原理、向量数据库、混合检索与 Rerank",
+      "order": 14,
+      "title": "RAG 练习题：向量检索、混合检索与质量评估"
+    },
+    {
+      "id": "chapter-03/lesson-01",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/01-章介绍.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 1,
+      "title": "MCP 原理、Tool Calling 与能力连接：章介绍"
+    },
+    {
+      "id": "chapter-03/lesson-02",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/02 - 手写一条完整的 Tool Calling 循环调用链.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 2,
+      "title": "Tool Calling 工具调用实战：手写循环调用链"
+    },
+    {
+      "id": "chapter-03/lesson-03",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/03-从 Tool Calling 到 MCP：理解 Host、Client、Server、能力发现与协议边界.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 3,
+      "title": "MCP 原理：Host、Client、Server 与能力发现"
+    },
+    {
+      "id": "chapter-03/lesson-04",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/04-MCP Server 能力建模：Tools、Resources、Prompts 与 Inspector 验证.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 4,
+      "title": "MCP Server 能力建模：Tools、Resources、Prompts 与 Inspector 验证"
+    },
+    {
+      "id": "chapter-03/lesson-05",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/05 - 构建 MCP Host 协议适配层：能力协商、Tool Schema 映射、调用路由与多轮结果回注.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 5,
+      "title": "MCP Host 实战：工具发现、Schema 映射与调用循环"
+    },
+    {
+      "id": "chapter-03/lesson-06",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/06 - 完成远程 MCP 调用，深入 stdio、Streamable HTTP 连接方案.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 6,
+      "title": "MCP 连接方式：stdio、Streamable HTTP 与远程调用"
+    },
+    {
+      "id": "chapter-03/lesson-07",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/07 - 实现一个退款系统，完整讲解：Human-in-the-Loop、长任务与 MCP Apps.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 7,
+      "title": "MCP 退款审核实战：人工确认、长任务与 MCP Apps"
+    },
+    {
+      "id": "chapter-03/lesson-08-a",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/08-实战（上）：企业售后 MCP 项目演示与结构拆解.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 8,
+      "title": "企业售后 MCP 实战（上）：项目演示与结构拆解"
+    },
+    {
+      "id": "chapter-03/lesson-08-b",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/08-实战（中）：企业级 MCP 落地方案：身份上下文、能力级授权、多租户隔离、MRTR 确认与幂等写入.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 9,
+      "title": "企业售后 MCP 实战（中）：权限隔离与幂等写入"
+    },
+    {
+      "id": "chapter-03/lesson-08-d",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/08-实战（下）：长任务、MCP Apps 与 Agent Host 完整闭环.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 10,
+      "title": "企业售后 MCP 实战（下）：长任务、MCP Apps 与 Agent Host"
+    },
+    {
+      "id": "chapter-03/lesson-09",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/09-第三章总结：MCP 学到的内容如何在简历和面试中体现.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 11,
+      "title": "MCP 项目如何写进简历？常见面试问题与回答思路"
+    },
+    {
+      "id": "chapter-03/exercises",
+      "source": "03-MCP 原理、Tool Calling 与能力连接/第三章习题.md",
+      "chapter": 3,
+      "chapterTitle": "MCP 原理、Tool Calling 与能力连接",
+      "order": 12,
+      "title": "MCP 练习题：Tool Calling、协议架构与工具调用"
+    },
+    {
+      "id": "chapter-04/lesson-01",
+      "source": "04-Agent 执行原理、任务规划与失败恢复/01-章介绍.md",
+      "chapter": 4,
+      "chapterTitle": "Agent 执行原理、任务规划与失败恢复",
+      "order": 1,
+      "title": "Agent 执行原理、任务规划与失败恢复：章介绍"
+    },
+    {
+      "id": "chapter-04/lesson-02",
+      "source": "04-Agent 执行原理、任务规划与失败恢复/02 - ReAct：Reasoning–Action–Observation 闭环、动态工具决策与执行轨迹.md",
+      "chapter": 4,
+      "chapterTitle": "Agent 执行原理、任务规划与失败恢复",
+      "order": 2,
+      "title": "ReAct Agent 原理：推理、行动、观察与工具调用"
+    },
+    {
+      "id": "chapter-04/lesson-03",
+      "source": "04-Agent 执行原理、任务规划与失败恢复/03-从 ReAct 到 Plan-and-Execute：结构化 Plan State、依赖调度、Completion Criteria 与增量 Replanning.md",
+      "chapter": 4,
+      "chapterTitle": "Agent 执行原理、任务规划与失败恢复",
+      "order": 3,
+      "title": "Agent 任务规划：从 ReAct 到 Plan-and-Execute"
+    },
+    {
+      "id": "chapter-04/lesson-04",
+      "source": "04-Agent 执行原理、任务规划与失败恢复/04-Agent Runtime：运行状态、执行预算与终止条件.md",
+      "chapter": 4,
+      "chapterTitle": "Agent 执行原理、任务规划与失败恢复",
+      "order": 4,
+      "title": "Agent Runtime：运行状态、执行预算与终止条件"
+    },
+    {
+      "id": "chapter-04/lesson-05",
+      "source": "04-Agent 执行原理、任务规划与失败恢复/05-Agent 结果校验：空结果、证据冲突与失败恢复.md",
+      "chapter": 4,
+      "chapterTitle": "Agent 执行原理、任务规划与失败恢复",
+      "order": 5,
+      "title": "Agent 结果校验：空结果、证据冲突与失败恢复"
+    },
+    {
+      "id": "chapter-04/lesson-06-a",
+      "source": "04-Agent 执行原理、任务规划与失败恢复/06-实战（上）：实现一个 AI 编程 Agent：支持代码编写、跨文件修改、自动测试、失败后重新规划与删除操作人工确认.md",
+      "chapter": 4,
+      "chapterTitle": "Agent 执行原理、任务规划与失败恢复",
+      "order": 6,
+      "title": "AI 编程 Agent 实战（上）：项目演示、运行与需求"
+    },
+    {
+      "id": "chapter-04/lesson-06-b",
+      "source": "04-Agent 执行原理、任务规划与失败恢复/06-实战（中）：实现 ReAct、任务计划与执行控制.md",
+      "chapter": 4,
+      "chapterTitle": "Agent 执行原理、任务规划与失败恢复",
+      "order": 7,
+      "title": "AI 编程 Agent 实战（中）：ReAct、任务计划与执行控制"
+    },
+    {
+      "id": "chapter-04/lesson-06-d",
+      "source": "04-Agent 执行原理、任务规划与失败恢复/06-实战（下）：实现失败恢复、人工确认与执行轨迹.md",
+      "chapter": 4,
+      "chapterTitle": "Agent 执行原理、任务规划与失败恢复",
+      "order": 8,
+      "title": "AI 编程 Agent 实战（下）：失败恢复、人工确认与执行轨迹"
+    },
+    {
+      "id": "chapter-04/lesson-07",
+      "source": "04-Agent 执行原理、任务规划与失败恢复/07-第四章总结：Agent 学到的内容如何在简历和面试中体现.md",
+      "chapter": 4,
+      "chapterTitle": "Agent 执行原理、任务规划与失败恢复",
+      "order": 9,
+      "title": "Agent 项目如何写进简历？常见面试问题与回答思路"
+    },
+    {
+      "id": "chapter-04/exercises",
+      "source": "04-Agent 执行原理、任务规划与失败恢复/第四章习题.md",
+      "chapter": 4,
+      "chapterTitle": "Agent 执行原理、任务规划与失败恢复",
+      "order": 10,
+      "title": "Agent 练习题：ReAct、任务规划与失败恢复"
+    },
+    {
+      "id": "chapter-05/lesson-01",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/01-章介绍：LangChain 生态与源码解析.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 1,
+      "title": "LangChain 生态与源码解析：章节导读"
+    },
+    {
+      "id": "chapter-05/lesson-02",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/02-Agent 框架选型：各框架的核心能力 与 设计方案.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 2,
+      "title": "Agent 框架如何选型？核心能力与设计差异"
+    },
+    {
+      "id": "chapter-05/lesson-03",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/03 - LangChain 组件协议与运行时组合：模型适配、消息语义、工具契约、Runnable 数据流与集成边界.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 3,
+      "title": "LangChain 核心组件：模型、消息、工具与 Runnable"
+    },
+    {
+      "id": "chapter-05/lesson-04",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/04 - 深入 createAgent 原理：ReactAgent 图编译、State 路由、Tool Loop 与多通道流式观测.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 4,
+      "title": "LangChain createAgent 原理：执行循环与流式输出"
+    },
+    {
+      "id": "chapter-05/lesson-05",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/05 - LangChain Agent 数据契约+权限隔离：State 生命周期、Runtime Context 注入 与 输出规范.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 5,
+      "title": "LangChain Agent 数据隔离：State 与 Runtime Context"
+    },
+    {
+      "id": "chapter-05/lesson-06",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/06 - 深入 LangChain Middleware：Hook 执行模型、请求拦截、结果契约与可靠性控制.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 6,
+      "title": "LangChain Middleware 原理：Hook、请求拦截与结果校验"
+    },
+    {
+      "id": "chapter-05/lesson-07",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/07 - LangGraph 状态图执行模型：State Channel、节点调度与条件分支.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 7,
+      "title": "LangGraph 状态图执行模型：State Channel、节点调度与条件分支"
+    },
+    {
+      "id": "chapter-05/lesson-08",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/08 - LangChain × LangGraph 分层编排：组合确定性流程与自主 Agent.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 8,
+      "title": "LangChain × LangGraph 分层编排：组合确定性流程与自主 Agent"
+    },
+    {
+      "id": "chapter-05/lesson-09-a",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/09 - 解剖 createAgent 构建链路（上）：类型重载、ReactAgent 初始化与 State:Input:Output Schema 合成.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 9,
+      "title": "LangChain createAgent 源码（上）：初始化与状态 Schema"
+    },
+    {
+      "id": "chapter-05/lesson-10-b",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/10-解剖 createAgent 控制流（中）：Middleware 节点化、Agent Loop 动态路由与 CompiledStateGraph 生成.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 10,
+      "title": "LangChain createAgent 源码（中）：Middleware 与图编译"
+    },
+    {
+      "id": "chapter-05/lesson-11",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/11 - 深入 createAgent 模型调用链路：ModelRequest 构造、Wrap Hook 编排、Tool Schema 绑定与 AIMessage 回写.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 11,
+      "title": "LangChain createAgent 源码：模型调用与 Middleware 执行"
+    },
+    {
+      "id": "chapter-05/lesson-12",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/12-深入 createAgent Tool 执行链路：ToolNode、消息回注与 Agent Loop 终止.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 12,
+      "title": "LangChain createAgent 源码：ToolNode 与工具执行循环"
+    },
+    {
+      "id": "chapter-05/lesson-13",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/13-LangChain 生态边界：Deep Agents、LangSmith 与 Integration Packages.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 13,
+      "title": "LangChain 生态：Deep Agents、LangSmith 与集成包"
+    },
+    {
+      "id": "chapter-05/lesson-14",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/14-第五章总结：LangChain 与 LangGraph 学到的内容如何在简历和面试中体现.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 14,
+      "title": "LangChain 与 LangGraph 项目如何写进简历和面试？"
+    },
+    {
+      "id": "chapter-05/exercises",
+      "source": "05-LangChain 核心能力、运行原理、源码解析与生态详解/第五章习题.md",
+      "chapter": 5,
+      "chapterTitle": "LangChain 核心能力、运行原理、源码解析与生态详解",
+      "order": 15,
+      "title": "LangChain 与 LangGraph 练习题：组件、状态与执行流程"
+    },
+    {
+      "id": "chapter-06/lesson-01",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/01-章介绍：从保存聊天记录，到让 Agent 真正用上记忆.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 1,
+      "title": "Agent Memory 导读：从聊天记录到可用记忆"
+    },
+    {
+      "id": "chapter-06/lesson-02",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/02 - 短期记忆与会话恢复：Thread、Checkpointer 与状态持久化.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 2,
+      "title": "Agent 短期记忆与会话恢复：Thread 和 Checkpointer"
+    },
+    {
+      "id": "chapter-06/lesson-03",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/03-长对话处理：自动摘要、消息裁剪与 Context Compaction.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 3,
+      "title": "Agent 上下文压缩：消息裁剪、自动摘要与 Context Compaction"
+    },
+    {
+      "id": "chapter-06/lesson-04",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/04-长期记忆：Store、用户画像与跨会话信息保存.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 4,
+      "title": "Agent 长期记忆：Store、用户画像与跨会话保存"
+    },
+    {
+      "id": "chapter-06/lesson-05",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/05-记忆提取：Agent 应该记住什么，什么时候写入.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 5,
+      "title": "记忆提取：Agent 应该记住什么，什么时候写入"
+    },
+    {
+      "id": "chapter-06/lesson-06",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/06-记忆更新与遗忘：去重、冲突修正、过期与删除.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 6,
+      "title": "Agent 记忆更新与遗忘：去重、冲突修正和删除"
+    },
+    {
+      "id": "chapter-06/lesson-07",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/07-记忆召回：怎样挑选本次回答真正需要的信息.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 7,
+      "title": "Agent 记忆召回：如何选择本次回答需要的信息？"
+    },
+    {
+      "id": "chapter-06/lesson-08",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/08-Agentic RAG：按需检索、多轮补查与证据判断.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 8,
+      "title": "Agentic RAG：按需检索、多轮补查与证据判断"
+    },
+    {
+      "id": "chapter-06/lesson-09-a",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/09-实战（上）：实现一个 AI 面试教练 Agent：项目演示、训练流程与会话恢复.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 9,
+      "title": "AI 面试教练 Agent 实战（上）：训练流程与会话恢复"
+    },
+    {
+      "id": "chapter-06/lesson-10-b",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/10-实战（中）：提取并管理训练记忆：薄弱点、用户画像与更新删除.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 10,
+      "title": "AI 面试教练 Agent 实战（中）：记忆提取、用户画像与更新"
+    },
+    {
+      "id": "chapter-06/lesson-11-d",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/11-实战（下）：跨会话复测、Agentic RAG 与训练效果验证.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 11,
+      "title": "AI 面试教练 Agent 实战（下）：跨会话复测与 Agentic RAG"
+    },
+    {
+      "id": "chapter-06/lesson-12",
+      "source": "06-Agent Memory、会话恢复与 Agentic RAG/12-第六章总结：Memory 学到的内容如何在简历和面试中体现.md",
+      "chapter": 6,
+      "chapterTitle": "Agent Memory、会话恢复与 Agentic RAG",
+      "order": 12,
+      "title": "Agent Memory 如何写进简历？常见面试问题与回答思路"
+    },
+    {
+      "id": "chapter-07/lesson-01",
+      "source": "07-企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop/01-章介绍：让 Agent 完成一项可以暂停、修改和继续的制作任务.md",
+      "chapter": 7,
+      "chapterTitle": "企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop",
+      "order": 1,
+      "title": "Agent 持久化工作流导读：暂停、修改与继续执行"
+    },
+    {
+      "id": "chapter-07/lesson-02",
+      "source": "07-企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop/02-Agent 业务建模与 DDD：制作要求、大纲、页面和审核规则由谁管理.md",
+      "chapter": 7,
+      "chapterTitle": "企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop",
+      "order": 2,
+      "title": "Agent 业务建模与 DDD：领域模型和审核规则设计"
+    },
+    {
+      "id": "chapter-07/lesson-03",
+      "source": "07-企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop/03-持久化执行：服务重启以后，Agent 从哪里继续.md",
+      "chapter": 7,
+      "chapterTitle": "企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop",
+      "order": 3,
+      "title": "LangGraph 持久化执行：服务重启后如何恢复 Agent？"
+    },
+    {
+      "id": "chapter-07/lesson-04",
+      "source": "07-企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop/04-持久化人工审核：批准、修改和拒绝以后，工作流怎样继续.md",
+      "chapter": 7,
+      "chapterTitle": "企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop",
+      "order": 4,
+      "title": "LangGraph 人工审核：暂停、批准、修改与恢复工作流"
+    },
+    {
+      "id": "chapter-07/lesson-05",
+      "source": "07-企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop/05-部分成功与局部重做：如何避免重复生成和混用旧结果.md",
+      "chapter": 7,
+      "chapterTitle": "企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop",
+      "order": 5,
+      "title": "Agent 工作流失败恢复：部分成功与局部重做"
+    },
+    {
+      "id": "chapter-07/lesson-06-a",
+      "source": "07-企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop/06-实战（上）：AI 演示文稿制作 Agent 的项目演示、运行与需求分析.md",
+      "chapter": 7,
+      "chapterTitle": "企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop",
+      "order": 6,
+      "title": "AI 演示文稿 Agent 实战（上）：项目运行与功能演示"
+    },
+    {
+      "id": "chapter-07/lesson-07-b",
+      "source": "07-企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop/07-实战（中）：从开始制作到大纲审核，串起持久化执行流程.md",
+      "chapter": 7,
+      "chapterTitle": "企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop",
+      "order": 7,
+      "title": "AI 演示文稿 Agent 实战（中）：大纲审核与持久化执行"
+    },
+    {
+      "id": "chapter-07/lesson-08-d",
+      "source": "07-企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop/08-实战（下）：从页面生成到文件导出，实现失败续做与局部修改.md",
+      "chapter": 7,
+      "chapterTitle": "企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop",
+      "order": 8,
+      "title": "AI 演示文稿 Agent 实战（下）：失败续做、局部修改与 PPTX 导出"
+    },
+    {
+      "id": "chapter-07/lesson-09",
+      "source": "07-企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop/09-第七章总结：持久化工作流如何在简历和面试中体现.md",
+      "chapter": 7,
+      "chapterTitle": "企业 Agent 工作流：DDD、LangGraph 持久化执行与 Human-in-the-Loop",
+      "order": 9,
+      "title": "Agent 持久化工作流如何写进简历和面试？"
+    },
+    {
+      "id": "chapter-08/lesson-01",
+      "source": "08-复杂任务 Agent：Skills、Workspace 与多 Agent 协作/01-章介绍：多 Agent 协作构建构建「互动游戏制作 Agent」.md",
+      "chapter": 8,
+      "chapterTitle": "复杂任务 Agent：Skills、Workspace 与多 Agent 协作",
+      "order": 1,
+      "title": "多 Agent 协作导读：互动剧情游戏制作项目"
+    },
+    {
+      "id": "chapter-08/lesson-02",
+      "source": "08-复杂任务 Agent：Skills、Workspace 与多 Agent 协作/02-Deep Agents 入门：为什么复杂任务需要 Agent Harness.md",
+      "chapter": 8,
+      "chapterTitle": "复杂任务 Agent：Skills、Workspace 与多 Agent 协作",
+      "order": 2,
+      "title": "Deep Agents 入门：为什么复杂任务需要 Agent Harness"
+    },
+    {
+      "id": "chapter-08/lesson-03",
+      "source": "08-复杂任务 Agent：Skills、Workspace 与多 Agent 协作/03-Workspace：复杂任务的中间产物为什么不能全部放进 Messages.md",
+      "chapter": 8,
+      "chapterTitle": "复杂任务 Agent：Skills、Workspace 与多 Agent 协作",
+      "order": 3,
+      "title": "Agent Workspace：复杂任务为何需要文件化上下文？"
+    },
+    {
+      "id": "chapter-08/lesson-04",
+      "source": "08-复杂任务 Agent：Skills、Workspace 与多 Agent 协作/04-Agent Skills：把剧情设计方法封装成按需加载的可复用能力.md",
+      "chapter": 8,
+      "chapterTitle": "复杂任务 Agent：Skills、Workspace 与多 Agent 协作",
+      "order": 4,
+      "title": "Agent Skills：把剧情设计方法封装成按需加载的可复用能力"
+    },
+    {
+      "id": "chapter-08/lesson-05",
+      "source": "08-复杂任务 Agent：Skills、Workspace 与多 Agent 协作/05-多 Agent 协作：Router、Handoff、Supervisor 与 Subagent 应该怎样选择.md",
+      "chapter": 8,
+      "chapterTitle": "复杂任务 Agent：Skills、Workspace 与多 Agent 协作",
+      "order": 5,
+      "title": "多 Agent 协作：Router、Handoff、Supervisor 与 Subagent 应该怎样选择"
+    },
+    {
+      "id": "chapter-08/lesson-06",
+      "source": "08-复杂任务 Agent：Skills、Workspace 与多 Agent 协作/06-多 Agent 结果治理：任务委派、产物契约与 Reviewer 返工闭环.md",
+      "chapter": 8,
+      "chapterTitle": "复杂任务 Agent：Skills、Workspace 与多 Agent 协作",
+      "order": 6,
+      "title": "多 Agent 结果治理：任务委派、产物契约与 Reviewer 返工闭环"
+    },
+    {
+      "id": "chapter-08/lesson-07-a",
+      "source": "08-复杂任务 Agent：Skills、Workspace 与多 Agent 协作/07-实战（上）：AI 互动剧情游戏制作 Agent 的项目演示、运行与需求分析.md",
+      "chapter": 8,
+      "chapterTitle": "复杂任务 Agent：Skills、Workspace 与多 Agent 协作",
+      "order": 7,
+      "title": "AI 剧情游戏 Agent 实战（上）：项目运行与功能演示"
+    },
+    {
+      "id": "chapter-08/lesson-08-b",
+      "source": "08-复杂任务 Agent：Skills、Workspace 与多 Agent 协作/08-实战（中一）：创建 Workspace、加载 Skills 并启动剧情总导演.md",
+      "chapter": 8,
+      "chapterTitle": "复杂任务 Agent：Skills、Workspace 与多 Agent 协作",
+      "order": 8,
+      "title": "AI 剧情游戏 Agent 实战（中一）：Workspace、Skills 与主 Agent"
+    },
+    {
+      "id": "chapter-08/lesson-09-c",
+      "source": "08-复杂任务 Agent：Skills、Workspace 与多 Agent 协作/09-实战（中二）：委派世界观、角色、剧情与场景任务.md",
+      "chapter": 8,
+      "chapterTitle": "复杂任务 Agent：Skills、Workspace 与多 Agent 协作",
+      "order": 9,
+      "title": "AI 剧情游戏 Agent 实战（中二）：Subagent 任务委派"
+    },
+    {
+      "id": "chapter-08/lesson-10-d",
+      "source": "08-复杂任务 Agent：Skills、Workspace 与多 Agent 协作/10-实战（下）：一致性审查、问题返工与可玩游戏构建.md",
+      "chapter": 8,
+      "chapterTitle": "复杂任务 Agent：Skills、Workspace 与多 Agent 协作",
+      "order": 10,
+      "title": "AI 剧情游戏 Agent 实战（下）：一致性审核、返工与游戏构建"
+    },
+    {
+      "id": "chapter-08/lesson-11",
+      "source": "08-复杂任务 Agent：Skills、Workspace 与多 Agent 协作/11-第八章总结：复杂任务 Agent 如何在简历和面试中体现.md",
+      "chapter": 8,
+      "chapterTitle": "复杂任务 Agent：Skills、Workspace 与多 Agent 协作",
+      "order": 11,
+      "title": "多 Agent 项目如何写进简历？常见面试问题与回答思路"
+    }
+  ]
+}

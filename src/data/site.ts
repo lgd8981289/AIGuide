@@ -1,17 +1,18 @@
 // 站点全局配置：改名、换 slogan、加模块、开引流，都只改这一个文件
 import { BASE, url } from '../utils'
+import { COURSE } from './course'
 
 export const SITE = {
 	name: 'Sunday 的面试指南',
-	tagline: 'AI 面试题与 AI 编程教程',
+	tagline: 'AI 面试题、全栈面试题与 AI 编程教程',
 	description:
-		'覆盖 Agent、RAG、LangChain、大模型基础的 AI 工程面试题库，以及 0 基础也能上手的 AI 编程教程。每篇都还原真实使用与工程决策，读完能直接上手、也能经得起追问。',
+		'覆盖 Agent、RAG、LangChain、大模型基础的 AI 面试题，前端、后端、数据库与网络等全栈面试题，以及 0 基础也能上手的 AI 编程教程。每篇讲清原理、使用场景与工程取舍。',
 	author: '程序员 Sunday',
 	// 站点 logo（public 目录下的相对路径，留空则不显示）
 	logo: '/avatar.jpg',
 	url: 'https://note.lgdsunday.club',
 	// 右上角 GitHub 图标（留空则不显示）
-	github: 'https://github.com/lgd8981289/AIGuide',
+	github: '',
 	// 主站入口（简历汪），站内互链形成求职闭环
 	mainSite: 'https://lgdsunday.club/',
 	mainSiteName: '简历汪'
@@ -21,7 +22,7 @@ export const SITE = {
 // 模块（顶部导航的一级入口）
 // ---------------------------------------------------------------------------
 
-export type ModuleKey = 'interview' | 'tutorial'
+export type ModuleKey = 'interview' | 'programmer' | 'tutorial' | 'course'
 
 export interface ModuleMeta {
 	key: ModuleKey
@@ -43,6 +44,17 @@ export interface ModuleMeta {
 }
 
 export const MODULE_META: Record<ModuleKey, ModuleMeta> = {
+	course: {
+		key: 'course',
+		name: COURSE.navTitle,
+		href: COURSE.href,
+		title: COURSE.title,
+		description: COURSE.seoDescription,
+		shortIntro: '从大模型基础到多 Agent 项目实战。',
+		countUnit: '节课程',
+		prevLabel: '上一节',
+		nextLabel: '下一节'
+	},
 	interview: {
 		key: 'interview',
 		name: 'AI 面试题',
@@ -52,6 +64,19 @@ export const MODULE_META: Record<ModuleKey, ModuleMeta> = {
 			'按六个系列系统刷题。每道题都从一个真实工程场景出发，先还原面试官的追问链路，再给出能落地、经得起追问的回答。',
 		shortIntro:
 			'六个系列，按分类刷题：每道题都从真实工程场景出发，给出能落地、经得起追问的回答。',
+		countUnit: '道题',
+		prevLabel: '上一题',
+		nextLabel: '下一题'
+	},
+	// 更名为「全栈面试题」；内部 key 和路径保留，导航顺序不变。
+	programmer: {
+		key: 'programmer',
+		name: '全栈面试题',
+		href: '/programmer/',
+		title: '全栈面试题',
+		description:
+			'围绕前端、后端、MySQL、Redis、计算机网络、操作系统与并发等全栈开发知识，讲清面试题的原理、适用条件和常见追问。',
+		shortIntro: '前端、后端、数据库与缓存、计算机基础、系统设计，按五个分类准备全栈面试。',
 		countUnit: '道题',
 		prevLabel: '上一题',
 		nextLabel: '下一题'
@@ -72,10 +97,32 @@ export const MODULE_META: Record<ModuleKey, ModuleMeta> = {
 }
 
 /** 顶部模块导航（顺序即展示顺序；新方向上线时补一行 + 建一个落地页） */
-export const MODULES: { key: ModuleKey | 'home'; name: string; href: string }[] = [
+export const MODULES: {
+	key: ModuleKey | 'home'
+	name: string
+	href: string
+}[] = [
 	{ key: 'home', name: '首页', href: '/' },
-	{ key: 'interview', name: MODULE_META.interview.name, href: MODULE_META.interview.href },
-	{ key: 'tutorial', name: MODULE_META.tutorial.name, href: MODULE_META.tutorial.href }
+	{
+		key: 'interview',
+		name: MODULE_META.interview.name,
+		href: MODULE_META.interview.href
+	},
+	{
+		key: 'programmer',
+		name: MODULE_META.programmer.name,
+		href: MODULE_META.programmer.href
+	},
+	{
+		key: 'tutorial',
+		name: MODULE_META.tutorial.name,
+		href: MODULE_META.tutorial.href
+	},
+	{
+		key: 'course',
+		name: MODULE_META.course.name,
+		href: MODULE_META.course.href
+	}
 	// { key: 'frontend' as ModuleKey, name: '前端面试题', href: '/frontend/' },
 	// { key: 'java' as ModuleKey, name: 'Java 面试题', href: '/java/' }
 ]
@@ -143,6 +190,43 @@ export const CATEGORIES: Category[] = [
 			'LangChain、LangGraph 等框架的内部机制、适用边界与选型逻辑。用框架，但不被框架用。'
 	},
 
+	// —— 全栈面试题：按主要考点归入唯一分类 ——
+	{
+		slug: 'frontend',
+		name: '前端面试题',
+		nav: '前端',
+		module: 'programmer',
+		intro: 'JavaScript、TypeScript、浏览器、React、Vue、页面性能与前端工程化，关注客户端如何工作。'
+	},
+	{
+		slug: 'backend',
+		name: '后端面试题',
+		nav: '后端',
+		module: 'programmer',
+		intro: '接口、鉴权、服务端框架、消息队列、异步任务与服务治理，关注服务端功能如何实现。'
+	},
+	{
+		slug: 'database',
+		name: '数据库与缓存面试题',
+		nav: '数据库与缓存',
+		module: 'programmer',
+		intro: 'MySQL、Redis、索引、事务、锁、缓存一致性与持久化，关注数据如何存取和保持正确。'
+	},
+	{
+		slug: 'cs-basics',
+		name: '计算机基础面试题',
+		nav: '计算机基础',
+		module: 'programmer',
+		intro: '网络协议、操作系统、进程线程、内存、数据结构与算法，关注不依赖具体框架的基础机制。'
+	},
+	{
+		slug: 'fullstack-system-design',
+		name: '系统设计面试题',
+		nav: '系统设计',
+		module: 'programmer',
+		intro: '短链接、秒杀、文件上传等完整系统的需求、模块协作、容量、容错与取舍，不重复单个组件的原理题。'
+	},
+
 	// —— AI 编程教程（源：Desktop/一起来玩 AI 呀～/文章）——
 	{
 		slug: 'tools',
@@ -156,7 +240,8 @@ export const CATEGORIES: Category[] = [
 		name: 'Agent能力扩展',
 		nav: '能力扩展',
 		module: 'tutorial',
-		intro: 'MCP、Skill、Hook、连接器、记忆、Subagent 等用于扩展 Agent 能力的主题。'
+		intro:
+			'MCP、Skill、Hook、连接器、记忆、Subagent 等用于扩展 Agent 能力的主题。'
 	},
 	{
 		slug: 'practice',
@@ -191,7 +276,9 @@ export function moduleOfPath(pathname: string): ModuleKey | 'home' {
 	const category = CATEGORIES.find((c) => c.slug === seg)
 	if (category) return category.module
 
-	const hit = MODULES.find((m) => m.key !== 'home' && url(m.href).startsWith(`${BASE}/${seg}/`))
+	const hit = MODULES.find(
+		(m) => m.key !== 'home' && url(m.href).startsWith(`${BASE}/${seg}/`)
+	)
 	return hit && hit.key !== 'home' ? hit.key : 'home'
 }
 

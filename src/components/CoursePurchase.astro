@@ -1,0 +1,42 @@
+---
+import { COURSE } from '../data/course';
+import { url } from '../utils';
+---
+<dialog class="course-purchase" id="course-purchase" aria-labelledby="purchase-title" aria-describedby="purchase-description" data-pagefind-ignore data-nosnippet>
+  <button type="button" class="purchase-close" data-course-close aria-label="关闭购买提示" autofocus>×</button>
+  <p class="course-eyebrow">添加作者微信 · 购买完整课程</p>
+  <h2 id="purchase-title">解锁完整课程 <span>¥{COURSE.price}</span></h2>
+  <p id="purchase-description">《{COURSE.title}》<br />扫码添加微信，备注「Agent 课程」，购买后由 Sunday 提供完整内容的学习方式。</p>
+  <img src={url(COURSE.qrcode)} alt={`扫码添加作者微信 ${COURSE.wechatName}，购买 499 元 Agent 课程`} width="764" height="1018" loading="lazy" />
+  <p class="purchase-note">微信昵称：{COURSE.wechatName}<br />手机上可长按保存二维码，再用微信扫一扫识别。</p>
+  <a class="course-text-link" href={url(COURSE.qrcode)} download="Sunday-课程微信.jpg">保存微信二维码</a>
+</dialog>
+<noscript>
+  <section class="purchase-fallback">
+    <h2>添加微信购买完整课程 · ¥{COURSE.price}</h2>
+    <p>扫码添加 {COURSE.wechatName}，备注「Agent 课程」。</p>
+    <img src={url(COURSE.qrcode)} alt="Sunday 课程购买微信二维码" width="764" height="1018" loading="lazy" />
+  </section>
+</noscript>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#course-purchase');
+  if (dialog) {
+    let trigger: HTMLElement | null = null;
+    document.querySelectorAll<HTMLElement>('[data-course-purchase]').forEach((button) => {
+      button.addEventListener('click', () => {
+        trigger = button;
+        dialog.showModal();
+        document.documentElement.classList.add('course-dialog-open');
+      });
+    });
+    dialog.querySelector('[data-course-close]')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+      const rect = dialog.getBoundingClientRect();
+      if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      document.documentElement.classList.remove('course-dialog-open');
+      trigger?.focus();
+    });
+  }
+</script>
