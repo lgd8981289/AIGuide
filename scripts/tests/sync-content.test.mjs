@@ -36,7 +36,7 @@ function fixture(t) {
   fs.writeFileSync(config, JSON.stringify({ Q001: "网站专用标题：如何保存任务状态？" }));
   return { root, sourceFile, source, fallbackFile, fallback, config,
     output: path.join(root, "src/content/articles/agent/q001-agent-vs-workflow.md"),
-    run: () => spawnSync(process.execPath, ["scripts/sync-content.mjs"], { cwd: root, encoding: "utf8" }),
+    run: (...args) => spawnSync(process.execPath, ["scripts/sync-content.mjs", ...args], { cwd: root, encoding: "utf8" }),
   };
 }
 
@@ -58,6 +58,90 @@ test("网站标题覆盖、未配置文章回退，重复同步保持 URL、正�
   const restored = fs.readFileSync(f.output, "utf8");
   assert.match(restored, /^title: "原始公众号标题"$/m);
   assert.equal(restored.replace(/^title: .+$/m, ""), generated.replace(/^title: .+$/m, ""));
+});
+
+test("显式 SEO 描述只覆盖摘要，速答、源稿、URL 与重复同步保持稳定", (t) => {
+  const f = fixture(t);
+  const card = path.join(path.dirname(f.sourceFile), '选题卡.md');
+  fs.writeFileSync(card, '- 描述：旧的编辑描述。\n- SEO 描述：检索失败时先定位片段在哪一步消失，附排查与验证方法。\n');
+  assert.equal(f.run().status, 0);
+  const generated = fs.readFileSync(f.output, 'utf8');
+  assert.match(generated, /^description: "检索失败时先定位片段在哪一步消失，附排查与验证方法。"$/m);
+  assert.match(generated, /^faqAnswer: "任务状态需要持久化，重试需要核对执行结果。"$/m);
+  assert.equal(fs.readFileSync(f.sourceFile, 'utf8'), f.source);
+  assert.equal(f.run().status, 0);
+  assert.equal(fs.readFileSync(f.output, 'utf8'), generated);
+
+  fs.writeFileSync(card, '- SEO 描述：   \n- 描述：旧的编辑描述。\n');
+  assert.equal(f.run().status, 0);
+  assert.match(fs.readFileSync(f.output, 'utf8'), /^description: "任务状态需要持久化，重试需要核对执行结果。"$/m);
+});
+
+test("教程支持 SEO 描述，空字段仍使用学习成果且不吞入下一行", (t) => {
+  const f = fixture(t);
+  const card = path.join(path.dirname(f.fallbackFile), '选题卡.md');
+  fs.writeFileSync(card, '- SEO 描述：配置浏览器工具并用待办任务验证调用结果。\n- 读完能掌握什么：可以理解浏览器配置与验证。\n');
+  const output = path.join(f.root, 'src/content/articles/tools/t009.md');
+  assert.equal(f.run().status, 0);
+  assert.match(fs.readFileSync(output, 'utf8'), /^description: "配置浏览器工具并用待办任务验证调用结果。"$/m);
+  fs.writeFileSync(card, '- SEO 描述：\n- 读完能掌握什么：可以理解浏览器配置与验证。\n');
+  assert.equal(f.run().status, 0);
+  assert.match(fs.readFileSync(output, 'utf8'), /^description: "教你理解浏览器配置与验证。"$/m);
+});
+
+test("限定同步保留无关正文、图片与课程，错误编号在清理前失败", (t) => {
+  const f = fixture(t);
+  assert.equal(f.run().status, 0);
+  const unrelated = path.join(f.root, 'src/content/articles/tools/t009.md');
+  const original = fs.readFileSync(unrelated, 'utf8');
+  fs.writeFileSync(f.fallbackFile, '# 尚未授权同步的上游改稿\n\n这份内容不应带入。\n');
+  const image = path.join(f.root, 'img-src/T009/preserved.png');
+  const course = path.join(f.root, 'src/content/course/chapter-1/preserved.md');
+  for (const p of [image, course]) { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, 'preserved'); }
+  fs.appendFileSync(f.sourceFile, '\n本次修订。\n');
+  const result = f.run('--only=Q001');
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(fs.readFileSync(f.output, 'utf8'), /本次修订/);
+  assert.equal(fs.readFileSync(unrelated, 'utf8'), original);
+  assert.equal(fs.readFileSync(image, 'utf8'), 'preserved');
+  assert.equal(fs.readFileSync(course, 'utf8'), 'preserved');
+  const current = fs.readFileSync(f.output, 'utf8');
+  for (const args of [['--only='], ['--only=Q999'], ['--only=../Q001'], ['--unknown']]) {
+    assert.notEqual(f.run(...args).status, 0);
+    assert.equal(fs.readFileSync(f.output, 'utf8'), current);
+    assert.equal(fs.readFileSync(unrelated, 'utf8'), original);
+    assert.equal(fs.readFileSync(image, 'utf8'), 'preserved');
+  }
+});
+
+test('实际修订更新 date，保留既有页面原日期，后续全量同步也不重置', (t) => {
+  const f = fixture(t);
+  fs.utimesSync(f.sourceFile, new Date('2026-09-16T12:00:00Z'), new Date('2026-09-16T12:00:00Z'));
+  assert.equal(f.run().status, 0);
+  fs.utimesSync(f.sourceFile, new Date('2026-10-04T12:00:00Z'), new Date('2026-10-04T12:00:00Z'));
+  assert.equal(f.run('--only=Q001').status, 0);
+  const revised = fs.readFileSync(f.output, 'utf8');
+  assert.match(revised, /^date: 2026-10-04$/m);
+  assert.match(revised, /^publishedDate: 2026-09-16$/m);
+  assert.equal(f.run().status, 0);
+  assert.equal(fs.readFileSync(f.output, 'utf8'), revised);
+});
+
+test('原页面日期配置不依赖生成目录，错误日期在清理前失败', (t) => {
+  const f = fixture(t);
+  const dates = path.join(f.root, 'scripts/article-published-dates.json');
+  fs.writeFileSync(dates, JSON.stringify({ Q001: '2026-09-16' }));
+  fs.utimesSync(f.sourceFile, new Date('2026-10-04T12:00:00Z'), new Date('2026-10-04T12:00:00Z'));
+  assert.equal(f.run().status, 0);
+  const generated = fs.readFileSync(f.output, 'utf8');
+  assert.match(generated, /^date: 2026-10-04$/m);
+  assert.match(generated, /^publishedDate: 2026-09-16$/m);
+  fs.rmSync(path.join(f.root, 'src/content/articles'), { recursive: true });
+  assert.equal(f.run().status, 0);
+  assert.equal(fs.readFileSync(f.output, 'utf8'), generated);
+  fs.writeFileSync(dates, JSON.stringify({ Q001: '2026-02-30' }));
+  assert.notEqual(f.run().status, 0);
+  assert.equal(fs.readFileSync(f.output, 'utf8'), generated);
 });
 
 test("损坏的标题配置在清理前失败，保留上一次文章和图片产物", (t) => {

@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import SidebarCollapse from '../../components/SidebarCollapse.astro'
+import { getLearningGuides, guideHref, type ResolvedGuide } from '../../data/learning-guides'
+import { SITE, MODULE_META } from '../../data/site'
+import { absoluteUrl, url } from '../../utils'
+import '../../styles/article-browser.css'
+import '../../styles/learning-guides.css'
+
+export async function getStaticPaths() {
+  const guides = await getLearningGuides()
+  return guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide, guides } }))
+}
+
+interface Props { guide: ResolvedGuide; guides: ResolvedGuide[] }
+const { guide, guides } = Astro.props
+const pagePath = guideHref(guide)
+const articles = guide.stages.flatMap((stage) => stage.articles)
+const schema = [
+  {
+    '@context': 'https://schema.org', '@type': 'CollectionPage',
+    name: guide.title, description: guide.description, url: absoluteUrl(pagePath),
+    dateModified: guide.updated, inLanguage: 'zh-CN',
+    author: { '@type': 'Person', name: SITE.author },
+    isPartOf: { '@type': 'WebSite', name: SITE.name, url: absoluteUrl('/') },
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'ItemList', name: guide.title,
+    numberOfItems: articles.length,
+    itemListElement: articles.map(({ article }, index) => ({
+      '@type': 'ListItem', position: index + 1, name: article.entry.data.title,
+      url: absoluteUrl(`/${article.entry.id}/`),
+    })),
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/') },
+      { '@type': 'ListItem', position: 2, name: guide.title, item: absoluteUrl(pagePath) },
+    ],
+  },
+]
+---
+
+<BaseLayout title={guide.title} description={guide.description} path={pagePath} customSidebar activeModule={guide.module}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+  <div class="learning-layout">
+    <aside class="browse-sidebar learning-sidebar" id="browse-sidebar" aria-label="学习路线" data-site-sidebar data-sidebar-scope={`guide:${guide.slug}`} data-sidebar-kind="browse" data-pagefind-ignore>
+      <div class="sidebar-heading"><p class="sb-title">学习路线</p><SidebarCollapse /></div>
+      <a class="guide-home" href={url('/')}><span aria-hidden="true">←</span> 返回首页</a>
+      <nav class="guide-switcher" aria-label="选择学习路线">
+        {guides.map((item) => (
+          <a href={url(guideHref(item))} aria-current={item.slug === guide.slug ? 'page' : undefined}>{item.label}</a>
+        ))}
+      </nav>
+      <p class="guide-sidebar-label">本页阅读顺序</p>
+      <nav class="guide-stage-nav" aria-label="路线阶段">
+        {guide.stages.map((stage, index) => (
+          <a href={`#${stage.id}`}><span aria-hidden="true">0{index + 1}</span>{stage.title}</a>
+        ))}
+      </nav>
+      <a class="guide-browse-link" href={url(guide.browseHref)}>{guide.browseLabel}<span aria-hidden="true">↗</span></a>
+    </aside>
+
+    <div class="browse-content guide-content">
+      <header class="guide-header">
+        <div class="crumbs"><a href={url('/')}>首页</a><span aria-hidden="true">/</span><span>学习路线</span></div>
+        <p class="guide-eyebrow">{MODULE_META[guide.module].name} · 阅读指南</p>
+        <h1>{guide.title}</h1>
+        <p class="guide-audience">{guide.audience}</p>
+        <div class="guide-meta"><span>{guide.stages.length} 个阶段</span><span>{guide.articleCount} 篇精选阅读</span><span>更新于 {guide.updated}</span></div>
+      </header>
+
+      <section class="guide-orientation" aria-labelledby="guide-how-title">
+        <h2 id="guide-how-title">这条路线怎么读</h2>
+        <p>{guide.approach}</p>
+        <a class="guide-begin" href={`#${guide.stages[0].id}`}>从第一阶段开始<span aria-hidden="true">↓</span></a>
+      </section>
+
+      <div class="guide-stages">
+        {guide.stages.map((stage, index) => (
+          <section class="guide-stage" id={stage.id} aria-labelledby={`${stage.id}-title`}>
+            <div class="guide-stage-heading">
+              <span class="guide-step" aria-hidden="true">0{index + 1}</span>
+              <div><h2 id={`${stage.id}-title`}>{stage.title}</h2><p>{stage.goal}</p></div>
+            </div>
+            <ol class="guide-reading-list">
+              {stage.articles.map(({ article, reason }) => (
+                <li><a href={url(`/${article.entry.id}/`)}>{article.entry.data.title}<span aria-hidden="true">↗</span></a><p>{reason}</p></li>
+              ))}
+            </ol>
+            <div class="guide-checkpoint"><span>读完检查</span><p>{stage.checkpoint}</p></div>
+          </section>
+        ))}
+      </div>
+
+      <nav class="guide-finish" aria-label="继续阅读">
+        <div><h2>按自己的问题继续读</h2><p>路线帮你建立顺序，完整题库和教程里还有更多具体问题。</p></div>
+        <a href={url(guide.browseHref)}>{guide.browseLabel}<span aria-hidden="true">→</span></a>
+      </nav>
+    </div>
+  </div>
+</BaseLayout>

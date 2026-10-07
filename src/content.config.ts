@@ -17,6 +17,8 @@ const articles = defineCollection({
     module: z.enum(["interview", "programmer", "tutorial"]).default("interview"),
     qnum: z.string(),
     date: z.coerce.date(),
+    // 既有页面声明的原日期；date 继续表示实际修订时间。
+    publishedDate: z.coerce.date().optional(),
     // 「面试速答」段落的完整文本，用于 FAQ 结构化数据
     faqAnswer: z.string().optional(),
   }).superRefine((article, context) => {

@@ -22,6 +22,7 @@ interface Props {
   ogType?: "website" | "article";
   noindex?: boolean;
   keywords?: string[];
+  activeModule?: ReturnType<typeof moduleOfPath>;
 }
 
 const {
@@ -36,7 +37,7 @@ const {
 } = Astro.props;
 
 // 当前页面所属模块：顶部导航高亮与侧边栏分组都用它
-const activeModule = moduleOfPath(path);
+const activeModule = Astro.props.activeModule ?? moduleOfPath(path);
 const hasSidebar = sidebar || customSidebar;
 
 const pageTitle =

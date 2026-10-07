@@ -24,6 +24,16 @@ const OUT_DIR = path.join(ROOT, "src", "content", "articles");
 const IMG_SRC_DIR = path.join(ROOT, "img-src");
 const BASE = "";
 
+// 限定编号时保留其他已同步文章和配图，避免带入写作目录中的待审改稿。
+const args = process.argv.slice(2);
+if (args.length > 1 || (args.length && !args[0].startsWith("--only="))) {
+  throw new Error("用法：node scripts/sync-content.mjs [--only=T002,Q005,Q028]");
+}
+const selected = args.length ? new Set(args[0].slice(7).split(",")) : null;
+if (selected && [...selected].some((num) => !/^[QT]\d{3,}$/.test(num))) {
+  throw new Error("--only 需要逗号分隔的原始文章编号，例如 T002,Q005,Q028");
+}
+
 const SOURCES = JSON.parse(
   fs.readFileSync(path.join(__dirname, "sources.json"), "utf-8")
 ).sources;
@@ -46,6 +56,11 @@ for (const source of SOURCES) {
 }
 const ARTICLE_TOPICS = validateArticleTopics(TOPICS, TOPIC_ASSIGNMENTS,
   SOURCES.flatMap((source) => Object.values(source.categories)), sourceArticles);
+if (selected) {
+  for (const num of selected) {
+    if (!sourceArticles.has(num)) throw new Error(`限定同步的文章不存在：${num}`);
+  }
+}
 
 // 使用写作仓库的固定编号，不使用网站按分类重排后的 Q/T 展示编号。
 // 在清理产物之前校验，配置损坏时保留上一次同步结果。
@@ -65,6 +80,20 @@ for (const [num, title] of Object.entries(WEBSITE_TITLES)) {
   }
   if (configuredTitles.has(title)) throw new Error(`网站标题重复：${title}`);
   configuredTitles.add(title);
+}
+
+// 有修订记录的页面显式保留原 datePublished，新克隆也不依赖旧生成目录。
+const publicationPath = path.join(__dirname, "article-published-dates.json");
+const WEBSITE_DATES = fs.existsSync(publicationPath)
+  ? JSON.parse(fs.readFileSync(publicationPath, "utf8")) : {};
+if (!WEBSITE_DATES || typeof WEBSITE_DATES !== "object" || Array.isArray(WEBSITE_DATES)) {
+  throw new Error("article-published-dates.json 必须是文章编号到原页面日期的对象");
+}
+for (const [num, date] of Object.entries(WEBSITE_DATES)) {
+  if (!/^[QT]\d{3,}$/.test(num) || typeof date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(date)
+    || !Number.isFinite(Date.parse(date)) || new Date(date).toISOString().slice(0, 10) !== date) {
+    throw new Error(`原页面日期无效：${num}`);
+  }
 }
 
 // 编号 → URL slug（英文关键词，新增题目时补一行）
@@ -178,26 +207,28 @@ function extractBodySummary(md) {
 }
 
 /**
- * 选题卡里的描述（优先级最高，作者手写的最准）
- *   - 描述：xxx          ← 显式指定（可选，加在选题卡任意位置）
+ * 单独读取手写 SEO 描述；描述、摘要、简介与学习成果保留旧回退顺序。
+ *   - SEO 描述：xxx      ← 各模块均优先使用
  *   - 读完能掌握什么：xxx ← 教程类用它拼一句话
  */
 function fromTopicCard(dir) {
   const cardPath = path.join(dir, "选题卡.md");
-  if (!fs.existsSync(cardPath)) return "";
+  if (!fs.existsSync(cardPath)) return { seo: "", fallback: "" };
   const card = fs.readFileSync(cardPath, "utf-8");
 
+  const seo = cleanInline(card.match(/^[-*][ \t]*SEO[ \t]*描述[ \t]*[：:][ \t]*([^\r\n]*)$/m)?.[1] ?? "");
+
   const explicit = card.match(
-    /^[-*]\s*(?:SEO\s*描述|描述|摘要|简介)\s*[：:]\s*(.+)$/m
+    /^[-*][ \t]*(?:描述|摘要|简介)[ \t]*[：:][ \t]*([^\r\n]+)$/m
   );
-  if (explicit) return cleanInline(explicit[1]);
+  if (explicit) return { seo, fallback: cleanInline(explicit[1]) };
 
   const outcome = card.match(/^[-*]\s*读完能掌握什么\s*[：:]\s*(.+)$/m);
   if (outcome) {
     const value = cleanInline(outcome[1]).replace(/^(能够|可以|能)/, "");
-    return `教你${value}`;
+    return { seo, fallback: `教你${value}` };
   }
-  return "";
+  return { seo, fallback: "" };
 }
 
 function rewriteImages(md, num) {
@@ -212,9 +243,26 @@ function rewriteImages(md, num) {
 // ---- 主流程 ----
 
 function main() {
-  // 幂等：先清空旧产物
-  fs.rmSync(OUT_DIR, { recursive: true, force: true });
-  fs.rmSync(IMG_SRC_DIR, { recursive: true, force: true });
+  // 保留页面已经声明的原日期，正文修订时间另用 date，避免修订变成重新发布。
+  const publishedDates = new Map(Object.entries(WEBSITE_DATES));
+  if (fs.existsSync(OUT_DIR)) {
+    for (const category of fs.readdirSync(OUT_DIR)) {
+      const dir = path.join(OUT_DIR, category);
+      if (!fs.statSync(dir).isDirectory()) continue;
+      for (const file of fs.readdirSync(dir).filter((name) => name.endsWith('.md'))) {
+        const existing = fs.readFileSync(path.join(dir, file), 'utf8').split('---')[1] ?? '';
+        const num = existing.match(/^qnum:\s*"?([QT]\d+)"?\s*$/m)?.[1];
+        const date = existing.match(/^publishedDate:\s*"?(\d{4}-\d{2}-\d{2})/m)?.[1]
+          ?? existing.match(/^date:\s*"?(\d{4}-\d{2}-\d{2})/m)?.[1];
+        if (num && date && !publishedDates.has(num)) publishedDates.set(num, date);
+      }
+    }
+  }
+  // 全量同步清理旧产物；限定同步只覆盖目标文章和对应图片目录。
+  if (!selected) {
+    fs.rmSync(OUT_DIR, { recursive: true, force: true });
+    fs.rmSync(IMG_SRC_DIR, { recursive: true, force: true });
+  }
 
   let total = 0;
   let changedTitles = 0;
@@ -241,6 +289,7 @@ function main() {
         if (!nm) continue;
 
         const num = nm[1];
+        if (selected && !selected.has(num)) continue;
         const src = path.join(catDir, entry.name, "正文.md");
         if (!fs.existsSync(src)) continue;
 
@@ -251,17 +300,17 @@ function main() {
         if (title !== sourceTitle) changedTitles++;
         const dir = path.join(catDir, entry.name);
         const answer = extractInterviewAnswer(raw);
-        const cardText = fromTopicCard(dir);
+        const card = fromTopicCard(dir);
         const isInterview = source.module === "interview" || source.module === "programmer";
 
-        // 描述优先级：面试题用「面试速答」；教程用选题卡（描述 → 读完能掌握什么）；
-        // 都没有时退回正文里有信息量的前几句（自动跳过问候语）
+        // 非空 SEO 描述优先；未配置时面试题用「面试速答」，教程用选题卡；
+        // 都没有时退回正文里有信息量的前几句（自动跳过问候语）。
         const description = tidyText(
           trimAtBoundary(
-            (isInterview
-              ? answer || cardText || extractBodySummary(raw)
-              : cardText || extractBodySummary(raw)
-            ).trim() || sourceTitle,
+            (card.seo || (isInterview
+              ? answer || card.fallback || extractBodySummary(raw)
+              : card.fallback || extractBodySummary(raw)
+            )).trim() || sourceTitle,
             120
           )
         );
@@ -291,6 +340,7 @@ function main() {
           `module: ${JSON.stringify(source.module)}`,
           `qnum: ${JSON.stringify(num)}`,
           `date: ${date}`,
+          `publishedDate: ${publishedDates.get(num) ?? date}`,
           ...(faqAnswer ? [`faqAnswer: ${JSON.stringify(faqAnswer)}`] : []),
           "---",
           "",
@@ -302,6 +352,7 @@ function main() {
 
         // 拷贝图片（实验素材等子目录不处理，只拷贝 正文.assets）
         const assets = path.join(catDir, entry.name, "正文.assets");
+        if (selected) fs.rmSync(path.join(IMG_SRC_DIR, num), { recursive: true, force: true });
         if (fs.existsSync(assets)) {
           fs.cpSync(assets, path.join(IMG_SRC_DIR, num), { recursive: true });
         }
@@ -318,6 +369,7 @@ function main() {
   console.log(`完成：共同步 ${total} 篇文章。`);
   console.log(`网站标题：${appliedTitles.size} 篇使用配置，其中 ${changedTitles} 篇与源稿标题不同；其余沿用源稿标题。`);
   for (const num of Object.keys(WEBSITE_TITLES)) {
+    if (selected && !selected.has(num)) continue;
     if (!appliedTitles.has(num)) console.warn(`网站标题配置 ${num} 未匹配到源稿，请核对原始编号。`);
   }
   if (total === 0) console.warn("警告：没有同步到任何文章，请检查 sources.json 里的目录。");

@@ -1,0 +1,101 @@
+/* 首页入口与学习路线沿用站点主题，以编号、留白和阅读顺序引导读者。 */
+.home-start { margin-bottom: 32px; }
+.home-start-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; margin-bottom: 14px; }
+.home-start-heading h2 { margin: 0; font-size: 17px; }
+.home-start-heading > span { color: var(--text-3); font-size: 12px; }
+.home-start-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.start-link { display: flex; gap: 12px; min-width: 0; padding: 18px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-soft); color: var(--text); transition: border-color .15s, background .15s; }
+.start-link:hover { border-color: var(--accent); background: var(--accent-soft); text-decoration: none; }
+.start-number { flex: none; padding-top: 2px; color: var(--accent); font-family: var(--font-mono); font-size: 12px; font-weight: 600; }
+.start-copy { min-width: 0; display: flex; flex-direction: column; flex: 1; }
+.start-copy h3 { margin: 0; font-size: 16px; }
+.start-copy p { flex: 1; margin: 7px 0 12px; color: var(--text-2); font-size: 12px; line-height: 1.7; }
+.start-action { display: flex; align-items: center; gap: 8px; color: var(--accent); font-size: 12px; font-weight: 500; }
+.start-action > span { font-size: 16px; line-height: 1; }
+.start-link:focus-visible, .guide-content a:focus-visible, .learning-sidebar a:focus-visible, .reading-guide-cta a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+.learning-layout { display: grid; grid-template-columns: var(--sidebar-w) minmax(0, 1fr); gap: 36px; padding-top: 32px; align-items: start; }
+.learning-sidebar .guide-home { display: flex; gap: 8px; padding: 7px 10px; margin-bottom: 16px; color: var(--text-2); font-size: 13px; }
+.guide-switcher { display: grid; gap: 4px; }
+.guide-switcher a { padding: 9px 10px; border-radius: 6px; color: var(--text-2); font-size: 14px; }
+.guide-switcher a:hover, .guide-stage-nav a:hover { background: var(--bg-soft); text-decoration: none; color: var(--accent); }
+.guide-switcher a[aria-current="page"] { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.guide-sidebar-label { margin: 28px 10px 8px; color: var(--text-3); font-size: 12px; }
+.guide-stage-nav { display: grid; gap: 4px; }
+.guide-stage-nav a { display: flex; align-items: baseline; gap: 10px; padding: 9px 10px; border-radius: 6px; color: var(--text-2); font-size: 13px; }
+.guide-stage-nav a > span { color: var(--text-3); font-size: 11px; font-family: var(--font-mono); }
+.guide-browse-link { display: flex; align-items: center; justify-content: space-between; margin-top: 26px; padding: 18px 10px 0; border-top: 1px solid var(--border); font-size: 13px; }
+.guide-header { padding-bottom: 28px; }
+.guide-header .crumbs { display: flex; gap: 9px; margin: 0 0 28px; font-size: 12px; color: var(--text-3); }
+.guide-eyebrow { margin: 0 0 10px; color: var(--accent); font-size: 12px; font-weight: 500; }
+.guide-header h1 { max-width: 720px; margin: 0; font-size: clamp(26px, 2.5vw, 34px); line-height: 1.45; letter-spacing: -.025em; text-wrap: balance; }
+.guide-audience { margin: 16px 0 0; color: var(--text-2); font-size: 15px; max-width: 680px; }
+.guide-meta { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 20px; color: var(--text-3); font-size: 12px; }
+.guide-orientation { padding: 22px 24px; border-left: 3px solid var(--accent); background: var(--bg-soft); border-radius: 0 8px 8px 0; }
+.guide-orientation h2 { margin: 0 0 9px; font-size: 16px; }
+.guide-orientation p { margin: 0; color: var(--text-2); font-size: 14px; }
+.guide-begin { display: inline-flex; align-items: center; gap: 14px; font-size: 13px; margin-top: 15px; font-weight: 500; }
+.guide-stages { margin-top: 36px; }
+.guide-stage { padding: 30px 0 32px; border-top: 1px solid var(--border); scroll-margin-top: calc(var(--topbar-h) + 24px); }
+.guide-stage-heading { display: flex; gap: 16px; align-items: baseline; }
+.guide-step { flex: none; color: var(--accent); font-family: var(--font-mono); font-size: 18px; line-height: 1.5; }
+.guide-stage-heading h2 { margin: 0; font-size: 21px; }
+.guide-stage-heading p { margin: 8px 0 0; color: var(--text-2); font-size: 14px; }
+.guide-reading-list { margin: 22px 0 0 39px; padding: 0; list-style: none; counter-reset: reading; }
+.guide-reading-list li { position: relative; padding: 14px 0 14px 25px; border-bottom: 1px solid var(--border); counter-increment: reading; }
+.guide-reading-list li::before { content: counter(reading, decimal-leading-zero); position: absolute; top: 16px; left: 0; color: var(--text-3); font-family: var(--font-mono); font-size: 10px; }
+.guide-reading-list li:last-child { border-bottom: 0; }
+.guide-reading-list a { display: flex; gap: 14px; align-items: baseline; justify-content: space-between; color: var(--text); font-weight: 500; font-size: 16px; line-height: 1.6; }
+.guide-reading-list a:hover { color: var(--accent); }
+.guide-reading-list a > span { flex: none; color: var(--text-3); font-size: 14px; }
+.guide-reading-list p { margin: 5px 28px 0 0; color: var(--text-2); font-size: 13px; }
+.guide-checkpoint { display: flex; gap: 16px; align-items: baseline; margin: 18px 0 0 39px; padding: 14px 16px; background: var(--bg-soft); border-radius: 6px; }
+.guide-checkpoint > span { flex: none; color: var(--accent); font-size: 12px; font-weight: 500; }
+.guide-checkpoint p { margin: 0; color: var(--text-2); font-size: 13px; }
+.guide-finish { display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid var(--border); padding: 28px 0 12px; }
+.guide-finish h2 { margin: 0 0 7px; font-size: 18px; }
+.guide-finish p { margin: 0; color: var(--text-2); font-size: 13px; }
+.guide-finish > a { display: inline-flex; align-items: center; gap: 12px; flex: none; font-size: 13px; font-weight: 500; }
+
+.reading-guide-cta { margin-top: 26px; padding: 20px 22px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; background: var(--bg-soft); }
+.reading-guide-kicker { display: block; margin-bottom: 6px; color: var(--text-3); font-size: 12px; }
+.reading-guide-cta a { display: inline-flex; align-items: baseline; gap: 16px; color: var(--text); font-weight: 600; font-size: 16px; }
+.reading-guide-cta a:hover { color: var(--accent); }
+.reading-guide-cta a > span { color: var(--accent); }
+.reading-guide-cta p { margin: 6px 0 0; color: var(--text-2); font-size: 13px; }
+
+@media (min-width: 961px) {
+  html[data-sidebar-collapsed="true"] .learning-layout { grid-template-columns: minmax(0, 1fr); }
+  html[data-sidebar-collapsed="true"] .guide-content { margin-inline: auto; width: 100%; }
+}
+@media (max-width: 1100px) and (min-width: 961px) {
+  .start-link { gap: 8px; padding: 15px 12px; }
+  .start-copy h3 { font-size: 15px; }
+}
+@media (max-width: 960px) {
+  .learning-layout { grid-template-columns: minmax(0, 1fr); gap: 22px; padding-top: 20px; }
+}
+@media (max-width: 600px) {
+  .home-start { margin-bottom: 26px; }
+  .home-start-heading > span { font-size: 11px; }
+  .home-start-grid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .start-link { align-items: center; gap: 12px; padding: 13px 14px; }
+  .start-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; flex: 1; }
+  .start-copy h3 { font-size: 15px; }
+  .start-copy p { grid-column: 1 / -1; grid-row: 2; margin: 0; font-size: 11px; }
+  .start-action { grid-column: 2; grid-row: 1; font-size: 11px; }
+  .guide-header .crumbs { margin-bottom: 22px; }
+  .guide-header h1 { font-size: 26px; }
+  .guide-audience { font-size: 14px; }
+  .guide-orientation { padding: 18px; }
+  .guide-stage-heading { gap: 12px; }
+  .guide-stage-heading h2 { font-size: 19px; }
+  .guide-step { font-size: 16px; }
+  .guide-reading-list { margin-left: 0; }
+  .guide-reading-list a { font-size: 15px; }
+  .guide-checkpoint { display: block; margin-left: 0; }
+  .guide-checkpoint p { margin-top: 5px; }
+  .guide-finish { align-items: start; flex-direction: column; }
+  .reading-guide-cta { padding: 16px 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .start-link { transition: none; } }

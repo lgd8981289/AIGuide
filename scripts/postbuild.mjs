@@ -168,6 +168,16 @@ function collectDates() {
       }
     }
   }
+  // 学习路线按已声明的内容更新时间填写，避免每次构建都改变 lastmod。
+  const guidesDir = path.join(DIST, 'guides');
+  if (fs.existsSync(guidesDir)) {
+    for (const slug of fs.readdirSync(guidesDir)) {
+      const file = path.join(guidesDir, slug, 'index.html');
+      if (!fs.existsSync(file)) continue;
+      const date = fs.readFileSync(file, 'utf8').match(/"dateModified":"(\d{4}-\d{2}-\d{2})"/)?.[1];
+      if (date) byUrl.set(`/guides/${slug}/`, date);
+    }
+  }
   return { byUrl, byCategory, byModule, latest };
 }
 

@@ -3,6 +3,7 @@ import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import TechGrow from "../../components/TechGrow.astro";
 import ResumeCta from "../../components/ResumeCta.astro";
+import ReadingGuideCta from "../../components/ReadingGuideCta.astro";
 import Toc from "../../components/Toc.astro";
 import BackTop from "../../components/BackTop.astro";
 import ImmersiveToggle from "../../components/ImmersiveToggle.astro";
@@ -12,6 +13,8 @@ import CodeCopy from "../../components/CodeCopy.astro";
 import ImageZoom from "../../components/ImageZoom.astro";
 import { CATEGORIES, COPY_GUARD, MODULE_META, SITE, TECHGROW, categoriesOf } from "../../data/site";
 import { getArticlesByCategory } from "../../data/articles";
+import { ARTICLE_RELATED } from "../../data/article-related";
+import { selectRelatedArticles } from "../../lib/related-articles.mjs";
 import { url, absoluteUrl } from "../../utils";
 
 export async function getStaticPaths() {
@@ -38,6 +41,7 @@ const meta = MODULE_META[cat.module];
 const pagePath = `/${entry.id}/`;
 const pageUrl = absoluteUrl(pagePath);
 const dateISO = entry.data.date.toISOString().slice(0, 10);
+const publishedDateISO = (entry.data.publishedDate ?? entry.data.date).toISOString().slice(0, 10);
 
 // 同分类内按展示序号取上下篇
 const siblings = (await getArticlesByCategory()).get(cat.slug) ?? [];
@@ -51,7 +55,8 @@ const sameCat = siblings.filter((s) => s.entry.id !== entry.id);
 const sameModule = categoriesOf(cat.module)
   .flatMap((c) => (c.slug === cat.slug ? [] : byCat.get(c.slug) ?? []))
   .filter((s) => s.entry.id !== entry.id);
-const related = [...sameCat, ...sameModule].slice(0, 4);
+const related = selectRelatedArticles(entry.data.qnum, [...byCat.values()].flat(),
+  ARTICLE_RELATED[entry.data.qnum] ?? [], [...sameCat, ...sameModule]);
 
 const fmt = (d: Date) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
@@ -76,7 +81,7 @@ const jsonLd = [
         cssSelector: ".gated-content",
       },
     } : {}),
-    datePublished: dateISO,
+    datePublished: publishedDateISO,
     dateModified: dateISO,
     inLanguage: "zh-CN",
     articleSection: cat.name,
@@ -137,7 +142,7 @@ const jsonLd = [
   ogType="article"
 >
   <Fragment slot="head">
-    <meta property="article:published_time" content={dateISO} />
+    <meta property="article:published_time" content={publishedDateISO} />
     <meta property="article:modified_time" content={dateISO} />
     <meta property="article:author" content={SITE.author} />
     <meta property="article:section" content={cat.name} />
@@ -195,6 +200,8 @@ const jsonLd = [
           )
         }
       </article>
+
+      <ReadingGuideCta category={cat.slug} module={cat.module} />
 
       {
         related.length > 0 && (

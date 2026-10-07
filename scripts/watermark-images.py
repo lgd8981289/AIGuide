@@ -165,6 +165,14 @@ def process_image(src_path, dst_path):
 
 
 def main():
+    args = sys.argv[1:]
+    if len(args) > 1 or (args and not args[0].startswith("--only=")):
+        print("用法：watermark-images.py [--only=T002,Q005,Q028]", file=sys.stderr)
+        return 1
+    selected = set(args[0][7:].split(",")) if args else None
+    if selected is not None and any(not (len(num) >= 4 and num[0] in "QT" and num[1:].isdigit()) for num in selected):
+        print("--only 需要逗号分隔的原始文章编号", file=sys.stderr)
+        return 1
     done = 0
     skipped = 0
     missing = []
@@ -187,6 +195,8 @@ def main():
                     continue
                 # 目录名形如 Q003-xxx / T001-xxx，取编号前缀
                 num = entry.name.split("-")[0]
+                if selected is not None and num not in selected:
+                    continue
                 if not num or not num[0].isalpha() or not num[1:].isdigit():
                     continue
 

@@ -959,6 +959,11 @@ main {
   border-radius: 5px;
 }
 
+/* 长文件路径与API名称可以在行内换行；独立代码块仍保留横向滚动。 */
+.prose :not(pre) > code {
+  overflow-wrap: anywhere;
+}
+
 .prose pre {
   border-radius: 12px;
   padding: 16px 18px;
@@ -985,6 +990,7 @@ main {
   border: 1px solid var(--border);
   padding: 8px 12px;
   text-align: left;
+  overflow-wrap: anywhere;
 }
 
 .prose th {

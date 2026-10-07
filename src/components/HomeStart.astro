@@ -1,0 +1,24 @@
+---
+import { LEARNING_GUIDES, guideHref } from '../data/learning-guides'
+import { url } from '../utils'
+import '../styles/learning-guides.css'
+---
+
+<section class="home-start" aria-labelledby="home-start-title" data-home-start>
+  <div class="home-start-heading">
+    <h2 id="home-start-title">从这里开始</h2>
+    <span>选一个目标，找到阅读顺序</span>
+  </div>
+  <div class="home-start-grid">
+    {LEARNING_GUIDES.map((guide, index) => (
+      <a class="start-link" href={url(guideHref(guide))}>
+        <span class="start-number" aria-hidden="true">0{index + 1}</span>
+        <div class="start-copy">
+          <h3>{guide.label}</h3>
+          <p>{guide.cardDescription}</p>
+          <span class="start-action">{guide.action}<span aria-hidden="true">↗</span></span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

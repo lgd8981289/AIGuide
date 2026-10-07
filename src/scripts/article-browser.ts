@@ -16,6 +16,7 @@ if (browser) {
   const topics = new Map(topicLinks.map((link) => [link.dataset.filterTopic!, link]));
   const sidebar = browser.querySelector<HTMLElement>("[data-site-sidebar]")!;
   const heading = browser.querySelector<HTMLHeadingElement>("#browse-title")!;
+  const homeStart = browser.querySelector<HTMLElement>("[data-home-start]");
   const intro = browser.querySelector<HTMLElement>("[data-browser-intro]")!;
   const count = browser.querySelector<HTMLElement>("[data-result-count]")!;
   const sort = browser.querySelector<HTMLSelectElement>("[data-browser-sort]")!;
@@ -93,6 +94,7 @@ if (browser) {
     const matching = ordered.filter((row) => (!state.category || row.dataset.articleCategory === state.category) && (!state.topic || row.dataset.articleTopic === state.topic));
     const pages = Math.max(1, Math.ceil(matching.length / pageSize));
     state.page = Math.min(state.page, pages);
+    if (homeStart) homeStart.hidden = Boolean(state.category) || state.page > 1;
     const visible = new Set(matching.slice((state.page - 1) * pageSize, state.page * pageSize));
     const fragment = document.createDocumentFragment();
     ordered.forEach((row) => { row.hidden = !visible.has(row); fragment.append(row); });

@@ -1,0 +1,20 @@
+---
+import { guideForArticle, guideHref } from '../data/learning-guides'
+import type { ModuleKey } from '../data/site'
+import { url } from '../utils'
+import '../styles/learning-guides.css'
+
+interface Props { category: string; module: ModuleKey }
+const guide = guideForArticle(Astro.props.category, Astro.props.module)
+const label = guide?.slug === 'rag' ? '继续按 RAG 复习路线学习' : guide?.slug === 'ai-interview' ? '继续准备 AI 应用开发面试' : '继续按 AI 编程实操路线学习'
+---
+
+{guide && (
+  <nav class="reading-guide-cta" aria-label="继续学习" data-pagefind-ignore>
+    <div>
+      <span class="reading-guide-kicker">下一步读什么</span>
+      <a href={url(guideHref(guide))}>{label}<span aria-hidden="true">→</span></a>
+      <p>{guide.cardDescription}</p>
+    </div>
+  </nav>
+)}

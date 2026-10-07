@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import ResumeCta from './ResumeCta.astro'
 import { getOrderedArticles, getArticleTopicGroups } from '../data/articles'
 import SidebarCollapse from './SidebarCollapse.astro'
+import HomeStart from './HomeStart.astro'
 import {
 	CATEGORIES,
 	MODULE_META,
@@ -242,6 +243,7 @@ jsonLd.push({
 			aria-labelledby="browse-title"
 			data-pagefind-ignore
 		>
+			{!module && !category && <HomeStart />}
 			<header class="browse-heading">
 				<h1 id="browse-title" tabindex="-1">
 					{category?.name ?? defaultTitle}
