@@ -20,7 +20,7 @@
 | 数据库与缓存面试题 | 50 | [数据库与缓存面试题](https://note.lgdsunday.club/database/) |
 | 计算机基础面试题 | 44 | [计算机基础面试题](https://note.lgdsunday.club/cs-basics/) |
 | 系统设计面试题（全栈） | 19 | [系统设计面试题（全栈）](https://note.lgdsunday.club/fullstack-system-design/) |
-| AI 编程教程 | 4 | [AI 编程教程](https://note.lgdsunday.club/tutorial/) |
+| AI 编程教程 | 5 | [AI 编程教程](https://note.lgdsunday.club/tutorial/) |
 
 其他入口：[首页](https://note.lgdsunday.club/) · [AI 面试题大全](https://note.lgdsunday.club/ai/) · [全栈面试题](https://note.lgdsunday.club/programmer/) · 
 [AI 应用开发面试准备路线](https://note.lgdsunday.club/guides/ai-interview/) · [RAG 复习路线](https://note.lgdsunday.club/guides/rag/) · 
@@ -137,12 +137,13 @@
 8. [LangChain Middleware 是什么？和 Tool、Callback 有什么区别？](https://note.lgdsunday.club/langchain/q055-langchain-middleware/)
 9. [LangChain、LangGraph 和自研 Agent 应该怎么选？](https://note.lgdsunday.club/langchain/q063-agent-framework-selection/)
 
-## AI 编程教程（4 篇）
+## AI 编程教程（5 篇）
 
 1. [Claude Code APP 接入 DeepSeek 教程：安装配置与使用技巧](https://note.lgdsunday.club/tools/t001-claude-code-deepseek/)
 2. [WorkBuddy 使用教程：安装配置、Skill 与自动化任务](https://note.lgdsunday.club/tools/t004-workbuddy-guide/)
-3. [Codex 如何重构大型旧项目？任务拆分、测试与验收](https://note.lgdsunday.club/practice/t006-github-ai-rewrite/)
-4. [GPT-6 Sol、Luna 与 Opus 5.5 怎么选？价格与使用场景](https://note.lgdsunday.club/reviews/t008-gpt-6-sol-luna-opus-5-5/)
+3. [Codex 接入 Playwright MCP 教程：安装、调用与验证](https://note.lgdsunday.club/agent-ext/t002-codex-mcp-playwright/)
+4. [Codex 如何重构大型旧项目？任务拆分、测试与验收](https://note.lgdsunday.club/practice/t006-github-ai-rewrite/)
+5. [GPT-6 Sol、Luna 与 Opus 5.5 怎么选？价格与使用场景](https://note.lgdsunday.club/reviews/t008-gpt-6-sol-luna-opus-5-5/)
 
 <details>
 <summary><b>前端面试题（92 篇）</b> — 点击展开全部题目</summary>
