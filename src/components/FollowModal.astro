@@ -2,11 +2,14 @@
 // 关注公众号弹窗
 // 任何带 data-follow-open 的元素点击后都会打开它（目前用在页脚的「程序员Sunday」按钮）
 // 图片延迟到首次打开才加载，避免给正常浏览增加流量
+// 由 site.ts 的 FOLLOW.enabled 控制；关闭时不渲染任何结构（页脚也不再有触发按钮）
+import { FOLLOW } from "../data/site";
 import { url } from "../utils";
 
 const qrcode = url("/wechat-qrcode.jpg");
 ---
 
+{FOLLOW.enabled && (
 <div class="follow-modal" id="follow-modal" hidden data-pagefind-ignore>
   <div class="fm-panel" role="dialog" aria-modal="true" aria-label="关注公众号 程序员Sunday">
     <button class="fm-close" type="button" aria-label="关闭">
@@ -23,10 +26,11 @@ const qrcode = url("/wechat-qrcode.jpg");
     />
     <p class="fm-title">微信搜一搜「程序员Sunday」，或扫码关注</p>
     <p class="fm-tip">
-      新文章第一时间推送；站点文章需要解锁时，在公众号里回复「验证码」即可领取链接。
+      新文章第一时间推送，不错过更新。
     </p>
   </div>
 </div>
+)}
 
 <script>
   const modal = document.getElementById("follow-modal") as HTMLElement | null;

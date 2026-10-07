@@ -283,6 +283,18 @@ export function moduleOfPath(pathname: string): ModuleKey | 'home' {
 }
 
 // ---------------------------------------------------------------------------
+// 搜索引擎站点验证（留空则不输出对应的 meta）
+// 百度：ziyuan.baidu.com → 用户中心 → 站点管理 → 添加站点 → HTML 标签验证，
+//       页面会给出 <meta name="baidu-site-verification" content="codeva-xxxx" />，把 codeva-xxxx 填到下面。
+//       注意 token 按域名发放，note 站必须单独验证、单独拿 token。
+// Google：search.google.com/search-console → 添加资源 → HTML 标记，填 content 值。
+// ---------------------------------------------------------------------------
+export const SITE_VERIFICATION = {
+	baidu: '',
+	google: ''
+}
+
+// ---------------------------------------------------------------------------
 // 其他开关
 // ---------------------------------------------------------------------------
 
@@ -292,20 +304,62 @@ export const COPY_GUARD = {
 	enabled: false
 }
 
+// 页脚「关注公众号」引导开关（控制页脚的「程序员Sunday」按钮与二维码弹窗）
+// 2026-10-07：暂时关闭——现阶段优先把搜索流量做起来，不引导关注。
+// 改回 true 即恢复页脚按钮与二维码弹窗；页脚署名不受影响（关闭时显示为纯文本）。
+export const FOLLOW = {
+	enabled: false
+}
+
 // TechGrow 公众号引流配置（https://docs.techgrow.cn）
 // 开启步骤：
 //   1. 到 https://open.techgrow.cn 注册博客，拿到 blogId
 //   2. 微信公众号后台配置「关键词自动回复」，回复内容为验证码链接（格式见 TechGrow 官方文档第二步）
 //   3. 补齐下方 name / keyword / qrcode，把 enabled 改为 true，重新构建部署
 // 未开启时，本站不加载任何引流脚本，文章全文直接可见
+//
+// 2026-10-07：暂时全量开放。原因是站点上线 4 个月、零外链、搜索几乎无收录，
+// 当前瓶颈是「内容可达性」而非「涨粉」。先让搜索引擎和读者无障碍拿到全文做流量，
+// 门禁留作以后有基础时的可选项——改 enabled 为 true 即可完整恢复（分层抽样逻辑仍在）。
 export const TECHGROW = {
-	enabled: true,
+	enabled: false, // 暂时关闭公众号解锁；true 时按下方 random 分层抽样恢复门禁
 	blogId: '77647-4526721610548-557',
 	name: '程序员Sunday', // 微信公众号名称
 	keyword: '验证码', // 读者在公众号里回复的关键词
 	qrcode: 'https://ww-zhi-dao.oss-cn-beijing.aliyuncs.com/gongzhonghao.jpg', // 公众号二维码图片地址
 	type: 'website',
 	expires: '30', // 验证码解锁后有效天数
-	random: '1.0', // 引流功能生效的文章比例
+	random: '0.3', // 恢复门禁时的解锁文章比例：0=全站开放，0.3=30% 文章门禁（enabled=false 时该项无效）
 	allowMobile: true // 当前移动端也启用解锁；false 时移动端直接显示全文
+}
+
+/** 稳定哈希：同一输入在每次构建中得到相同结果（用于确定性抽样） */
+export function stableHash(s: string): number {
+	let h = 0
+	for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0
+	return h
+}
+
+/**
+ * 在「同一分类」的文章里确定性地挑出需要公众号解锁的那一批。
+ *
+ * 两点设计：
+ * 1. 必须构建时确定 —— TechGrow 自带的 random 是**浏览器端随机**的，而结构化数据的
+ *    isAccessibleForFree 必须构建时写死。直接用它会出现「实际只锁 30%，却对搜索引擎
+ *    声明 100% 非免费」的错误信号。
+ * 2. 按分类分层抽样 —— 全站一起抽时小分类方差极大（实测出现过某分类 100% 被锁、
+ *    另一分类仅 11%）。分层后每个分类的开放比例都稳定在 TECHGROW.random 附近，
+ *    不会出现「某个栏目对搜索引擎整体消失」。
+ *
+ * @param siblingIds 同一分类下全部文章的 id
+ * @returns 命中门禁的文章 id 集合
+ */
+export function selectGatedArticles(siblingIds: string[]): Set<string> {
+	const ratio = Number(TECHGROW.random)
+	if (!TECHGROW.enabled || !(ratio > 0) || siblingIds.length === 0) return new Set()
+	if (ratio >= 1) return new Set(siblingIds)
+	const count = Math.round(siblingIds.length * ratio)
+	return new Set(
+		[...siblingIds].sort((a, b) => stableHash(a) - stableHash(b)).slice(0, count)
+	)
 }

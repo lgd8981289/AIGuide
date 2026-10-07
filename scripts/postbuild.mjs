@@ -215,6 +215,64 @@ function emitSitemapAlias() {
   return 1;
 }
 
+// ------------------------------------------------ 旧编号地址永久跳转
+
+// 2026-10-07 起文章 URL 加入英文关键词：/frontend/q145/ → /frontend/q145-tree-shaking/。
+// 变更前已上线过的纯编号地址在这里补一个跳转页，保证已收录地址不 404，并把信号指向新地址。
+// 跳转页在 astro build 之后生成，因此不会进入 sitemap；也不要加 noindex，
+// 否则搜索引擎无法把旧地址的权重合并到新地址。
+const ORIGIN = "https://note.lgdsunday.club";
+
+// 这几篇从上线起就是带关键词的地址，从未存在过纯编号地址，无需跳转。
+const NEVER_NUMERIC = new Set(["Q001", "Q002", "Q003", "T001", "T004", "T006"]);
+
+function legacyRedirectHtml(target) {
+  return `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>页面已迁移</title>
+<link rel="canonical" href="${target}">
+<meta http-equiv="refresh" content="0; url=${target}">
+</head>
+<body>
+<p>这篇文章的地址已更新，正在跳转：<a href="${target}">${target}</a></p>
+</body>
+</html>
+`;
+}
+
+function emitLegacyRedirects() {
+  const articlesDir = path.join(ROOT, "src", "content", "articles");
+  const slugsPath = path.join(ROOT, "scripts", "article-slugs.json");
+  if (!fs.existsSync(articlesDir) || !fs.existsSync(slugsPath)) return 0;
+  const slugs = JSON.parse(fs.readFileSync(slugsPath, "utf-8"));
+
+  let count = 0;
+  for (const category of fs.readdirSync(articlesDir)) {
+    const catDir = path.join(articlesDir, category);
+    if (!fs.statSync(catDir).isDirectory()) continue;
+
+    for (const file of fs.readdirSync(catDir)) {
+      if (!file.endsWith(".md")) continue;
+      const raw = fs.readFileSync(path.join(catDir, file), "utf-8");
+      const qnum = (raw.match(/^qnum:\s*"?([QT]\d+)"?\s*$/m) || [])[1];
+      if (!qnum || NEVER_NUMERIC.has(qnum) || !slugs[qnum]) continue;
+
+      const stem = file.replace(/\.md$/, "");
+      const legacy = qnum.toLowerCase();
+      if (stem === legacy) continue; // 还没语义化，没有旧地址需要跳
+
+      const target = `${ORIGIN}${BASE}/${category}/${stem}/`;
+      const dir = path.join(DIST, category, legacy);
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, "index.html"), legacyRedirectHtml(target));
+      count += 1;
+    }
+  }
+  return count;
+}
+
 // ------------------------------------------------------------------ 主流程
 
 let imgChanged = 0;
@@ -243,7 +301,8 @@ if (fs.existsSync(DIST)) {
 
 const sitemapCount = injectLastmod();
 const aliasWritten = emitSitemapAlias();
+const legacyCount = emitLegacyRedirects();
 
 console.log(
-  `  构建后处理：${imgChanged} 张配图已换 WebP 并补尺寸/懒加载（涉及 ${pages} 个页面）；sitemap 注入 lastmod ${sitemapCount} 条${aliasWritten ? "，另输出 sitemap.xml 别名" : ""}`
+  `  构建后处理：${imgChanged} 张配图已换 WebP 并补尺寸/懒加载（涉及 ${pages} 个页面）；sitemap 注入 lastmod ${sitemapCount} 条${aliasWritten ? "，另输出 sitemap.xml 别名" : ""}；旧编号地址跳转页 ${legacyCount} 个`
 );

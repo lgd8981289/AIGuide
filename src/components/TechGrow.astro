@@ -1,10 +1,16 @@
 ---
 // TechGrow 公众号引流组件
-// 开关与生效设备见 src/data/site.ts。HTML 保留全文，受限区域通过 Article.hasPart 标记；
-// 搜索引擎的实际渲染和收录仍需在站长平台验证。
+// 开关与生效设备见 src/data/site.ts。是否对本页生效由页面按 TECHGROW.random
+// 在构建时抽样后通过 gated 传入（见 isGatedArticle），保证与 Article.hasPart 标记一致。
+// HTML 保留全文，受限区域通过 Article.hasPart 标记；搜索引擎的实际渲染和收录仍需在站长平台验证。
 import { TECHGROW } from "../data/site";
 
-const enabled = TECHGROW.enabled;
+interface Props {
+  /** 页面级抽样结果；false 时不加载引流脚本，全文直接可见 */
+  gated?: boolean;
+}
+const { gated = true } = Astro.props;
+const enabled = TECHGROW.enabled && gated;
 const cfg = {
   blogId: TECHGROW.blogId,
   name: TECHGROW.name,
@@ -12,7 +18,9 @@ const cfg = {
   qrcode: TECHGROW.qrcode,
   type: TECHGROW.type,
   expires: TECHGROW.expires,
-  random: TECHGROW.random,
+  // 固定 1.0：页面级抽样已在构建时完成，命中即对本页 100% 生效；
+  // 若沿用 TECHGROW.random 会二次抽样，实际门禁率被平方。
+  random: "1.0",
   allowMobile: TECHGROW.allowMobile,
 };
 ---

@@ -11,7 +11,7 @@ import CodeTabs from "../../components/CodeTabs.astro";
 import CopyGuard from "../../components/CopyGuard.astro";
 import CodeCopy from "../../components/CodeCopy.astro";
 import ImageZoom from "../../components/ImageZoom.astro";
-import { CATEGORIES, COPY_GUARD, MODULE_META, SITE, TECHGROW, categoriesOf } from "../../data/site";
+import { CATEGORIES, COPY_GUARD, MODULE_META, SITE, TECHGROW, categoriesOf, selectGatedArticles } from "../../data/site";
 import { getArticlesByCategory } from "../../data/articles";
 import { ARTICLE_RELATED } from "../../data/article-related";
 import { selectRelatedArticles } from "../../lib/related-articles.mjs";
@@ -63,7 +63,11 @@ const fmt = (d: Date) =>
     d.getDate()
   ).padStart(2, "0")}`;
 
-const gated = TECHGROW.enabled && headings.some((heading) => heading.depth === 2);
+// 构建时确定本页是否门禁：既要有可切分的边界（存在二级标题），也要命中本分类的抽样结果。
+// 结果同时驱动前端脚本与下方的 isAccessibleForFree，避免两者不一致。
+const gated = TECHGROW.enabled
+  && headings.some((heading) => heading.depth === 2)
+  && selectGatedArticles(siblings.map((s) => s.entry.id)).has(entry.id);
 
 // 速答属于文章摘要；受限内容与实际正文 .gated-content 对应。
 const jsonLd = [
@@ -237,5 +241,5 @@ const jsonLd = [
 
   <CopyGuard />
 
-  <TechGrow />
+  <TechGrow gated={gated} />
 </BaseLayout>

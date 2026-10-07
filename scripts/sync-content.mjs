@@ -96,21 +96,21 @@ for (const [num, date] of Object.entries(WEBSITE_DATES)) {
   }
 }
 
-// 编号 → URL slug（英文关键词，新增题目时补一行）
-const SLUGS = {
-  // AI 面试题
-  Q001: "agent-vs-workflow",
-  Q002: "agent-loop",
-  Q003: "langgraph-pause-resume",
-  // AI 编程教程
-  T001: "claude-code-deepseek",
-  T002: "codex-mcp-playwright",
-  T003: "chrome-devtools-mcp",
-  T004: "workbuddy-guide",
-  T005: "context-engineering",
-  T006: "github-ai-rewrite",
-  T007: "jev-review",
-};
+// 编号 → URL slug（英文关键词）。统一维护在 scripts/article-slugs.json，新增题目时补一条。
+// URL 会带上关键词（/frontend/q145-tree-shaking/），既保留编号又拿到相关性信号；
+// 变更前已上线的纯编号地址由 scripts/postbuild.mjs 输出永久跳转页兜底。
+const SLUGS = JSON.parse(fs.readFileSync(path.join(__dirname, "article-slugs.json"), "utf-8"));
+if (!SLUGS || typeof SLUGS !== "object" || Array.isArray(SLUGS)) {
+  throw new Error("article-slugs.json 必须是文章编号到英文 slug 的对象");
+}
+for (const [num, slug] of Object.entries(SLUGS)) {
+  if (!/^[QT]\d{3,}$/.test(num)) {
+    throw new Error(`slug 编号无效：${num}（请使用原始 Q001 / T001 等编号）`);
+  }
+  if (typeof slug !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+    throw new Error(`slug 无效：${num} → ${slug}（只允许小写字母、数字与连字符）`);
+  }
+}
 
 // ---- 提取逻辑 ----
 
@@ -325,7 +325,7 @@ function main() {
           fileStem = `${num.toLowerCase()}-${SLUGS[num]}`;
         } else {
           console.warn(
-            `  ${num} 使用稳定地址 /${catSlug}/${fileStem}/`
+            `  ⚠️  ${num} 缺少英文 slug，暂用编号地址 /${catSlug}/${fileStem}/（请在 scripts/article-slugs.json 补一条）`
           );
         }
 

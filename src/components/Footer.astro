@@ -1,5 +1,5 @@
 ---
-import { SITE } from "../data/site";
+import { FOLLOW, SITE } from "../data/site";
 
 const year = new Date().getFullYear();
 ---
@@ -8,28 +8,34 @@ const year = new Date().getFullYear();
   <div class="inner">
     <div>
       {SITE.name} 由
-      <button
-        type="button"
-        class="follow-link"
-        data-follow-open
-        title="点击查看公众号二维码，扫码关注"
-      >
-        程序员Sunday
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <rect x="3" y="3" width="7" height="7" rx="1.5" />
-          <rect x="14" y="3" width="7" height="7" rx="1.5" />
-          <rect x="3" y="14" width="7" height="7" rx="1.5" />
-          <path d="M14 14h3v3h-3zM20 14v3M17 20h3" />
-        </svg>
-      </button>
+      {
+        FOLLOW.enabled ? (
+          <button
+            type="button"
+            class="follow-link"
+            data-follow-open
+            title="点击查看公众号二维码，扫码关注"
+          >
+            程序员Sunday
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3" y="3" width="7" height="7" rx="1.5" />
+              <rect x="14" y="3" width="7" height="7" rx="1.5" />
+              <rect x="3" y="14" width="7" height="7" rx="1.5" />
+              <path d="M14 14h3v3h-3zM20 14v3M17 20h3" />
+            </svg>
+          </button>
+        ) : (
+          <span>程序员Sunday</span>
+        )
+      }
       维护，内容持续更新。正在准备简历？试试同门的
       <a href={SITE.mainSite} rel="noopener">{SITE.mainSiteName}</a>，永久免费的简历制作工具。
     </div>
