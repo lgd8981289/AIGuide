@@ -23,7 +23,7 @@ const { module, category } = Astro.props
 const meta = module ? MODULE_META[module] : undefined
 const scopePath = meta?.href ?? '/'
 const pagePath = category ? `/${category.slug}/` : scopePath
-const defaultTitle = meta?.name ?? '最新文章'
+const defaultTitle = meta?.name ?? SITE.homeHeading
 const defaultIntro =
 	module === 'interview'
 		? '从工程场景出发，讲清每道面试题。'
@@ -31,7 +31,7 @@ const defaultIntro =
 			? MODULE_META.programmer.shortIntro
 			: module === 'tutorial'
 				? '从工具配置到工程实践，每篇讲清一个完整主题。'
-				: 'AI 面试题、全栈面试题与 AI 编程教程，记录从理解到实践的过程。'
+				: SITE.homeIntro
 const cats = CATEGORIES.filter((c) => !module || c.module === module)
 const categoryBySlug = new Map(cats.map((c) => [c.slug, c]))
 const ordered = (await getOrderedArticles()).filter(
@@ -145,6 +145,7 @@ jsonLd.push({
 	description={category?.intro ?? meta?.description ?? SITE.description}
 	path={pagePath}
 	customSidebar
+	noindex={initialList.length === 0}
 >
 	<script
 		slot="head"

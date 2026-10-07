@@ -138,7 +138,8 @@ def main():
             expected = expected_titles.get(url)
             check(expected is not None, "文章缺少对应同步源稿: " + url)
             check(page.h1_titles == [expected], "文章 H1 与网站标题不一致: " + url)
-            expected_page_title = f"{expected}｜慕课网 {course_name}｜Sunday 的面试指南" if url in course_free else f"{expected}｜Sunday 的面试指南"
+            # BaseLayout 的 article 页面不追加站点名；课程页仍由页面传入课程品牌。
+            expected_page_title = f"{expected}｜慕课网 {course_name}" if url in course_free else expected
             check(page.titles == [expected_page_title], "文章 title 与网站标题不一致: " + url)
             check(article.get("headline") == expected, "文章结构化标题与网站标题不一致: " + url)
             check(page.meta.get("og:title") == page.meta.get("twitter:title") == expected_page_title, "文章分享标题不一致: " + url)

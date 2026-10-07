@@ -224,7 +224,9 @@ function emitSitemapAlias() {
 const ORIGIN = "https://note.lgdsunday.club";
 
 // 这几篇从上线起就是带关键词的地址，从未存在过纯编号地址，无需跳转。
-const NEVER_NUMERIC = new Set(["Q001", "Q002", "Q003", "T001", "T004", "T006"]);
+// ⚠️ 新增文章同理：只要它上线时就已经是 `编号-关键词` 形态，编号就必须补进这里，
+//    否则 postbuild 会为它生成一个从未存在过的 `/分类/编号/` 跳转页（噪声，且让 373 这个数一直漂）。
+const NEVER_NUMERIC = new Set(["Q001", "Q002", "Q003", "T001", "T002", "T004", "T006"]);
 
 function legacyRedirectHtml(target) {
   return `<!DOCTYPE html>

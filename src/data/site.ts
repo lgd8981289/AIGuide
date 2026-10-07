@@ -4,9 +4,24 @@ import { COURSE } from './course'
 
 export const SITE = {
 	name: 'Sunday 的面试指南',
-	tagline: 'AI 面试题、全栈面试题与 AI 编程教程',
+	/**
+	 * 首页 <title>（2026-10-07 重写）。
+	 *
+	 * 为什么改：首页是全站唯一有稳定曝光的页面（GSC 实测占全站展示 41.7%），
+	 * 而旧值 `${name}｜${tagline}` 是「零搜索量的品牌词 + 三个模块罗列」——真正有搜索量的
+	 * 关键词全被挤到中文 SERP 约 30 字的截断线之外。参照竞品 xiaolinnote.com 的首页标题
+	 * 「图解 Agent+RAG+LLM 大模型面试题 | 小林面试笔记」，同样是关键词在前、品牌在后。
+	 * 本站品牌搜索量近零，因此进一步把品牌后缀整个去掉；品牌仍由 og:site_name、顶部站点名
+	 * 与页脚承载（check-seo.py 校验的也是 og:site_name，不受影响）。
+	 */
+	homeTitle: 'AI 面试题与大模型面试题｜Agent、RAG 高频考点',
+	/** 首页 <h1>（列表上方标题；用户选择分类后由前端脚本替换为分类名） */
+	homeHeading: 'AI 面试题与大模型面试题',
+	/** 首页列表上方的一句话说明（同样会被前端脚本按分类替换） */
+	homeIntro:
+		'覆盖 Agent、RAG、LangChain 与大模型基础，每道题都从一个真实的工程场景出发。',
 	description:
-		'覆盖 Agent、RAG、LangChain、大模型基础的 AI 面试题，前端、后端、数据库与网络等全栈面试题，以及 0 基础也能上手的 AI 编程教程。每篇讲清原理、使用场景与工程取舍。',
+		'AI 面试题与大模型面试题合集：Agent、RAG、LangChain 高频考点，还原面试官追问链路，给出能落地的答案；另含全栈面试题与 AI 编程教程。',
 	author: '程序员 Sunday',
 	// 站点 logo（public 目录下的相对路径，留空则不显示）
 	logo: '/avatar.jpg',
@@ -59,9 +74,14 @@ export const MODULE_META: Record<ModuleKey, ModuleMeta> = {
 		key: 'interview',
 		name: 'AI 面试题',
 		href: '/ai/',
-		title: 'AI 面试题',
+		// 2026-10-07 重写：这页本来就 SSR 出全部 93 篇 AI 面试题（标题 + 摘要都在静态 HTML 里），
+		// 是全站天然的「汇总入口」。而多引擎下拉词显示，「大模型面试题」后面跟 大全 / 题库 /
+		// 八股文 / 合集 / 汇总 这类**形态词**的搜索需求非常明确（参见 docs/seo-keyword-gap-2026-10-07.md），
+		// 但站内 379 篇全是单点问答，形态词覆盖为 0。故 title 改为命中形态词的版本。
+		// 注意：h1 与顶部导航用的是 name（保持短标签），这里只影响 <title> / og:title。
+		title: '大模型面试题大全：Agent、RAG 高频题与答案',
 		description:
-			'按六个系列系统刷题。每道题都从一个真实工程场景出发，先还原面试官的追问链路，再给出能落地、经得起追问的回答。',
+			'大模型面试题大全：覆盖大模型基础、Agent、RAG、LangChain、AI 应用工程与系统设计六大系列，每题给出能落地、经得起追问的答案。',
 		shortIntro:
 			'六个系列，按分类刷题：每道题都从真实工程场景出发，给出能落地、经得起追问的回答。',
 		countUnit: '道题',
@@ -76,7 +96,8 @@ export const MODULE_META: Record<ModuleKey, ModuleMeta> = {
 		title: '全栈面试题',
 		description:
 			'围绕前端、后端、MySQL、Redis、计算机网络、操作系统与并发等全栈开发知识，讲清面试题的原理、适用条件和常见追问。',
-		shortIntro: '前端、后端、数据库与缓存、计算机基础、系统设计，按五个分类准备全栈面试。',
+		shortIntro:
+			'前端、后端、数据库与缓存、计算机基础、系统设计，按五个分类准备全栈面试。',
 		countUnit: '道题',
 		prevLabel: '上一题',
 		nextLabel: '下一题'
@@ -147,7 +168,7 @@ export const CATEGORIES: Category[] = [
 		nav: '大模型基础',
 		module: 'interview',
 		intro:
-			'Transformer、Attention、训练与对齐、微调与推理优化。面试官往底层追问时的终点站，也是所有上层应用题的地基。'
+			'大模型面试题合集：Transformer、Attention、训练与对齐、微调与推理优化。面试官往底层追问时的终点站，也是所有上层应用题的地基。'
 	},
 	{
 		slug: 'rag',
@@ -155,7 +176,7 @@ export const CATEGORIES: Category[] = [
 		nav: 'RAG',
 		module: 'interview',
 		intro:
-			'从文档切割、Embedding、向量检索到多路召回、Query 改写与幻觉治理，检索增强全链路的高频考点。'
+			'RAG 面试题合集：从文档切割、Embedding、向量检索到多路召回、Query 改写与幻觉治理，检索增强全链路的高频考点。'
 	},
 	{
 		slug: 'agent',
@@ -163,7 +184,7 @@ export const CATEGORIES: Category[] = [
 		nav: 'Agent',
 		module: 'interview',
 		intro:
-			'Agent 与 Workflow 的控制权边界、运行循环、任务拆分、记忆机制与 Multi-Agent 协作，把执行路径的决策权讲清楚。'
+			'AI Agent 面试题合集：控制权边界、运行循环、任务拆分、记忆机制与 Multi-Agent 协作，讲清执行路径的决策权。'
 	},
 	{
 		slug: 'engineering',
@@ -196,35 +217,40 @@ export const CATEGORIES: Category[] = [
 		name: '前端面试题',
 		nav: '前端',
 		module: 'programmer',
-		intro: 'JavaScript、TypeScript、浏览器、React、Vue、页面性能与前端工程化，关注客户端如何工作。'
+		intro:
+			'JavaScript、TypeScript、浏览器、React、Vue、页面性能与前端工程化，关注客户端如何工作。'
 	},
 	{
 		slug: 'backend',
 		name: '后端面试题',
 		nav: '后端',
 		module: 'programmer',
-		intro: '接口、鉴权、服务端框架、消息队列、异步任务与服务治理，关注服务端功能如何实现。'
+		intro:
+			'接口、鉴权、服务端框架、消息队列、异步任务与服务治理，关注服务端功能如何实现。'
 	},
 	{
 		slug: 'database',
 		name: '数据库与缓存面试题',
 		nav: '数据库与缓存',
 		module: 'programmer',
-		intro: 'MySQL、Redis、索引、事务、锁、缓存一致性与持久化，关注数据如何存取和保持正确。'
+		intro:
+			'MySQL、Redis、索引、事务、锁、缓存一致性与持久化，关注数据如何存取和保持正确。'
 	},
 	{
 		slug: 'cs-basics',
 		name: '计算机基础面试题',
 		nav: '计算机基础',
 		module: 'programmer',
-		intro: '网络协议、操作系统、进程线程、内存、数据结构与算法，关注不依赖具体框架的基础机制。'
+		intro:
+			'网络协议、操作系统、进程线程、内存、数据结构与算法，关注不依赖具体框架的基础机制。'
 	},
 	{
 		slug: 'fullstack-system-design',
 		name: '系统设计面试题',
 		nav: '系统设计',
 		module: 'programmer',
-		intro: '短链接、秒杀、文件上传等完整系统的需求、模块协作、容量、容错与取舍，不重复单个组件的原理题。'
+		intro:
+			'短链接、秒杀、文件上传等完整系统的需求、模块协作、容量、容错与取舍，不重复单个组件的原理题。'
 	},
 
 	// —— AI 编程教程（源：Desktop/一起来玩 AI 呀～/文章）——
@@ -329,8 +355,8 @@ export const TECHGROW = {
 	qrcode: 'https://ww-zhi-dao.oss-cn-beijing.aliyuncs.com/gongzhonghao.jpg', // 公众号二维码图片地址
 	type: 'website',
 	expires: '30', // 验证码解锁后有效天数
-	random: '0.3', // 恢复门禁时的解锁文章比例：0=全站开放，0.3=30% 文章门禁（enabled=false 时该项无效）
-	allowMobile: true // 当前移动端也启用解锁；false 时移动端直接显示全文
+	random: '0', // 恢复门禁时的解锁文章比例：0=全站开放，0.3=30% 文章门禁（enabled=false 时该项无效）
+	allowMobile: false // 当前移动端也启用解锁；false 时移动端直接显示全文
 }
 
 /** 稳定哈希：同一输入在每次构建中得到相同结果（用于确定性抽样） */
@@ -356,10 +382,13 @@ export function stableHash(s: string): number {
  */
 export function selectGatedArticles(siblingIds: string[]): Set<string> {
 	const ratio = Number(TECHGROW.random)
-	if (!TECHGROW.enabled || !(ratio > 0) || siblingIds.length === 0) return new Set()
+	if (!TECHGROW.enabled || !(ratio > 0) || siblingIds.length === 0)
+		return new Set()
 	if (ratio >= 1) return new Set(siblingIds)
 	const count = Math.round(siblingIds.length * ratio)
 	return new Set(
-		[...siblingIds].sort((a, b) => stableHash(a) - stableHash(b)).slice(0, count)
+		[...siblingIds]
+			.sort((a, b) => stableHash(a) - stableHash(b))
+			.slice(0, count)
 	)
 }

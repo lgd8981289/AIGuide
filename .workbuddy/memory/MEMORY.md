@@ -1,87 +1,152 @@
 # AIGuide 项目长期记忆
 
-项目：`/Users/lgd_sunday/Desktop/AI 工程面试手册/AIGuide`
-线上：https://note.lgdsunday.club/（文章站）、https://lgdsunday.club/note/ 亦有部署；同域另有 www（简历汪，Nuxt）与 resume 子域
+项目：`/Users/lgd_sunday/Desktop/AI 工程面试手册/AIGuide` · 线上 https://note.lgdsunday.club/（Astro 文章站）
+同域：www.lgdsunday.club（简历汪，Nuxt）、resume 子域 · GitHub：https://github.com/lgd8981289/AIGuide
 
-## 站点架构要点
+> **工程/构建细节 → `docs/aiguide-engineering-notes.md`**（标题三层机制、页面结构、构建坑、发布链路、nginx 细节）
+> **SEO 专题文档** → `docs/seo-diagnosis-2026-10-07.md`、`seo-playbook-2026-10-07.md`、`seo-content-audit-2026-10-07.md`、`seo-crawl-diagnosis-2026-10-07.md`、`seo-keyword-gap-2026-10-07.md`、`seo-subdomain-vs-subdirectory.md`
 
-- Astro 静态站，sitemap 496 个 URL（379 篇文章 + 课程/栏目/模块页）；`npm run build` 链路含 `img:optimize → astro build → build:post → check:seo → pagefind → check:course`
-- 文章正文源在 `src/content/articles/{分类}/{编号-英文slug}.md`（379 篇）；课程从 `../../Agent 全栈实战课/Agent 全栈课程文案` 同步，`scripts/course-lessons.json` 保存目录与固定 URL
-- 发布：`./deploy.sh`（rsync → `/sunday/resume2/AIGuide`），发布后自动触发推送
-- **robots.txt 已带 `Sitemap:` 指令**（note → `sitemap-index.xml`，www → `sitemap.xml`），Google 侧发现路径本就通，无需代码改动
+## 北极星：点击
 
-## URL 结构（2026-10-07 全站语义化，已上线）
+> 「所有文章、代码和任何内容都是为 SEO 服务的。核心目的是更多点击，其他都不重要。」
 
-URL 形态：`/{分类}/{编号}-{英文关键词}/`，如 `/frontend/q145-tree-shaking/`。379 篇 **100% 带关键词**，纯编号地址 0 个。
+**点击 = 展示 × CTR。绑定约束是展示（收录 + 排名），不是 CTR。**
 
-- **唯一真源：`scripts/article-slugs.json`**（`Q145: "tree-shaking"`）。新增题目必须补一条，否则同步脚本会打印「缺少英文 slug」告警并回落到编号地址。
-- `scripts/sync-content.mjs` 从该 JSON 读取 `SLUGS`（原先内联 10 条已迁出）+ 校验编号/slug 格式。
-- **旧编号地址由 `scripts/postbuild.mjs` 的 `emitLegacyRedirects()` 生成跳转页**（373 个，含 `canonical` + 零延迟 `meta refresh`，**不加 noindex**）。跳转页在 `astro build` 之后生成 → **不进 sitemap**。常量 `NEVER_NUMERIC = {Q001,Q002,Q003,T001,T004,T006}` 排除上线起就带关键词、从未有过编号地址的 6 篇。
-- **内链无需维护**：源码与正文里没有任何硬编码文章地址，全部由 `entry.id` 生成，改文件名即自动跟随。
-- **当前用跳转页而非 nginx 301** 的理由：索引量近零，跳转页已够（防 404 + 合并信号），且零服务器配置风险。索引量上来后可升级为 nginx 301（`configure-server-seo.py` 已有备份/回滚骨架）。
+### 三渠道「病得不一样」
 
-## SEO / 提交相关（重要）
+| | Google | Bing |
+|---|---|---|
+| 抓取 | 正常，~395 页 | 0 页，从未抓取 |
+| 收录 | 355 页（72%，三渠道最好） | 近 0（note `DailyQuota=0`） |
+| 主要矛盾 | **收录了但排不上名** | **根本没被收录** |
+| 解法 | 内容质量 + 选题匹配 + 权威度 | 域名信任 + 外链 |
 
-- **Bing 官方 API**：`scripts/submit-bing.py`，`npm run bing:preview` 预览 / `npm run bing:submit -- --site all` 提交。密钥在 `.env` 的 `BING-API—KEY`（注意键名含连字符与长破折号，读取逻辑做了归一化）。状态与回执在 `.bing/`（note 站）与 `.bing/www.lgdsunday.club/`
-  - 特性：读取线上 sitemap → 逐页预检 canonical/robots → sha256 状态记忆跳过未变化页 → 额度预检 → `pending` 锁防重复消耗 → 回执落盘
-  - **note 站 Bing 额度实测只有 100/天、2500/月**（www 站约 9961/天）；456 个 URL 需数天才能推完一轮
-- **IndexNow 已启用**：`deploy.sh` 顶部 `INDEXNOW_KEY="76a5dca42d09708f954824df3b1149b4"`，密钥文件 `public/{key}.txt`（内容=文件名），线上仅 note 站返回 200。每次发布 POST `api.indexnow.org/indexnow`，覆盖 Bing/Yandex/Naver/Seznam
-- **百度：token 归属搞错过，已修脚本（2026-10-07）**。`deploy.sh` 顶部 `BAIDU_PUSH_TOKEN="O77VS8F6Br5oe0OD"` 实测**归属 `www.lgdsunday.club`**，不是 note 站：配 note 会返回 `{"error":401,"message":"site error"}`（带不带 `https://` 一样），配 www 才 `{"remain":9,"success":1}`。**百度 token 按域名发放**，note 站必须单独验证、单独申请。
-  - 原 push 逻辑硬编码 `site=https://note.lgdsunday.club` → 每次发布**静默 401**，且 `|| true` + 无条件 `ok` 导致日志假报成功。
-  - 已改为：`BAIDU_SITE` 变量（空则跳过推送）+ 裸域名（百度规范）+ 识别 `error` 字段打 warn。
-  - **2026-10-07 用户反馈：百度暂时无法添加新站点** → 独立验证 note 站这条路暂缓。绕法见下节「子域名 vs 二级路径」：搬回 www 的 `/note/` 后可直接复用 www 的验证与 token。若日后能加站点，则填 note 站专属 token 并把 `BAIDU_SITE` 设为 `note.lgdsunday.club`。
-  - 线上当前只有 `www.lgdsunday.club` 带 `baidu-site-verification` meta（`codeva-iAa19awTff`），note 站无任何百度/Google 验证。
-- **站点验证开关已就绪**：`src/data/site.ts` 的 `SITE_VERIFICATION = { baidu, google }`，留空不输出；`BaseLayout.astro` 已接上条件 meta。填 `codeva-xxx` 即可生效。
-- `deploy.sh` 的推送是**发布时增量**（解析 rsync itemize 的 .html，兜底才推 `dist/sitemap-0.xml` 全量），**没有** sha256 状态记忆与配额判断 —— 与 `submit-bing.py` 差距明显
-- **Google 无可自动化通道**：`google.com/ping?sitemap=` 2023-06 弃用（现 404）；Indexing API 官方仅支持 JobPosting 与 BroadcastEvent；GSC URL Inspection API 只读。Google 侧靠 robots.txt 的 Sitemap 指令 + Search Console 手动提交一次
-- 站长验证文件：`public/` 只有 `BingSiteAuth.xml`；无 google / baidu 验证文件或 meta（已加 `SITE_VERIFICATION` 开关位）
-- **内容门禁：2026-10-07 已全量开放（方案 B，最终态）**。`src/data/site.ts` 的 `TECHGROW.enabled` = `false` → 339 篇全部全文开放；构建实测 `readmore.js`/`readmore.css`/`isAccessibleForFree:false`/`hasPart` **全部 0 处**。用户决策：「暂时不引导关注，先把搜索流量做起来」。
-  - 历史：先执行过方案 A（`random` 1.0 → 0.3，30% 门禁），随后用户改为全关。分层抽样代码 `selectGatedArticles()` **保留未删**、`random:'0.3'` 仍在配置 → **改回 `true` 即完整恢复**。
-  - `.gated-content` 包裹层仍在（`rehype-readmore-boundary.mjs` 插入），已无 CSS/脚本/结构化数据引用，纯 DOM 包裹、无害；不摘是为避免 astro.config.mjs import site.ts（后者引 `import.meta.env.BASE_URL`，配置阶段不可用）。
-  - **页脚关注引导已撤下**：新增 `FOLLOW = { enabled: false }`；关闭时 `Footer.astro` 降级为纯文本署名、`BaseLayout.astro` 不渲染 `FollowModal`（弹窗里那句已失效的「需要解锁」文案也一并修掉了）。改回 `true` 恢复。
-  - **付费课程不受影响**：`agent-course` 的 `course-paywall` / `isAccessibleForFree:false` 是真付费内容，保持原样。
-  - **实现要点（改这个配置前必读）**：TechGrow 自带 `random` 是**浏览器端随机**，而 JSON-LD `isAccessibleForFree` 是**构建时**写死的 —— 直接改数字会造成「实际锁 30% 却声明 100% 非免费」。因此改为 `site.ts` 的 `selectGatedArticles(siblingIds)` 在**构建时按分类分层抽样**（`stableHash` 保证可复现）；`TechGrow.astro` 接收 `gated` prop，插件参数 `random` **固定传 `"1.0"`**（页面级抽样已完成，沿用会二次抽样把门禁率平方）。改比例只需动 `TECHGROW.random`。
-  - TechGrow `random` 官方定义：每篇文章随机加引流工具的概率，0.1~1.0，**1.0 = 所有文章都加**；可用 `excludePages` 对指定 URL 关闭
-  - **竞品对照（2026-10-07 实测）**：JavaGuide 与 小林面试笔记（xiaolinnote.com）**都没有门禁**，正文全在 HTML，且未声明 `isAccessibleForFree`；公众号对它们只是署名与文末软性引导。两家靠「内容免费 + 课程/书变现」，且分别背靠 xiaolincoding.com 与 15 万 star 开源仓库。**「竞品也门禁」的说法不成立**
+note vs www（Bing 实测）：有数据天数 4 vs 284；展示 146 vs 151,449；点击 5 vs 53,698；排名词 22 vs 1,181；抓取 0 页 vs 177 天日抓 197–433 页。
+www 点击几乎全来自品牌词「简历汪」（位置 1–2）→ **搬主站继承的是抓取预算与信任，不是流量**。配额差万倍（note 月 2400 vs www 月 249961），**按域名信任分配**。
 
-## 子域名 vs 二级路径（2026-10-07 专项评估，用户暂不执行）
+- **查 Bing 必须显式传日期**：`GetQueryStats` 不传日期时窗口极窄（实测 9 行全落在 10-02）。真实数据用 `~/Downloads/note.lgdsunday.club_KeywordReport_2026_10_5.csv`（22 词 / 41 展示 / 3 点击）。
+- **根因**：note 排名词里有多个是**正文整句被当成查询词** → 内容与真实搜索需求不匹配。
 
-结论：**应搬回 `www.lgdsunday.club/note/`**。详见 `docs/seo-subdomain-vs-subdirectory.md`。
+### Google 覆盖率（GSC，截 10-04）
 
-- 实测差距三个数量级：www 有 284 天数据 / 累计 151,449 展示 / 53,698 点击 / 1,181 排名词 / 抓取 177 天（日抓 85–433 页）；note 仅 4 天 / 146 展示 / 5 点击 / 9 词 / **GetCrawlStats 无数据（抓取 0 页）**。
-- **最关键一行**：主站 sitemap 只有 39 个 URL 却日均被抓 200–400 页；note 有 456 个 URL 被抓 0 页 → 差距是**抓取预算**。
-- **能继承的是域名信任与抓取预算，不是流量**：主站 1,181 个词里 31% 含品牌词，非品牌词 Top 仍是「qlientresume」「简历狗」「简历旺」等品牌/竞品词（位置 6–9、CTR<1%）；真正带量的是「简历汪」（位置 1–2）。
-- **附带收益**：www 已通过百度验证（`codeva-iAa19awTff`），token `O77VS8F6Br5oe0OD` 归属 www → 搬回后**百度通道立刻可用**（`site=www.lgdsunday.club` 推 `/note/...`），绕过「百度加不了新站点」。
-- **技术成本低**：`BASE = import.meta.env.BASE_URL` 已抽象，主要改 `astro.config.mjs`（site/base）+ `site.ts`（SITE.url）；nginx 侧 `scripts/configure-server-seo.py` 留着当年挂 `/note/` 的踩坑注释，走过有解。
-- 风险：二次迁移（但 note 权重近零 → **现在是历史最低成本时机**）；Nuxt+Astro 共存运维复杂度；战略取舍（生态一部分 vs 独立品牌）。
-- 优先级：内容可达性 > URL 语义化 > 路径结构。建议搬迁与 URL 语义化合并一次发布。
+已编入 355，未编入 71。71 拆解 = **备用网页（有适当规范标记）24**（✅ 语义化做对了，**不要修**）+ **已抓取-尚未编入索引 40**（⚠️ 唯一值得行动 = 内容质量信号）+ 已发现-尚未编入索引 7（抓取预算，可忽略）。
+逐日展示 `0→5→11→11→21→14→38→27=127` → **收录 355 页、8 天仅 127 展示**。
 
-## 诊断工具（可复用）
+**「示例网址」取数**：覆盖率导出只有 4 表（`图表/严重问题/非严重问题/元数据`），**不含网址**。网址在**每个原因各自的详情页**：GSC → 索引 → 网页 → **点那一行文字本身**（不是点数字）→ 详情页出现「示例网址」表 → 再导出。Google 对「Google 系统」判定的状态常不提供示例网址。**建议不追**（站级质量信号，用户持续新增文章，快照会过期）。
 
-`.env` 的 Bing API Key 可直接查真实搜索数据，无需浏览器：
-`https://ssl.bing.com/webmaster/api.svc/json/{Method}?apikey=<key>&siteUrl=<url>`
+### Google 效果（近 3 个月）
 
-- 可用：`GetUserSites`、`GetRankAndTrafficStats`（按天展示/点击）、`GetQueryStats`（实际排名词+平均位置）、`GetCrawlStats`（抓取页数/索引中/错误）、`GetCrawlIssues`、`GetUrlSubmissionQuota`
-- 不可用：`GetUrlTrafficInfo` 对 https 站点报 `SiteUriSchemeIsNotSupported`
-- 已知已验证站点：mianshiwangoffer.com、note.lgdsunday.club、resume.lgdsunday.club、www.lgdsunday.club
+**3 点击 / 127 展示**，平均排名 ~7.3。**查询词仅 3 个**：`prefill 中文`(2)、`ai agent 记忆系统…`(4)、`createagent`(7) → **内容基本没有搜索词足迹**。网页 84 行：首页 2 点击/53 展示/**CTR 3.77%**/排名 4.36（占 41.7%）；其余 80 页 ≤2 展示。
 
-## 用户偏好
+- **美国 61 展示 0 点击 = 用户自测流量**（2026-10-07 用户确认），**不是市场信号**。剔除后有效展示 ~66，CTR ~4.5%。⚠️ **站长自测系统性拉低 CTR、污染国家维度** —— 新站看 GSC 国家数据前必须先排除自测。
 
-- 偏好中文表达，不喜欢中英夹杂过多
-- 重视站点 SEO 与内容质量，会主动追问根因（"这是为什么"）而非只要结论
-- 现存诊断与方案：`docs/seo-diagnosis-2026-10-07.md`（原因诊断）、`docs/seo-playbook-2026-10-07.md`（五阶段运营路线图）
-- **待用户决策（卡住后续动作）**：
-  1. Google Search Console 验证（`SITE_VERIFICATION.google` 已留位，验证后由我接手配置）
-  2. 是否搬回 `www.lgdsunday.club/note/`（战略取舍，用户已知晓，明确说暂不执行）
-- 2026-10-07 起用户提出「把 SEO 全部交给你做」，已接手的执行项：脚本修复、验证 meta、索引推进、脚本化改造、自动化任务、门禁处理、URL 语义化。
-- 已决策并执行：**门禁全量开放（方案 B）**——`TECHGROW.enabled=false` + 页脚关注引导撤下（`FOLLOW.enabled=false`），已两次 `./deploy.sh` 上线并线上验证。
-- 已决策并执行：**URL 语义化全站（阶段 2）**——379 篇全部带英文关键词 + 373 个旧地址跳转页，已上线并线上验证。用户口头指令「继续做下去」即视为放行。
+### Bing 关键词报告的真相（22 词，2026-10-05）
 
-## 构建环境坑（必看）
+1. **点击几乎全来自品牌词**：22 词共 3 点击，2 次来自 `sunday的面试指南`(1.75) / `sunday面试指南`(1.5) → 点进来的都是**已经知道这个站的人**
+2. **真实技术词有排名但全卡 5–10 位**（拿不到点击）：`http和https，对百度收录有区别吗`6/5、`tls`5/9、`rlhf`4/8.5、`context engineering`1/9
+3. **引擎仍把正文整句当查询词**：`+eedfield.stage.charlnfo`、`拆 速祚`、一条正文原句等
 
-- 本项目 `npm run build` / `build:fast` 在 WorkBuddy 环境会**必然失败**：Astro 清理 `dist/.prerender/.vite/`（50 文件）触发 `SAFE_DELETE_BULK_CONFIRM_REQUIRED`。失败点在 content syncing 之后、entrypoints 编译阶段，**与代码改动无关**。
-- 绕过：命令前加 `CODEBUDDY_TOOL_CALL_ID= CODEBUDDY_SAFE_DELETE_BULK_STATE_DIR=`（shim 对这两者为空时直接放行）。删的只是构建缓存，安全。验证：457 页全部构建成功。
-- 门禁代码位置：开关 `src/data/site.ts` 的 `TECHGROW`（`enabled:false` 已全关）与 `FOLLOW`（页脚关注引导，已关）；`gated` 判定 + JSON-LD `isAccessibleForFree`/`hasPart` 在 `src/pages/[category]/[slug].astro` 第 66、76–83 行；`.gated-content` 边界由 `src/lib/rehype-readmore-boundary.mjs` 从「知识点详解」二级标题处开始插入。
-- `python3 scripts/check-seo.py` 依赖 `dist/sitemap.xml`，而它由 `npm run build:post` 生成 → 只跑 `build:fast` 后直接自检会在该处报 `FileNotFoundError`，先补 `npm run build:post` 即可。
-- **构建顺序坑**：`img:optimize` 写的是 `public/img/`，必须再跑一次 `astro build` 才会复制进 `dist/`。只跑 `img:optimize + build:post + check:seo` 会报「图片不存在」的假故障 —— 直接用完整 `npm run build` 即可（它就是 deploy.sh 用的那条）。
-- **单张损坏图会拖垮整个构建**：`img:optimize` 遇到截断的 PNG 会直接抛 `OSError: image file is truncated` → `npm run build` 失败 → 部署中断。修法：用 `Pillow` 扫 `img-src/` 定位坏图，再 `python scripts/watermark-images.py --only=<编号>` 从写作仓库原始素材重新生成（该脚本幂等、不会叠水印）。2026-10-07 修过 `Q017`。
+→ **选题没对准「有搜索量且能进前 3」的词**，这是 Google 与 Bing 的**共同根因**。
+
+## 关键词需求与内容缺口（`docs/seo-keyword-gap-2026-10-07.md`）
+
+**方法**：中文搜索量 API 拿不到（Bing `GetKeywordStats` 对 `country=CN&language=zh-CN` 返 **0 行**；Google Suggest 不可达）。
+**可用的是下拉词**：`api.bing.com/osjson.aspx`、`suggestion.baidu.com/su`（GBK）、`sug.so.360.cn/suggest`（20 种子 × 3 引擎，400+ 条）。下拉词证明「有人在搜」，但**不给量级**。
+
+**三个关键发现**：
+
+1. **缺口是「形态」不是「主题」（最重要）**：下拉词高频出现的是**形态词** —— 及答案 / 大全 / 题库 / 合集 / 汇总 / 200问 / 60问 / 八股文 / 手撕 / 代码题 / 必刷题，而站内 379 篇**标题命中这些词全为 0**。我们只有单点问答，用户却在搜汇总入口。竞品 `xiaolinnote.com` 每个专题都有独立 `*_info.html` 索引页。
+2. **「AI 面试题」意图不符**：其下拉词是「吉利ai面试题 / 去哪儿ai面试题 / ai面试官 / ai面试是不是骗局」= **「企业用 AI 系统面我，会问什么」**，不是「AI 领域技术面试题」。→ 保留不主推，让「大模型面试题」（意图干净）承担主位。
+3. **「xxx github」是高频意图**：`大模型面试题 github`、`llm 面试题 github`、`ai agent 面试题 github` → 建公开 GitHub 仓库同时命中该查询意图 + 产出外链。
+
+**内容 backlog**：P0 建 GitHub 仓库（✅ 已完成）、P0 补齐 `AI 编程教程` 模块（现仅 4 篇，`agent-ext` 目录不存在）；P1 做「八股文/100问」形态长文、补「面经」类；P2 扩写提示词工程（4→8+）与向量数据库（2→6+）、加「手撕/代码题」。
+
+## 站点规模
+
+**14 个分类目录 / 379 篇**（sitemap 495 URL）：
+
+- **全栈 282 篇（74%）**：frontend 92、backend 77、database 50、cs-basics 44、fullstack-system-design 19
+- **AI 面试题 93 篇（25%）**：agent 26、rag 18、engineering 18、llm 15、langchain 9、system-design 7
+- **AI 编程教程仅 4 篇**：tools 2、practice 1、reviews 1，`agent-ext` 目录**不存在（0 篇）** → **导航里「AI 编程教程」这一栏基本是空的**，是明显内容缺口
+
+URL 形态 `/{分类}/{编号}-{英文关键词}/`（2026-10-07 全站语义化，已上线）。**唯一真源 `scripts/article-slugs.json`** —— **新增题目必须补一条英文 slug**，否则 sync 打告警并回落编号地址。
+
+## SEO / 提交通道
+
+- **Bing API** `scripts/submit-bing.py`（`npm run bing:preview` / `bing:submit -- --site all`）。密钥在 `.env` 的 `BING-API—KEY`（键名含连字符与长破折号，读取做了归一化）。状态在 `.bing/`。特性：读线上 sitemap → 预检 canonical/robots → sha256 状态记忆 → 额度预检 → `pending` 锁防重复 → 回执落盘
+- **IndexNow 已启用**：`deploy.sh` 顶部 `INDEXNOW_KEY=76a5dca42d09708f954824df3b1149b4`，密钥文件 `public/{key}.txt`（内容=文件名）。覆盖 Bing/Yandex/Naver/Seznam
+- **百度**：token `O77VS8F6Br5oe0OD` 实测**归属 www**（配 note 返回 `401 site error`）—— **token 按域名发放**，note 必须单独申请。已改为 `BAIDU_SITE` 变量（空则跳过）+ 裸域名 + 识别 `error` 打 warn（原来硬编码 note → 每次静默 401 且日志假报成功）。**用户反馈百度暂时加不了新站点** → note 独立验证暂缓；搬回 www 的 `/note/` 可复用 www 验证与 token。线上仅 www 有 `baidu-site-verification` meta（`codeva-iAa19awTff`）
+- **站点验证开关** `src/data/site.ts` 的 `SITE_VERIFICATION = { baidu, google }`，留空不输出
+- **note 的 Google 验证是「HTML 文件」方式**：`public/google679e7cb325cb9c18.html`（53B）。⚠️ **别用「首页有没有 google meta」判断 note 是否验证过** —— 文件验证首页本就没有 meta。www 的 google meta = `8vei0yoKjoqXuDKZHox_mt-K3BudF4JYnCq06bAMWIA`
+- **Google 无可自动化通道**：`ping?sitemap=` 2023-06 弃用（404）；Indexing API 仅支持 JobPosting/BroadcastEvent；URL Inspection API 只读 → 靠 robots.txt Sitemap 指令 + GSC 手动提交
+
+## 内容门禁（2026-10-07 全量开放，方案 B，最终态）
+
+`src/data/site.ts` 的 `TECHGROW.enabled=false` + `FOLLOW.enabled=false`（页脚关注引导撤下）→ 全文开放。构建实测 `readmore.js`/`readmore.css`/`isAccessibleForFree:false`/`hasPart` **全 0 处**。用户决策：「暂不引导关注，先把搜索流量做起来」。付费课 `agent-course` 的 course-paywall 不受影响。
+
+- 恢复：改回 `enabled=true`（分层抽样 `selectGatedArticles()` 保留未删）
+- **改配置前必读**：TechGrow 自带 `random` 是**浏览器端随机**，JSON-LD `isAccessibleForFree` 是**构建时写死** → 直接改数字会造成「实锁 30% 却声明 100% 免费」。故改为 `site.ts` 的 `selectGatedArticles(siblingIds)` **构建时按分类分层抽样**（`stableHash` 可复现）；`TechGrow.astro` 的 `random` 固定传 `"1.0"`
+- **竞品对照（实测）**：JavaGuide 与 `xiaolinnote.com` **都没门禁**，正文全在 HTML，靠「内容免费 + 课程/书变现」。**「竞品也门禁」不成立**
+
+## 已上线的 SEO 改动
+
+### 内容层第一批（6 项，审计 `docs/seo-content-audit-2026-10-07.md`）
+
+- **FAQPage**：`src/lib/faq.mjs` 的 `extractFaqPairs()` 从「面试官继续追问」H2 下的 H3 块抽 Q&A → `[slug].astro` 追加节点 → **325 篇 / 975 Question**。**如实口径**：Google 2023-08 起 FAQ 富结果限权威站点，收益在 Bing/百度/AI 搜索抽取
+- **og:image 分文章化**：`src/lib/article-image.mjs` 读 `public/img/.manifest.json` 取正文首图，**要求 width ≥ 1200**（Discover 门槛，不达标回落 `og-cover.jpg`）→ 379 篇用真实首图
+- **文章页标题去品牌后缀**
+- **描述优先级的坑**：`sync-content.mjs` 优先级 `选题卡 SEO 描述 > 正文面试速答 > 选题卡兜底 > 正文摘要`（选题卡批量模板句会盖掉更好的正文摘录），`trimAtBoundary(text,120)`，中文 SERP 显示 **≈78 字**。改描述须同时满足 ≤120 字与 ≈78 字显示约束，否则截出「……」
+- **图片 alt 排查覆盖两种语法**：markdown `![]()` 之外还有**裸 HTML `<img alt="image-xxx">`**。口径 `grep -rEn '<img[^>]*alt="(image|img|ChatGPT|[0-9])' src/content/articles/`。**agent-course 的 410 个「配图N」来自 `sync-course.mjs` 独立路径，正常勿误判**；装饰图（brand-logo/avatar）与 lightbox 占位（`lb-img`，由 `ImageZoom.astro` 回填）的 `alt=""` 是正确写法
+- **尚未做**：171 篇「A vs B」缺对比表格、栏目落地页正文、AI 类外链密度（0.25–0.55/千字 vs 标准 2.0）、36 篇短文扩写。**67 篇 >45 字标题已结论不做批量重写**
+
+### 首页标题/描述重写（已上线，curl 验证过）
+
+旧 `<title>` = `${SITE.name}｜${SITE.tagline}` = 零搜索量品牌词在前 + 三模块罗列 → 有搜索量的关键词全被挤出中文 SERP 约 30 字截断线。
+**竞品对照**：`xiaolinnote.com` 首页 = `图解 Agent+RAG+LLM 大模型面试题 | 小林面试笔记` —— **关键词在前、品牌在后**；本站品牌搜索量近零，故进一步去掉品牌后缀（品牌仍由 `og:site_name` / 顶部站点名 / 页脚承载）。
+
+**最终文案**：`<title>` = `AI 面试题与大模型面试题｜Agent、RAG 高频考点`（28 字）；`description` ≈75 字；`<h1>` = `AI 面试题与大模型面试题`（原为「最新文章」）。
+**选型**：首页主打 AI（差异化 + 增长方向，站内 93 篇 AI 类，引擎已用 LLM 词匹配到本站）；全栈类（282 篇）竞争被 JavaGuide/小林垄断，只在描述尾部提及。
+实现细节见 `docs/aiguide-engineering-notes.md` 第四节。
+
+### 第二轮标题优化（已上线）
+
+- `MODULE_META.interview.title` → `大模型面试题大全：Agent、RAG 高频题与答案`（`/ai/` 的 `<title>`；h1 仍是「AI 面试题」）
+- `llm`/`agent`/`rag` 三个分类的 `intro` 前加「…面试题合集：」（`/agent/` 描述第一版 83 字超 SERP 显示区，已收到 63 字）
+- **非文章页品牌后缀全部去掉**：`pageTitle = path === "/" ? SITE.homeTitle : title`
+
+### 空分类页处理（已构建验证）
+
+`/agent-ext/` 渲染「共 0 篇文章」、20,061 字节 —— 典型 thin content，很可能贡献了那 40 篇「已抓取-未编入索引」。
+`astro.config.mjs` 构建时把**无 `.md` 的分类从 sitemap 排除**；`ArticleBrowser.astro` 对空列表输出 `noindex, follow`。
+实测 sitemap **496 → 495**，`/agent-ext/` robots = `noindex, follow`。细节见工程笔记第二节。
+
+### GitHub 仓库（已推送，commit `3a83e52`）
+
+README 重写为**用户向的面试题合集导航**（202 → 687 行）：专题入口表 + 主题索引 + **全部 379 篇文章链接**（AI 类平铺，全栈 282 篇包在 `<details>` 里），原 202 行运维文档原样保留在 `# 仓库维护说明（开发文档）` 下。
+**站内链接 2 → 399 条**。理由：GitHub 每日被 Bing 抓取，README 链接是本站在**站外唯一的发现路径**（外链是 Bing 唯一解法）；同时命中「xxx 面试题 github」查询意图。生成方式见工程笔记第五节。
+
+## 关键结构事实（决定能做/不能做什么）
+
+- **分类页与模块页的文章列表是 SSR 的** → `/ai/`、`/llm/` 等**本身就是带完整列表的汇总型入口页**，**不需要另建「大全」页**（另建会与它们重复，正好撞上「已抓取-尚未编入索引」的内容重复判定）
+- **模块页 `h1` 与 `<title>` 是两个字段** → 可只改 `MODULE_META[x].title` 做 SEO 而不动导航与 h1
+- **改描述/alt 要写回源仓库**（源选题卡 `- SEO 描述：` 行 / 源 `正文.md`），只改 `src/content/articles/` 会被下次 `--sync` 冲掉；`--sync` 与 SEO 改动**不冲突**（实测「更新 0，复用 379」）
+- `check-seo.py` 硬约束：`<title>` 全站唯一、description 全站唯一、首页 `og:site_name` == `Sunday 的面试指南`。**不**校验 robots meta，**不**校验 sitemap 数量
+
+（以上四条的完整机制见 `docs/aiguide-engineering-notes.md` 第一、二、三节）
+
+## 子域名 vs 二级路径（2026-10-07 评估，用户暂不执行）
+
+结论：**应搬回 `www.lgdsunday.club/note/`**。收益排序：**百度（0→1，确定）> Bing（收录覆盖率）> Google（最小）**，不可承诺排名与流量。
+核心理由：实测差距三个数量级（主站 sitemap 仅 39 URL 却日抓 200–400 页；note 有 456 URL 抓取 0 页）→ **差距是抓取预算**；且搬回后可**直接复用 www 的百度验证与 token**，绕过「百度加不了新站点」。
+风险：二次迁移（note 权重近零 → **现在是历史最低成本时机**）、Nuxt+Astro 共存运维复杂度、战略取舍（生态一部分 vs 独立品牌）。
+**成本几乎全在 nginx**（改动面 11 文件约 25 行）。工程细节见 `docs/aiguide-engineering-notes.md` 第八节与 `docs/seo-subdomain-vs-subdirectory.md`。
+**用户态度：明确「只确认，暂不执行」，已问过两轮 → 不要主动开工迁移。**
+
+## 诊断工具与用户偏好
+
+- `.env` 的 Bing API Key 可直接查真实搜索数据：`https://ssl.bing.com/webmaster/api.svc/json/{Method}?apikey=<key>&siteUrl=<url>`
+  - 可用 `GetUserSites` / `GetRankAndTrafficStats` / `GetQueryStats` / `GetCrawlStats` / `GetCrawlIssues` / `GetUrlSubmissionQuota`；`GetUrlTrafficInfo` 对 https 报 `SiteUriSchemeIsNotSupported`
+- **北极星是点击**：判断任何改动先问「这能多带来多少次点击」；偏好中文，不喜欢中英夹杂；会追问根因
+- **待用户决策**：① 是否搬回 `www.lgdsunday.club/note/`（暂不执行）；② 那 40 个「已抓取-尚未编入索引」页是哪些（取数方法已给，**建议不追**）；③ 外链建设（**只能用户做**：掘金/思否、公众号阅读原文、GitHub、知乎/CSDN）
+- **用户仍在持续新增文章** → 每新增一篇**必须在 `scripts/article-slugs.json` 补英文 slug**；新增文章**不必逐篇**去 GSC「请求编入索引」（配额有限且对质量判定类无效）
+- 2026-10-07 用户授予**广泛授权**：「按照你的想法去做，只要可以提高流量，我都支持你」+ 开放 GitHub 仓库随意使用

@@ -22,6 +22,10 @@ interface Props {
   ogType?: "website" | "article";
   noindex?: boolean;
   keywords?: string[];
+  /** 社交分享与结构化数据用图；文章页传正文首图，未传则用站点通用封面 */
+  ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   activeModule?: ReturnType<typeof moduleOfPath>;
 }
 
@@ -34,15 +38,26 @@ const {
   ogType = "website",
   noindex = false,
   keywords,
+  ogImage = "/og-cover.jpg",
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
 } = Astro.props;
 
 // 当前页面所属模块：顶部导航高亮与侧边栏分组都用它
 const activeModule = Astro.props.activeModule ?? moduleOfPath(path);
 const hasSidebar = sidebar || customSidebar;
 
-const pageTitle =
-  path === "/" ? `${SITE.name}｜${SITE.tagline}` : `${title}｜${SITE.name}`;
+// 不加品牌后缀（2026-10-07）：站点名是零搜索量的品牌词，白占 11 个字符的 SERP 预算，
+// 却把标题里真正有差异化的词挤出中文 SERP 约 30 字的显示上限之外。
+// 第一轮只去掉了文章页，栏目/分类页仍保留「｜站点名」；第二轮一并去掉，理由有两个：
+//   1) 栏目页现在要承载「大模型面试题大全…」这类较长的关键词标题，再加 13 字后缀必然被截断；
+//   2) 首页与 473 篇文章都已无后缀，只留栏目页不一致。
+// 品牌始终由 og:site_name、顶部站点名与页脚承载。
+//   · 首页 → SITE.homeTitle（关键词在前，理由见 site.ts 注释）
+//   · 其余 → 页面自己的 title（文章页 = 文章标题；栏目/分类页 = 模块/分类标题）
+const pageTitle = path === "/" ? SITE.homeTitle : title;
 const canonical = absoluteUrl(path);
+const ogImageUrl = /^https?:\/\//.test(ogImage) ? ogImage : absoluteUrl(ogImage);
 ---
 
 <!doctype html>
@@ -71,13 +86,13 @@ const canonical = absoluteUrl(path);
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:locale" content="zh_CN" />
-    <meta property="og:image" content={absoluteUrl("/og-cover.jpg")} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(ogImageWidth)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={absoluteUrl("/og-cover.jpg")} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <!-- 51.LA 全站访问统计；保留内联脚本，按官方方式异步加载 SDK。 -->
     <script is:inline>
       !function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"3RLhnol3nj3ui0Lt",ck:"3RLhnol3nj3ui0Lt"});

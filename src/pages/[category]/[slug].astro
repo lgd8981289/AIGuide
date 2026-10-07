@@ -15,6 +15,8 @@ import { CATEGORIES, COPY_GUARD, MODULE_META, SITE, TECHGROW, categoriesOf, sele
 import { getArticlesByCategory } from "../../data/articles";
 import { ARTICLE_RELATED } from "../../data/article-related";
 import { selectRelatedArticles } from "../../lib/related-articles.mjs";
+import { extractFaqPairs } from "../../lib/faq.mjs";
+import { resolveArticleImage } from "../../lib/article-image.mjs";
 import { url, absoluteUrl } from "../../utils";
 
 export async function getStaticPaths() {
@@ -69,6 +71,18 @@ const gated = TECHGROW.enabled
   && headings.some((heading) => heading.depth === 2)
   && selectGatedArticles(siblings.map((s) => s.entry.id)).has(entry.id);
 
+// 「面试官继续追问」板块的问答对。这些 H3 问句与紧随其后的答案本来就渲染在页面上，
+// 只是从未被结构化表达——搜索引擎读到的是连续正文，不知道该把它匹配给哪个问题。
+// 975 对问答全部来自正文，不新增、不改写任何文字。
+const faqs = extractFaqPairs(entry.body ?? "");
+
+// 正文首图：让每篇文章的结构化数据与社交分享用上自己的示意图，
+// 而不是 379 篇共用一张 og-cover.jpg。取不到合格的图时回落到通用封面。
+const coverImage = resolveArticleImage(entry.body ?? "");
+const coverImageUrl = coverImage
+  ? absoluteUrl(coverImage.src)
+  : absoluteUrl("/og-cover.jpg");
+
 // 速答属于文章摘要；受限内容与实际正文 .gated-content 对应。
 const jsonLd = [
   {
@@ -107,7 +121,15 @@ const jsonLd = [
       url: absoluteUrl("/"),
     },
     mainEntityOfPage: pageUrl,
-    image: absoluteUrl("/og-cover.jpg"),
+    // 有文章自己的配图时用 ImageObject 带上真实尺寸，满足 Discover 对 1200px 大图的要求
+    image: coverImage
+      ? {
+          "@type": "ImageObject",
+          url: coverImageUrl,
+          width: coverImage.w,
+          height: coverImage.h,
+        }
+      : coverImageUrl,
   },
   {
     "@context": "https://schema.org",
@@ -134,6 +156,23 @@ const jsonLd = [
       { "@type": "ListItem", position: 4, name: entry.data.title, item: pageUrl },
     ],
   },
+  // FAQPage：把「面试官继续追问」的问答对显式声明出来，共 975 对、覆盖 325 篇文章。
+  // 收益主要在 Bing（仍正常展示 FAQ 富结果）、百度，以及 AI 搜索的答案抽取——
+  // Perplexity / ChatGPT Search 对成对 Q&A 的定位效率远高于连续段落。
+  // 注意：Google 自 2023-08 起把 FAQ 富结果收缩到权威政府/医疗站点，不要指望它带来 SERP 折叠块。
+  ...(faqs.length > 0
+    ? [
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map(({ q, a }) => ({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: { "@type": "Answer", text: a },
+          })),
+        },
+      ]
+    : []),
 ];
 
 ---
@@ -144,6 +183,9 @@ const jsonLd = [
   path={pagePath}
   sidebar
   ogType="article"
+  ogImage={coverImageUrl}
+  ogImageWidth={coverImage ? coverImage.w : undefined}
+  ogImageHeight={coverImage ? coverImage.h : undefined}
 >
   <Fragment slot="head">
     <meta property="article:published_time" content={publishedDateISO} />
