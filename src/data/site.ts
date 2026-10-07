@@ -93,7 +93,7 @@ export const MODULE_META: Record<ModuleKey, ModuleMeta> = {
 		key: 'programmer',
 		name: '全栈面试题',
 		href: '/programmer/',
-		title: '全栈面试题',
+		title: '全栈面试题及答案：前端、后端、数据库与系统设计',
 		description:
 			'围绕前端、后端、MySQL、Redis、计算机网络、操作系统与并发等全栈开发知识，讲清面试题的原理、适用条件和常见追问。',
 		shortIntro:
@@ -106,7 +106,7 @@ export const MODULE_META: Record<ModuleKey, ModuleMeta> = {
 		key: 'tutorial',
 		name: 'AI 编程教程',
 		href: '/tutorial/',
-		title: 'AI 编程教程',
+		title: 'AI 编程教程：工具配置、MCP 扩展与工程实践',
 		description:
 			'0 基础也能上手的 AI 编程与 AI 工具教程：工具安装配置、Agent 能力扩展、工程方法与实践、模型实测，每篇讲清一个完整主题。',
 		shortIntro:
@@ -156,6 +156,14 @@ export interface Category {
 	slug: string
 	name: string
 	nav: string // 导航栏短名
+	/**
+	 * 分类页的 <title>（SEO 用）。缺省时回退到 name。
+	 * 与模块页同理：h1 / 侧边栏 / 面包屑仍用 name 这个短标签，只有 <title> 取这里，
+	 * 因为「及答案 / 大全 / 合集」这类形态词才是真实搜索需求（见 docs/seo-keyword-gap-2026-10-07.md），
+	 * 而 name 是导航标签，不含这些词。
+	 * 约束：必须全站唯一（scripts/check-seo.py 会校验），且控制在 ~30 个全角字内。
+	 */
+	seoTitle?: string
 	intro: string
 	module: ModuleKey
 }
@@ -166,6 +174,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'llm',
 		name: '大模型基础面试题',
 		nav: '大模型基础',
+		seoTitle: '大模型基础面试题及答案：高频考点解析',
 		module: 'interview',
 		intro:
 			'大模型面试题合集：Transformer、Attention、训练与对齐、微调与推理优化。面试官往底层追问时的终点站，也是所有上层应用题的地基。'
@@ -174,6 +183,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'rag',
 		name: 'RAG面试题',
 		nav: 'RAG',
+		seoTitle: 'RAG 面试题及答案：检索增强高频考点解析',
 		module: 'interview',
 		intro:
 			'RAG 面试题合集：从文档切割、Embedding、向量检索到多路召回、Query 改写与幻觉治理，检索增强全链路的高频考点。'
@@ -182,6 +192,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'agent',
 		name: 'Agent面试题',
 		nav: 'Agent',
+		seoTitle: 'Agent 面试题及答案：高频考点与解析',
 		module: 'interview',
 		intro:
 			'AI Agent 面试题合集：控制权边界、运行循环、任务拆分、记忆机制与 Multi-Agent 协作，讲清执行路径的决策权。'
@@ -190,6 +201,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'engineering',
 		name: 'AI应用工程面试题',
 		nav: 'AI应用工程',
+		seoTitle: 'AI 应用工程面试题及答案：高频考点',
 		module: 'interview',
 		intro:
 			'真实上线才会遇到的问题：效果评测、延迟与成本、稳定性、安全边界。区分「做过 demo」和「上过生产」的分水岭。'
@@ -198,6 +210,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'system-design',
 		name: 'AI项目与系统设计面试题',
 		nav: '系统设计',
+		seoTitle: 'AI 项目与系统设计面试题及答案',
 		module: 'interview',
 		intro:
 			'从单点答题到整套系统设计：需求拆解、架构选型、技术权衡与迭代演进，检验工程完整度的地方。'
@@ -206,6 +219,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'langchain',
 		name: 'LangChain生态面试题',
 		nav: 'LangChain',
+		seoTitle: 'LangChain 面试题及答案：高频考点',
 		module: 'interview',
 		intro:
 			'LangChain、LangGraph 等框架的内部机制、适用边界与选型逻辑。用框架，但不被框架用。'
@@ -216,6 +230,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'frontend',
 		name: '前端面试题',
 		nav: '前端',
+		seoTitle: '前端面试题及答案：高频考点与解析',
 		module: 'programmer',
 		intro:
 			'JavaScript、TypeScript、浏览器、React、Vue、页面性能与前端工程化，关注客户端如何工作。'
@@ -224,6 +239,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'backend',
 		name: '后端面试题',
 		nav: '后端',
+		seoTitle: '后端面试题及答案：高频考点与解析',
 		module: 'programmer',
 		intro:
 			'接口、鉴权、服务端框架、消息队列、异步任务与服务治理，关注服务端功能如何实现。'
@@ -232,6 +248,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'database',
 		name: '数据库与缓存面试题',
 		nav: '数据库与缓存',
+		seoTitle: '数据库与缓存面试题及答案',
 		module: 'programmer',
 		intro:
 			'MySQL、Redis、索引、事务、锁、缓存一致性与持久化，关注数据如何存取和保持正确。'
@@ -240,6 +257,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'cs-basics',
 		name: '计算机基础面试题',
 		nav: '计算机基础',
+		seoTitle: '计算机基础面试题及答案',
 		module: 'programmer',
 		intro:
 			'网络协议、操作系统、进程线程、内存、数据结构与算法，关注不依赖具体框架的基础机制。'
@@ -248,6 +266,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'fullstack-system-design',
 		name: '系统设计面试题',
 		nav: '系统设计',
+		seoTitle: '系统设计面试题及答案：高频考点',
 		module: 'programmer',
 		intro:
 			'短链接、秒杀、文件上传等完整系统的需求、模块协作、容量、容错与取舍，不重复单个组件的原理题。'
@@ -258,6 +277,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'tools',
 		name: 'AI编程工具与平台',
 		nav: '工具与平台',
+		seoTitle: 'AI 编程工具教程：安装、配置与使用',
 		module: 'tutorial',
 		intro: '完整工具、客户端和平台的安装、配置与使用。'
 	},
@@ -265,6 +285,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'agent-ext',
 		name: 'Agent能力扩展',
 		nav: '能力扩展',
+		seoTitle: 'MCP 与 Agent 能力扩展教程',
 		module: 'tutorial',
 		intro:
 			'MCP、Skill、Hook、连接器、记忆、Subagent 等用于扩展 Agent 能力的主题。'
@@ -273,6 +294,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'practice',
 		name: 'AI编程方法与工程实践',
 		nav: '方法与实践',
+		seoTitle: 'AI 编程方法与工程实践教程',
 		module: 'tutorial',
 		intro: '任务拆解、上下文、测试、审查、重构与多 Agent 协作等工程方法。'
 	},
@@ -280,6 +302,7 @@ export const CATEGORIES: Category[] = [
 		slug: 'reviews',
 		name: '模型与热点实测',
 		nav: '模型实测',
+		seoTitle: '大模型实测与选型：新模型能力评测',
 		module: 'tutorial',
 		intro: '新模型、新能力及热门技术事件的实际体验与价值判断。'
 	}

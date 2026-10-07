@@ -141,7 +141,7 @@ jsonLd.push({
 ---
 
 <BaseLayout
-	title={category?.name ?? meta?.title ?? SITE.name}
+	title={category?.seoTitle ?? category?.name ?? meta?.title ?? SITE.name}
 	description={category?.intro ?? meta?.description ?? SITE.description}
 	path={pagePath}
 	customSidebar
