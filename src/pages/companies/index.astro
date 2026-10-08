@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getCompanyPages } from '../../data/company-pages'
+import { INTERVIEW_NOTE } from '../../data/company-interviews.mjs'
+import { url } from '../../utils'
+import '../../styles/company-interviews.css'
+const pages = await getCompanyPages()
+const companies = pages.filter(page => page.kind === 'company')
+const lists = pages.filter(page => page.kind === 'role')
+const articleCount = new Set(lists.flatMap(page => page.entries.map(item => item.article.entry.data.qnum))).size
+---
+<BaseLayout title="公司面试真题及答案：前端、后端与Agent开发" description={`公司面试真题及答案：按 ${companies.length} 家公司、${lists.length} 个岗位列表浏览 ${articleCount} 篇技术解析，包含字节、百度、阿里、腾讯等公司的公开面经题目与来源。`} path="/companies/">
+  <div class="company-page">
+    <nav class="crumbs"><a href={url('/')}>首页</a> / 公司面试真题</nav>
+    <header class="company-header"><h1>公司面试真题及答案</h1><p>按公司和岗位选题，阅读完整解析与面试追问。已收录 {articleCount} 道题。</p></header>
+    <nav class="company-category-links" aria-label="选择公司">{companies.map(company => <a href={`#company-${company.id}`}>{company.name}</a>)}</nav>
+    {companies.map(company => <section class="company-question-group" aria-labelledby={`company-${company.id}`}>
+      <h2 id={`company-${company.id}`}><a href={url(company.href)}>{company.name}</a></h2>
+      <div class="company-grid">{lists.filter(list => list.company.id === company.id).map(list => <a class="company-card" href={url(list.href)}>
+        <h3>{list.label}</h3><p>{list.groups.map(group => group.category.name).join('、')}</p><span>{list.articleCount} 道题 · 阅读题目与解析 →</span>
+      </a>)}</div>
+    </section>)}
+    <p class="company-note">{INTERVIEW_NOTE}</p>
+  </div>
+</BaseLayout>

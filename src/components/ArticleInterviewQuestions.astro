@@ -1,0 +1,29 @@
+---
+import { realQuestionsForArticle } from '../lib/company-interviews.mjs'
+import { INTERVIEW_NOTE, INTERVIEW_EMPTY_NOTE } from '../data/company-interviews.mjs'
+import { url } from '../utils'
+const matches = realQuestionsForArticle(Astro.props.qnum)
+---
+<section class="article-real-questions" aria-labelledby="company-interview-questions" data-real-question-section>
+  <h2 id="company-interview-questions">公司面试真题</h2>
+  {matches.length ? <>
+    <p class="question-note">{INTERVIEW_NOTE}</p>
+    <ul>{matches.map(({ company, source, question }) => <li>
+      <p class="question-context">{company.name} · {source.role} · {source.stage}</p>
+      <p class="question-text">{question}<span class="question-caption">（题意整理）</span></p>
+      <p class="question-source"><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title} ↗</a><br />{source.dateLabel}</p>
+    </li>)}</ul>
+  </> : <p class="question-note" data-real-question-empty>{INTERVIEW_EMPTY_NOTE}</p>}
+  <a class="question-directory" href={url('/companies/')}>浏览公司面试真题 →</a>
+</section>
+<style>
+  .article-real-questions { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  h2 { margin: 0 0 .9rem; font-size: 1.3rem; scroll-margin-top: 80px; }
+  p { margin: .35rem 0; }
+  .question-note, .question-source, .question-caption { color: var(--text-2); font-size: .8125rem; line-height: 1.8; }
+  .question-context { color: var(--text-2); font-size: .8125rem; }
+  .question-text { font-size: .95rem; }
+  ul { padding: 0; list-style: none; margin: 1rem 0; }
+  li { margin: 0; padding: .85rem 0; border-bottom: 1px solid var(--border); }
+  .question-directory { display: inline-block; margin-top: .6rem; font-size: .875rem; }
+</style>

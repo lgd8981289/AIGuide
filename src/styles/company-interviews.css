@@ -1,0 +1,27 @@
+.company-page { max-width: 920px; margin: 0 auto; padding: 2rem 1.25rem 4rem; line-height: 1.75; }
+.company-header h1 { font-size: clamp(1.65rem, 3vw, 2.1rem); line-height: 1.4; margin: .9rem 0 .7rem; }
+.company-header p { color: var(--text-2); margin: 0 0 1.3rem; font-size: .9rem; }
+.company-role-links, .company-category-links { display: flex; flex-wrap: wrap; gap: .5rem .7rem; margin: 1rem 0; font-size: .8125rem; }
+.company-role-links a { border-radius: 5px; background: var(--accent-soft); color: var(--accent); padding: .3rem .7rem; }
+.company-role-links a[aria-current='page'] { box-shadow: inset 0 0 0 1px var(--accent); }
+.company-category-links a { color: var(--text-2); padding: .3rem .5rem; }
+.company-category-links span { margin-left: .3rem; color: var(--text-3); }
+.company-question-group { margin-top: 2rem; }
+.company-question-group h2 { font-size: 1.2rem; margin: 0 0 .5rem; scroll-margin-top: 80px; }
+.company-question-group h2 > span { margin-left: .8rem; font-size: .8rem; font-weight: 400; color: var(--text-2); }
+.company-article-list { list-style: none; padding: 0; margin: 0; }
+.company-article-list li { padding: 1.2rem 0; border-bottom: 1px solid var(--border); }
+.company-article-list h3 { font-size: 1rem; font-weight: 500; line-height: 1.7; margin: 0 0 .4rem; }
+.company-article-list h3 a { color: var(--text); }
+.company-article-list h3 a:hover { color: var(--accent); }
+.company-article-list p { margin: .3rem 0; color: var(--text-2); font-size: .875rem; }
+.company-question-meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .3rem 1rem; margin-top: .6rem; font-size: .8rem; }
+.company-question-meta span { color: var(--text-2); }
+.company-note { margin-top: 2.5rem; color: var(--text-2); font-size: .8125rem; line-height: 1.8; }
+.company-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+.company-card { display: block; border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.2rem; text-decoration: none; }
+.company-card h3 { margin: 0 0 .4rem; font-size: 1rem; line-height: 1.6; font-weight: 500; }
+.company-card p, .company-card span { color: var(--text-2); font-size: .8125rem; margin: .3rem 0; }
+.company-card:hover { border-color: var(--accent); text-decoration: none; }
+@media (max-width: 600px) { .company-grid { grid-template-columns: 1fr; } .company-page { padding: 1.5rem 1rem 3rem; } }
+@media (pointer: coarse) { .company-role-links a, .company-category-links a { display: inline-flex; align-items: center; min-height: 44px; } }

@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { INTERVIEW_NOTE } from '../data/company-interviews.mjs'
+import { getInterviewCollections } from '../lib/company-interviews.mjs'
+import type { CompanyPage } from '../data/company-pages'
+import { SITE } from '../data/site'
+import { url, absoluteUrl } from '../utils'
+import '../styles/company-interviews.css'
+interface Props { company: CompanyPage }
+const { company } = Astro.props
+const roles = getInterviewCollections().filter(view => view.company.id === company.company.id)
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: company.title,
+    description: company.description, url: absoluteUrl(company.href), dateModified: company.updated,
+    inLanguage: 'zh-CN', isPartOf: { '@type': 'WebSite', name: SITE.name, url: absoluteUrl('/') } },
+  { '@context': 'https://schema.org', '@type': 'ItemList', name: company.title, numberOfItems: company.entries.length,
+    itemListElement: company.entries.map(({ article }, i) => ({ '@type': 'ListItem', position: i + 1, name: article.entry.data.title, url: absoluteUrl(`/${article.entry.id}/`) })) },
+]
+---
+<BaseLayout title={company.title} description={company.description} path={company.href} noindex={company.kind === 'legacy'}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+  <div class="company-page">
+    <nav class="crumbs" aria-label="面包屑"><a href={url('/')}>首页</a> / <a href={url('/companies/')}>公司面试真题</a> / {company.kind === 'company' ? company.name : <><a href={url(`/companies/${company.company.id}/`)}>{company.name}</a> / {company.role?.name}</>}</nav>
+    <header class="company-header">
+      <h1>{company.title}</h1>
+      <p>{company.articleCount} 道题，按知识分类阅读完整解析和面试追问。</p>
+    </header>
+    <nav class="company-role-links" aria-label="公司与岗位">
+      {roles.map(role => <a href={url(role.href)} aria-current={company.id === role.id ? 'page' : undefined}>{role.label}</a>)}
+      <a href={url('/companies/')}>全部公司</a>
+    </nav>
+    {company.groups.length > 1 && <nav class="company-category-links" aria-label="题目分类">
+      {company.groups.map(group => <a href={`#questions-${group.category.slug}`}>{group.category.name} <span>{group.entries.length}</span></a>)}
+    </nav>}
+    {company.groups.map(group => <section class="company-question-group" aria-labelledby={`questions-${group.category.slug}`}>
+      <h2 id={`questions-${group.category.slug}`}>{group.category.name}<span>{group.entries.length} 道</span></h2>
+      <ul class="company-article-list">{group.entries.map(({ article, matches }) => <li data-company-question={article.entry.data.qnum}>
+        <h3><a href={url(`/${article.entry.id}/`)}>{article.entry.data.title}</a></h3>
+        <p>{article.entry.data.description}</p>
+        <div class="company-question-meta">
+          <span>{[...new Set(matches.map(m => `${m.source.role} · ${m.source.stage}`))].join(' / ')}</span>
+          <a href={url(`/${article.entry.id}/#company-interview-questions`)}>查看真题出处 →</a>
+        </div>
+      </li>)}</ul>
+    </section>)}
+    <p class="company-note">{INTERVIEW_NOTE}</p>
+  </div>
+</BaseLayout>

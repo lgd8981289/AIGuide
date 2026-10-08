@@ -1,0 +1,14 @@
+---
+import { questionTags } from '../lib/company-interviews.mjs'
+import { url } from '../utils'
+const tags = questionTags(Astro.props.qnum)
+---
+{tags.length > 0 && <nav class="company-tags" aria-label="相关公司面试真题">
+  {tags.map(tag => <a href={url(tag.href)}>{tag.label}</a>)}
+</nav>}
+<style>
+  .company-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin: .8rem 0 1rem; }
+  .company-tags a { padding: .2rem .7rem; border-radius: 5px; font-size: .8125rem; line-height: 1.8; color: var(--accent); background: var(--accent-soft); text-decoration: none; }
+  .company-tags a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  @media (pointer: coarse) { .company-tags a { display: inline-flex; align-items: center; min-height: 44px; } }
+</style>

@@ -1,0 +1,8 @@
+---
+import CompanyInterviewPage from '../../components/CompanyInterviewPage.astro'
+import { getCompanyPages } from '../../data/company-pages'
+export async function getStaticPaths() {
+  return (await getCompanyPages()).filter(c => c.kind === 'company').map(company => ({ params: { slug: company.id }, props: { company } }))
+}
+---
+<CompanyInterviewPage company={Astro.props.company} />
