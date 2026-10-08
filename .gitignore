@@ -42,6 +42,9 @@ docs
 # Bing URL 提交的本地状态、锁和回执
 /.bing/
 
+# 百度普通收录（配额轮转）的本地状态、锁和回执
+/.baidu/
+
 # 图片指纹与处理缓存，仅本地使用
 /.cache/image-pipeline/
 

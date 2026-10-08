@@ -49,7 +49,12 @@ URL 形态 `/{分类}/{编号}-{英文关键词}/`（2026-10-07 全站语义化�
 
 - **Bing API** `scripts/submit-bing.py`（`npm run bing:preview` / `bing:submit -- --site all`）。密钥在 `.env` 的 `BING-API—KEY`（键名含连字符与长破折号，读取已归一化）。状态在 `.bing/`。含预检 canonical/robots + sha256 记忆 + 额度预检 + `pending` 锁防重复。
 - **IndexNow 已启用**：`deploy.sh` 顶部 `INDEXNOW_KEY`，密钥文件 `public/{key}.txt`。覆盖 Bing/Yandex/Naver/Seznam。
-- **百度**：token `O77VS8F6Br5oe0OD` 实测**归属 www**（配 note 返 `401 site error`）—— **token 按域名发放**。已改为 `BAIDU_SITE` 变量（空则跳过）+ 裸域名 + 识别 `error` 打 warn（原来硬编码 note → 每次静默 401 且日志假报成功）。**用户反馈百度暂加不了新站点** → note 独立验证暂缓；搬回 `/note/` 可复用 www 验证与 token。线上仅 www 有 `baidu-site-verification` meta。
+- **百度（2026-10-08 状态已变，以此条为准）**：token `O77VS8F6Br5oe0OD` **现在对 note.lgdsunday.club 可用**了 —— 实测 `curl --data-binary "https://note.lgdsunday.club/" "http://data.zz.baidu.com/urls?site=note.lgdsunday.club&token=O77VS8F6Br5oe0OD"` → `{"remain":9,"success":1}`；对照 `site=example.com` → `{"error":401,"message":"site error"}`。说明用户已在百度账号里把 note 站加上并通过验证；早先「token 归属 www」只是当时快照。**带协议头 `site=https://note.lgdsunday.club` 现在也返 success** → 「必须裸域名」的旧结论不成立。
+  - **额度很小：note 站约 10 条/天**（实测推 3 条后 `remain=7`）。→ 百度只能推**增量改动页**，绝不能拿 495 条 sitemap 全量刷。
+  - `deploy.sh` 已把 `BAIDU_SITE="note.lgdsunday.club"` 填上（此前为空 → 百度分支每次被 `elif` 静默跳过）；`push_urls()` 的返回判断改为**先认 `"success"` 再认 `"error"`**（原来只认 error，「部分成功」会被误报失败）。
+  - **两个字段别混**：`BAIDU_PUSH_TOKEN`（deploy.sh）= API 推送密钥，20 位字母数字；`SITE_VERIFICATION.baidu`（src/data/site.ts）= 站点验证码，形态 **`codeva-xxxxx`**（www 站线上实测 `codeva-iAa19awTff`）。用户 2026-10-08 把推送密钥填进了验证码字段 → 无效。
+  - **每日本地定时任务「自动提交」（id `5b50800e-1319-4dac-901e-b092e7a06747`，每天 12:01）只跑 `npm run bing:submit -- --site all`，只推 Bing**，`submit-bing.py` 里没有任何百度代码 → 「加了百度 token 就会每天自动提交」不成立。百度目前唯一接入点是 `deploy.sh`。
+  - **2026-10-08 已建第二个每日任务**（id `d3654b67-a900-4faf-8189-646f7544bfda`，**21:00**）跑 `npm run baidu:submit` → 新脚本 `scripts/submit-baidu.py`（配额轮转，纯标准库）：线上 sitemap 561 URL，队列 = 首页 → 20 单段入口页 → 文章页（日期倒序）→ 课程/其他；先 1 条探测 `remain` 再批量补满，永不超配额；`over quota` 不计 attempts 且退出码 0；状态 `.baidu/state.json`（gitignored）。**放晚上是为了让当天发布的增量推送先跑，轮转吃剩余配额。** 首次实跑推 7 条（首页+6 个 AI 入口页），当日配额归零。命令：`npm run baidu:preview|status|submit`。
 - **note 的 Google 验证是「HTML 文件」方式**：`public/google679e7cb325cb9c18.html`。⚠️ **别用「首页有没有 google meta」判断** —— 文件验证首页本就无 meta。
 - **Google 无可自动化通道**：`ping?sitemap=` 2023-06 弃用（404）；Indexing API 仅 JobPosting/BroadcastEvent；URL Inspection API 只读 → 靠 robots.txt Sitemap 指令 + GSC 手动提交。
 - **站点验证开关** `src/data/site.ts` 的 `SITE_VERIFICATION = { baidu, google }`，留空不输出。
@@ -99,6 +104,7 @@ URL 形态 `/{分类}/{编号}-{英文关键词}/`（2026-10-07 全站语义化�
 
 结论：**应搬回 `www.lgdsunday.club/note/`**。收益排序：**百度（0→1，确定）> Bing（收录覆盖率）> Google（最小）**，不承诺排名与流量。
 核心理由：实测差距三个数量级（主站 sitemap 仅 39 URL 却日抓 200–400 页；note 有 456 URL 抓取 0 页）→ **差距是抓取预算**；搬回后可**直接复用 www 的百度验证与 token**，绕过「百度加不了新站点」。
+> ⚠️ 2026-10-08 更新：**「绕过百度」这条理由已失效** —— note 站的百度推送现已直接打通（见上文「百度」条）。迁移的剩余理由只剩 Bing / Google 的抓取预算继承，收益较原先估计**明显变小**。
 风险：二次迁移（note 权重近零 → **现在是历史最低成本时机**）、Nuxt+Astro 共存运维复杂度、战略取舍。**成本几乎全在 nginx**（改动面 11 文件约 25 行）。细节见 `docs/seo-subdomain-vs-subdirectory.md`。
 **用户态度：明确「只确认，暂不执行」（已问过两轮）→ 不要主动开工迁移。**
 

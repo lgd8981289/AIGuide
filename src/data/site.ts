@@ -9,8 +9,10 @@ export const SITE = {
 	// 首页明确站点身份；各内页由 BaseLayout 统一追加一次品牌后缀。
 	homeTitle: 'Sunday面试指南｜AI、前端、后端与校招面试题',
 	homeHeading: 'Sunday面试指南：AI 与全栈面试题',
-	homeIntro: '程序员Sunday 整理的面试备考指南，覆盖 AI、前端、后端与校招，从原理讲到项目取舍和面试追问。',
-	description: 'Sunday面试指南由程序员Sunday维护，提供大模型、Agent、RAG、前端、后端、数据库与校招面试题解析，配合学习路线和 AI 编程教程，帮助你理解原理、准备项目与面试追问。',
+	homeIntro:
+		'程序员Sunday 整理的面试备考指南，覆盖 AI、前端、后端与校招，从原理讲到项目取舍和面试追问。',
+	description:
+		'Sunday面试指南由程序员Sunday维护，提供大模型、Agent、RAG、前端、后端、数据库与校招面试题解析，配合学习路线和 AI 编程教程，帮助你理解原理、准备项目与面试追问。',
 	author: BRAND.author,
 	logo: '/avatar.jpg',
 	url: BRAND.url,
@@ -364,7 +366,7 @@ export const TECHGROW = {
 	qrcode: 'https://ww-zhi-dao.oss-cn-beijing.aliyuncs.com/gongzhonghao.jpg', // 公众号二维码图片地址
 	type: 'website',
 	expires: '30', // 验证码解锁后有效天数
-	random: '0', // 恢复门禁时的解锁文章比例：0=全站开放，0.3=30% 文章门禁（enabled=false 时该项无效）
+	random: '1.0', // 恢复门禁时的解锁文章比例：0=全站开放，0.3=30% 文章门禁（enabled=false 时该项无效）
 	allowMobile: false // 当前移动端也启用解锁；false 时移动端直接显示全文
 }
 
