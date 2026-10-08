@@ -1,5 +1,7 @@
 # Java 内存溢出 OOM 怎么排查？如何用 Heap Dump 找到问题对象？
 
+[阿里后端面试真题](../companies/alibaba-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q279-java-oom-heapdump/) · [题库目录](../../README.md)
@@ -105,6 +107,14 @@ jcmd 12345 GC.heap_dump /var/tmp/order-service-oom.hprof
 > - 找原因：沿引用链确认谁在保留对象、什么时候应该清理。
 > - 取证风险：转储可能暂停、占磁盘并暴露敏感数据。
 > - 修复验证：同等负载下检查内存、错误、吞吐和延迟。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **阿里巴巴 · 后端 · 原帖未明确批次**：Java OOM 可能由哪些原因引起？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159441665171456)；原帖发布于 2022-03-29。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

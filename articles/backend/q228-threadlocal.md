@@ -1,5 +1,7 @@
 # ThreadLocal 是什么？为什么在线程池中容易出现内存泄漏和数据串用？
 
+[阿里后端面试真题](../companies/alibaba-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q228-threadlocal/) · [题库目录](../../README.md)
@@ -107,6 +109,14 @@ InheritableThreadLocal 主要涉及创建子线程时的继承，也不能把它
 > - 弱键强值：键被回收，不代表值立即消失。
 > - 清理：普通任务 finally 中 remove，嵌套场景考虑恢复。
 > - 跨线程：明确传播与作用范围，不依赖自动继承假设。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **阿里巴巴 · 后端 · 原帖未明确批次**：ThreadLocal 怎样工作？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159441665171456)；原帖发布于 2022-03-29。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

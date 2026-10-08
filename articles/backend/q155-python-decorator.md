@@ -128,6 +128,12 @@ console.log(double(3)); // before、after，然后 6
 > - wraps：保留元数据，不替你修复业务语义。
 > - 异步：等待实际执行，别只测协程创建。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

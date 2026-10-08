@@ -158,6 +158,12 @@ name 让这个输入可以按名字进入 FormData；没有 onChange 状态反�
 > - 选型：看实时联动、重置和提交读取需求，不贴先进落后标签。
 > - checkbox：看 checked 表示选中，不把 value 当勾选状态。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

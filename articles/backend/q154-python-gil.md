@@ -90,6 +90,12 @@ CPython 3.13 起的可选 free-threaded 构建允许关闭 GIL。构建是否支
 > - free-threaded：3.13起可选，不等于所有环境默认无GIL。
 > - 安全：GIL不是业务锁，跨步骤不变量仍需保护。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

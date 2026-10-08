@@ -3,6 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArticle, publicMarkdown, selectPublished } from './lib/github-articles.mjs';
+import { INTERVIEW_NOTE } from '../src/data/company-interviews.mjs';
+import { getInterviewCollections, validateInterviewSources } from '../src/lib/company-interviews.mjs';
 import { BRAND } from '../src/lib/brand.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -20,20 +22,36 @@ const selected = selectPublished(articles, published).sort((a, b) => a.qnum.loca
 if (!selected.length) throw new Error('没有可导出的已发布文章，保留原目录');
 if (selected.length !== Object.keys(published).length) throw new Error('已发布文章未全部同步，保留原目录');
 
+validateInterviewSources(selected);
+
 // 先生成全部文件并校验，再落盘；重复执行只写实际变化。
 const files = new Map(selected.map((article) => [article.relative, publicMarkdown(article, published[article.qnum], manifest)]));
+const lists = getInterviewCollections();
+let companyDirectory = `# 公司面试真题 · ${BRAND.name}\n\n${INTERVIEW_NOTE}\n\n[网站真题列表](${BRAND.url}/companies/) · [全部文章](../../README.md)\n\n`;
+for (const view of lists) {
+  const group = selected.filter(article => view.qnums.includes(article.qnum));
+  const file = `${view.company.id}-${view.role.id}.md`;
+  companyDirectory += `- [${view.label}](./${file})：${group.length} 道题\n`;
+  let list = `# ${view.label}及答案 · ${BRAND.name}\n\n[全部公司真题](./README.md) · [在线阅读](${BRAND.url}${view.href})\n\n${INTERVIEW_NOTE}\n\n`;
+  for (const category of categories) {
+    const entries = group.filter(article => article.category === category.slug);
+    if (!entries.length) continue;
+    list += `## ${category.name}\n\n`;
+    for (const article of entries) list += `- [${article.title}](../${article.relative})\n  ${article.description}\n`;
+    list += '\n';
+  }
+  files.set(`companies/${file}`, list);
+}
+files.set('companies/README.md', companyDirectory);
 let readme = `# ${BRAND.name} · AI 与全栈面试题\n\n` +
   `**${selected.length} 篇完整文章**，由 **${BRAND.author}** 整理，覆盖大模型、Agent、RAG、JavaScript、Vue、React、后端、MySQL、Redis、计算机基础和系统设计。每道题讲清原理、工程取舍与面试追问，适合校招、实习与社招复习。\n\n` +
   `📖 [在线阅读 ${BRAND.name}](${BRAND.url}/) · [GitHub 正文目录](articles/)\n\n` +
   `你也可以通过 **sunday面试指南**、**程序员Sunday** 找到本站。建议先按岗位选路线，再按具体问题查阅。\n\n` +
-  `## 校招与公司备考\n\n` +
-  `| 复习目标 | 阅读入口 |\n| --- | --- |\n` +
-  `| 校招、实习与秋招基础 | [校招面试题准备路线](${BRAND.url}/guides/campus-interview/) |\n` +
-  `| 字节跳动开发岗位 | [字节面试题备考](${BRAND.url}/guides/bytedance-interview/) |\n` +
-  `| 百度校招开发岗位 | [百度校招面试题备考](${BRAND.url}/guides/baidu-campus-interview/) |\n` +
-  `| 百度前端开发岗位 | [百度前端面试题备考](${BRAND.url}/guides/baidu-frontend-interview/) |\n` +
-  `| 阿里巴巴后端开发岗位 | [阿里后端面试题备考](${BRAND.url}/guides/alibaba-backend-interview/) |\n\n` +
-  `公司专题按岗位能力整理通用技术题，未标注可核验面经来源的内容不代表该公司的实际考题或官方题库。\n\n` +
+  `## 公司面试真题\n\n` +
+  `${INTERVIEW_NOTE}\n\n` +
+  `| 公司 / 岗位 | 题目数 | GitHub 真题列表 | 在线阅读 |\n| --- | ---: | --- | --- |\n` +
+  lists.map(view => `| ${view.label} | ${view.qnums.length} | [题目与答案](articles/companies/${view.company.id}-${view.role.id}.md) | [网站列表](${BRAND.url}${view.href}) |\n`).join('') +
+  `\n[全部公司真题目录](articles/companies/README.md) · [网站真题列表](${BRAND.url}/companies/) · [校招与实习准备路线](${BRAND.url}/guides/campus-interview/)\n\n` +
   `## 分类目录\n\n| 分类 | 篇数 | GitHub 阅读 | 在线阅读 |\n| --- | ---: | --- | --- |\n`;
 for (const { name, slug } of categories) {
   const group = selected.filter((article) => article.category === slug);
@@ -63,4 +81,4 @@ const stale = fs.existsSync(output) ? fs.readdirSync(output, { recursive: true }
 if (stale.length) throw new Error(`导出目录有未登记的旧文件，请人工核对：${stale.join(', ')}`);
 for (const [relative, content] of files) writeChanged(path.join(output, relative), content);
 writeChanged(path.join(root, 'README.md'), readme);
-console.log(`GitHub 导出完成：${selected.length} 篇正文，${files.size - selected.length - 1} 个分类目录；图片使用线上公开地址。`);
+console.log(`GitHub 导出完成：${selected.length} 篇正文、${lists.length} 个公司岗位真题列表；图片使用线上公开地址。`);

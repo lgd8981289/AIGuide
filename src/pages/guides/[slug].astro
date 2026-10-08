@@ -1,4 +1,6 @@
 ---
+import CompanyInterviewPage from '../../components/CompanyInterviewPage.astro'
+import { getCompanyPages, type CompanyPage } from '../../data/company-pages'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import SidebarCollapse from '../../components/SidebarCollapse.astro'
 import { getLearningGuides, guideHref, type ResolvedGuide } from '../../data/learning-guides'
@@ -9,14 +11,15 @@ import '../../styles/learning-guides.css'
 
 export async function getStaticPaths() {
   const guides = await getLearningGuides()
-  return guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide, guides } }))
+  return [...guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide, guides } })),
+    ...(await getCompanyPages()).filter(company => company.guideSlug).map(company => ({ params: { slug: company.guideSlug }, props: { company } }))]
 }
 
-interface Props { guide: ResolvedGuide; guides: ResolvedGuide[] }
-const { guide, guides } = Astro.props
-const pagePath = guideHref(guide)
-const articles = guide.stages.flatMap((stage) => stage.articles)
-const schema = [
+interface Props { guide?: ResolvedGuide; guides?: ResolvedGuide[]; company?: CompanyPage }
+const { guide, guides, company } = Astro.props
+const pagePath = guide ? guideHref(guide) : company!.href
+const articles = guide?.stages.flatMap((stage) => stage.articles) ?? []
+const schema = guide ? [
   {
     '@context': 'https://schema.org', '@type': 'CollectionPage',
     name: guide.title, description: guide.description, url: absoluteUrl(pagePath),
@@ -39,10 +42,10 @@ const schema = [
       { '@type': 'ListItem', position: 2, name: guide.title, item: absoluteUrl(pagePath) },
     ],
   },
-]
+] : []
 ---
 
-<BaseLayout title={guide.title} description={guide.description} path={pagePath} customSidebar activeModule={guide.module}>
+{company ? <CompanyInterviewPage company={company} /> : guide && guides && <BaseLayout title={guide.title} description={guide.description} path={pagePath} customSidebar activeModule={guide.module}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
   <div class="learning-layout">
     <aside class="browse-sidebar learning-sidebar" id="browse-sidebar" aria-label="学习路线" data-site-sidebar data-sidebar-scope={`guide:${guide.slug}`} data-sidebar-kind="browse" data-pagefind-ignore>
@@ -101,4 +104,4 @@ const schema = [
       </nav>
     </div>
   </div>
-</BaseLayout>
+</BaseLayout>}

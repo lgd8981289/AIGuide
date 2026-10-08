@@ -1,5 +1,7 @@
 # Redis 缓存穿透、击穿、雪崩有什么区别？分别怎么解决？
 
+[美团开发面试真题](../companies/meituan-development.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q086-cache-penetration-breakdown-avalanche/) · [题库目录](../../README.md)
@@ -97,6 +99,14 @@
 > - 雪崩：大范围失效或服务故障，分散过期并保护回源。
 > - 布隆过滤器：可能存在仍需查询，不提供精确存在证明。
 > - 验收重点：数据库压力、应用等待与数据时效一起检查。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：怎样区分并处理缓存穿透与雪崩？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -1,5 +1,7 @@
 # CSR、SSR、SSG、ISR 有什么区别？Next.js 项目怎么选？
 
+[百度前端面试真题](../companies/baidu-frontend.md) · [网易前端面试真题](../companies/netease-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q147-ssr-csr-ssg-isr/) · [题库目录](../../README.md)
@@ -96,6 +98,15 @@ Next.js 的 ISR 也不等于纯静态导出能力。只把一堆 HTML 上传到�
 > - SSG：构建时预生成，更新要有发布或再生成路径。
 > - ISR：框架的增量缓存更新机制，行为依实现。
 > - 选型：生成时机、共享范围、新鲜度与部署能力。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 实习（原帖标签）**：SSR 怎样工作，使用时遇到哪些问题？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+- **网易 · 前端 · 原帖未明确批次**：SSR 怎样工作，使用时遇到哪些问题？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

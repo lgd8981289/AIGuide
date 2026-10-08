@@ -3,6 +3,7 @@ import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import { toMarkdown } from 'mdast-util-to-markdown';
 import { gfmToMarkdown } from 'mdast-util-gfm';
+import { companyMarkdown, companyTagMarkdown } from '../../src/lib/company-interviews.mjs';
 import { BRAND } from '../../src/lib/brand.mjs';
 
 export function parseArticle(raw) {
@@ -35,7 +36,7 @@ export function publicMarkdown(article, articlePath, manifest = {}) {
   }
   visit(tree);
   const body = toMarkdown(tree, { extensions: [gfmToMarkdown()], bullet: '-', fences: true });
-  return `# ${article.title}\n\n> 作者：${BRAND.author} · [${BRAND.name}](${BRAND.url}/)\n>\n> [在线阅读与配图](${BRAND.url}${articlePath}) · [题库目录](../../README.md)\n\n${body}\n---\n\n本文收录于 [${BRAND.name}](${BRAND.url}/)。转载请注明作者与原文链接。\n`;
+  return `# ${article.title}\n\n${companyTagMarkdown(article.qnum, BRAND.url, tag => `../companies/${tag.company}-${tag.role}.md`)}> 作者：${BRAND.author} · [${BRAND.name}](${BRAND.url}/)\n>\n> [在线阅读与配图](${BRAND.url}${articlePath}) · [题库目录](../../README.md)\n\n${body}${companyMarkdown(article.qnum, BRAND.url)}\n---\n\n本文收录于 [${BRAND.name}](${BRAND.url}/)。转载请注明作者与原文链接。\n`;
 }
 
 // 只开放已登记发布的文章，课程集合不在输入范围内。

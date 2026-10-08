@@ -1,5 +1,7 @@
 # HTTP 和 HTTPS 有什么区别？TLS 怎样防止窃听、篡改和冒充？
 
+[百度前端面试真题](../companies/baidu-frontend.md) · [阿里后端面试真题](../companies/alibaba-backend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q093-https-tls/) · [题库目录](../../README.md)
@@ -97,6 +99,16 @@ TLS 主要处理保密性、完整性和身份验证。以常见的 TLS 1.3 证�
 > - TLS：保密、完整性与身份验证，各有对应机制。
 > - 证书：帮助确认对方身份，不直接加密全部业务内容。
 > - 应用边界：登录、对象权限和内部链路仍要单独保护。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 实习（原帖标签）**：HTTP 与 HTTPS 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+- **阿里巴巴 · 后端 · 原帖未明确批次**：HTTP 与 HTTPS 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159441665171456)；原帖发布于 2022-03-29。
+- **小米 · 前端 · 原帖未明确批次**：HTTP 与 HTTPS 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

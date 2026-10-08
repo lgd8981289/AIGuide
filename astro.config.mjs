@@ -39,6 +39,8 @@ export default defineConfig({
       filter: (page) => {
         const { pathname } = new URL(page);
         if (/\/404(?:\.html|\/)?$/.test(pathname)) return false;
+        // 旧公司指南保留访问，canonical 指向公司岗位真题列表，不重复进入 sitemap。
+        if (['bytedance-interview', 'baidu-frontend-interview', 'baidu-campus-interview', 'alibaba-backend-interview'].some(slug => pathname === `/guides/${slug}/`)) return false;
         return !emptyCategoryPaths.has(pathname);
       },
     }),

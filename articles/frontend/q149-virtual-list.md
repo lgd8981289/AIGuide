@@ -1,5 +1,7 @@
 # 虚拟列表是什么？几万条数据怎样做到滚动不卡顿？
 
+[百度前端面试真题](../companies/baidu-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q149-virtual-list/) · [题库目录](../../README.md)
@@ -122,6 +124,14 @@ overscan 多画一点窗口之外的行，用少量额外工作换快速滚动�
 > - 动态高度：测量、累计偏移与锚点。
 > - 行状态：稳定ID，重要状态不能随窗口移除丢失。
 > - 成本边界：减少DOM，不等于减少全部数据成本。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 实习（原帖标签）**：虚拟列表怎样实现？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

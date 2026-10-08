@@ -1,5 +1,7 @@
 # Agent Harness 是什么？模型之外的执行与状态管理
 
+[字节Agent开发面试真题](../companies/bytedance-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/agent/q057-agent-harness/) · [题库目录](../../README.md)
@@ -107,6 +109,15 @@ Agent Harness 可以理解为围绕模型搭建的一套运行系统。模型负
 > - 提示词边界：说明规则，不等于提供环境或落实权限。
 > - 设计原则：针对实际失败补能力，不按组件数量判断成熟度。
 > - 验收标准：看任务结果和执行证据，不只看模型宣布完成。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · Agent开发 · 校招**：Agent Harness 的职责是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/929731481189044224)；页面显示 09-16 编辑，未明确年份；标题为秋招。
+- **字节跳动 · Agent开发 · 校招（原帖标签）**：Agent Harness 的职责是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/925342611194286080)；标题记录 9 月 3 日面试，页面显示 09-04 编辑；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

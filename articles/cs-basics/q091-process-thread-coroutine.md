@@ -1,5 +1,7 @@
 # 进程、线程和协程有什么区别？CPU 密集与 I/O 密集任务怎么选？
 
+[阿里后端面试真题](../companies/alibaba-backend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q091-process-thread-coroutine/) · [题库目录](../../README.md)
@@ -95,6 +97,15 @@ Node.js 中，异步网络 I/O 适合事件驱动，但 JS 重计算可以考虑
 > - 协程：在等待点协作调度，适合大量可异步等待的任务。
 > - 并发与并行：任务交错推进，不等于同时使用多个核心。
 > - 选择依据：等待、计算、隔离、共享状态与资源上限一起判断。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **阿里巴巴 · 后端 · 原帖未明确批次**：进程与线程有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159441665171456)；原帖发布于 2022-03-29。
+- **小米 · 前端 · 原帖未明确批次**：进程与线程有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -1,5 +1,7 @@
 # Redis Cluster 为什么使用哈希槽？扩容时数据和请求怎么迁移？
 
+[美团开发面试真题](../companies/meituan-development.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q187-redis-cluster/) · [题库目录](../../README.md)
@@ -89,6 +91,14 @@ Cluster 提供分片和副本切换，不会透明拆开一个大键，也不能
 > - MOVED：归属更新；ASK：迁移中的临时访问。
 > - 多键：常规原子操作看同槽，hash tag 管相关键。
 > - 边界：单键不透明拆分，异步复制仍有风险。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：Redis 分片集群增删节点有什么影响？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

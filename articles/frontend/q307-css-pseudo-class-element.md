@@ -1,5 +1,7 @@
 # CSS 伪类和伪元素有什么区别？::before 能代替真正的 HTML 内容吗？
 
+[网易前端面试真题](../companies/netease-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q307-css-pseudo-class-element/) · [题库目录](../../README.md)
@@ -101,6 +103,14 @@
 > - 冒号：现代写法有区分，历史写法有兼容例外。
 > - 内容：重要文本留在 HTML，装饰再交给 CSS。
 > - 交互：鼠标有反馈，键盘也要看得见焦点。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **网易 · 前端 · 原帖未明确批次**：CSS 伪类和伪元素有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

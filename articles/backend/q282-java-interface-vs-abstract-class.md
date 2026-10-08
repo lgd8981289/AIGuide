@@ -1,5 +1,7 @@
 # Java 接口和抽象类有什么区别？有了 default 方法还需要抽象类吗？
 
+[美团开发面试真题](../companies/meituan-development.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q282-java-interface-vs-abstract-class/) · [题库目录](../../README.md)
@@ -89,6 +91,14 @@ default 方法适合提供可以被覆盖的默认实现，例如一个能力接
 > - 抽象类：可以保存实例状态、执行构造初始化、共享实现。
 > - 继承限制：一个类只能继承一个类，抽象基类也占用这条关系。
 > - 组合方案：接口保持契约，抽象类提供可选实现，不强迫所有实现继承。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：Java 接口与抽象类有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

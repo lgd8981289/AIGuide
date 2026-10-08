@@ -102,6 +102,12 @@ const nickname = defineModel<string>({ required: true });
 > - 数据归属：父组件拥有值，子组件通知修改。
 > - 组件边界：初始化、草稿、校验和提交时机要单独定义。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

@@ -1,5 +1,7 @@
 # 数据库乐观锁和悲观锁有什么区别？version 字段怎么防止覆盖更新？
 
+[腾讯后端面试真题](../companies/tencent-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q245-optimistic-vs-pessimistic-lock/) · [题库目录](../../README.md)
@@ -119,6 +121,14 @@ SQL 已经表达本题核心，不再用 TS、Python 驱动样板代码重复它
 > - 结果检查：零行不能当成功，冲突和不存在按业务区分。
 > - 锁边界：乐观 UPDATE 仍有数据库锁，不等于无锁。
 > - 失败处理：能否重试取决于意图，多行约束需要整体边界。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **腾讯 · 后台开发 · 原帖未明确批次**：乐观锁与悲观锁有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

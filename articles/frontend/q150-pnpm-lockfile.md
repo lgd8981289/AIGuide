@@ -1,5 +1,7 @@
 # pnpm 和 npm 有什么区别？lockfile 为什么应该提交？
 
+[字节前端面试真题](../companies/bytedance-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q150-pnpm-lockfile/) · [题库目录](../../README.md)
@@ -89,6 +91,14 @@ Node 版本、包管理器版本、操作系统、CPU 架构、原生模块和�
 > - 清单：表达依赖要求；锁文件：记录解析结果。
 > - CI：冻结安装，让清单和锁文件不一致早点失败。
 > - 复现：运行时、包管理器、平台与脚本也要固定。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · 前端 · 实习**：pnpm 为什么可能比 npm 安装更快？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/756639561995870208)；原帖发布于 2025-05-26。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -1,5 +1,7 @@
 # XSS 和 CSRF 有什么区别？HttpOnly、SameSite 和 Token 分别防什么？
 
+[百度前端面试真题](../companies/baidu-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q111-xss-csrf/) · [题库目录](../../README.md)
@@ -97,6 +99,14 @@ GET 应具有安全语义。浏览器、预加载、爬虫或链接访问都可�
 > - HttpOnly：防脚本读取 Cookie，不防所有账户操作。
 > - SameSite：限制跨站携带，但不是权限与来源检查的全集。
 > - 防护组合：输出防护与请求防护分开做，高风险操作再加确认。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 校招**：XSS 与 CSRF 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158492217352192)；面试记录为 2021 年 9 月；原帖编辑于 2021-10-04。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

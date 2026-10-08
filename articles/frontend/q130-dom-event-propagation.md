@@ -102,6 +102,12 @@ preventDefault 作用于可取消的默认行为，调用时还要考虑事件�
 > - stopPropagation：停止进一步传播，不自动取消默认行为。
 > - preventDefault：取消可取消的默认行为，不自动停止传播。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

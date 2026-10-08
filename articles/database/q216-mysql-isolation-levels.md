@@ -1,5 +1,7 @@
 # MySQL 事务的四种隔离级别是什么？脏读、不可重复读和幻读有什么区别？
 
+[京东后端面试真题](../companies/jd-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q216-mysql-isolation-levels/) · [题库目录](../../README.md)
@@ -112,6 +114,14 @@ B 关心的不是某一条账户余额从 100 变成 80，而是这个查询条�
 > - 幻读：同一条件对应的记录集合发生变化。
 > - InnoDB 可重复读：普通快照读和锁定读、写操作要分开分析。
 > - 选型：同时看一致性要求与冲突成本，不能替代业务约束。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **京东 · 数据开发 / 后端 · 校招**：MySQL 的事务隔离级别有哪些？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/791720598454935552)；原帖发布于 2025-08-31（秋招记录）。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

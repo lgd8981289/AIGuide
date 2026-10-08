@@ -1,5 +1,7 @@
 # 死锁产生的四个必要条件是什么？预防、避免和检测有什么区别？
 
+[阿里后端面试真题](../companies/alibaba-backend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q328-deadlock-four-conditions/) · [题库目录](../../README.md)
@@ -93,6 +95,15 @@ A 只有拿到锁二才肯继续，B 只有拿到锁一才肯继续。于是我�
 > - 顺序：所有参与者遵守统一资源获取顺序。
 > - 超时：要配合释放、回退和重试策略。
 > - 区分：死锁不前进，活锁忙而无进展，饥饿缺少机会。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **阿里巴巴 · 后端 · 原帖未明确批次**：死锁怎样产生，怎样避免？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159441665171456)；原帖发布于 2022-03-29。
+- **小米 · 前端 · 原帖未明确批次**：死锁怎样产生，怎样避免？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -112,6 +112,12 @@ MySQL 的普通持久表 TRUNCATE、DROP 会引发隐式提交。把它们写在
 > - 回滚：InnoDB 未提交 DELETE 可撤销；已提交修改另走恢复方案。
 > - DDL：普通 TRUNCATE、DROP 的隐式提交不受事务外壳保护。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

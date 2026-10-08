@@ -1,5 +1,7 @@
 # Redis 分布式锁怎么实现？为什么加了锁仍然可能重复执行？
 
+[腾讯后端面试真题](../companies/tencent-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q088-redis-distributed-lock/) · [题库目录](../../README.md)
@@ -107,6 +109,14 @@ fencing 也不等于业务幂等：新持有者拿着更大 token，再重复处
 > - 租期：锁过期不会自动终止旧程序。
 > - fencing：由资源端拒绝过期执行者，需要可靠 token 与原子校验。
 > - 业务保护：幂等、状态条件和唯一约束不能被锁替代。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **腾讯 · 后台开发 · 原帖未明确批次**：怎样使用 Redis 实现分布式锁？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

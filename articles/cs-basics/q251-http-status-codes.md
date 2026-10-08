@@ -1,5 +1,7 @@
 # HTTP 常见状态码有哪些？401、403 和 502、503、504 怎么区分？
 
+[百度前端面试真题](../companies/baidu-frontend.md) · [网易前端面试真题](../companies/netease-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q251-http-status-codes/) · [题库目录](../../README.md)
@@ -115,6 +117,15 @@ HTTP 状态码描述本次请求的处理结果与响应语义。1xx 是信息�
 > - 403：理解但拒绝，不保证重新登录可以解决。
 > - 502 / 503 / 504：无效上游响应 / 暂时无法服务 / 等上游超时。
 > - 重试：先查幂等与执行状态，超时不证明写入未发生。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 实习（原帖标签）**：常见 HTTP 状态码表示什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+- **网易 · 前端 · 原帖未明确批次**：常见 HTTP 状态码表示什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -1,5 +1,7 @@
 # JavaScript 的 this 指向谁？箭头函数、call、apply、bind 有什么区别？
 
+[百度前端面试真题](../companies/baidu-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q117-this-binding/) · [题库目录](../../README.md)
@@ -104,6 +106,14 @@ bind 也可以预先填一部分参数。但绑定后的普通调用再使用 ca
 > - bind：保存普通调用的接收对象，返回新函数。
 > - 箭头函数：使用外层 this，不能重新绑定。
 > - 回调清理：保存绑定后的函数，别用新函数去删旧监听。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 校招**：JavaScript 的 this 怎样确定？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158492217352192)；面试记录为 2021 年 9 月；原帖编辑于 2021-10-04。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -109,6 +109,12 @@ Spring Boot 的 [优雅停机文档](https://docs.spring.io/spring-boot/referenc
 > - 消费消息按完成情况确认，重投仍需要业务幂等。
 > - 用真实入口与超时任务验证退出流程。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

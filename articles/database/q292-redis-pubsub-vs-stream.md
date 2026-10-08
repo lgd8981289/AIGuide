@@ -99,6 +99,12 @@ XREADGROUP GROUP workers worker-a COUNT 1 STREAMS orders >
 > - XACK：移除未确认记录，不等于删除 Stream 条目。
 > - 可靠性：结合持久化、复制、裁剪与幂等，不承诺绝不丢、不重复。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

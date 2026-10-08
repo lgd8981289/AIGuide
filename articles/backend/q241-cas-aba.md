@@ -1,5 +1,7 @@
 # CAS 是什么？ABA 问题怎么产生，为什么加版本号能解决？
 
+[美团开发面试真题](../companies/meituan-development.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q241-cas-aba/) · [题库目录](../../README.md)
@@ -109,6 +111,14 @@ CAS 的原子性有底层实现和内存语义支持。它不是“完全不处�
 > - ABA：值变回来了，不说明中间没有变化。
 > - 版本方案：值与版本一起核对，相关修改要推进版本。
 > - 工程边界：单次原子更新不等于跨字段事务，无锁也有竞争成本。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：CAS 怎样实现原子更新？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

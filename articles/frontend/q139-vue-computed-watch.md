@@ -104,6 +104,12 @@ Vue 3.5 起还提供 `onWatcherCleanup`，但它必须在监听函数的同步�
 > - 异步监听：处理清理、过期结果和异常。
 > - DOM 时机：需要更新后的 DOM，考虑 flush: 'post'。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

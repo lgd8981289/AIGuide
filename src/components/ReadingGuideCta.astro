@@ -6,7 +6,7 @@ import '../styles/learning-guides.css'
 
 interface Props { category: string; module: ModuleKey }
 const guide = guideForArticle(Astro.props.category, Astro.props.module)
-const label = guide?.slug === 'rag' ? '继续按 RAG 复习路线学习' : guide?.slug === 'ai-interview' ? '继续准备 AI 应用开发面试' : '继续按 AI 编程实操路线学习'
+const label = guide?.slug === 'rag' ? '继续按 RAG 复习路线学习' : guide?.slug === 'ai-interview' ? '继续准备 AI 应用开发面试' : guide?.slug === 'campus-interview' ? '继续按校招复习路线学习' : '继续按 AI 编程实操路线学习'
 ---
 
 {guide && (

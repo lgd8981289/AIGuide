@@ -1,5 +1,7 @@
 # Redis 的 RDB 和 AOF 有什么区别？宕机后哪些数据可能丢失？
 
+[腾讯后端面试真题](../companies/tencent-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q094-redis-rdb-aof/) · [题库目录](../../README.md)
@@ -103,6 +105,14 @@ appendfsync always 更积极地同步写入，通常付出更高写入成本；e
 > - everysec：常见故障下可能丢最近约一秒，不是无条件承诺。
 > - 重写：压缩恢复表示，不保留完整历史审计。
 > - 运维判断：持久化、复制、备份和恢复演练分别负责不同问题。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **腾讯 · 后台开发 · 原帖未明确批次**：Redis 怎样进行持久化？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

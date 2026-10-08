@@ -1,5 +1,7 @@
 # Vue Router 的 hash 和 history 模式有什么区别？刷新为什么会 404？
 
+[百度前端面试真题](../companies/baidu-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q143-vue-router-modes/) · [题库目录](../../README.md)
@@ -94,6 +96,14 @@ history 地址更自然，代价是你必须把服务器入口配置完整。Vue
 > - 回退规则：前端页面可回入口，API 与静态资源要分开。
 > - 前端 catch-all：显示未找到，不自动设置 HTTP 404。
 > - 验收：站内跳转、刷新、深链和不存在路径都要测。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 实习（原帖标签）**：Vue Router 的路由模式有哪些区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

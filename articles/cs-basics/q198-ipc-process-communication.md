@@ -1,5 +1,7 @@
 # 进程间通信有哪些方式？管道、消息队列、共享内存怎么选？
 
+[腾讯后端面试真题](../companies/tencent-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q198-ipc-process-communication/) · [题库目录](../../README.md)
@@ -87,6 +89,14 @@ Unix 域 Socket 支持本机进程通信，网络 Socket 则可以连接远端�
 > - Socket：类型与本机/网络场景分开。
 > - 共享内存：共享数据，同步和生命周期另做。
 > - 评估：性能收益与故障恢复成本一起算。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **腾讯 · 后台开发 · 原帖未明确批次**：进程之间有哪些通信方式？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -1,5 +1,7 @@
 # Agent 执行越来越慢，应该怎么定位性能瓶颈？
 
+[字节Agent开发面试真题](../companies/bytedance-agent.md) · [百度Agent开发面试真题](../companies/baidu-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/engineering/q067-agent-performance-bottleneck/) · [题库目录](../../README.md)
@@ -121,6 +123,15 @@ Agent 执行变慢，不能直接判断是大模型的问题，需要先把一�
 > - 关键路径：看哪些等待拖住最终完成，不能重复累加重叠耗时。
 > - 优化验证：同一批任务比较耗时、质量、错误和成本。
 > - 流式输出：早点看到内容，不等于整个任务更早完成。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · Agent开发 · 校招（原帖标签）**：怎样定位 Agent 执行延迟和卡点？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/925342611194286080)；标题记录 9 月 3 日面试，页面显示 09-04 编辑；未明确年份。
+- **百度 · Agent开发 · 实习**：怎样定位 Agent 执行延迟和卡点？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；标题记录 9 月 7 日面试，页面显示 09-07 发布；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

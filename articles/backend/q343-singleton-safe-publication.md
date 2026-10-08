@@ -1,5 +1,7 @@
 # Java 单例模式怎么实现？双重检查锁为什么需要 volatile？
 
+[腾讯后端面试真题](../companies/tencent-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q343-singleton-safe-publication/) · [题库目录](../../README.md)
@@ -105,6 +107,14 @@ Spring 的 singleton 是容器中的 Bean 作用域，通常按容器和 Bean �
 > - volatile：保障同步区外读取所需的安全发布。
 > - 静态内部类：利用 JVM 类初始化机制。
 > - 共享实例：不自动保证内部可变状态线程安全。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **腾讯 · 后台开发 · 原帖未明确批次**：怎样实现线程安全的单例？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -92,6 +92,12 @@ Webpack 中，sideEffects 声明可以让工具跳过无需保留的模块及其
 > - sideEffects：声明责任在作者，错误声明可能删掉必要行为。
 > - 验收：生产产物与最小页面行为一起看。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

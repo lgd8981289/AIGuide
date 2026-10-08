@@ -1,5 +1,6 @@
 ---
 import { LEARNING_GUIDES, guideHref } from '../data/learning-guides'
+import { getInterviewCollections } from '../lib/company-interviews.mjs'
 import { url } from '../utils'
 import '../styles/learning-guides.css'
 ---
@@ -21,15 +22,15 @@ import '../styles/learning-guides.css'
       </a>
     ))}
   </div>
-  <nav class="recruitment-links" aria-label="公司面试备考专题">
-    <span>按投递目标复习</span>
-    {LEARNING_GUIDES.filter((guide) => guide.note).map((guide) => (
-      <a href={url(guideHref(guide))}>{guide.label}<span aria-hidden="true"> ↗</span></a>
+  <nav class="recruitment-links" aria-label="公司与岗位面试真题">
+    <a href={url('/companies/')}>公司面试真题</a>
+    {getInterviewCollections().map((view) => (
+      <a href={url(view.href)}>{view.label}<span aria-hidden="true"> ↗</span></a>
     ))}
   </nav>
 </section>
 
 <style>
   .recruitment-links { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem 1.25rem; margin-top: 1rem; font-size: .875rem; }
-  .recruitment-links > span { color: var(--muted); }
+  .recruitment-links > span { color: var(--text-2); }
 </style>

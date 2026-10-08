@@ -123,6 +123,12 @@ highWaterMark 在普通字节流和对象模式里的计量不同，不能拿一
 > - highWaterMark：阈值，不是总内存硬上限。
 > - 验收：慢消费、报错、断开和取消都要测。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

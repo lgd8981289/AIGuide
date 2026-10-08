@@ -140,6 +140,12 @@ def top_k(values: Iterable[float], k: int) -> list[float]:
 > - 复杂度：维护 O(n log K)，有序输出另算。
 > - 边界：K=0、K>n、重复、负数与并列规则。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

@@ -102,6 +102,12 @@ MySQL 8.4 的 TIMESTAMP 范围大致从 1970 年初到 2038 年 1 月；DATETIME
 > - 版本范围：MySQL 8.4 的 TIMESTAMP 仍有 2038 年限制。
 > - 选型：先定时刻或当地时间语义，再定范围、精度与时区约定。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

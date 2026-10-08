@@ -94,6 +94,12 @@ EXPLAIN 里常见的 Using index 通常提示覆盖访问；Using index conditio
 > - 计划：Using index 与 Using index condition 不是同义词。
 > - 取舍：读收益要对照写入、空间和缓存成本。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

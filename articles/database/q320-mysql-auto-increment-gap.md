@@ -94,6 +94,12 @@ MySQL 8.4 中，innodb\_autoinc\_lock\_mode 默认是 2，也就是 interleaved�
 > - 统计：最大 ID 不能代替记录数。
 > - 业务编号：连续性与审计规则需要另外设计。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

@@ -1,5 +1,7 @@
 # Computer Use 是什么？Agent 如何看懂页面并操作电脑？
 
+[字节Agent开发面试真题](../companies/bytedance-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/agent/q070-computer-use/) · [题库目录](../../README.md)
@@ -114,6 +116,14 @@ Agent 看见后台首页，选择“订单管理”。应用点击以后，返�
 > - 定位方式：有页面结构时可以定位元素，不必只靠坐标。
 > - 完成判断：检查目标结果，点击成功不等于任务完成。
 > - 安全边界：网页内容不是用户授权，高风险动作需要额外限制。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · Agent开发 · 校招**：Computer Use 怎样操作本地或云端电脑？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/929731481189044224)；页面显示 09-16 编辑，未明确年份；标题为秋招。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -131,6 +131,12 @@ Attention 权重在位置维度上对 V 加权，因此输出特征维度由 V �
 > - 多头：多组投影分别计算，拼接后再变换。
 > - 输出：Attention 表示不是下一 Token 的词表概率。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

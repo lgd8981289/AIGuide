@@ -1,5 +1,7 @@
 # 大模型结构化输出怎么校验？JSON 入库与失败处理
 
+[字节Agent开发面试真题](../companies/bytedance-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/engineering/q019-structured-output-validation/) · [题库目录](../../README.md)
@@ -77,6 +79,14 @@
 > - 异常分流：先辨别失败、截断、拒答和正常完成，再解析。
 > - 入库门槛：核对金额单位、来源、订单归属与用户权限。
 > - 重试安全：写操作有幂等键，避免一次请求生成多张单。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · Agent开发 · 校招（原帖标签）**：AI 项目的评分结果如何结构化输出？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/925342611194286080)；标题记录 9 月 3 日面试，页面显示 09-04 编辑；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

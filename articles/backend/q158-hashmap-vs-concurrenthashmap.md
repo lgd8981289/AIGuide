@@ -1,5 +1,7 @@
 # HashMap 和 ConcurrentHashMap 有什么区别？并发读写为什么不能混用？
 
+[腾讯后端面试真题](../companies/tencent-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q158-hashmap-vs-concurrenthashmap/) · [题库目录](../../README.md)
@@ -83,6 +85,14 @@
 > - 同 key 复合修改使用适合的原子方法。
 > - 多 key 约束和 value 内部状态要另行协调。
 > - 遍历与 size 不是全表一致快照。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **腾讯 · 后台开发 · 原帖未明确批次**：HashMap 与 ConcurrentHashMap 有哪些区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

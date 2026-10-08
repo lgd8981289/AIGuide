@@ -1,5 +1,7 @@
 # HTTP/1.1、HTTP/2、HTTP/3 有什么区别？队头阻塞是怎么解决的？
 
+[小米前端面试真题](../companies/xiaomi-frontend.md) · [阿里前端面试真题](../companies/alibaba-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q190-http-versions/) · [题库目录](../../README.md)
@@ -87,6 +89,15 @@ UDP 只负责承载数据报；QUIC 在其上实现可靠流和恢复机制，�
 > - TCP：共享有序字节流仍可能形成传输层阻塞。
 > - HTTP/3：QUIC 独立流，头字段用 QPACK。
 > - 边界：可靠不等于无等待，新协议不自动修应用瓶颈。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **小米 · 前端 · 原帖未明确批次**：HTTP 的不同版本有哪些变化？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **阿里巴巴 · 前端 · 原帖未明确批次**：HTTP 的不同版本有哪些变化？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

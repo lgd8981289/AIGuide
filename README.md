@@ -6,17 +6,27 @@
 
 你也可以通过 **sunday面试指南**、**程序员Sunday** 找到本站。建议先按岗位选路线，再按具体问题查阅。
 
-## 校招与公司备考
+## 公司面试真题
 
-| 复习目标 | 阅读入口 |
-| --- | --- |
-| 校招、实习与秋招基础 | [校招面试题准备路线](https://note.lgdsunday.club/guides/campus-interview/) |
-| 字节跳动开发岗位 | [字节面试题备考](https://note.lgdsunday.club/guides/bytedance-interview/) |
-| 百度校招开发岗位 | [百度校招面试题备考](https://note.lgdsunday.club/guides/baidu-campus-interview/) |
-| 百度前端开发岗位 | [百度前端面试题备考](https://note.lgdsunday.club/guides/baidu-frontend-interview/) |
-| 阿里巴巴后端开发岗位 | [阿里后端面试题备考](https://note.lgdsunday.club/guides/alibaba-backend-interview/) |
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-公司专题按岗位能力整理通用技术题，未标注可核验面经来源的内容不代表该公司的实际考题或官方题库。
+| 公司 / 岗位 | 题目数 | GitHub 真题列表 | 在线阅读 |
+| --- | ---: | --- | --- |
+| 字节前端面试真题 | 10 | [题目与答案](articles/companies/bytedance-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/frontend/) |
+| 百度前端面试真题 | 15 | [题目与答案](articles/companies/baidu-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/frontend/) |
+| 阿里后端面试真题 | 6 | [题目与答案](articles/companies/alibaba-backend.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/backend/) |
+| 腾讯后端面试真题 | 10 | [题目与答案](articles/companies/tencent-backend.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/backend/) |
+| 美团开发面试真题 | 13 | [题目与答案](articles/companies/meituan-development.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/development/) |
+| 京东后端面试真题 | 6 | [题目与答案](articles/companies/jd-backend.md) | [网站列表](https://note.lgdsunday.club/companies/jd/backend/) |
+| 小米前端面试真题 | 16 | [题目与答案](articles/companies/xiaomi-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/xiaomi/frontend/) |
+| 网易前端面试真题 | 5 | [题目与答案](articles/companies/netease-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/netease/frontend/) |
+| 字节Agent开发面试真题 | 6 | [题目与答案](articles/companies/bytedance-agent.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/agent/) |
+| 百度Agent开发面试真题 | 6 | [题目与答案](articles/companies/baidu-agent.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/agent/) |
+| 阿里前端面试真题 | 4 | [题目与答案](articles/companies/alibaba-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/frontend/) |
+| 腾讯前端面试真题 | 4 | [题目与答案](articles/companies/tencent-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/frontend/) |
+| 去哪儿AI应用开发面试真题 | 1 | [题目与答案](articles/companies/qunar-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/qunar/ai-application/) |
+
+[全部公司真题目录](articles/companies/README.md) · [网站真题列表](https://note.lgdsunday.club/companies/) · [校招与实习准备路线](https://note.lgdsunday.club/guides/campus-interview/)
 
 ## 分类目录
 

@@ -90,6 +90,12 @@ use server 又是另一回事，它用于 Server Functions，不是“宣布这�
 > - 指令：use client 定入口边界，use server 用于 Server Functions。
 > - 安全：不发组件源码，不等于输出数据不可见。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

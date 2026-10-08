@@ -96,6 +96,12 @@ CronJob 的 Forbid 约束同一个 CronJob 创建的 Job 不重叠，不是给�
 > - fencing：需要写入资源真正拒绝旧执行权。
 > - 业务幂等：重跑不产生重复效果，不能由分布式锁替代。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

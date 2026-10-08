@@ -1,5 +1,7 @@
 # 从输入 URL 到页面显示，浏览器到底经历了什么？
 
+[百度前端面试真题](../companies/baidu-frontend.md) · [美团开发面试真题](../companies/meituan-development.md) · [小米前端面试真题](../companies/xiaomi-frontend.md) · [阿里前端面试真题](../companies/alibaba-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q129-browser-navigation-rendering/) · [题库目录](../../README.md)
@@ -91,6 +93,17 @@ display: none 的元素不参与相应布局；visibility: hidden 仍占布局�
 > - 渲染：样式算外观，布局算几何，绘制与合成呈现内容。
 > - 交互：第一屏已出现，主线程仍可能被长任务占用。
 > - 诊断：网络和主线程分别测，首次与重复访问分别看。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 实习（原帖标签）**：从输入网址到页面渲染经历哪些步骤？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+- **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：从输入网址到页面渲染经历哪些步骤？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+- **小米 · 前端 · 原帖未明确批次**：从输入网址到页面渲染经历哪些步骤？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **阿里巴巴 · 前端 · 原帖未明确批次**：从输入网址到页面渲染经历哪些步骤？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

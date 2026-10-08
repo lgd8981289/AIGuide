@@ -1,5 +1,7 @@
 # JavaScript 数组去重有哪些方法？为什么 Set 去不掉内容相同的对象？
 
+[腾讯前端面试真题](../companies/tencent-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q298-array-dedup-business-key/) · [题库目录](../../README.md)
@@ -113,6 +115,14 @@ JS Set 不会把它们自动合并。接口如果混用了类型，先按业务�
 > - 业务键：明确 id 的类型、范围和缺失值处理。
 > - 保留规则：第一条、最后一条与输出顺序分别定义。
 > - JSON：是序列化格式，不是通用相等规则。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **腾讯 · 前端 · 原帖未明确批次**：怎样实现数组去重？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

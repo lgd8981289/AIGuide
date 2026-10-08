@@ -1,5 +1,7 @@
 # HTTP 强缓存和协商缓存有什么区别？Cache-Control、ETag 和 304 怎么配合？
 
+[字节前端面试真题](../companies/bytedance-frontend.md) · [百度前端面试真题](../companies/baidu-frontend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md) · [网易前端面试真题](../companies/netease-frontend.md) · [腾讯前端面试真题](../companies/tencent-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q105-http-browser-cache/) · [题库目录](../../README.md)
@@ -94,6 +96,19 @@ private 则限制共享缓存，防止同一份个性化响应被发给其他用
 > - 304：省正文，不省验证请求。
 > - 指令：no-cache 要验证，no-store 不存储，private 不共享。
 > - 发布：入口常验证，哈希资源长期缓存，旧资源适当保留。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · 前端 · 社招**：浏览器缓存有哪些机制？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/786037843704479744)；原帖编辑于 2025-09-01。
+- **百度 · 前端 · 实习（原帖标签）**：浏览器缓存有哪些机制？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+- **百度 · 前端 · 校招**：浏览器缓存有哪些机制？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158492217352192)；面试记录为 2021 年 9 月；原帖编辑于 2021-10-04。
+- **小米 · 前端 · 原帖未明确批次**：浏览器缓存有哪些机制？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **网易 · 前端 · 原帖未明确批次**：浏览器缓存有哪些机制？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+- **腾讯 · 前端 · 原帖未明确批次**：浏览器缓存有哪些机制？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

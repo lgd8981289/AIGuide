@@ -152,6 +152,12 @@ def reverse_recursive(head: ListNode | None) -> ListNode | None:
 > - 递归断链：head.next 置空，避免保留旧箭头形成环。
 > - 复杂度：两者 O(n) 时间；迭代 O(1)，递归 O(n) 额外空间。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

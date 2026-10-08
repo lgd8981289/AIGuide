@@ -116,6 +116,12 @@ asyncio.run(outer(inner))
 > - 洋葱顺序：A 前 → B 前 → 内层 → B 后 → A 后。
 > - 异常捕获依赖正确等待，响应完成还要看生命周期。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

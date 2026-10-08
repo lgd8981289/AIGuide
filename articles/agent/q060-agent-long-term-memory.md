@@ -1,5 +1,7 @@
 # Agent 的长期记忆怎么设计？用户改口后，旧记忆怎么办？
 
+[百度Agent开发面试真题](../companies/baidu-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/agent/q060-agent-long-term-memory/) · [题库目录](../../README.md)
@@ -116,6 +118,14 @@ Agent 的长期记忆，是把跨会话仍然有用的信息保存下来，并�
 > - 更新方式：更新同一事实的有效版本，不只追加相似文本。
 > - 读取过程：过滤用户、范围和有效状态，再选入当前上下文。
 > - 安全边界：记忆可以提供背景，不能代替当前授权。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · Agent开发 · 实习**：项目中的长期记忆如何实现？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；标题记录 9 月 7 日面试，页面显示 09-07 发布；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

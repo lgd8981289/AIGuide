@@ -92,6 +92,12 @@ Zustand v5 中，返回新对象等不稳定引用的 selector 还要注意稳�
 > - Zustand：轻量 store 与 selector，仍需边界和稳定输出。
 > - 判断：看订阅、生命周期和调试需求，不只看项目大小。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

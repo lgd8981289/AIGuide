@@ -1,5 +1,7 @@
 # Redis 的大 Key 和热 Key 有什么区别？应该怎么发现和处理？
 
+[美团开发面试真题](../companies/meituan-development.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q184-redis-big-key-hot-key/) · [题库目录](../../README.md)
@@ -87,6 +89,14 @@ Cluster 把一个键分配到一个槽，稳定时由对应主节点服务，不
 > - 定位：规模与频率分别采证据。
 > - 拆分：要改变单次工作和实际访问路径。
 > - 边界：Cluster 不会自动拆开一个热键。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：怎样处理 Redis 热 Key？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

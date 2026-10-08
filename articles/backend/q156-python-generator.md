@@ -111,6 +111,12 @@ Python 的 next 在耗尽时通过 StopIteration 结束；JavaScript 迭代结�
 > - 执行：普通生成器不是后台线程或异步I/O。
 > - 清理：提前停止和异常时明确关闭责任。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

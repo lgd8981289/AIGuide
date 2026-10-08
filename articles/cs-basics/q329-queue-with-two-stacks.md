@@ -133,6 +133,12 @@ class TwoStackQueue:
 > - 成本：单次最坏 O(n)，一串操作均摊 O(1)。
 > - 验证：重点测试入队、出队交错与空队列。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

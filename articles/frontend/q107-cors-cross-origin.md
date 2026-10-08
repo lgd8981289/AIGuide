@@ -1,5 +1,7 @@
 # 浏览器为什么会跨域？CORS 预检请求和携带 Cookie 怎么处理？
 
+[小米前端面试真题](../companies/xiaomi-frontend.md) · [网易前端面试真题](../companies/netease-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q107-cors-cross-origin/) · [题库目录](../../README.md)
@@ -101,6 +103,15 @@ OPTIONS 表达的是：“这个来源想用 POST，并带这些请求头，可�
 > - 凭据：include、响应许可和 Cookie 自身规则都要满足。
 > - 鉴权：CORS 通过不代表用户有权限。
 > - 排查：分开看预检、正式请求、凭据与响应读取。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **小米 · 前端 · 原帖未明确批次**：浏览器跨域有哪些处理方式？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **网易 · 前端 · 原帖未明确批次**：浏览器跨域有哪些处理方式？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

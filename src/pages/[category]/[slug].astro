@@ -1,4 +1,7 @@
 ---
+import ArticleCompanies from "../../components/ArticleCompanies.astro";
+import ArticleInterviewQuestions from "../../components/ArticleInterviewQuestions.astro";
+import { realQuestionsForArticle, questionTags, interviewDescription } from "../../lib/company-interviews.mjs";
 import { render } from "astro:content";
 import { brandedDescription } from "../../lib/brand.mjs";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -37,7 +40,10 @@ export async function getStaticPaths() {
 }
 
 const { entry, displayNum } = Astro.props;
+const companyMatches = realQuestionsForArticle(entry.data.qnum);
+const description = interviewDescription(entry.data.description, companyMatches);
 const { Content, headings } = await render(entry);
+const articleHeadings = [...headings, { depth: 2, slug: 'company-interview-questions', text: '公司面试真题' }];
 
 const cat = CATEGORIES.find((c) => c.slug === entry.data.category)!;
 const meta = MODULE_META[cat.module];
@@ -90,7 +96,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "Article",
     headline: entry.data.title,
-    description: brandedDescription(entry.data.description),
+    description: brandedDescription(description),
     ...(entry.data.faqAnswer ? { abstract: entry.data.faqAnswer } : {}),
     isAccessibleForFree: !gated,
     ...(gated ? {
@@ -100,6 +106,7 @@ const jsonLd = [
         cssSelector: ".gated-content",
       },
     } : {}),
+    ...(companyMatches.length ? { citation: [...new Set(companyMatches.map(m => m.source.url))], keywords: questionTags(entry.data.qnum).map(t => t.label) } : {}),
     datePublished: publishedDateISO,
     dateModified: dateISO,
     inLanguage: "zh-CN",
@@ -180,7 +187,7 @@ const jsonLd = [
 
 <BaseLayout
   title={entry.data.title}
-  description={entry.data.description}
+  description={description}
   path={pagePath}
   sidebar
   ogType="article"
@@ -210,6 +217,7 @@ const jsonLd = [
             <a href={url(`/${cat.slug}/`)}>{cat.name}</a>
           </div>
           <h1 data-pagefind-meta="title">{entry.data.title}</h1>
+          <ArticleCompanies qnum={entry.data.qnum} />
           <div class="article-meta" data-pagefind-ignore>
             <span>{SITE.author} · {SITE.name}</span>
             <a class="cat" data-pagefind-meta="category" href={url(`/${cat.slug}/`)}>
@@ -224,6 +232,8 @@ const jsonLd = [
         <div id="readmore-container" class="prose">
           <Content />
         </div>
+
+        <ArticleInterviewQuestions qnum={entry.data.qnum} />
 
         {
           (prev || next) && (
@@ -272,7 +282,7 @@ const jsonLd = [
       <ResumeCta variant="inline" />
     </div>
 
-    <Toc headings={headings} />
+    <Toc headings={articleHeadings} />
   </div>
 
   <BackTop />

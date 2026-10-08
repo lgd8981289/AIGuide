@@ -1,5 +1,7 @@
 # JavaScript 闭包是什么？为什么变量没有被释放，什么时候会内存泄漏？
 
+[百度前端面试真题](../companies/baidu-frontend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md) · [阿里前端面试真题](../companies/alibaba-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q110-js-closure-memory/) · [题库目录](../../README.md)
@@ -127,6 +129,17 @@ print(a(), a(), b())  # 1 2 1
 > - 回收：看是否可达，不看外层函数是否已经返回。
 > - 泄漏：已经不需要的数据，仍被长期入口保留。
 > - 清理：取消监听、计时器和订阅，检查真实引用链。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 实习（原帖标签）**：闭包是什么，通常用于什么场景？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+- **百度 · 前端 · 校招**：闭包是什么，通常用于什么场景？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158492217352192)；面试记录为 2021 年 9 月；原帖编辑于 2021-10-04。
+- **小米 · 前端 · 原帖未明确批次**：闭包是什么，通常用于什么场景？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **阿里巴巴 · 前端 · 原帖未明确批次**：闭包是什么，通常用于什么场景？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

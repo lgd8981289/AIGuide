@@ -1,5 +1,7 @@
 # Agent 的 Context、Memory 和 State 有什么区别？
 
+[美团开发面试真题](../companies/meituan-development.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/agent/q007-context-memory-state/) · [题库目录](../../README.md)
@@ -98,6 +100,14 @@
 > - Memory：让信息以后还能被取回；短期记忆可以存在 State 中，长期记忆通常跨会话。
 > - 忘事排查：先查有没有保存，再查有没有选入本轮 Context，不只怪上下文窗口。
 > - 安全边界：关键限制要反复带入判断，写操作还必须由工具层独立校验。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：Agent 的短期记忆和长期记忆分别适用于什么场景？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

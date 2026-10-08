@@ -1,5 +1,7 @@
 # Agent 任务中断后如何恢复？Checkpoint 与幂等设计
 
+[百度Agent开发面试真题](../companies/baidu-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/engineering/q065-agent-task-failure-recovery/) · [题库目录](../../README.md)
@@ -117,6 +119,14 @@ Checkpoint 可以保存恢复所需的运行状态，但必须使用真正可持
 > - 稳定操作编号：跨重试识别同一次业务动作。
 > - 执行权控制：原子接管，拒绝过期执行者提交，并配合外部幂等。
 > - 恢复验收：在关键故障位置测试，允许明确待确认，不允许假成功。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · Agent开发 · 实习**：Agent 执行中断后怎样继续任务？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；标题记录 9 月 7 日面试，页面显示 09-07 发布；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

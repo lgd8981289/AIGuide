@@ -100,6 +100,12 @@ Cookie 自动发送很方便，也需要考虑 CSRF。HttpOnly 限制脚本读�
 > - 安全：签名不等于加密，HttpOnly 不防所有账户操作。
 > - 撤销：删本地副本，不等于别人手中的凭据失效。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

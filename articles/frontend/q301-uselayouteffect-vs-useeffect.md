@@ -1,5 +1,7 @@
 # React 的 useLayoutEffect 和 useEffect 有什么区别？什么时候需要在绘制前测量 DOM？
 
+[字节前端面试真题](../companies/bytedance-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q301-uselayouteffect-vs-useeffect/) · [题库目录](../../README.md)
@@ -87,6 +89,14 @@ useEffect 主要用于与外部系统同步，通常让浏览器先绘制，但�
 > - 代价：阻挡绘制，不能装入无关长任务。
 > - useEffect：不把所有情况概括为绝对绘制后。
 > - SSR：不运行 Effect，也没有浏览器布局可测。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · 前端 · 社招**：useEffect 与 useLayoutEffect 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/786037843704479744)；原帖编辑于 2025-09-01。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

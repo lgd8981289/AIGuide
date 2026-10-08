@@ -1,5 +1,7 @@
 # JavaScript 原型链是什么？new 和继承是怎么实现的？
 
+[字节前端面试真题](../companies/bytedance-frontend.md) · [百度前端面试真题](../companies/baidu-frontend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q116-prototype-chain-new/) · [题库目录](../../README.md)
@@ -104,6 +106,16 @@ console.log(Object.hasOwn(user, "role")); // true
 > - 共享：原型方法可以复用，实例可变数据要谨慎放置。
 > - 修改：重新赋值与修改共享对象内部，是不同动作。
 > - 验证：Object.getPrototypeOf 看关系，Object.hasOwn 看归属。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · 前端 · 社招**：JavaScript 原型链怎样实现继承？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/786037843704479744)；原帖编辑于 2025-09-01。
+- **百度 · 前端 · 实习（原帖标签）**：JavaScript 原型链怎样实现继承？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+- **小米 · 前端 · 原帖未明确批次**：JavaScript 原型链怎样实现继承？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

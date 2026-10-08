@@ -148,6 +148,12 @@ for...in 不会因为 length 包含这个位置，就自动生成一个对应自
 > - 普通对象：默认不直接可迭代，字段可先转成 Object.entries。
 > - 范围：自有、继承、可枚举、Symbol 与空洞分别判断。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

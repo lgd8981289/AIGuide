@@ -92,6 +92,12 @@ MyBatis 的一级缓存通常作用在一个 SqlSession 内。同一会话里重
 > - 失效边界：外部写入和未共享缓存的 Mapper，可能留下旧结果。
 > - 排查顺序：缓存命中、Session 与事务、namespace、数据库隔离逐项确认。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

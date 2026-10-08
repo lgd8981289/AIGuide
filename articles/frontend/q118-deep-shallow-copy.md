@@ -1,5 +1,7 @@
 # JavaScript 深拷贝和浅拷贝有什么区别？structuredClone 能替代 JSON 拷贝吗？
 
+[小米前端面试真题](../companies/xiaomi-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q118-deep-shallow-copy/) · [题库目录](../../README.md)
@@ -115,6 +117,14 @@ JSON 只能表达它支持的那套数据。日期可能变成字符串；对象
 > - JSON：适合 JSON 数据，不能通用复制对象。
 > - structuredClone：支持更多数据与循环引用，仍有类型限制。
 > - 验收：检查身份与实际修改结果，不只比较外层对象。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **小米 · 前端 · 原帖未明确批次**：深拷贝和浅拷贝有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

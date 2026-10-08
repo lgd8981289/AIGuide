@@ -1,5 +1,7 @@
 # CSS 定位有哪些方式？absolute、fixed 和 sticky 有什么区别？
 
+[百度前端面试真题](../companies/baidu-frontend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q233-css-position-containing-block/) · [题库目录](../../README.md)
@@ -107,6 +109,15 @@ static 时，它按普通布局占据位置。relative 时，也仍然为它保�
 > - fixed：通常参照视口，但有祖先样式例外。
 > - sticky：正常流占位，受滚动机制、阈值与容器边界约束。
 > - 排错：先参照与尺寸，再处理遮挡。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 实习（原帖标签）**：CSS position 提供哪些定位方式？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+- **小米 · 前端 · 原帖未明确批次**：CSS position 提供哪些定位方式？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

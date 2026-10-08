@@ -15,6 +15,7 @@
     "build:post": "node scripts/postbuild.mjs",
     "check:seo": "node scripts/article-url-workflow.mjs built && python3 scripts/check-seo.py",
     "check:urls": "node scripts/article-url-workflow.mjs source",
+    "check:companies": "node scripts/check-company-questions.mjs",
     "urls:init": "node scripts/article-url-workflow.mjs init",
     "urls:record": "node scripts/article-url-workflow.mjs record",
     "test:urls": "node --test scripts/tests/article-url-*.test.mjs",

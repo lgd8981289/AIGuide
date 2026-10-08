@@ -1,5 +1,7 @@
 # Java 内存模型 JMM 是什么？happens-before 等于代码先执行吗？
 
+[美团开发面试真题](../companies/meituan-development.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q309-jmm-happens-before/) · [题库目录](../../README.md)
@@ -94,6 +96,14 @@ sleep 主要改变调度机会，不给共享字段自动建立需要的同步�
 > - 推理：程序顺序 → 同步关系 → 程序顺序。
 > - 传递性：把发布前写入与接收后读取连起来。
 > - 边界：可见性不等于复合操作原子性，sleep 不替代同步。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：Java 内存模型怎样工作？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

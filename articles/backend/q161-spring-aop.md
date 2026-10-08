@@ -1,5 +1,7 @@
 # Spring AOP 是什么？JDK 动态代理和 CGLIB 有什么区别？
 
+[京东后端面试真题](../companies/jd-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q161-spring-aop/) · [题库目录](../../README.md)
@@ -84,6 +86,14 @@ Spring 核心框架与 Spring Boot 的默认配置可能不同，用户也可以
 > - JDK 基于接口；CGLIB 基于可继承、可重写的类方法。
 > - this 内部调用绕过代理，不触发新的增强。
 > - 先查调用路径，再查匹配规则和配置。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **京东 · 数据开发 / 后端 · 校招**：Spring AOP 怎样实现切面功能？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/791720598454935552)；原帖发布于 2025-08-31（秋招记录）。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

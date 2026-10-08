@@ -131,6 +131,12 @@ amount 可能为 null 时不同。COUNT(\*) 计行，COUNT(amount) 只计该表�
 > - HAVING：决定哪些组结果留下。
 > - 优化边界：逻辑顺序解释语义，物理计划可以改变计算方式。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

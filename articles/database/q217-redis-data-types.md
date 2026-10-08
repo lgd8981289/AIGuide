@@ -1,5 +1,7 @@
 # Redis 常用数据类型有哪些？String、Hash、List、Set、ZSet 应该怎么选？
 
+[京东后端面试真题](../companies/jd-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q217-redis-data-types/) · [题库目录](../../README.md)
@@ -98,6 +100,14 @@ Hash 允许直接操作指定字段，少做整份搬运。不过，Hash 并不�
 > - Set：成员唯一，适合去重和集合运算。
 > - ZSet：成员唯一且带分数，适合排序与范围查询。
 > - 选型：先看操作，再看规模、过期与可靠性。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **京东 · 数据开发 / 后端 · 校招**：Redis 的数据类型和底层结构有哪些？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/791720598454935552)；原帖发布于 2025-08-31（秋招记录）。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

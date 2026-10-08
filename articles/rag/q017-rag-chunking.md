@@ -1,5 +1,7 @@
 # RAG 文档切片越小越好吗？Chunk Size 应该怎么选？
 
+[百度Agent开发面试真题](../companies/baidu-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/rag/q017-rag-chunking/) · [题库目录](../../README.md)
@@ -73,6 +75,14 @@ RAG 切片不是越小越好。小块通常更聚焦，检索时容易定位到�
 > - 优先边界：按标题、条款和段落切，不只看固定字数。
 > - 折中做法：小块检索，再带回完整父条款或相邻证据。
 > - 选型依据：用标注问题比较证据完整度、答案质量、延迟与成本。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · Agent开发 · 实习**：RAG 文档切片的粒度怎样确定？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；标题记录 9 月 7 日面试，页面显示 09-07 发布；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -1,5 +1,7 @@
 # MCP 的 stdio 和 Streamable HTTP 有什么区别？“流式”到底指什么？
 
+[百度Agent开发面试真题](../companies/baidu-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/agent/q071-mcp-transport/) · [题库目录](../../README.md)
@@ -116,6 +118,14 @@ HTTP 可能增加网络等待，但工具本身执行多久、服务是否复用
 > - 流式边界：消息流、工具进度和模型 Token 流是不同的事。
 > - 版本检查：本篇采用 2026-07-28，旧会话与 GET 流不能直接套用。
 > - 权限判断：连接和发现工具，不等于用户被允许执行操作。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · Agent开发 · 实习**：MCP 的 stdio 与 Streamable HTTP 如何工作？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；标题记录 9 月 7 日面试，页面显示 09-07 发布；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

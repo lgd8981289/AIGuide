@@ -102,6 +102,12 @@ useState 不会自动浅合并新旧对象。需要保留字段时，应返回�
 > - 更新函数：保持纯粹，不放业务副作用。
 > - 版本边界：批处理看根 API，类 setState 与 useState 的合并规则不同。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

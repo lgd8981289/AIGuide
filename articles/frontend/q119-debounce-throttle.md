@@ -1,5 +1,7 @@
 # 防抖和节流有什么区别？搜索框和滚动事件分别怎么选？
 
+[百度前端面试真题](../companies/baidu-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q119-debounce-throttle/) · [题库目录](../../README.md)
@@ -132,6 +134,14 @@ asyncio.run(main())
 > - 行为契约：说明 leading、trailing、取消与最长等待。
 > - 异步结果：减少触发不等于解决响应乱序。
 > - 测试：同时检查次数、时刻和最终显示内容。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 实习（原帖标签）**：防抖与节流有什么区别，怎样实现防抖？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

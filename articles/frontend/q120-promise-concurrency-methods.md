@@ -1,5 +1,7 @@
 # Promise.all、allSettled、race、any 有什么区别？失败后其他任务会停止吗？
 
+[字节前端面试真题](../companies/bytedance-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q120-promise-concurrency-methods/) · [题库目录](../../README.md)
@@ -104,6 +106,14 @@ all 和 allSettled 的聚合状态可以成功，any 会以 AggregateError 失�
 > - race：要最先完成，成功失败都算。
 > - any：要第一个成功，全部失败才报聚合错误。
 > - 取消：聚合结束后，剩余任务仍可能运行。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · 前端 · 社招**：Promise.all 与其他组合方法怎样使用？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/786037843704479744)；原帖编辑于 2025-09-01。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

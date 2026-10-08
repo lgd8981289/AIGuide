@@ -1,5 +1,7 @@
 # var、let、const 有什么区别？暂时性死区和变量提升怎么理解？
 
+[百度前端面试真题](../companies/baidu-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q236-var-let-const-tdz/) · [题库目录](../../README.md)
@@ -121,6 +123,14 @@ config 仍然指向原来的对象，变化发生在对象内部。const 没有�
 > - 遮蔽：先找到当前作用域的绑定，不会因为尚未初始化就自动读取外层。
 > - const：不允许重新赋值，不代表对象深层内容不能改。
 > - 选型：默认 const，需要重赋值时 let；不要用性能传言代替理由。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · 前端 · 实习（原帖标签）**：var、let、const 的作用域有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

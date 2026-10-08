@@ -112,6 +112,12 @@ def reducer(state, action):
 > - 请求：在副作用位置执行，结果按身份回填。
 > - 测试：有效转换、无效转换与原状态不变分开检查。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

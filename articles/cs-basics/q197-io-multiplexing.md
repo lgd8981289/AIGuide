@@ -1,5 +1,7 @@
 # select、poll、epoll 有什么区别？I/O 多路复用到底在复用什么？
 
+[京东后端面试真题](../companies/jd-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q197-io-multiplexing/) · [题库目录](../../README.md)
@@ -89,6 +91,14 @@ epoll\_wait 本身可以阻塞等待；描述符和业务是否阻塞是另一�
 > - LT：满足条件继续通知；ET：注意状态变化。
 > - ET 常规处理：非阻塞，处理到 EAGAIN。
 > - 边界：就绪不等于读完，更不等于业务完成。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **京东 · 数据开发 / 后端 · 校招**：I/O 多路复用怎样工作？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/791720598454935552)；原帖发布于 2025-08-31（秋招记录）。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

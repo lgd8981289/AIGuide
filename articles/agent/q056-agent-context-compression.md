@@ -1,5 +1,7 @@
 # Agent 上下文太长怎么办？压缩与关键信息保留
 
+[美团开发面试真题](../companies/meituan-development.md) · [字节Agent开发面试真题](../companies/bytedance-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/agent/q056-agent-context-compression/) · [题库目录](../../README.md)
@@ -113,6 +115,16 @@ Agent 已经查过接口耗时、数据库日志和发布记录。此时，完�
 > - 长材料：可以移出上下文，但要能按来源重新取回。
 > - 处理时机：为下一轮输出和工具结果预留空间。
 > - 验证方式：检查压缩后的行为有没有遗忘、重复或误判。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：Agent 上下文过长时怎样压缩，并减少信息损失？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+- **字节跳动 · Agent开发 · 校招**：Agent 上下文过长时怎样压缩，并减少信息损失？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/929731481189044224)；页面显示 09-16 编辑，未明确年份；标题为秋招。
+- **字节跳动 · Agent开发 · 校招（原帖标签）**：Agent 上下文过长时怎样压缩，并减少信息损失？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/925342611194286080)；标题记录 9 月 3 日面试，页面显示 09-04 编辑；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

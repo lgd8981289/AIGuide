@@ -25,6 +25,14 @@
 
 # 仓库维护说明（开发文档）
 
+## 公司面试真题与文章标签
+
+在 `src/data/company-interviews.mjs` 维护公司、岗位 `roleKey`、公开面经来源、核验日期和文章全局题号。原帖明确出现的问题用 `mentioned`，同时维护题意 `question`；编辑补充的阅读方向用 `related`。只有已核验的 `mentioned` 生成真题标签和列表，禁止根据文章关键词自动贴公司。`dateLabel` 区分发布、编辑与面试时间，页面没有年份时保留“未明确年份”。问题题意需逐条核对原帖，不把本站模拟对话写成真实问答。
+
+文章 H1 下方用真实 `<a href>` 展示“公司＋岗位＋面试真题”标签，指向 `/companies/{company}/{role}/`。所有文章都有文末“公司面试真题”环节，未收录来源的题目显示明确空状态。公司与岗位列表按文章去重并链接回原有正文；GitHub 同步正文、标题标签与 `articles/companies/` 真题目录。旧公司指南地址保留兼容访问，`noindex` 并规范到新列表，不重复进入 sitemap。
+
+更新后运行 `node --test scripts/tests/company-interviews.test.mjs scripts/tests/github-articles.test.mjs`、`npm run export:github`、`npm run build`、`npm run check:companies` 和 `npm run check:urls`。不得把构建和导出当成已部署或已推送；来源引用也不替代文章技术结论的核验。
+
 网站入口：[note.lgdsunday.club](https://note.lgdsunday.club/)。指南部署在独立子域名的根目录；原 `lgdsunday.club/note/` 和 `www.lgdsunday.club/note/` 均逐页 301 到新地址。
 
 ## 服务器目录

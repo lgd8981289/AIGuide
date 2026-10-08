@@ -1,5 +1,7 @@
 # OSI 七层模型和 TCP/IP 四层模型有什么区别？一次请求经过哪些层？
 
+[阿里后端面试真题](../companies/alibaba-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q290-osi-vs-tcpip/) · [题库目录](../../README.md)
@@ -95,6 +97,14 @@ TCP/IP 四层口径里，应用层包含这些上层职责；最下面的链路�
 > - 封装：下层加入本层控制信息，接收时相应处理再向上交付。
 > - 范围：端口分通信入口，IP 管跨网络，链路地址管当前一跳。
 > - 跨路由：链路帧逐跳重建，不能把端到端 IP 交付等同同一个帧。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **阿里巴巴 · 后端 · 原帖未明确批次**：网络分层中交换机和路由器各负责什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159441665171456)；原帖发布于 2022-03-29。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

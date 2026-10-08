@@ -1,5 +1,7 @@
 # React 错误边界 Error Boundary 是什么？为什么捕获不到所有错误？
 
+[字节前端面试真题](../companies/bytedance-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q294-react-error-boundary/) · [题库目录](../../README.md)
@@ -115,6 +117,14 @@ JSX 表达式建立的是元素描述，子组件真正渲染可能由 React 在
 > - 版本例外：当前 useTransition 的 startTransition 错误可进入边界。
 > - 放置：按能独立降级的功能区域，不是只放全页或每个小节点。
 > - 恢复：先处理原因，再重置边界，避免立即再次失败。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · 前端 · 社招**：React 错误边界能捕获哪些错误？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/786037843704479744)；原帖编辑于 2025-09-01。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

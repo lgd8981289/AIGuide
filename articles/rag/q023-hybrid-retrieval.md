@@ -1,5 +1,7 @@
 # RAG 混合检索怎么做？关键词与向量检索的融合
 
+[百度Agent开发面试真题](../companies/baidu-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/rag/q023-hybrid-retrieval/) · [题库目录](../../README.md)
@@ -69,6 +71,14 @@ RAG 用混合检索，主要是因为关键词和向量检索擅长的题不一�
 > - 融合：统一 ID 去重，分数不宜直接相加。
 > - 门禁：权限与版本不能被高相似度覆盖。
 > - 证据：按题型比较召回、答案、延迟和成本。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **百度 · Agent开发 · 实习**：项目中的混合检索如何实现？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；标题记录 9 月 7 日面试，页面显示 09-07 发布；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

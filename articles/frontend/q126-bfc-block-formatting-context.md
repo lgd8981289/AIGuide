@@ -1,5 +1,7 @@
 # BFC 是什么？为什么能解决浮动塌陷和部分外边距重叠问题？
 
+[腾讯前端面试真题](../companies/tencent-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q126-bfc-block-formatting-context/) · [题库目录](../../README.md)
@@ -98,6 +100,14 @@ flow-root 的意思比较清楚：我要一个新的普通流布局区域，不�
 > - margin：隔离内外边界，不是禁止所有合并。
 > - 工具选择：只为建立 BFC 时，优先考虑 flow-root。
 > - 工程检查：overflow 可能同时裁剪内容或制造滚动条。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **腾讯 · 前端 · 原帖未明确批次**：BFC 是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

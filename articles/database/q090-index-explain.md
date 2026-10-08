@@ -1,5 +1,7 @@
 # MySQL 索引为什么会失效？如何用 EXPLAIN 判断 SQL 有没有用好索引？
 
+[腾讯后端面试真题](../companies/tencent-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q090-index-explain/) · [题库目录](../../README.md)
@@ -112,6 +114,14 @@ rows 和 filtered 是估算信息，不能直接当成实际返回行数。Extra
 > - key 有值：不代表扫描少，也不代表没有回表。
 > - 估算与实际：rows 是估算，ANALYZE 会执行。
 > - 优化目标：结果不变，减少实际代价，而非强行出现索引名字。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **腾讯 · 后台开发 · 原帖未明确批次**：如何分析索引失效和慢 SQL？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

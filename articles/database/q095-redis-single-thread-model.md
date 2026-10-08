@@ -1,5 +1,7 @@
 # Redis 为什么快？“单线程”与多线程 I/O 应该怎样理解？
 
+[京东后端面试真题](../companies/jd-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q095-redis-single-thread-model/) · [题库目录](../../README.md)
@@ -99,6 +101,14 @@ Redis 不同版本会调整 I/O 工作分配与配置行为。以 [Redis 8.0 配
 > - I/O 多线程：处理网络相关工作，不等于任意命令并行修改数据。
 > - 阻塞风险：大对象、复杂命令、长脚本和系统资源压力。
 > - 原子边界：单命令原子，不自动保证业务原子或数据持久。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **京东 · 数据开发 / 后端 · 校招**：Redis 为什么能提供较高的访问性能？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/791720598454935552)；原帖发布于 2025-08-31（秋招记录）。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

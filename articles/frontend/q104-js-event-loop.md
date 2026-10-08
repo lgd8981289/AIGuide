@@ -1,5 +1,7 @@
 # JavaScript 事件循环是什么？宏任务、微任务和 async/await 怎么执行？
 
+[字节前端面试真题](../companies/bytedance-frontend.md) · [百度前端面试真题](../companies/baidu-frontend.md) · [阿里前端面试真题](../companies/alibaba-frontend.md) · [腾讯前端面试真题](../companies/tencent-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q104-js-event-loop/) · [题库目录](../../README.md)
@@ -105,6 +107,18 @@ requestAnimationFrame 适合安排与下一次绘制相关的更新，但不能�
 > - 定时器：零延迟也要等待执行机会。
 > - 卡顿风险：微任务不断补充，可能拖住交互与渲染。
 > - 环境边界：浏览器与 Node.js 的规则不能混着背。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · 前端 · 社招**：事件循环怎样决定 JavaScript 的执行顺序？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/786037843704479744)；原帖编辑于 2025-09-01。
+- **字节跳动 · 前端 · 实习**：事件循环怎样决定 JavaScript 的执行顺序？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/756639561995870208)；原帖发布于 2025-05-26。
+- **百度 · 前端 · 实习（原帖标签）**：事件循环怎样决定 JavaScript 的执行顺序？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+- **阿里巴巴 · 前端 · 原帖未明确批次**：事件循环怎样决定 JavaScript 的执行顺序？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+- **腾讯 · 前端 · 原帖未明确批次**：事件循环怎样决定 JavaScript 的执行顺序？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -111,6 +111,12 @@ console.log(config.options.timeout);
 > - 浅层边界：引用不能替换，不代表引用对象不能改。
 > - 访问器和内部状态：不能用普通数据属性规则一概而论。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

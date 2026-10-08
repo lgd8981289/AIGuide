@@ -1,5 +1,7 @@
 # React Fiber 是什么？为什么渲染可以暂停和继续？
 
+[字节前端面试真题](../companies/bytedance-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q136-react-fiber/) · [题库目录](../../README.md)
@@ -87,6 +89,14 @@ commit 包含相应 DOM 变更、布局 Effect 等提交工作；其中同步提
 > - render：准备下一版，可中断、重启或放弃。
 > - 提交：DOM 变更有自己的同步阶段，不等同于准备过程。
 > - 工程实践：减长任务、保渲染纯粹，区分紧急输入与延后展示。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **字节跳动 · 前端 · 实习**：React Fiber 怎样中断和调度渲染？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/756639561995870208)；原帖发布于 2025-05-26。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

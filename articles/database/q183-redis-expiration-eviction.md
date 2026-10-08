@@ -88,6 +88,12 @@ LRU 和 LFU 也不是同义词：一个看近期，一个看频率。短期突�
 > - 算法：LRU 看近期，LFU 看频率，通常近似。
 > - 边界：maxmemory 非进程绝对内存上限。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

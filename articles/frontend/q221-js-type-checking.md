@@ -1,5 +1,7 @@
 # JavaScript 怎么判断数据类型？typeof、instanceof 和 Array.isArray 有什么区别？
 
+[小米前端面试真题](../companies/xiaomi-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q221-js-type-checking/) · [题库目录](../../README.md)
@@ -101,6 +103,14 @@ Python 的 type 和 isinstance 有自己的语言语义，不是这三个 JavaSc
 > - Array.isArray：判断真实数组，优先于 instanceof Array。
 > - 业务结构：数组身份不保证元素字段合法。
 > - TypeScript：静态类型不代替外部输入的运行时校验。
+
+## 公司面试真题
+
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
+
+- **小米 · 前端 · 原帖未明确批次**：JavaScript 有哪些数据类型？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

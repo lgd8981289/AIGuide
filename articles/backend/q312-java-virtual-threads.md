@@ -94,6 +94,12 @@ ThreadLocal 也不是禁止使用，但每个任务保留大量数据，再乘�
 > - 限制：线程便宜，下游容量、内存和超时仍有限。
 > - 版本：JDK 21 正式提供，JDK 24 改进 synchronized pinning。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。

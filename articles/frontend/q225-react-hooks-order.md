@@ -104,6 +104,12 @@ React 的 use API 支持读取 Promise 或 Context 等资源，官方明确允�
 > - 列表状态：由条目组件管理，不在循环里直接调用 Hook。
 > - use API：允许条件与循环，但仍有自己的调用限制。
 
+## 公司面试真题
+
+这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+
+[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+
 ---
 
 本文收录于 [Sunday面试指南](https://note.lgdsunday.club/)。转载请注明作者与原文链接。
