@@ -1,5 +1,6 @@
 import { getOrderedArticles, type ArticleWithOrder } from './articles'
 import type { ModuleKey } from './site'
+import { RECRUITMENT_GUIDES } from './recruitment-guides'
 
 interface ReadingItem {
   qnum: string
@@ -23,6 +24,8 @@ export interface LearningGuide {
   action: string
   audience: string
   approach: string
+  note?: string
+  reviewedAt?: string
   module: ModuleKey
   browseHref: string
   browseLabel: string
@@ -193,6 +196,7 @@ export const LEARNING_GUIDES: LearningGuide[] = [
       },
     ],
   },
+  ...RECRUITMENT_GUIDES,
 ]
 
 export const guideHref = (guide: Pick<LearningGuide, 'slug'>) => `/guides/${guide.slug}/`
@@ -221,12 +225,12 @@ export async function getLearningGuides(): Promise<ResolvedGuide[]> {
       }),
     }))
     const dates = stages.flatMap((stage) => stage.articles.map((item) => item.article.entry.data.date.toISOString().slice(0, 10)))
-    return { ...guide, stages, articleCount: used.size, updated: ['2026-10-04', ...dates].sort().at(-1)! }
+    return { ...guide, stages, articleCount: used.size, updated: [guide.reviewedAt ?? '2026-10-04', ...dates].sort().at(-1)! }
   })
 }
 
 /** RAG 优先进入专题，其他 AI 面试题与教程进入对应路线。 */
 export function guideForArticle(category: string, module: ModuleKey): LearningGuide | undefined {
-  const slug = category === 'rag' ? 'rag' : module === 'interview' ? 'ai-interview' : module === 'tutorial' ? 'ai-coding' : undefined
+  const slug = category === 'rag' ? 'rag' : module === 'interview' ? 'ai-interview' : module === 'tutorial' ? 'ai-coding' : module === 'programmer' ? 'campus-interview' : undefined
   return LEARNING_GUIDES.find((guide) => guide.slug === slug)
 }

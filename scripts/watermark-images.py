@@ -4,16 +4,20 @@
 图片水印脚本：给文章配图打上「lgdsunday.club@程序员Sunday」水印
 
 - 输入：写作仓库 ../文章/{分类}/{Q编号}-{主题}/正文.assets/ 下的原图（保持干净，不动它）
-- 输出：站点 public/img/{Q编号}/ 下的同名文件（带水印）
+- 输出：站点 img-src/{Q编号}/ 下的同名文件（带水印）
 - 幂等：每次都从原始素材重新生成，重复跑不会叠加水印
+- 增量：原图、处理参数及输出哈希均未变化时复用；--force 强制重建
 
-由 scripts/watermark-images.mjs 负责挑选带 Pillow 的解释器后调用；
+由 scripts/py.mjs 负责挑选带 Pillow 的解释器后调用；
 也可以直接运行：python3 scripts/watermark-images.py
 """
 
 import json
+import argparse
 import os
+import shutil
 import sys
+import time
 from pathlib import Path
 
 try:
@@ -21,6 +25,9 @@ try:
 except ImportError:  # pragma: no cover
     print("错误：需要 Pillow，请先安装：pip3 install Pillow", file=sys.stderr)
     sys.exit(1)
+
+from image_cache import (atomic_output, cache_hit, file_hash, prune_files, read_cache,
+                         recipe_hash, run_jobs, save_cache, worker_count)
 
 WATERMARK = "lgdsunday.club@程序员Sunday"
 
@@ -48,6 +55,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
 # 打水印后的原图先落到 img-src/（不直接进 public/），再由 optimize-images.py 压成 WebP
 IMG_DIR = ROOT / "img-src"
+CACHE = ROOT / ".cache/image-pipeline/watermark.json"
 
 # 来源配置与正文同步共用一份（scripts/sources.json）
 SOURCES = json.loads((SCRIPT_DIR / "sources.json").read_text(encoding="utf-8"))["sources"]
@@ -164,26 +172,45 @@ def process_image(src_path, dst_path):
             marked.save(dst_path, format="WEBP", quality=92)
 
 
+def process_job(job):
+    key, src, dst, source_hash, recipe = job
+    with atomic_output(dst) as temporary:
+        process_image(src, temporary)
+        if file_hash(src) != source_hash:
+            raise RuntimeError(f"图片在处理中发生变化，请重试：{src}")
+    return key, {"source": source_hash, "recipe": recipe, "output": file_hash(dst)}
+
+
 def main():
-    args = sys.argv[1:]
-    if len(args) > 1 or (args and not args[0].startswith("--only=")):
-        print("用法：watermark-images.py [--only=T002,Q005,Q028]", file=sys.stderr)
-        return 1
-    selected = set(args[0][7:].split(",")) if args else None
+    started = time.perf_counter()
+    parser = argparse.ArgumentParser(description="增量生成文章图片水印")
+    parser.add_argument("--only", help="限定原始文章编号，例如 Q001,T002")
+    parser.add_argument("--force", "-f", action="store_true", help="强制重新打水印")
+    args = parser.parse_args()
+    selected = set(args.only.split(",")) if args.only is not None else None
     if selected is not None and any(not (len(num) >= 4 and num[0] in "QT" and num[1:].isdigit()) for num in selected):
         print("--only 需要逗号分隔的原始文章编号", file=sys.stderr)
         return 1
-    done = 0
+    workers = worker_count()
+    cache = read_cache(CACHE)
+    entries = {key: value for key, value in cache.items()
+               if selected is not None and key.split("/")[0] not in selected}
+    font = load_font(20)
+    font_path = getattr(font, "path", None)
+    recipe = recipe_hash(__file__, {"font": file_hash(font_path) if font_path else "default"})
+    jobs = []
+    expected = set()
+    seen_articles = set()
+    passthrough = []
+    hits = 0
     skipped = 0
-    missing = []
 
     for source in SOURCES:
         source_root = (ROOT / source["root"]).resolve()
         label = source.get("label") or source["module"]
 
         if not source_root.exists():
-            missing.append(f"{label}（{source_root}）")
-            continue
+            raise FileNotFoundError(f"找不到写作仓库，保留已有图片：{label}（{source_root}）")
 
         for cat_name in source["categories"]:
             cat_dir = source_root / cat_name
@@ -199,6 +226,11 @@ def main():
                     continue
                 if not num or not num[0].isalpha() or not num[1:].isdigit():
                     continue
+                if not (entry / "正文.md").is_file():
+                    continue
+                if num in seen_articles:
+                    raise ValueError(f"正文编号重复：{num}")
+                seen_articles.add(num)
 
                 assets = entry / "正文.assets"
                 if not assets.exists():
@@ -208,18 +240,34 @@ def main():
                     if not src.is_file():
                         continue
                     suffix = src.suffix.lower()
+                    key = (Path(num) / src.relative_to(assets)).as_posix()
+                    expected.add(key)
+                    dst = IMG_DIR / key
                     if suffix in SKIP_SUFFIXES or suffix not in SUPPORTED_SUFFIXES:
                         skipped += 1
+                        passthrough.append((src, dst))
                         continue
-                    rel = src.relative_to(assets)
-                    process_image(src, IMG_DIR / num / rel)
-                    done += 1
+                    source_hash = file_hash(src)
+                    previous = cache.get(key, {})
+                    if not args.force and cache_hit(previous, source_hash, recipe, dst):
+                        entries[key] = previous
+                        hits += 1
+                    else:
+                        jobs.append((key, src, dst, source_hash, recipe))
 
-    print(f"  水印完成：{done} 张图片已打上「{WATERMARK}」")
+    if selected is not None and selected - seen_articles:
+        raise ValueError("限定同步的文章不存在：" + ",".join(sorted(selected - seen_articles)))
+    print(f"  水印：待处理 {len(jobs)} 张，命中缓存 {hits} 张，最多 {workers} 个进程", flush=True)
+    entries.update(run_jobs(process_job, jobs, workers))
+    for src, dst in passthrough:
+        if not dst.exists() or file_hash(src) != file_hash(dst):
+            with atomic_output(dst) as temporary:
+                shutil.copyfile(src, temporary)
+    removed = prune_files(IMG_DIR, expected, selected)
+    save_cache(CACHE, entries)
+    print(f"  水印完成：新生成 {len(jobs)}，命中缓存 {hits}，清理 {removed}；耗时 {time.perf_counter()-started:.2f}s")
     if skipped:
         print(f"  跳过 {skipped} 个不支持的格式（gif 等）")
-    for item in missing:
-        print(f"  警告：找不到写作仓库目录，已跳过 {item}")
     return 0
 
 

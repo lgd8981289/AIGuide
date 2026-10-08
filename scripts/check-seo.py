@@ -116,15 +116,17 @@ def main():
         page = Page(file.read_text())
         check(page.canonical == [url], "canonical 错误: " + url)
         check(page.meta.get("og:url") == url, "og:url 错误: " + url)
-        check(page.meta.get("og:site_name") == "Sunday 的面试指南", "站点名称错误: " + url)
+        check(page.meta.get("og:site_name") == "Sunday面试指南", "站点名称错误: " + url)
         check(bool(page.icons) and page.icons[0].get("href") == "/apple-touch-icon.png", "指南独立图标缺失: " + url)
         check("https://lgdsunday.club/note/" not in json.dumps(page.schemas), "结构化数据残留旧域地址: " + url)
         if url == ORIGIN + BASE:
             website = next((s for s in page.schemas if s.get("@type") == "WebSite"), {})
-            check(website.get("name") == "Sunday 的面试指南" and website.get("url") == url, "首页站点名称结构化数据错误")
+            check(website.get("name") == "Sunday面试指南" and website.get("url") == url, "首页站点名称结构化数据错误")
         check(page.h1 == 1, "H1 数量错误: " + url)
         check(len(page.titles) == 1 and bool(page.titles[0]), "title 缺失或重复: " + url)
         check(page.meta.get("description"), "description 缺失: " + url)
+        check("Sunday面试指南" in page.meta.get("description", ""), "description 缺少品牌: " + url)
+        check(bool(page.titles) and "Sunday面试指南" in page.titles[0], "title 缺少品牌: " + url)
         check("noindex" not in page.meta.get("robots", ""), "sitemap 页面被禁止索引: " + url)
         check("max-image-preview:large" in page.meta.get("robots", ""), "缺少大图预览设置: " + url)
         if page.titles:
@@ -138,8 +140,9 @@ def main():
             expected = expected_titles.get(url)
             check(expected is not None, "文章缺少对应同步源稿: " + url)
             check(page.h1_titles == [expected], "文章 H1 与网站标题不一致: " + url)
-            # BaseLayout 的 article 页面不追加站点名；课程页仍由页面传入课程品牌。
+            # BaseLayout 为文章与课程标题追加统一品牌；H1 仍保留具体题目。
             expected_page_title = f"{expected}｜慕课网 {course_name}" if url in course_free else expected
+            expected_page_title += "｜Sunday面试指南"
             check(page.titles == [expected_page_title], "文章 title 与网站标题不一致: " + url)
             check(article.get("headline") == expected, "文章结构化标题与网站标题不一致: " + url)
             check(page.meta.get("og:title") == page.meta.get("twitter:title") == expected_page_title, "文章分享标题不一致: " + url)

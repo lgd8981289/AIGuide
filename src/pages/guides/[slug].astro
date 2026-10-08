@@ -74,6 +74,7 @@ const schema = [
       <section class="guide-orientation" aria-labelledby="guide-how-title">
         <h2 id="guide-how-title">这条路线怎么读</h2>
         <p>{guide.approach}</p>
+        {guide.note && <p class="guide-source-note">{guide.note}</p>}
         <a class="guide-begin" href={`#${guide.stages[0].id}`}>从第一阶段开始<span aria-hidden="true">↓</span></a>
       </section>
 

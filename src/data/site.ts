@@ -1,34 +1,20 @@
 // 站点全局配置：改名、换 slogan、加模块、开引流，都只改这一个文件
 import { BASE, url } from '../utils'
 import { COURSE } from './course'
+import { BRAND } from '../lib/brand.mjs'
 
 export const SITE = {
-	name: 'Sunday 的面试指南',
-	/**
-	 * 首页 <title>（2026-10-07 重写）。
-	 *
-	 * 为什么改：首页是全站唯一有稳定曝光的页面（GSC 实测占全站展示 41.7%），
-	 * 而旧值 `${name}｜${tagline}` 是「零搜索量的品牌词 + 三个模块罗列」——真正有搜索量的
-	 * 关键词全被挤到中文 SERP 约 30 字的截断线之外。参照竞品 xiaolinnote.com 的首页标题
-	 * 「图解 Agent+RAG+LLM 大模型面试题 | 小林面试笔记」，同样是关键词在前、品牌在后。
-	 * 本站品牌搜索量近零，因此进一步把品牌后缀整个去掉；品牌仍由 og:site_name、顶部站点名
-	 * 与页脚承载（check-seo.py 校验的也是 og:site_name，不受影响）。
-	 */
-	homeTitle: 'AI 面试题与大模型面试题｜Agent、RAG 高频考点',
-	/** 首页 <h1>（列表上方标题；用户选择分类后由前端脚本替换为分类名） */
-	homeHeading: 'AI 面试题与大模型面试题',
-	/** 首页列表上方的一句话说明（同样会被前端脚本按分类替换） */
-	homeIntro:
-		'覆盖 Agent、RAG、LangChain 与大模型基础，每道题都从一个真实的工程场景出发。',
-	description:
-		'AI 面试题与大模型面试题合集：Agent、RAG、LangChain 高频考点，还原面试官追问链路，给出能落地的答案；另含全栈面试题与 AI 编程教程。',
-	author: '程序员 Sunday',
-	// 站点 logo（public 目录下的相对路径，留空则不显示）
+	name: BRAND.name,
+	alternateNames: BRAND.aliases,
+	// 首页明确站点身份；各内页由 BaseLayout 统一追加一次品牌后缀。
+	homeTitle: 'Sunday面试指南｜AI、前端、后端与校招面试题',
+	homeHeading: 'Sunday面试指南：AI 与全栈面试题',
+	homeIntro: '程序员Sunday 整理的面试备考指南，覆盖 AI、前端、后端与校招，从原理讲到项目取舍和面试追问。',
+	description: 'Sunday面试指南由程序员Sunday维护，提供大模型、Agent、RAG、前端、后端、数据库与校招面试题解析，配合学习路线和 AI 编程教程，帮助你理解原理、准备项目与面试追问。',
+	author: BRAND.author,
 	logo: '/avatar.jpg',
-	url: 'https://note.lgdsunday.club',
-	// 右上角 GitHub 图标（留空则不显示）
-	github: '',
-	// 主站入口（简历汪），站内互链形成求职闭环
+	url: BRAND.url,
+	github: BRAND.github,
 	mainSite: 'https://lgdsunday.club/',
 	mainSiteName: '简历汪'
 }

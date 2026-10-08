@@ -18,7 +18,7 @@ deploy.sh
 # 图片原图（由 npm run sync 生成，可重建，不进仓库）
 img-src/
 
-# 私有文章及配图：保留在本地用于构建、部署，不提交到 GitHub
+# 网站同步正文、课程与构建配图保留本地；已发布文章通过 npm run export:github 导出到 articles/ 提交
 /src/content/articles/
 /src/content/course/
 /public/course-assets/
@@ -41,3 +41,12 @@ docs
 
 # Bing URL 提交的本地状态、锁和回执
 /.bing/
+
+# 图片指纹与处理缓存，仅本地使用
+/.cache/image-pipeline/
+
+# 上传前的网址清单：失败时本地保留，不提交；已发布保护表在 scripts/ 下提交
+/.cache/article-urls/
+
+# 渠道待审稿只在本地审阅，不随代码推送公开
+/publishing/

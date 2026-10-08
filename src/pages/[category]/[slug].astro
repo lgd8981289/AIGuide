@@ -1,5 +1,6 @@
 ---
 import { render } from "astro:content";
+import { brandedDescription } from "../../lib/brand.mjs";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import TechGrow from "../../components/TechGrow.astro";
 import ResumeCta from "../../components/ResumeCta.astro";
@@ -89,7 +90,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "Article",
     headline: entry.data.title,
-    description: entry.data.description,
+    description: brandedDescription(entry.data.description),
     ...(entry.data.faqAnswer ? { abstract: entry.data.faqAnswer } : {}),
     isAccessibleForFree: !gated,
     ...(gated ? {
@@ -210,6 +211,7 @@ const jsonLd = [
           </div>
           <h1 data-pagefind-meta="title">{entry.data.title}</h1>
           <div class="article-meta" data-pagefind-ignore>
+            <span>{SITE.author} · {SITE.name}</span>
             <a class="cat" data-pagefind-meta="category" href={url(`/${cat.slug}/`)}>
               {cat.name}
             </a>

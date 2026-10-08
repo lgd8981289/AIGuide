@@ -886,5 +886,125 @@
   {
     "qnum": "Q375",
     "topic": "fullstack-system-design:architecture"
+  },
+  {
+    "qnum": "Q376",
+    "topic": "backend:api-auth"
+  },
+  {
+    "qnum": "Q377",
+    "topic": "frontend:react"
+  },
+  {
+    "qnum": "Q379",
+    "topic": "backend:frameworks"
+  },
+  {
+    "qnum": "Q381",
+    "topic": "backend:services"
+  },
+  {
+    "qnum": "Q390",
+    "topic": "frontend:react"
+  },
+  {
+    "qnum": "Q391",
+    "topic": "frontend:vue"
+  },
+  {
+    "qnum": "Q392",
+    "topic": "frontend:engineering"
+  },
+  {
+    "qnum": "Q393",
+    "topic": "frontend:engineering"
+  },
+  {
+    "qnum": "Q394",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q395",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q396",
+    "topic": "frontend:html-css"
+  },
+  {
+    "qnum": "Q397",
+    "topic": "frontend:html-css"
+  },
+  {
+    "qnum": "Q398",
+    "topic": "backend:api-auth"
+  },
+  {
+    "qnum": "Q399",
+    "topic": "backend:api-auth"
+  },
+  {
+    "qnum": "Q400",
+    "topic": "backend:api-auth"
+  },
+  {
+    "qnum": "Q401",
+    "topic": "backend:frameworks"
+  },
+  {
+    "qnum": "Q402",
+    "topic": "backend:async"
+  },
+  {
+    "qnum": "Q403",
+    "topic": "backend:async"
+  },
+  {
+    "qnum": "Q404",
+    "topic": "database:mysql"
+  },
+  {
+    "qnum": "Q405",
+    "topic": "database:mysql"
+  },
+  {
+    "qnum": "Q406",
+    "topic": "database:redis"
+  },
+  {
+    "qnum": "Q407",
+    "topic": "database:redis"
+  },
+  {
+    "qnum": "Q408",
+    "topic": "database:mysql"
+  },
+  {
+    "qnum": "Q409",
+    "topic": "cs-basics:os"
+  },
+  {
+    "qnum": "Q410",
+    "topic": "cs-basics:network"
+  },
+  {
+    "qnum": "Q411",
+    "topic": "cs-basics:network"
+  },
+  {
+    "qnum": "Q412",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q413",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q414",
+    "topic": "fullstack-system-design:architecture"
+  },
+  {
+    "qnum": "Q415",
+    "topic": "fullstack-system-design:architecture"
   }
 ]

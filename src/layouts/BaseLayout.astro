@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { brandedTitle, brandedDescription } from "../lib/brand.mjs";
 import Topbar from "../components/Topbar.astro";
 import Sidebar from "../components/Sidebar.astro";
 import CourseSidebar from "../components/CourseSidebar.astro";
@@ -47,15 +48,9 @@ const {
 const activeModule = Astro.props.activeModule ?? moduleOfPath(path);
 const hasSidebar = sidebar || customSidebar;
 
-// 不加品牌后缀（2026-10-07）：站点名是零搜索量的品牌词，白占 11 个字符的 SERP 预算，
-// 却把标题里真正有差异化的词挤出中文 SERP 约 30 字的显示上限之外。
-// 第一轮只去掉了文章页，栏目/分类页仍保留「｜站点名」；第二轮一并去掉，理由有两个：
-//   1) 栏目页现在要承载「大模型面试题大全…」这类较长的关键词标题，再加 13 字后缀必然被截断；
-//   2) 首页与 473 篇文章都已无后缀，只留栏目页不一致。
-// 品牌始终由 og:site_name、顶部站点名与页脚承载。
-//   · 首页 → SITE.homeTitle（关键词在前，理由见 site.ts 注释）
-//   · 其余 → 页面自己的 title（文章页 = 文章标题；栏目/分类页 = 模块/分类标题）
-const pageTitle = path === "/" ? SITE.homeTitle : title;
+// 品牌只追加一次，具体问题放在标题前面；保留每篇文章自己的描述。
+const pageTitle = path === "/" ? SITE.homeTitle : brandedTitle(title);
+const pageDescription = brandedDescription(description);
 const canonical = absoluteUrl(path);
 const ogImageUrl = /^https?:\/\//.test(ogImage) ? ogImage : absoluteUrl(ogImage);
 ---
@@ -66,7 +61,7 @@ const ogImageUrl = /^https?:\/\//.test(ogImage) ? ogImage : absoluteUrl(ogImage)
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={pageDescription} />
     {keywords && <meta name="keywords" content={keywords.join(", ")} />}
     <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
     <link rel="canonical" href={canonical} />
@@ -82,7 +77,7 @@ const ogImageUrl = /^https?:\/\//.test(ogImage) ? ogImage : absoluteUrl(ogImage)
     )}
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:locale" content="zh_CN" />
@@ -91,7 +86,7 @@ const ogImageUrl = /^https?:\/\//.test(ogImage) ? ogImage : absoluteUrl(ogImage)
     <meta property="og:image:height" content={String(ogImageHeight)} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={ogImageUrl} />
     <!-- 51.LA 全站访问统计；保留内联脚本，按官方方式异步加载 SDK。 -->
     <script is:inline>

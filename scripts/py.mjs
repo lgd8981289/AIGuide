@@ -2,7 +2,7 @@
 // 用带 Pillow 的 python3 跑指定脚本（水印、图片优化都用它）
 //
 // 为什么要有这一层：本机可能有多个 python3，系统自带的那个不一定装了 Pillow。
-// 这里依次探测，找到能 import PIL 的解释器；都找不到时只警告、不让发布流程失败。
+// 这里依次探测，找到能 import PIL 的解释器；缺少依赖时停止，避免漏水印或图片处理。
 //
 // 用法：node scripts/py.mjs scripts/optimize-images.py [--force]
 // 自定义解释器：AIGUIDE_PYTHON=/path/to/python3 node scripts/py.mjs <脚本>
@@ -39,11 +39,11 @@ const hasPillow = (python) =>
 const python = candidates.find(hasPillow);
 
 if (!python) {
-  console.warn(
-    "⚠️  没找到带 Pillow 的 python3，已跳过这一步。\n" +
+  console.error(
+    "没找到带 Pillow 的 python3，图片处理已停止。\n" +
       "   安装后重跑即可：pip3 install Pillow（或指定 AIGUIDE_PYTHON=/path/to/python3）"
   );
-  process.exit(0);
+  process.exit(1);
 }
 
 const result = spawnSync(python, [script, ...rest], { stdio: "inherit" });

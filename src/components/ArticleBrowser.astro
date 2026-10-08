@@ -95,8 +95,8 @@ if (!module)
 		url: absoluteUrl('/'),
 		description: SITE.description,
 		inLanguage: 'zh-CN',
-		alternateName: 'AIGuide',
-		publisher: { '@type': 'Organization', name: SITE.author }
+		alternateName: SITE.alternateNames,
+		publisher: { '@type': 'Person', name: SITE.author, url: SITE.url, sameAs: [SITE.github] }
 	})
 if (module) {
 	const crumbs = [

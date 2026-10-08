@@ -1,0 +1,22 @@
+# AI应用工程面试题 · Sunday面试指南
+
+[返回总目录](../../README.md) · [在线阅读](https://note.lgdsunday.club/engineering/)
+
+- [AI 聊天流式输出用 SSE 还是 WebSocket？页面刷新后如何恢复？](./q006-streaming-output-refresh-recovery.md) · [在线阅读](https://note.lgdsunday.club/engineering/q006-streaming-output-refresh-recovery/)
+- [AI 文件解析与建索引的异步任务怎么设计？](./q012-async-file-parsing-indexing.md) · [在线阅读](https://note.lgdsunday.club/engineering/q012-async-file-parsing-indexing/)
+- [大模型结构化输出怎么校验？JSON 入库与失败处理](./q019-structured-output-validation.md) · [在线阅读](https://note.lgdsunday.club/engineering/q019-structured-output-validation/)
+- [AI 应用为什么要做模型路由？怎样避免把难题错送给小模型？](./q031-model-routing.md) · [在线阅读](https://note.lgdsunday.club/engineering/q031-model-routing/)
+- [Prompt Cache 和答案缓存有什么区别？](./q032-prompt-cache-answer-cache.md) · [在线阅读](https://note.lgdsunday.club/engineering/q032-prompt-cache-answer-cache/)
+- [大模型 API 限流怎么办？排队、重试与降级策略](./q033-rate-limiting-queue-fallback.md) · [在线阅读](https://note.lgdsunday.club/engineering/q033-rate-limiting-queue-fallback/)
+- [多租户 AI 应用如何隔离聊天记录和知识库？](./q034-multi-tenant-data-isolation.md) · [在线阅读](https://note.lgdsunday.club/engineering/q034-multi-tenant-data-isolation/)
+- [AI 聊天如何停止生成？后端任务取消与状态处理](./q044-ai-task-cancellation.md) · [在线阅读](https://note.lgdsunday.club/engineering/q044-ai-task-cancellation/)
+- [Prompt 为什么也要做版本管理？线上出错怎么回滚？](./q052-prompt-versioning.md) · [在线阅读](https://note.lgdsunday.club/engineering/q052-prompt-versioning/)
+- [AI 生成的代码如何验收？测试、需求与 Diff 审查](./q058-ai-coding-acceptance.md) · [在线阅读](https://note.lgdsunday.club/engineering/q058-ai-coding-acceptance/)
+- [Agent 任务中断后如何恢复？Checkpoint 与幂等设计](./q065-agent-task-failure-recovery.md) · [在线阅读](https://note.lgdsunday.club/engineering/q065-agent-task-failure-recovery/)
+- [Agent 执行越来越慢，应该怎么定位性能瓶颈？](./q067-agent-performance-bottleneck.md) · [在线阅读](https://note.lgdsunday.club/engineering/q067-agent-performance-bottleneck/)
+- [Python 的 async/await 是怎么工作的？为什么用了异步，接口还是会卡住？](./q069-async-event-loop.md) · [在线阅读](https://note.lgdsunday.club/engineering/q069-async-event-loop/)
+- [MySQL 明明只更新一条记录，为什么还会阻塞其他请求？](./q073-mysql-update-lock-scope.md) · [在线阅读](https://note.lgdsunday.club/engineering/q073-mysql-update-lock-scope/)
+- [Redis 和数据库如何保持一致？为什么更新数据库后删缓存，仍然可能读到旧数据？](./q074-cache-database-consistency.md) · [在线阅读](https://note.lgdsunday.club/engineering/q074-cache-database-consistency/)
+- [Kafka 消息交给后台异步处理后，Offset 应该什么时候提交？](./q075-kafka-consumer-offset.md) · [在线阅读](https://note.lgdsunday.club/engineering/q075-kafka-consumer-offset/)
+- [vLLM 为什么快？PagedAttention 和连续批处理分别解决什么问题？](./q083-vllm-inference-serving.md) · [在线阅读](https://note.lgdsunday.club/engineering/q083-vllm-inference-serving/)
+- [SWE-bench 是什么？AI 编程 Agent 的跑分能直接比较吗？](./q102-swe-bench-evaluation.md) · [在线阅读](https://note.lgdsunday.club/engineering/q102-swe-bench-evaluation/)

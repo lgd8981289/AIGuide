@@ -14,8 +14,10 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { validateArticleTopics } from "../src/lib/article-topics.mjs";
+import { readSlugs, planURLs, assertProtected } from './article-url-policy.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -23,6 +25,7 @@ const OUT_DIR = path.join(ROOT, "src", "content", "articles");
 // 原图（打水印后的）先落到 img-src/，再由 optimize-images.py 压成 WebP 输出到 public/img/
 const IMG_SRC_DIR = path.join(ROOT, "img-src");
 const BASE = "";
+const started = performance.now();
 
 // 限定编号时保留其他已同步文章和配图，避免带入写作目录中的待审改稿。
 const args = process.argv.slice(2);
@@ -42,6 +45,8 @@ const TOPICS = JSON.parse(fs.readFileSync(path.join(ROOT, "src/data/topics.json"
 const TOPIC_ASSIGNMENTS = JSON.parse(fs.readFileSync(path.join(__dirname, "article-topics.json"), "utf8"));
 const sourceArticles = new Map();
 for (const source of SOURCES) {
+  const root = path.resolve(ROOT, source.root);
+  if (!fs.existsSync(root)) throw new Error(`找不到写作仓库，保留已有同步产物：${root}`);
   for (const [name, category] of Object.entries(source.categories)) {
     const directory = path.resolve(ROOT, source.root, name);
     if (!fs.existsSync(directory)) continue;
@@ -97,20 +102,9 @@ for (const [num, date] of Object.entries(WEBSITE_DATES)) {
 }
 
 // 编号 → URL slug（英文关键词）。统一维护在 scripts/article-slugs.json，新增题目时补一条。
-// URL 会带上关键词（/frontend/q145-tree-shaking/），既保留编号又拿到相关性信号；
-// 变更前已上线的纯编号地址由 scripts/postbuild.mjs 输出永久跳转页兜底。
-const SLUGS = JSON.parse(fs.readFileSync(path.join(__dirname, "article-slugs.json"), "utf-8"));
-if (!SLUGS || typeof SLUGS !== "object" || Array.isArray(SLUGS)) {
-  throw new Error("article-slugs.json 必须是文章编号到英文 slug 的对象");
-}
-for (const [num, slug] of Object.entries(SLUGS)) {
-  if (!/^[QT]\d{3,}$/.test(num)) {
-    throw new Error(`slug 编号无效：${num}（请使用原始 Q001 / T001 等编号）`);
-  }
-  if (typeof slug !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
-    throw new Error(`slug 无效：${num} → ${slug}（只允许小写字母、数字与连字符）`);
-  }
-}
+// 缺少 slug、变更已发布路径或删除已发布文章，必须在写入/清理正文和图片前失败。
+const SLUGS = readSlugs(ROOT);
+assertProtected(ROOT, planURLs(sourceArticles, SLUGS, selected), selected);
 
 // ---- 提取逻辑 ----
 
@@ -242,6 +236,55 @@ function rewriteImages(md, num) {
 
 // ---- 主流程 ----
 
+function filesIn(directory) {
+  if (!fs.existsSync(directory)) return [];
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const file = path.join(directory, entry.name);
+    return entry.isDirectory() ? filesIn(file) : entry.isFile() ? [file] : [];
+  });
+}
+
+function writeChanged(file, content) {
+  if (fs.existsSync(file) && fs.readFileSync(file, 'utf8') === content) return false;
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  const temporary = `${file}.${process.pid}.tmp`;
+  try {
+    fs.writeFileSync(temporary, content);
+    fs.renameSync(temporary, file);
+  } finally {
+    fs.rmSync(temporary, { force: true });
+  }
+  return true;
+}
+
+function watermarkEntries() {
+  try {
+    const cache = JSON.parse(fs.readFileSync(path.join(ROOT, '.cache/image-pipeline/watermark.json'), 'utf8'));
+    return cache?.version === 1 && cache.entries && typeof cache.entries === 'object' && !Array.isArray(cache.entries)
+      ? cache.entries : {};
+  } catch { return {}; }
+}
+
+function syncImage(src, dst, cached) {
+  const content = fs.readFileSync(src);
+  const digest = (bytes) => createHash('sha256').update(bytes).digest('hex');
+  const source = digest(content);
+  if (fs.existsSync(dst)) {
+    const output = digest(fs.readFileSync(dst));
+    // 原图未变时保留经过核对的水印产物，不能再次用原图覆盖它。
+    if (source === output || (cached?.source === source && cached?.output === output)) return false;
+  }
+  fs.mkdirSync(path.dirname(dst), { recursive: true });
+  const temporary = `${dst}.${process.pid}.tmp`;
+  try {
+    fs.writeFileSync(temporary, content);
+    fs.renameSync(temporary, dst);
+  } finally {
+    fs.rmSync(temporary, { force: true });
+  }
+  return true;
+}
+
 function main() {
   // 保留页面已经声明的原日期，正文修订时间另用 date，避免修订变成重新发布。
   const publishedDates = new Map(Object.entries(WEBSITE_DATES));
@@ -258,11 +301,9 @@ function main() {
       }
     }
   }
-  // 全量同步清理旧产物；限定同步只覆盖目标文章和对应图片目录。
-  if (!selected) {
-    fs.rmSync(OUT_DIR, { recursive: true, force: true });
-    fs.rmSync(IMG_SRC_DIR, { recursive: true, force: true });
-  }
+  // 先生成期望清单，再写变化文件及清理删除项，不清空整棵目录。
+  const articles = new Map();
+  const images = new Map();
 
   let total = 0;
   let changedTitles = 0;
@@ -273,8 +314,7 @@ function main() {
     const label = source.label || source.module;
 
     if (!fs.existsSync(sourceRoot)) {
-      console.warn(`  跳过「${label}」：找不到目录 ${sourceRoot}`);
-      continue;
+      throw new Error(`找不到写作仓库，保留已有同步产物：${label}（${sourceRoot}）`);
     }
 
     let count = 0;
@@ -320,14 +360,7 @@ function main() {
             : undefined;
         const date = new Date(fs.statSync(src).mtime).toISOString().slice(0, 10);
 
-        let fileStem = num.toLowerCase();
-        if (SLUGS[num]) {
-          fileStem = `${num.toLowerCase()}-${SLUGS[num]}`;
-        } else {
-          console.warn(
-            `  ⚠️  ${num} 缺少英文 slug，暂用编号地址 /${catSlug}/${fileStem}/（请在 scripts/article-slugs.json 补一条）`
-          );
-        }
+        const fileStem = `${num.toLowerCase()}-${SLUGS[num]}`;
 
         const body = rewriteImages(stripH1(raw), num).replace(/^\s+/, "");
 
@@ -347,14 +380,12 @@ function main() {
         ].join("\n");
 
         const outCatDir = path.join(OUT_DIR, catSlug);
-        fs.mkdirSync(outCatDir, { recursive: true });
-        fs.writeFileSync(path.join(outCatDir, `${fileStem}.md`), fm + body + "\n");
+        articles.set(path.join(outCatDir, `${fileStem}.md`), fm + body + "\n");
 
         // 拷贝图片（实验素材等子目录不处理，只拷贝 正文.assets）
         const assets = path.join(catDir, entry.name, "正文.assets");
-        if (selected) fs.rmSync(path.join(IMG_SRC_DIR, num), { recursive: true, force: true });
-        if (fs.existsSync(assets)) {
-          fs.cpSync(assets, path.join(IMG_SRC_DIR, num), { recursive: true });
+        for (const file of filesIn(assets)) {
+          images.set(path.join(IMG_SRC_DIR, num, path.relative(assets, file)), file);
         }
 
         count++;
@@ -366,7 +397,23 @@ function main() {
     console.log(`  ${label}：${count} 篇\n`);
   }
 
-  console.log(`完成：共同步 ${total} 篇文章。`);
+  let written = 0, copied = 0, removed = 0;
+  for (const [file, content] of articles) written += Number(writeChanged(file, content));
+  const cached = watermarkEntries();
+  for (const [dst, src] of images) {
+    const key = path.relative(IMG_SRC_DIR, dst).split(path.sep).join('/');
+    copied += Number(syncImage(src, dst, cached[key]));
+  }
+  for (const file of filesIn(OUT_DIR)) {
+    if (!file.endsWith('.md') || articles.has(file)) continue;
+    const num = fs.readFileSync(file, 'utf8').match(/^qnum:\s*"?([QT]\d+)"?\s*$/m)?.[1];
+    if (!selected || selected.has(num)) { fs.unlinkSync(file); removed++; }
+  }
+  for (const file of filesIn(IMG_SRC_DIR)) {
+    const num = path.relative(IMG_SRC_DIR, file).split(path.sep)[0];
+    if (!images.has(file) && (!selected || selected.has(num))) { fs.unlinkSync(file); removed++; }
+  }
+  console.log(`完成：${total} 篇文章（更新 ${written}，复用 ${total-written}），图片复制 ${copied}、复用 ${images.size-copied}，清理 ${removed} 个旧文件；耗时 ${((performance.now()-started)/1000).toFixed(2)}s。`);
   console.log(`网站标题：${appliedTitles.size} 篇使用配置，其中 ${changedTitles} 篇与源稿标题不同；其余沿用源稿标题。`);
   for (const num of Object.keys(WEBSITE_TITLES)) {
     if (selected && !selected.has(num)) continue;

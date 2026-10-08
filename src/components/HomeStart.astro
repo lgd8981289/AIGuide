@@ -10,7 +10,7 @@ import '../styles/learning-guides.css'
     <span>选一个目标，找到阅读顺序</span>
   </div>
   <div class="home-start-grid">
-    {LEARNING_GUIDES.map((guide, index) => (
+    {LEARNING_GUIDES.filter((guide) => !guide.note).map((guide, index) => (
       <a class="start-link" href={url(guideHref(guide))}>
         <span class="start-number" aria-hidden="true">0{index + 1}</span>
         <div class="start-copy">
@@ -21,4 +21,15 @@ import '../styles/learning-guides.css'
       </a>
     ))}
   </div>
+  <nav class="recruitment-links" aria-label="公司面试备考专题">
+    <span>按投递目标复习</span>
+    {LEARNING_GUIDES.filter((guide) => guide.note).map((guide) => (
+      <a href={url(guideHref(guide))}>{guide.label}<span aria-hidden="true"> ↗</span></a>
+    ))}
+  </nav>
 </section>
+
+<style>
+  .recruitment-links { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem 1.25rem; margin-top: 1rem; font-size: .875rem; }
+  .recruitment-links > span { color: var(--muted); }
+</style>
