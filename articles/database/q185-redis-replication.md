@@ -1,5 +1,7 @@
 # Redis 主从复制怎么工作？全量同步和增量同步如何切换？
 
+[美团开发面试真题](../companies/meituan-development.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q185-redis-replication/) · [题库目录](../../README.md)
@@ -90,9 +92,11 @@ RDB 是数据集快照，backlog 是最近复制流窗口，保存对象与用�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：Redis 主从同步的流程是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

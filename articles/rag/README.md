@@ -23,3 +23,7 @@
 - [BM25 算法是什么？和 TF-IDF 有什么区别？](./q378-bm25-tfidf-scoring.md) · [在线阅读](https://note.lgdsunday.club/rag/q378-bm25-tfidf-scoring/)
 - [RAG 中的 MMR 是什么？如何避免检索结果全是相似内容？](./q387-mmr-retrieval-diversity.md) · [在线阅读](https://note.lgdsunday.club/rag/q387-mmr-retrieval-diversity/)
 - [Contextual Retrieval 是什么？为什么要为 RAG 文档切片补充上下文？](./q389-contextual-retrieval.md) · [在线阅读](https://note.lgdsunday.club/rag/q389-contextual-retrieval/)
+- [RRF 融合排序是什么？为什么混合检索不能直接相加 BM25 和向量分数？](./q427-rrf-reciprocal-rank-fusion.md) · [在线阅读](https://note.lgdsunday.club/rag/q427-rrf-reciprocal-rank-fusion/)
+- [RAG 查询分解和 Multi-Query 有什么区别？复杂问题应该怎么拆开检索？](./q428-rag-query-decomposition-multi-query.md) · [在线阅读](https://note.lgdsunday.club/rag/q428-rag-query-decomposition-multi-query/)
+- [RAPTOR 是什么？树状摘要检索和普通向量 RAG 有什么区别？](./q429-raptor-hierarchical-retrieval.md) · [在线阅读](https://note.lgdsunday.club/rag/q429-raptor-hierarchical-retrieval/)
+- [RAG 更换 Embedding 模型后，向量索引怎么迁移？怎样避免检索中断？](./q430-embedding-model-index-migration.md) · [在线阅读](https://note.lgdsunday.club/rag/q430-embedding-model-index-migration/)

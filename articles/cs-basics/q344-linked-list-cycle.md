@@ -1,5 +1,7 @@
 # 如何判断链表有环并找到入环节点？快慢指针为什么有效？
 
+[京东后端面试真题](../companies/jd-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q344-linked-list-cycle/) · [题库目录](../../README.md)
@@ -130,9 +132,11 @@ def cycle_entry(head):
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **京东 · Java后台 · 校招**：怎样判断链表有环并找到入环节点？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155278348689408)；原帖编辑于 2019-08-23（历史校招面经）。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -1,5 +1,7 @@
 # 布隆过滤器是什么？为什么会误判，又为什么不能直接删除元素？
 
+[美团后端面试真题](../companies/meituan-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q227-bloom-filter/) · [题库目录](../../README.md)
@@ -108,9 +110,11 @@ A 对应位置 1、4，B 对应位置 4、6。加入它们以后，位置 1、4�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **美团 · Java后端 · 实习**：布隆过滤器的原理、优点和缺点是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

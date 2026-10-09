@@ -22,3 +22,8 @@
 - [推测解码是什么？为什么小模型先写草稿，能加快大模型生成？](./q384-speculative-decoding.md) · [在线阅读](https://note.lgdsunday.club/llm/q384-speculative-decoding/)
 - [Decoder-only 是什么？和 Encoder-only、Encoder-Decoder 有什么区别？](./q385-encoder-decoder-only-transformers.md) · [在线阅读](https://note.lgdsunday.club/llm/q385-encoder-decoder-only-transformers/)
 - [GRPO 是什么？和 PPO 有什么区别，为什么不需要单独的价值模型？](./q386-grpo-ppo-comparison.md) · [在线阅读](https://note.lgdsunday.club/llm/q386-grpo-ppo-comparison/)
+- [余弦相似度、点积和欧氏距离有什么区别？向量检索应该怎么选？](./q431-cosine-dot-product-euclidean-distance.md) · [在线阅读](https://note.lgdsunday.club/llm/q431-cosine-dot-product-euclidean-distance/)
+- [大模型的 Temperature、Top-p、Top-k 有什么区别？生成参数应该怎么调？](./q432-temperature-top-p-top-k.md) · [在线阅读](https://note.lgdsunday.club/llm/q432-temperature-top-p-top-k/)
+- [BPE 分词算法是什么？Tokenizer 怎样把文本切成 Token？](./q433-bpe-tokenizer.md) · [在线阅读](https://note.lgdsunday.club/llm/q433-bpe-tokenizer/)
+- [推理模型和普通大模型有什么区别？Agent 一定要用推理模型吗？](./q460-reasoning-models-agent-selection.md) · [在线阅读](https://note.lgdsunday.club/llm/q460-reasoning-models-agent-selection/)
+- [Embedding 模型如何训练？正负样本和对比学习分别有什么作用？](./q461-embedding-contrastive-training.md) · [在线阅读](https://note.lgdsunday.club/llm/q461-embedding-contrastive-training/)

@@ -1,5 +1,7 @@
 # Raft 算法是什么？Leader 选举、日志复制和多数派提交怎么理解？
 
+[美团后端面试真题](../companies/meituan-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/fullstack-system-design/q255-raft-consensus/) · [题库目录](../../README.md)
@@ -132,9 +134,11 @@ Leader 已提交修改，但响应没到客户端。客户端重试，可能再�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **美团 · 后端（榛果民宿） · 原帖未明确批次**：Raft 协议怎样工作？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155468262580224)；历史面经；原帖编辑于 2019-09-18。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

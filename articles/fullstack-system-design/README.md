@@ -23,3 +23,5 @@
 - [SLI、SLO 和 SLA 有什么区别？错误预算怎么计算、怎么用？](./q375-slo-error-budget.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q375-slo-error-budget/)
 - [CQRS 是什么？和数据库读写分离有什么区别？](./q414-cqrs-read-write-models.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q414-cqrs-read-write-models/)
 - [Event Sourcing 事件溯源是什么？和普通操作日志有什么区别？](./q415-event-sourcing-audit-log.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q415-event-sourcing-audit-log/)
+- [即时通讯系统怎么设计？消息顺序、离线消息和多端同步怎么处理？](./q492-instant-messaging-system-design.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q492-instant-messaging-system-design/)
+- [Feed 流系统怎么设计？推模式、拉模式和推拉结合怎么选？](./q493-feed-system-fanout.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q493-feed-system-fanout/)

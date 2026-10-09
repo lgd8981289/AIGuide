@@ -1,6 +1,6 @@
 # RAG 文档切片越小越好吗？Chunk Size 应该怎么选？
 
-[百度Agent开发面试真题](../companies/baidu-agent.md)
+[百度Agent开发面试真题](../companies/baidu-agent.md) · [虾皮Agent开发面试真题](../companies/shopee-agent.md) · [快手AI应用开发面试真题](../companies/kuaishou-ai-application.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -81,6 +81,8 @@ RAG 切片不是越小越好。小块通常更聚焦，检索时容易定位到�
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **百度 · Agent开发 · 实习**：RAG 文档切片的粒度怎样确定？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；标题记录 9 月 7 日面试，页面显示 09-07 发布；未明确年份。
+- **虾皮 · Agent开发 · 秋招（原帖标签）**：文档采用什么分块策略，递归切分后仍超长怎样处理？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)；原帖记录 9 月 3 日面试，未明确年份。
+- **快手 · AI应用开发算法 · 原帖未明确批次**：RAG 文档切片粒度如何选择？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/4f0f37f01fa64605a51b635bdeba16b4)；页面显示 05-02 发布，未明确年份。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

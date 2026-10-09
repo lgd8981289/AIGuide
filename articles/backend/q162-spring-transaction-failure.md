@@ -1,5 +1,7 @@
 # Spring 的 @Transactional 为什么会失效？事务传播行为怎么选？
 
+[字节后端面试真题](../companies/bytedance-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q162-spring-transaction-failure/) · [题库目录](../../README.md)
@@ -90,9 +92,11 @@ NESTED 则在同一物理事务中使用保存点，内层可以回到保存点�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · 后端（TikTok） · 日常实习**：Spring 事务的原理是什么，什么情况下会失效？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/686735730227286016)；面试记录为 2024-11-14；原帖编辑于 2024-11-16。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

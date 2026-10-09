@@ -33,6 +33,10 @@
 
 更新后运行 `node --test scripts/tests/company-interviews.test.mjs scripts/tests/github-articles.test.mjs`、`npm run export:github`、`npm run build`、`npm run check:companies` 和 `npm run check:urls`。不得把构建和导出当成已部署或已推送；来源引用也不替代文章技术结论的核验。
 
+新增文章后运行 `npm run report:companies` 查看真实来源的覆盖率、分类缺口和最新未匹配题目；每次完整构建也自动输出该报告。`npm run report:companies -- --unmatched` 列出全部待核验文章，`npm run report:companies -- --json` 提供结构化清单。覆盖率只统计 Q 编号面试题，教程与 `related` 延伸阅读不计入。多公司同帖按公司段落维护独立来源记录，面经篇数按 URL 去重。未匹配是维护队列，不意味着公司没有问过，也不能按关键词自动贴标签。
+
+2026-10-09 的扩充来源保存在 `src/data/company-interview-expansion.mjs`，由主数据统一合并，网站和 GitHub 继续使用同一套读取逻辑。新来源逐条保留原帖题意与日期；没有重新阅读的旧来源保留原核验日期。
+
 网站入口：[note.lgdsunday.club](https://note.lgdsunday.club/)。指南部署在独立子域名的根目录；原 `lgdsunday.club/note/` 和 `www.lgdsunday.club/note/` 均逐页 301 到新地址。
 
 ## 服务器目录

@@ -95,6 +95,7 @@ useEffect 主要用于与外部系统同步，通常让浏览器先绘制，但�
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **字节跳动 · 前端 · 社招**：useEffect 与 useLayoutEffect 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/786037843704479744)；原帖编辑于 2025-09-01。
+- **字节跳动 · 前端 · 校招**：useEffect 和 useLayoutEffect 的执行时机有什么差异？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158686203912192)；面试记录为 2021 年秋招；原帖编辑于 2021-10-09。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

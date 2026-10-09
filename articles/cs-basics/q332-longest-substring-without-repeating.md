@@ -1,5 +1,7 @@
 # 最长无重复子串怎么用滑动窗口实现？为什么左边界只能向前移动？
 
+[字节后端面试真题](../companies/bytedance-backend.md) · [快手AI应用开发面试真题](../companies/kuaishou-ai-application.md) · [美团后端面试真题](../companies/meituan-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q332-longest-substring-without-repeating/) · [题库目录](../../README.md)
@@ -119,9 +121,13 @@ TS 先用 Array.from 得到码点序列，避免把补充平面字符拆成两�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · 后端（TikTok） · 日常实习**：怎样求字符串中不含重复字符的最长子串长度？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/686735730227286016)；面试记录为 2024-11-14；原帖编辑于 2024-11-16。
+- **快手 · AI应用开发算法 · 原帖未明确批次**：怎样求最长无重复字符子串？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/4f0f37f01fa64605a51b635bdeba16b4)；页面显示 05-02 发布，未明确年份。
+- **美团 · 后端（榛果民宿） · 原帖未明确批次**：怎样求最大无重复字符子串长度？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155468262580224)；历史面经；原帖编辑于 2019-09-18。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

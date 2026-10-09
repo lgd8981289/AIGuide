@@ -1,5 +1,7 @@
 # Java volatile 有什么作用？为什么不能保证 i++ 的线程安全？
 
+[美团后端面试真题](../companies/meituan-backend.md) · [京东后端面试真题](../companies/jd-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q224-volatile-atomicity/) · [题库目录](../../README.md)
@@ -106,9 +108,12 @@ AtomicInteger 提供 incrementAndGet 等原子更新操作，把一次读改写�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **美团 · Java后端 · 实习**：volatile 如何保障有序性？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
+- **京东 · Java后台 · 校招**：volatile 能否实现线程安全？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155278348689408)；原帖编辑于 2019-08-23（历史校招面经）。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

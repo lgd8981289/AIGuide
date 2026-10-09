@@ -1,5 +1,7 @@
 # AI 文件解析与建索引的异步任务怎么设计？
 
+[字节Agent开发面试真题](../companies/bytedance-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/engineering/q012-async-file-parsing-indexing/) · [题库目录](../../README.md)
@@ -80,9 +82,11 @@ OCR 服务短暂故障可以有限次数重试；文件损坏、格式不支持�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · Agent开发 · 校招（原帖标签）**：项目中 RAG 的离线上传环节如何实现？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/925342611194286080)；标题记录 9 月 3 日面试，页面显示 09-04 编辑；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

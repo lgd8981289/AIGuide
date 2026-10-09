@@ -1,6 +1,6 @@
 # OSI 七层模型和 TCP/IP 四层模型有什么区别？一次请求经过哪些层？
 
-[阿里后端面试真题](../companies/alibaba-backend.md)
+[阿里后端面试真题](../companies/alibaba-backend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md) · [字节后端面试真题](../companies/bytedance-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -103,6 +103,8 @@ TCP/IP 四层口径里，应用层包含这些上层职责；最下面的链路�
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **阿里巴巴 · 后端 · 原帖未明确批次**：网络分层中交换机和路由器各负责什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159441665171456)；原帖发布于 2022-03-29。
+- **小米 · 前端 · 原帖未明确批次**：网络怎样分层，HTTP 位于哪一层？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **字节跳动 · 后端（番茄小说） · 实习**：HTTP 和 DNS 位于网络的哪一层？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159640278048768)；面试记录为 2021 年 1 月；原帖发布于 2022-04-29。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

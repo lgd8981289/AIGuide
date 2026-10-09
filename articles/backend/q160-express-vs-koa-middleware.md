@@ -1,5 +1,7 @@
 # Express 和 Koa 的中间件有什么区别？洋葱模型是怎么执行的？
 
+[字节前端面试真题](../companies/bytedance-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q160-express-vs-koa-middleware/) · [题库目录](../../README.md)
@@ -118,9 +120,11 @@ asyncio.run(outer(inner))
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · 前端 · 原帖未明确批次**：Koa 和 Express 怎样用中间件统计请求耗时？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156819747020800)；原帖编辑于 2020-08-24。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

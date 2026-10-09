@@ -1,6 +1,6 @@
 # MySQL 索引为什么用 B+ 树？与 B 树、哈希索引有什么区别？
 
-[美团开发面试真题](../companies/meituan-development.md) · [字节Agent开发面试真题](../companies/bytedance-agent.md)
+[美团开发面试真题](../companies/meituan-development.md) · [字节Agent开发面试真题](../companies/bytedance-agent.md) · [美团后端面试真题](../companies/meituan-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -106,6 +106,7 @@ B+ 树把记录组织在有序的叶子层，范围读取比较顺畅。对于�
 
 - **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：MySQL 索引使用什么数据结构？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
 - **字节跳动 · Agent开发 · 校招**：MySQL 索引使用什么数据结构？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/929731481189044224)；页面显示 09-16 编辑，未明确年份；标题为秋招。
+- **美团 · Java后端 · 实习**：为什么 MySQL 使用 B+ 树索引？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

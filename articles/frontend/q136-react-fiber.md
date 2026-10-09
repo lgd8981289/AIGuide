@@ -95,6 +95,8 @@ commit 包含相应 DOM 变更、布局 Effect 等提交工作；其中同步提
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **字节跳动 · 前端 · 实习**：React Fiber 怎样中断和调度渲染？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/756639561995870208)；原帖发布于 2025-05-26。
+- **字节跳动 · 前端 · 校招**：React Fiber 如何调度，为什么需要可中断渲染？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158686203912192)；面试记录为 2021 年秋招；原帖编辑于 2021-10-09。
+- **字节跳动 · 前端 · 原帖未明确批次**：React Fiber 调度器怎样工作？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156819747020800)；原帖编辑于 2020-08-24。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

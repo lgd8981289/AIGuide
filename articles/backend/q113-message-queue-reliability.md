@@ -1,5 +1,7 @@
 # 消息队列如何保证消息不丢失？为什么收到 ACK 还不一定代表业务完成？
 
+[字节后端面试真题](../companies/bytedance-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q113-message-queue-reliability/) · [题库目录](../../README.md)
@@ -106,9 +108,12 @@ durable 队列、persistent 消息和发布确认，各自承担不同职责。�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · 后端（TikTok） · 日常实习**：消息队列如何避免重复处理，并保证消息发送成功？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/686735730227286016)；面试记录为 2024-11-14；原帖编辑于 2024-11-16。
+- **字节跳动 · 后端（抖音） · 社招**：Kafka 怎样保证消息不丢失？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353157517968613376)；历史面经，面试年份未明确；页面编辑于 2024-07-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

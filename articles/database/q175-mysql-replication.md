@@ -1,5 +1,7 @@
 # MySQL 主从复制是怎么工作的？主从延迟时怎样保证读到刚写的数据？
 
+[字节后端面试真题](../companies/bytedance-backend.md) · [美团后端面试真题](../companies/meituan-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q175-mysql-replication/) · [题库目录](../../README.md)
@@ -90,9 +92,12 @@ MySQL 常见主从复制，是主库把变更记录到 binlog，从库接收后�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · 后端（TikTok） · 日常实习**：MySQL 主从如何同步，读写分离不一致怎样处理？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/686735730227286016)；面试记录为 2024-11-14；原帖编辑于 2024-11-16。
+- **美团 · 后端（榛果民宿） · 原帖未明确批次**：MySQL 读写分离如何实现，实时性读取怎样处理？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155468262580224)；历史面经；原帖编辑于 2019-09-18。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

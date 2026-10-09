@@ -20,6 +20,8 @@
 
 - [Java 线程池的核心参数怎么设置？队列越大越安全吗？](../backend/q157-java-thread-pool.md)
   Java 的 ThreadPoolExecutor 接到任务后，通常先补足核心线程，再尝试入队；队列放不下时，才继续创建线程，直到最大线程数。再接不下，就执行拒绝策略。因此，队列越大并不一定越安全。
+- [HashMap 和 ConcurrentHashMap 有什么区别？并发读写为什么不能混用？](../backend/q158-hashmap-vs-concurrenthashmap.md)
+  HashMap 不提供并发读写的同步保证。多个线程共享并修改时，需要外部同步或选择合适的并发容器。ConcurrentHashMap 支持安全的并发访问，但它不是给整个 Map 加一把大锁。读取通常不阻塞，更新按其实现协调。
 - [synchronized 和 ReentrantLock 有什么区别？Java 并发加锁应该怎么选？](../backend/q222-synchronized-vs-reentrantlock.md)
   synchronized 和 ReentrantLock 都可以实现可重入的互斥访问，并提供相应的内存可见性保证。一个线程已经持有这把锁，还能再次进入受同一把锁保护的代码。
 - [CAS 是什么？ABA 问题怎么产生，为什么加版本号能解决？](../backend/q241-cas-aba.md)
@@ -39,6 +41,8 @@
   这里通常讨论的是 InnoDB 的常见索引，不能把所有 MySQL 索引都说成同一种结构。B+ 树内部节点主要保存键和指向下一层的指针，一个页能容纳较多分支，因此树通常较矮。
 - [Redis 的大 Key 和热 Key 有什么区别？应该怎么发现和处理？](../database/q184-redis-big-key-hot-key.md)
   大 Key 指单键的数据量、元素量或操作代价过大；热 Key 指访问或修改集中在少数键。小值也能很热，大集合也可能几乎没人访问。大 Key 会影响内存、网络、命令耗时和删除回收；热 Key 则可能让单节点、CPU 或网络成为瓶颈。
+- [Redis 主从复制怎么工作？全量同步和增量同步如何切换？](../database/q185-redis-replication.md)
+  Redis 复制通常先让从库获得基准数据，再持续接收主库的变更流。全量同步会传输数据集，并补上同步期间的后续变更。断线重连时，从库带着复制 ID 和已处理的 offset 发起 PSYNC。
 - [Redis Cluster 为什么使用哈希槽？扩容时数据和请求怎么迁移？](../database/q187-redis-cluster.md)
   Redis Cluster 把键空间划成 16384 个哈希槽，键通常按 CRC16(key) 对 16384 取模得到槽号，再由槽的归属找到主节点。节点增减通过迁移槽调整数据分布，不是简单改成 hash(key) % 节点数。
 

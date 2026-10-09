@@ -1,6 +1,6 @@
 # Redis 分布式锁怎么实现？为什么加了锁仍然可能重复执行？
 
-[腾讯后端面试真题](../companies/tencent-backend.md)
+[腾讯后端面试真题](../companies/tencent-backend.md) · [字节后端面试真题](../companies/bytedance-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -115,6 +115,7 @@ fencing 也不等于业务幂等：新持有者拿着更大 token，再重复处
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **腾讯 · 后台开发 · 原帖未明确批次**：怎样使用 Redis 实现分布式锁？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
+- **字节跳动 · 后端（TikTok） · 日常实习**：分布式锁在项目中怎样使用？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/686735730227286016)；面试记录为 2024-11-14；原帖编辑于 2024-11-16。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

@@ -1,5 +1,7 @@
 # JWT 和 Session 有什么区别？Cookie 在登录认证中负责什么？
 
+[字节前端面试真题](../companies/bytedance-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q106-jwt-vs-session/) · [题库目录](../../README.md)
@@ -102,9 +104,11 @@ Cookie 自动发送很方便，也需要考虑 CSRF。HttpOnly 限制脚本读�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · 前端 · 校招**：Token、Cookie 和 Session 在后端鉴权中怎样配合？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158686203912192)；面试记录为 2021 年秋招；原帖编辑于 2021-10-09。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

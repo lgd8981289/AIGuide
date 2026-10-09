@@ -1,5 +1,7 @@
 # MySQL 的 redo log、undo log 和 binlog 有什么区别？为什么需要两阶段提交？
 
+[美团后端面试真题](../companies/meituan-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/database/q112-mysql-three-logs/) · [题库目录](../../README.md)
@@ -110,9 +112,11 @@ redo 也不能直接代替 binlog 发给另一套库，要求它承担同样的�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **美团 · Java后端 · 社招**：MySQL 有哪些日志文件，各有什么作用？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353157517968613376)；历史面经，面试年份未明确；页面编辑于 2024-07-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

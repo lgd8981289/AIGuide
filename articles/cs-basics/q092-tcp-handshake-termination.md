@@ -1,5 +1,7 @@
 # TCP 为什么要三次握手、四次挥手？TIME_WAIT 有什么作用？
 
+[腾讯前端面试真题](../companies/tencent-frontend.md) · [字节后端面试真题](../companies/bytedance-backend.md) · [腾讯开发面试真题](../companies/tencent-development.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q092-tcp-handshake-termination/) · [题库目录](../../README.md)
@@ -106,9 +108,13 @@ TCP 连接通常由双方地址和端口形成四元组。标准中的等待与�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **腾讯 · 前端（TEG / QQ音乐 / PCG） · 暑期实习**：TCP 连接如何建立和关闭？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156343349583872)；面试记录为 2020 年 3 月；原帖编辑于 2020-04-19。
+- **字节跳动 · 后端（番茄小说） · 实习**：TCP 为什么需要三次握手和四次挥手？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159640278048768)；面试记录为 2021 年 1 月；原帖发布于 2022-04-29。
+- **腾讯 · 开发（含 Agent 设计） · 原帖未明确批次**：TCP 三次握手怎样工作？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/3d6a90f681d745849a32e611d1ec1c11)；页面显示 04-20 发布，未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

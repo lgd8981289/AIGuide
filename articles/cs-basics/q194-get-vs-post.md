@@ -1,6 +1,6 @@
 # GET 和 POST 有什么区别？安全性、幂等性和参数位置该怎么理解？
 
-[小米前端面试真题](../companies/xiaomi-frontend.md)
+[小米前端面试真题](../companies/xiaomi-frontend.md) · [快手AI应用开发面试真题](../companies/kuaishou-ai-application.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -95,6 +95,7 @@ HTTP 并没有统一规定 GET 参数最多只能多少字符。限制可能来�
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **小米 · 前端 · 原帖未明确批次**：GET 与 POST 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **快手 · AI应用开发算法 · 原帖未明确批次**：HTTP GET 和 POST 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/4f0f37f01fa64605a51b635bdeba16b4)；页面显示 05-02 发布，未明确年份。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

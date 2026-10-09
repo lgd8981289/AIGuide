@@ -1,6 +1,6 @@
 # Vue 3 生命周期有哪些？父子组件的执行顺序是什么？
 
-[小米前端面试真题](../companies/xiaomi-frontend.md)
+[小米前端面试真题](../companies/xiaomi-frontend.md) · [腾讯前端面试真题](../companies/tencent-frontend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -140,6 +140,7 @@ Vue 的生命周期，就是一个组件从创建、挂载、更新到卸载的�
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **小米 · 前端 · 原帖未明确批次**：Vue 3 有哪些生命周期钩子？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **腾讯 · 前端（TEG / QQ音乐 / PCG） · 暑期实习**：Vue 各生命周期阶段分别做什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156343349583872)；面试记录为 2020 年 3 月；原帖编辑于 2020-04-19。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

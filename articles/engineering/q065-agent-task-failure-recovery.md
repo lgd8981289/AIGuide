@@ -1,6 +1,6 @@
 # Agent 任务中断后如何恢复？Checkpoint 与幂等设计
 
-[百度Agent开发面试真题](../companies/baidu-agent.md)
+[百度Agent开发面试真题](../companies/baidu-agent.md) · [腾讯AI应用开发面试真题](../companies/tencent-ai-application.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -125,6 +125,7 @@ Checkpoint 可以保存恢复所需的运行状态，但必须使用真正可持
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **百度 · Agent开发 · 实习**：Agent 执行中断后怎样继续任务？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；标题记录 9 月 7 日面试，页面显示 09-07 发布；未明确年份。
+- **腾讯 · AI应用开发后端 · 实习**：Agent 执行中断后如何处理？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/144c6ae334b24c0aa643ed43ccfebaac)；页面显示 04-23 发布，未明确年份。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

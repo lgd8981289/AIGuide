@@ -1,5 +1,7 @@
 # Kafka 消费者组如何分配分区？Rebalance 为什么会频繁发生？
 
+[美团后端面试真题](../companies/meituan-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q273-kafka-consumer-group-rebalance/) · [题库目录](../../README.md)
@@ -120,9 +122,11 @@ Kafka 4.0 起正式可用的新 Consumer 再均衡协议，把分区分配移到
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **美团 · Java后端 · 实习**：Kafka 消费者与 partition 有什么关系？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

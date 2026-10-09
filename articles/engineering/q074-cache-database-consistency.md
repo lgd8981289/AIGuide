@@ -1,6 +1,6 @@
 # Redis 和数据库如何保持一致？为什么更新数据库后删缓存，仍然可能读到旧数据？
 
-[腾讯后端面试真题](../companies/tencent-backend.md) · [京东后端面试真题](../companies/jd-backend.md)
+[腾讯后端面试真题](../companies/tencent-backend.md) · [京东后端面试真题](../companies/jd-backend.md) · [美团后端面试真题](../companies/meituan-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -127,6 +127,8 @@ Redis 和数据库使用 Cache-Aside 时，通常先读缓存，未命中再查�
 
 - **腾讯 · 后台开发 · 原帖未明确批次**：Redis 与 MySQL 结合使用时怎样处理缓存写入？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
 - **京东 · 数据开发 / 后端 · 校招**：Redis 与 MySQL 结合使用时怎样处理缓存写入？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/791720598454935552)；原帖发布于 2025-08-31（秋招记录）。
+- **美团 · Java后端 · 实习**：高并发下，先删除缓存与先更新数据库分别会有什么问题？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
+- **美团 · 后端（榛果民宿） · 原帖未明确批次**：先写缓存与先写数据库分别带来什么一致性问题？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155468262580224)；历史面经；原帖编辑于 2019-09-18。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

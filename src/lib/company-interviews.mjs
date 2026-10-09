@@ -58,6 +58,33 @@ export function getInterviewCollections(sources = INTERVIEW_SOURCES) {
   return [...collections.values()];
 }
 
+// 覆盖率用于维护排查，不能据此把没有来源的文章自动贴上公司标签。
+export function getInterviewCoverage(articles, sources = INTERVIEW_SOURCES) {
+  validateInterviewSources(articles, sources);
+  const interviewArticles = articles.filter(article => /^Q\d+$/.test(article.qnum));
+  const matches = sources.flatMap(source => source.topics.filter(topic =>
+    topic.relation === 'mentioned' && topic.question && source.reviewedAt));
+  const matched = new Set(matches.map(topic => topic.qnum));
+  const categories = [...new Set(interviewArticles.map(article => article.category))].sort();
+  const collections = getInterviewCollections(sources);
+  return {
+    articleCount: interviewArticles.length,
+    matchedArticleCount: interviewArticles.filter(article => matched.has(article.qnum)).length,
+    questionSourceCount: matches.length,
+    sourceCount: new Set(sources.map(source => source.url)).size,
+    sourceRecordCount: sources.length,
+    companyCount: new Set(collections.map(view => view.company.id)).size,
+    roleCollectionCount: collections.length,
+    categories: categories.map(category => {
+      const group = interviewArticles.filter(article => article.category === category);
+      return { category, articleCount: group.length, matchedArticleCount: group.filter(article => matched.has(article.qnum)).length };
+    }),
+    unmatched: interviewArticles.filter(article => !matched.has(article.qnum))
+      .sort((a, b) => Number(b.qnum.slice(1)) - Number(a.qnum.slice(1)))
+      .map(({ qnum, title, category }) => ({ qnum, title, category })),
+  };
+}
+
 export function interviewDescription(description, matches) {
   const tags = [...new Set(matches.filter(m => m.relation === 'mentioned' && m.question).map(m => `${m.company.name}${INTERVIEW_ROLES.find(r => r.id === m.source.roleKey).name}`))];
   return tags.length ? `${description} 附${tags.slice(0, 2).join('、')}${tags.length > 2 ? '等岗位' : ''}公开面经中的真题题意与来源。` : description;

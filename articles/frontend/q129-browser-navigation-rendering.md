@@ -1,6 +1,6 @@
 # 从输入 URL 到页面显示，浏览器到底经历了什么？
 
-[百度前端面试真题](../companies/baidu-frontend.md) · [美团开发面试真题](../companies/meituan-development.md) · [小米前端面试真题](../companies/xiaomi-frontend.md) · [阿里前端面试真题](../companies/alibaba-frontend.md)
+[百度前端面试真题](../companies/baidu-frontend.md) · [美团开发面试真题](../companies/meituan-development.md) · [小米前端面试真题](../companies/xiaomi-frontend.md) · [阿里前端面试真题](../companies/alibaba-frontend.md) · [腾讯前端面试真题](../companies/tencent-frontend.md) · [字节后端面试真题](../companies/bytedance-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -102,6 +102,8 @@ display: none 的元素不参与相应布局；visibility: hidden 仍占布局�
 - **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：从输入网址到页面渲染经历哪些步骤？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
 - **小米 · 前端 · 原帖未明确批次**：从输入网址到页面渲染经历哪些步骤？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
 - **阿里巴巴 · 前端 · 原帖未明确批次**：从输入网址到页面渲染经历哪些步骤？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+- **腾讯 · 前端（TEG / QQ音乐 / PCG） · 暑期实习**：从输入 URL 到页面展示经历哪些步骤？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156343349583872)；面试记录为 2020 年 3 月；原帖编辑于 2020-04-19。
+- **字节跳动 · 后端（番茄小说） · 实习**：一次完整的网络请求经历哪些步骤？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159640278048768)；面试记录为 2021 年 1 月；原帖发布于 2022-04-29。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

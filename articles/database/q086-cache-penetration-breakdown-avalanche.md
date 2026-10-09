@@ -1,6 +1,6 @@
 # Redis 缓存穿透、击穿、雪崩有什么区别？分别怎么解决？
 
-[美团开发面试真题](../companies/meituan-development.md)
+[美团开发面试真题](../companies/meituan-development.md) · [美团后端面试真题](../companies/meituan-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -105,6 +105,7 @@
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：怎样区分并处理缓存穿透与雪崩？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+- **美团 · Java后端 · 实习**：缓存穿透和热点数据击穿怎样处理？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

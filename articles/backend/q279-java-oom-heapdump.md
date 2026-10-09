@@ -1,6 +1,6 @@
 # Java 内存溢出 OOM 怎么排查？如何用 Heap Dump 找到问题对象？
 
-[阿里后端面试真题](../companies/alibaba-backend.md)
+[阿里后端面试真题](../companies/alibaba-backend.md) · [美团后端面试真题](../companies/meituan-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -113,6 +113,8 @@ jcmd 12345 GC.heap_dump /var/tmp/order-service-oom.hprof
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **阿里巴巴 · 后端 · 原帖未明确批次**：Java OOM 可能由哪些原因引起？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159441665171456)；原帖发布于 2022-03-29。
+- **美团 · Java后端 · 实习**：JVM 哪些内存区域会出现 OOM，分别在什么场景发生？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
+- **美团 · 后端（榛果民宿） · 原帖未明确批次**：OOM 和 StackOverflow 分别在什么场景发生？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155468262580224)；历史面经；原帖编辑于 2019-09-18。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

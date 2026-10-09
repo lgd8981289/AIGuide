@@ -1,6 +1,6 @@
 # RAG 混合检索怎么做？关键词与向量检索的融合
 
-[百度Agent开发面试真题](../companies/baidu-agent.md)
+[百度Agent开发面试真题](../companies/baidu-agent.md) · [美团AI应用开发面试真题](../companies/meituan-ai-application.md) · [虾皮Agent开发面试真题](../companies/shopee-agent.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -77,6 +77,8 @@ RAG 用混合检索，主要是因为关键词和向量检索擅长的题不一�
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **百度 · Agent开发 · 实习**：项目中的混合检索如何实现？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；标题记录 9 月 7 日面试，页面显示 09-07 发布；未明确年份。
+- **美团 · AI应用开发 · 原帖未明确批次**：关键词与向量两路召回怎样融合和排序？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/870623192925167616)；标题记录 3 月 30 日面试，页面显示 04-06 发布；未明确年份。
+- **虾皮 · Agent开发 · 秋招（原帖标签）**：BM25 与向量检索的结果怎样融合？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)；原帖记录 9 月 3 日面试，未明确年份。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

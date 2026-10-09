@@ -1,6 +1,6 @@
 # 进程、线程和协程有什么区别？CPU 密集与 I/O 密集任务怎么选？
 
-[阿里后端面试真题](../companies/alibaba-backend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md)
+[阿里后端面试真题](../companies/alibaba-backend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md) · [字节后端面试真题](../companies/bytedance-backend.md) · [京东后端面试真题](../companies/jd-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -104,6 +104,8 @@ Node.js 中，异步网络 I/O 适合事件驱动，但 JS 重计算可以考虑
 
 - **阿里巴巴 · 后端 · 原帖未明确批次**：进程与线程有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159441665171456)；原帖发布于 2022-03-29。
 - **小米 · 前端 · 原帖未明确批次**：进程与线程有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **字节跳动 · 后端（番茄小说） · 实习**：进程和线程有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159640278048768)；面试记录为 2021 年 1 月；原帖发布于 2022-04-29。
+- **京东 · Java后台 · 校招**：线程与进程有什么区别，为什么需要线程？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155278348689408)；原帖编辑于 2019-08-23（历史校招面经）。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

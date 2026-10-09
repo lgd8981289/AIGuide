@@ -1,5 +1,7 @@
 # Tree Shaking 是什么？为什么没用到的代码仍然进了包？
 
+[字节前端面试真题](../companies/bytedance-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q145-tree-shaking/) · [题库目录](../../README.md)
@@ -94,9 +96,11 @@ Webpack 中，sideEffects 声明可以让工具跳过无需保留的模块及其
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · 前端 · 原帖未明确批次**：为什么 Tree Shaking 依赖 ES Module？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156819747020800)；原帖编辑于 2020-08-24。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -1,6 +1,6 @@
 # Java 线程池的核心参数怎么设置？队列越大越安全吗？
 
-[腾讯后端面试真题](../companies/tencent-backend.md) · [美团开发面试真题](../companies/meituan-development.md) · [去哪儿AI应用开发面试真题](../companies/qunar-ai-application.md)
+[腾讯后端面试真题](../companies/tencent-backend.md) · [美团开发面试真题](../companies/meituan-development.md) · [去哪儿AI应用开发面试真题](../companies/qunar-ai-application.md) · [美团后端面试真题](../companies/meituan-backend.md) · [京东后端面试真题](../companies/jd-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -92,6 +92,8 @@ Java 的 `ThreadPoolExecutor` 接到任务后，通常先补足核心线程，�
 - **腾讯 · 后台开发 · 原帖未明确批次**：线程池有哪些核心参数？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
 - **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：线程池有哪些核心参数？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
 - **去哪儿 · AI应用开发（Java） · 校招**：任务到来时，线程池怎样在核心线程、队列和非核心线程之间分配？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/930185770202038272)；页面显示 09-17 发布，未明确年份；标题为秋招。
+- **美团 · Java后端 · 实习**：线程池有哪些参数，提交任务和拒绝任务的过程是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
+- **京东 · Java后台 · 校招**：线程池需要哪些参数，任务怎样进入线程和队列？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155278348689408)；原帖编辑于 2019-08-23（历史校招面经）。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

@@ -9,3 +9,5 @@
 - [AI 应用如何灰度发布与回滚？从离线评测到线上验证](./q053-canary-release-rollback.md) · [在线阅读](https://note.lgdsunday.club/system-design/q053-canary-release-rollback/)
 - [Text2SQL 是什么？如何让大模型准确、安全地查询数据库？](./q079-text2sql.md) · [在线阅读](https://note.lgdsunday.club/system-design/q079-text2sql/)
 - [Deep Research Agent 怎么设计？怎样保证研究报告的引用可靠？](./q098-deep-research-citation-reliability.md) · [在线阅读](https://note.lgdsunday.club/system-design/q098-deep-research-citation-reliability/)
+- [Dify 和 LangChain 有什么区别？AI 应用开发该选平台还是代码框架？](./q458-dify-vs-langchain.md) · [在线阅读](https://note.lgdsunday.club/system-design/q458-dify-vs-langchain/)
+- [Spring AI 和 LangChain4j 有什么区别？Java 开发 Agent 应该怎么选？](./q459-spring-ai-vs-langchain4j.md) · [在线阅读](https://note.lgdsunday.club/system-design/q459-spring-ai-vs-langchain4j/)

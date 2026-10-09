@@ -359,7 +359,7 @@ export const FOLLOW = {
 // 当前瓶颈是「内容可达性」而非「涨粉」。先让搜索引擎和读者无障碍拿到全文做流量，
 // 门禁留作以后有基础时的可选项——改 enabled 为 true 即可完整恢复（分层抽样逻辑仍在）。
 export const TECHGROW = {
-	enabled: false, // 暂时关闭公众号解锁；true 时按下方 random 分层抽样恢复门禁
+	enabled: true, // 暂时关闭公众号解锁；true 时按下方 random 分层抽样恢复门禁
 	blogId: '77647-4526721610548-557',
 	name: '程序员Sunday', // 微信公众号名称
 	keyword: '验证码', // 读者在公众号里回复的关键词

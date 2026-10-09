@@ -29,3 +29,7 @@
 - [Agent 的 Reflection 反思机制是什么？为什么自查也可能越改越错？](./q097-agent-reflection.md) · [在线阅读](https://note.lgdsunday.club/agent/q097-agent-reflection/)
 - [Agent 强化学习的奖励怎么设计？怎样避免模型只会刷分？](./q103-agent-rl-reward.md) · [在线阅读](https://note.lgdsunday.club/agent/q103-agent-rl-reward/)
 - [Agent 意图识别怎么做？什么时候应该先澄清，而不是直接执行？](./q380-agent-intent-recognition.md) · [在线阅读](https://note.lgdsunday.club/agent/q380-agent-intent-recognition/)
+- [MCP 的 Tools、Resources、Prompts 有什么区别？分别在什么场景使用？](./q416-mcp-tools-resources-prompts.md) · [在线阅读](https://note.lgdsunday.club/agent/q416-mcp-tools-resources-prompts/)
+- [CodeAct 是什么？让 Agent 执行代码和调用工具有什么区别？](./q420-codeact-code-actions.md) · [在线阅读](https://note.lgdsunday.club/agent/q420-codeact-code-actions/)
+- [MCP Elicitation 是什么？工具需要补充信息时，怎样向用户发起询问？](./q423-mcp-elicitation-user-input.md) · [在线阅读](https://note.lgdsunday.club/agent/q423-mcp-elicitation-user-input/)
+- [Prompt Engineering 是什么？Agent 提示词应该怎样设计？](./q456-agent-prompt-engineering.md) · [在线阅读](https://note.lgdsunday.club/agent/q456-agent-prompt-engineering/)

@@ -1,6 +1,6 @@
 # synchronized 和 ReentrantLock 有什么区别？Java 并发加锁应该怎么选？
 
-[腾讯后端面试真题](../companies/tencent-backend.md) · [美团开发面试真题](../companies/meituan-development.md)
+[腾讯后端面试真题](../companies/tencent-backend.md) · [美团开发面试真题](../companies/meituan-development.md) · [京东后端面试真题](../companies/jd-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -108,6 +108,7 @@ synchronized 可以配合 wait 和 notify/notifyAll；同一个监视器上的�
 
 - **腾讯 · 后台开发 · 原帖未明确批次**：synchronized 与 Lock 有哪些区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
 - **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：synchronized 与 Lock 有哪些区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+- **京东 · Java后台 · 校招**：synchronized 与 Lock 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155278348689408)；原帖编辑于 2019-08-23（历史校招面经）。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

@@ -1,6 +1,6 @@
 # XSS 和 CSRF 有什么区别？HttpOnly、SameSite 和 Token 分别防什么？
 
-[百度前端面试真题](../companies/baidu-frontend.md)
+[百度前端面试真题](../companies/baidu-frontend.md) · [字节前端面试真题](../companies/bytedance-frontend.md) · [腾讯前端面试真题](../companies/tencent-frontend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -105,6 +105,9 @@ GET 应具有安全语义。浏览器、预加载、爬虫或链接访问都可�
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **百度 · 前端 · 校招**：XSS 与 CSRF 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158492217352192)；面试记录为 2021 年 9 月；原帖编辑于 2021-10-04。
+- **字节跳动 · 前端 · 校招**：XSS 和 CSRF 的攻击原理与防范措施是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158686203912192)；面试记录为 2021 年秋招；原帖编辑于 2021-10-09。
+- **腾讯 · 前端（TEG / QQ音乐 / PCG） · 暑期实习**：XSS 和 CSRF 怎样防范？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156343349583872)；面试记录为 2020 年 3 月；原帖编辑于 2020-04-19。
+- **腾讯 · 前端 · 原帖未明确批次**：XSS、CSRF 如何防范？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/529319096907726848)；腾讯面试记录为 2023-08-28、2023-08-30；原帖编辑于 2023-09-07。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

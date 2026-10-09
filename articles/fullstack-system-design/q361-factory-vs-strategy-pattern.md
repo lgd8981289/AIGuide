@@ -1,5 +1,7 @@
 # 工厂模式和策略模式有什么区别？如何配合管理多种实现？
 
+[百度AI应用开发面试真题](../companies/baidu-ai-application.md) · [阿里后端面试真题](../companies/alibaba-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/fullstack-system-design/q361-factory-vs-strategy-pattern/) · [题库目录](../../README.md)
@@ -126,9 +128,12 @@ getSaver/get\_saver 集中选择实现，属于工厂或提供器职责；取得
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **百度 · 大模型生态集成 · 实习**：除了工厂模式，还了解哪些设计模式？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/62d4ca9866d84d63bf6eafbb0a947bb8)；标题记录 2026 年 4 月；页面显示 04-22 编辑。
+- **阿里巴巴 · Java后端 · 社招**：工厂、策略等设计模式分别怎样使用？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353157517968613376)；历史面经，面试年份未明确；页面编辑于 2024-07-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

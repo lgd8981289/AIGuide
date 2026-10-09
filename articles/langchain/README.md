@@ -12,3 +12,7 @@
 - [LangChain Middleware 是什么？和 Tool、Callback 有什么区别？](./q055-langchain-middleware.md) · [在线阅读](https://note.lgdsunday.club/langchain/q055-langchain-middleware/)
 - [LangChain、LangGraph 和自研 Agent 应该怎么选？](./q063-agent-framework-selection.md) · [在线阅读](https://note.lgdsunday.club/langchain/q063-agent-framework-selection/)
 - [LangGraph 如何实现流式输出？messages、updates、values 有什么区别？](./q388-langgraph-streaming-modes.md) · [在线阅读](https://note.lgdsunday.club/langchain/q388-langgraph-streaming-modes/)
+- [LangGraph 的 Pregel 和 Super-step 是什么？并行节点何时能读到新状态？](./q424-langgraph-pregel-supersteps.md) · [在线阅读](https://note.lgdsunday.club/langchain/q424-langgraph-pregel-supersteps/)
+- [LangGraph Time Travel 怎么用？如何从历史检查点重放或分叉执行？](./q425-langgraph-time-travel-replay-fork.md) · [在线阅读](https://note.lgdsunday.club/langchain/q425-langgraph-time-travel-replay-fork/)
+- [LangGraph 为什么报 GraphRecursionError？recursion_limit 应该怎么设置？](./q426-langgraph-recursion-limit.md) · [在线阅读](https://note.lgdsunday.club/langchain/q426-langgraph-recursion-limit/)
+- [LangChain 和 LlamaIndex 有什么区别？开发 RAG 和 Agent 应该怎么选？](./q457-langchain-vs-llamaindex.md) · [在线阅读](https://note.lgdsunday.club/langchain/q457-langchain-vs-llamaindex/)

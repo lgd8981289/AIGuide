@@ -1,5 +1,7 @@
 # LRU 缓存怎么实现？为什么通常需要哈希表加双向链表？
 
+[腾讯前端面试真题](../companies/tencent-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/cs-basics/q201-lru-cache/) · [题库目录](../../README.md)
@@ -142,9 +144,11 @@ class LRU:
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **腾讯 · 前端 · 原帖未明确批次**：怎样实现 LRU，除了 Map 还可以用哪些数据结构？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/529319096907726848)；腾讯面试记录为 2023-08-28、2023-08-30；原帖编辑于 2023-09-07。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -1,5 +1,7 @@
 # JVM 垃圾回收怎么判断对象可以回收？GC Roots 和可达性分析是什么？
 
+[阿里后端面试真题](../companies/alibaba-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q223-gc-roots-reachability/) · [题库目录](../../README.md)
@@ -106,9 +108,11 @@ Map 仍然可达，里面的结果也就仍然可达。GC 没有读懂“这些�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **阿里巴巴 · Java后端 · 社招**：GC Roots 有哪些，怎样判断对象可回收？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353157517968613376)；历史面经，面试年份未明确；页面编辑于 2024-07-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

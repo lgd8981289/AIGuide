@@ -1,5 +1,7 @@
 # script 的 defer 和 async 有什么区别？会影响执行顺序和 DOMContentLoaded 吗？
 
+[腾讯前端面试真题](../companies/tencent-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q296-defer-vs-async/) · [题库目录](../../README.md)
@@ -86,9 +88,11 @@ DOMContentLoaded 表示文档已经完成解析，相关延后脚本也完成了
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **腾讯 · 前端（TEG / QQ音乐 / PCG） · 暑期实习**：JavaScript 文件有哪些异步加载方式？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156343349583872)；面试记录为 2020 年 3 月；原帖编辑于 2020-04-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

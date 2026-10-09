@@ -1,5 +1,7 @@
 # RoPE 旋转位置编码是什么？Transformer 为什么需要位置信息？
 
+[字节算法面试真题](../companies/bytedance-algorithm.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/llm/q382-rope-rotary-position-embedding/) · [题库目录](../../README.md)
@@ -110,9 +112,11 @@ RoPE 的典型用法，是在注意力打分前旋转 Q、K。正文讨论的是
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · 风控算法 · 原帖未明确批次**：RoPE 的计算公式和位置编码原理是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/799371978426564608)；原帖发布于 2025-09-21。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

@@ -1,5 +1,7 @@
 # React 合成事件是什么？和原生 DOM 事件有什么区别？
 
+[字节前端面试真题](../companies/bytedance-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/frontend/q289-react-synthetic-events/) · [题库目录](../../README.md)
@@ -109,9 +111,11 @@ React 事件处理中不要靠 return false。需要阻止默认行为时使用 
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · 前端 · 校招**：React 合成事件如何模拟捕获与冒泡？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158686203912192)；面试记录为 2021 年秋招；原帖编辑于 2021-10-09。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

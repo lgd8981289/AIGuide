@@ -1,6 +1,6 @@
 # JavaScript 原型链是什么？new 和继承是怎么实现的？
 
-[字节前端面试真题](../companies/bytedance-frontend.md) · [百度前端面试真题](../companies/baidu-frontend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md)
+[字节前端面试真题](../companies/bytedance-frontend.md) · [百度前端面试真题](../companies/baidu-frontend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md) · [腾讯前端面试真题](../companies/tencent-frontend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -114,6 +114,8 @@ console.log(Object.hasOwn(user, "role")); // true
 - **字节跳动 · 前端 · 社招**：JavaScript 原型链怎样实现继承？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/786037843704479744)；原帖编辑于 2025-09-01。
 - **百度 · 前端 · 实习（原帖标签）**：JavaScript 原型链怎样实现继承？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
 - **小米 · 前端 · 原帖未明确批次**：JavaScript 原型链怎样实现继承？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **字节跳动 · 前端 · 原帖未明确批次**：ES5、ES6 继承如何实现？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156819747020800)；原帖编辑于 2020-08-24。
+- **腾讯 · 前端（TEG / QQ音乐 / PCG） · 暑期实习**：new 操作符和原型链继承怎样实现？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156343349583872)；面试记录为 2020 年 3 月；原帖编辑于 2020-04-19。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

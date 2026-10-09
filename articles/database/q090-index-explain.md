@@ -1,6 +1,6 @@
 # MySQL 索引为什么会失效？如何用 EXPLAIN 判断 SQL 有没有用好索引？
 
-[腾讯后端面试真题](../companies/tencent-backend.md)
+[腾讯后端面试真题](../companies/tencent-backend.md) · [美团后端面试真题](../companies/meituan-backend.md) · [京东后端面试真题](../companies/jd-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -120,6 +120,9 @@ rows 和 filtered 是估算信息，不能直接当成实际返回行数。Extra
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **腾讯 · 后台开发 · 原帖未明确批次**：如何分析索引失效和慢 SQL？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
+- **美团 · Java后端 · 实习**：最左前缀原则如何应用，EXPLAIN 的字段代表什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
+- **京东 · Java后台 · 校招**：索引最左匹配怎样工作，SQL 怎样调优？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155278348689408)；原帖编辑于 2019-08-23（历史校招面经）。
+- **美团 · 后端（榛果民宿） · 原帖未明确批次**：怎样优化 SQL，索引建立的依据是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155468262580224)；历史面经；原帖编辑于 2019-09-18。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

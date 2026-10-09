@@ -1,5 +1,7 @@
 # Agent 调用工具超时了，可以直接重试吗？
 
+[腾讯AI应用开发面试真题](../companies/tencent-ai-application.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/agent/q028-tool-timeout-retry-idempotency/) · [题库目录](../../README.md)
@@ -92,9 +94,11 @@ Agent 调工具超时，先把它看成结果未知，而不是操作失败。�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **腾讯 · AI应用开发后端 · 实习**：Agent 失败或中断时怎样处理，重试如何保证安全？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/144c6ae334b24c0aa643ed43ccfebaac)；页面显示 04-23 发布，未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

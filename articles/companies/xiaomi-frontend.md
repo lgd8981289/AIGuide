@@ -20,6 +20,8 @@
   CSS 盒模型从里到外是 content、padding、border 和 margin。默认的 content-box 把 width 和 height 用在内容区上，内边距和边框要另外加。
 - [从输入 URL 到页面显示，浏览器到底经历了什么？](../frontend/q129-browser-navigation-rendering.md)
   浏览器先解析 URL，确定导航目标，再按缓存、已有连接和协议情况获取页面。需要时进行域名解析与连接建立；HTTPS 还涉及安全握手，但不能把每次导航都说成重新走完整 TCP 流程，HTTP/3 也不使用 TCP。
+- [Vue 3 的 v-model 是怎么实现的？自定义组件如何支持双向绑定？](../frontend/q140-vue-v-model.md)
+  组件上的 v-model 本质上是一个约定：父组件传入 modelValue，子组件需要更新时触发 update:modelValue，父组件再更新自己的状态。
 - [Vue 组件通信有哪些方式？props、emit、provide/inject、Pinia 怎么选？](../frontend/q141-vue-component-communication.md)
   父组件向子组件传数据，优先用 props；子组件通知父组件发生了什么，使用 emit。组件事件不会像 DOM 事件一样沿祖先自动冒泡。一组深层组件共享同一个上下文，例如表单、主题或组件库配置，可以用 provide/inject。
 - [JavaScript 怎么判断数据类型？typeof、instanceof 和 Array.isArray 有什么区别？](../frontend/q221-js-type-checking.md)
@@ -39,6 +41,8 @@
   HTTP/1.1 支持连接复用，但同连接的流水线响应仍受顺序限制，实践中常用多连接并发。HTTP/2 使用二进制帧和流，让多个请求在一个连接上交错传输，并通过 HPACK 压缩头字段。
 - [GET 和 POST 有什么区别？安全性、幂等性和参数位置该怎么理解？](../cs-basics/q194-get-vs-post.md)
   GET 的语义是获取目标资源的表示，POST 是让目标资源按自己的规则处理提交的内容。参数放在哪里，不是二者的定义。GET 属于安全、幂等的方法。这里安全指客户端没有请求改变资源状态，不是密码传输安全；
+- [OSI 七层模型和 TCP/IP 四层模型有什么区别？一次请求经过哪些层？](../cs-basics/q290-osi-vs-tcpip.md)
+  OSI 七层是理解通信职责的参考模型；TCP/IP 四层则更贴近互联网协议体系的组织方式。两者不是两套需要同时逐层运行的机器。常见对应是：OSI 的应用、表示、会话合到 TCP/IP 应用层；传输层对应传输层；网络层对应网际层；
 - [死锁产生的四个必要条件是什么？预防、避免和检测有什么区别？](../cs-basics/q328-deadlock-four-conditions.md)
   死锁产生的四个必要条件是什么？预防、避免和检测有什么区别？等待很久不一定就是死锁，关键是资源等待是否形成无法解除的闭环。讲清四个条件如何同时成立、又从哪里打破。
 

@@ -1,5 +1,7 @@
 # 消息队列如何保证顺序消费？增加消费者为什么可能破坏顺序？
 
+[美团后端面试真题](../companies/meituan-backend.md) · [京东后端面试真题](../companies/jd-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q168-message-ordering/) · [题库目录](../../README.md)
@@ -88,9 +90,12 @@ Kafka 普通消费组中，消费者多于可分配分区时，额外消费者�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **美团 · Java后端 · 实习**：Kafka 怎样保证顺序消费？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
+- **京东 · Java后台 · 校招**：消费者速度不同时，如何保证插入操作先于删除操作？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155278348689408)；原帖编辑于 2019-08-23（历史校招面经）。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

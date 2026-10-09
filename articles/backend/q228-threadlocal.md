@@ -1,6 +1,6 @@
 # ThreadLocal 是什么？为什么在线程池中容易出现内存泄漏和数据串用？
 
-[阿里后端面试真题](../companies/alibaba-backend.md)
+[阿里后端面试真题](../companies/alibaba-backend.md) · [字节后端面试真题](../companies/bytedance-backend.md) · [京东后端面试真题](../companies/jd-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -115,6 +115,8 @@ InheritableThreadLocal 主要涉及创建子线程时的继承，也不能把它
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **阿里巴巴 · 后端 · 原帖未明确批次**：ThreadLocal 怎样工作？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159441665171456)；原帖发布于 2022-03-29。
+- **字节跳动 · 后端（TikTok） · 日常实习**：ThreadLocal 怎样工作，子线程能否获取父线程的数据？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/686735730227286016)；面试记录为 2024-11-14；原帖编辑于 2024-11-16。
+- **京东 · Java后台 · 校招**：ThreadLocal 的原理、使用场景和内存泄漏风险是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155278348689408)；原帖编辑于 2019-08-23（历史校招面经）。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

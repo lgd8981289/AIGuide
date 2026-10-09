@@ -1,6 +1,6 @@
 # Vue 组件通信有哪些方式？props、emit、provide/inject、Pinia 怎么选？
 
-[小米前端面试真题](../companies/xiaomi-frontend.md)
+[小米前端面试真题](../companies/xiaomi-frontend.md) · [腾讯前端面试真题](../companies/tencent-frontend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -106,6 +106,7 @@ TypeScript 项目可以使用 InjectionKey 约定类型，并处理“没有找�
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **小米 · 前端 · 原帖未明确批次**：Vue 父子组件怎样通信？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **腾讯 · 前端（TEG / QQ音乐 / PCG） · 暑期实习**：Vue 父子、子父和隔代组件怎样传值？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156343349583872)；面试记录为 2020 年 3 月；原帖编辑于 2020-04-19。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

@@ -43,11 +43,15 @@ const cfg = {
             try {
               var container = document.getElementById("readmore-container");
               if (!container) return;
-              var height = "auto";
               var marker = container.querySelector(".gated-content");
-              if (marker) {
-                var top = marker.getBoundingClientRect().top - container.getBoundingClientRect().top;
-                if (top > 100) height = String(top);
+              function previewHeight() {
+                if (!marker) return "auto";
+                var top = marker.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop;
+                if (top <= 100) return "auto";
+                // 插件的渐变遮罩向上覆盖 200px，给它单独留出空间，避免压住速答配图。
+                var mask = container.querySelector("#readmore-mask");
+                var maskHeight = mask ? mask.getBoundingClientRect().height : 200;
+                return String(Math.ceil(top + maskHeight + 24));
               }
               var plugin = new ReadmorePlugin();
               plugin.init({
@@ -57,10 +61,31 @@ const cfg = {
                 keyword: cfg.keyword,
                 qrcode: cfg.qrcode,
                 type: cfg.type,
-                height: height,
+                height: previewHeight(),
                 expires: cfg.expires,
                 random: cfg.random,
               });
+              if (marker) {
+                function syncHeight() {
+                  // 解锁后插件会恢复全文；后续图片加载、窗口缩放不能重新截断文章。
+                  var wrapper = container.querySelector("#readmore-wrapper");
+                  if (!wrapper || !wrapper.getBoundingClientRect().height || container.style.overflow !== "hidden") return;
+                  var height = previewHeight();
+                  if (height !== "auto" && container.style.height !== height + "px") {
+                    container.style.height = height + "px";
+                  }
+                }
+                syncHeight();
+                // 同时跟踪容器宽度和速答内容尺寸，兼容图片晚加载、侧栏切换及文字换行。
+                var observer = new ResizeObserver(function () {
+                  requestAnimationFrame(syncHeight);
+                });
+                observer.observe(container);
+                for (var child of container.children) {
+                  if (child === marker) break;
+                  observer.observe(child);
+                }
+              }
             } catch (e) {
               console.warn(
                 "readmore plugin occurred error: " + e.name + " | " + e.message

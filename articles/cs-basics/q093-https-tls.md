@@ -1,6 +1,6 @@
 # HTTP 和 HTTPS 有什么区别？TLS 怎样防止窃听、篡改和冒充？
 
-[百度前端面试真题](../companies/baidu-frontend.md) · [阿里后端面试真题](../companies/alibaba-backend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md)
+[百度前端面试真题](../companies/baidu-frontend.md) · [阿里后端面试真题](../companies/alibaba-backend.md) · [小米前端面试真题](../companies/xiaomi-frontend.md) · [字节前端面试真题](../companies/bytedance-frontend.md) · [腾讯前端面试真题](../companies/tencent-frontend.md) · [字节后端面试真题](../companies/bytedance-backend.md) · [腾讯开发面试真题](../companies/tencent-development.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -107,6 +107,10 @@ TLS 主要处理保密性、完整性和身份验证。以常见的 TLS 1.3 证�
 - **百度 · 前端 · 实习（原帖标签）**：HTTP 与 HTTPS 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
 - **阿里巴巴 · 后端 · 原帖未明确批次**：HTTP 与 HTTPS 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159441665171456)；原帖发布于 2022-03-29。
 - **小米 · 前端 · 原帖未明确批次**：HTTP 与 HTTPS 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
+- **字节跳动 · 前端 · 校招**：HTTPS 的加密和证书验证如何工作？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158686203912192)；面试记录为 2021 年秋招；原帖编辑于 2021-10-09。
+- **腾讯 · 前端 · 原帖未明确批次**：HTTPS 怎样工作？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/529319096907726848)；腾讯面试记录为 2023-08-28、2023-08-30；原帖编辑于 2023-09-07。
+- **字节跳动 · 后端（番茄小说） · 实习**：HTTP 和 HTTPS 有什么区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159640278048768)；面试记录为 2021 年 1 月；原帖发布于 2022-04-29。
+- **腾讯 · 开发（含 Agent 设计） · 原帖未明确批次**：HTTPS 如何工作？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/3d6a90f681d745849a32e611d1ec1c11)；页面显示 04-20 发布，未明确年份。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

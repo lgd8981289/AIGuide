@@ -1,6 +1,6 @@
 # JVM 垃圾回收算法有哪些？标记清除、复制和标记整理有什么区别？
 
-[美团开发面试真题](../companies/meituan-development.md)
+[美团开发面试真题](../companies/meituan-development.md) · [美团后端面试真题](../companies/meituan-backend.md) · [京东后端面试真题](../companies/jd-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -127,6 +127,8 @@
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：垃圾回收有哪些基本算法？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+- **美团 · Java后端 · 实习**：垃圾回收有哪些算法？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
+- **京东 · Java后台 · 校招**：JVM 使用哪些垃圾回收算法？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155278348689408)；原帖编辑于 2019-08-23（历史校招面经）。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

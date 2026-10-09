@@ -1,5 +1,7 @@
 # BM25 算法是什么？和 TF-IDF 有什么区别？
 
+[虾皮Agent开发面试真题](../companies/shopee-agent.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/rag/q378-bm25-tfidf-scoring/) · [题库目录](../../README.md)
@@ -109,9 +111,11 @@ score(q, d) = Σ IDF(t) ×
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **虾皮 · Agent开发 · 秋招（原帖标签）**：BM25 的计算原理是什么？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)；原帖记录 9 月 3 日面试，未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

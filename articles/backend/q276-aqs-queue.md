@@ -1,5 +1,7 @@
 # Java AQS 是什么？它如何实现线程排队、阻塞和唤醒？
 
+[阿里后端面试真题](../companies/alibaba-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q276-aqs-queue/) · [题库目录](../../README.md)
@@ -91,9 +93,11 @@ CAS 解决一次状态修改能否成功，不负责组织长期竞争。如果�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **阿里巴巴 · Java后端 · 社招**：ReentrantLock 怎样通过 AQS 实现公平、可重入和可中断锁？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353157517968613376)；历史面经，面试年份未明确；页面编辑于 2024-07-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

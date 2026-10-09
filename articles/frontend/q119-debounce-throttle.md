@@ -1,6 +1,6 @@
 # 防抖和节流有什么区别？搜索框和滚动事件分别怎么选？
 
-[百度前端面试真题](../companies/baidu-frontend.md)
+[百度前端面试真题](../companies/baidu-frontend.md) · [字节前端面试真题](../companies/bytedance-frontend.md) · [腾讯前端面试真题](../companies/tencent-frontend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -140,6 +140,8 @@ asyncio.run(main())
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **百度 · 前端 · 实习（原帖标签）**：防抖与节流有什么区别，怎样实现防抖？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/530709141912829952)；原帖编辑于 2023-09-15。
+- **字节跳动 · 前端 · 原帖未明确批次**：防抖和节流分别怎样实现？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156819747020800)；原帖编辑于 2020-08-24。
+- **腾讯 · 前端（TEG / QQ音乐 / PCG） · 暑期实习**：防抖和节流怎样工作？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156343349583872)；面试记录为 2020 年 3 月；原帖编辑于 2020-04-19。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

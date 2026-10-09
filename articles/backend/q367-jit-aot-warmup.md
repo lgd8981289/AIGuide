@@ -1,5 +1,7 @@
 # JIT 和 AOT 编译有什么区别？Java 服务为什么需要预热？
 
+[阿里后端面试真题](../companies/alibaba-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q367-jit-aot-warmup/) · [题库目录](../../README.md)
@@ -102,9 +104,11 @@ JIT 与 AOT 也不是绝对互斥，具体运行时可能有不同组合。应�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **阿里巴巴 · Java后端 · 社招**：JIT、分层编译与逃逸分析怎样工作？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353157517968613376)；历史面经，面试年份未明确；页面编辑于 2024-07-19。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

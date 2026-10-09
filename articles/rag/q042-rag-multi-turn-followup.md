@@ -1,5 +1,7 @@
 # RAG 多轮对话怎么检索？追问理解与 Query 改写
 
+[美团AI应用开发面试真题](../companies/meituan-ai-application.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/rag/q042-rag-multi-turn-followup/) · [题库目录](../../README.md)
@@ -112,9 +114,11 @@
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **美团 · AI应用开发 · 原帖未明确批次**：多轮查询怎样结合上下文改写？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/870623192925167616)；标题记录 3 月 30 日面试，页面显示 04-06 发布；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

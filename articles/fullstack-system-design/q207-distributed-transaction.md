@@ -1,5 +1,7 @@
 # 分布式事务怎么实现？2PC、TCC、Saga 有什么区别？
 
+[字节后端面试真题](../companies/bytedance-backend.md) · [美团后端面试真题](../companies/meituan-backend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/fullstack-system-design/q207-distributed-transaction/) · [题库目录](../../README.md)
@@ -92,9 +94,12 @@ Outbox 可以服务于 Saga 等架构，但它自己不保证所有服务一起�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · 后端（TikTok） · 日常实习**：出现跨库事务时怎样处理？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/686735730227286016)；面试记录为 2024-11-14；原帖编辑于 2024-11-16。
+- **美团 · Java后端 · 实习**：分布式事务有哪些实现方案？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

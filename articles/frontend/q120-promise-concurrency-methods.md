@@ -1,6 +1,6 @@
 # Promise.all、allSettled、race、any 有什么区别？失败后其他任务会停止吗？
 
-[字节前端面试真题](../companies/bytedance-frontend.md)
+[字节前端面试真题](../companies/bytedance-frontend.md) · [腾讯前端面试真题](../companies/tencent-frontend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -112,6 +112,7 @@ all 和 allSettled 的聚合状态可以成功，any 会以 AggregateError 失�
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **字节跳动 · 前端 · 社招**：Promise.all 与其他组合方法怎样使用？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/786037843704479744)；原帖编辑于 2025-09-01。
+- **腾讯 · 前端 · 原帖未明确批次**：怎样手写 Promise.all？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/529319096907726848)；腾讯面试记录为 2023-08-28、2023-08-30；原帖编辑于 2023-09-07。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

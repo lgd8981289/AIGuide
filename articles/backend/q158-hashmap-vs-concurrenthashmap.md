@@ -1,6 +1,6 @@
 # HashMap 和 ConcurrentHashMap 有什么区别？并发读写为什么不能混用？
 
-[腾讯后端面试真题](../companies/tencent-backend.md)
+[腾讯后端面试真题](../companies/tencent-backend.md) · [美团开发面试真题](../companies/meituan-development.md) · [字节后端面试真题](../companies/bytedance-backend.md) · [京东后端面试真题](../companies/jd-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -91,6 +91,9 @@
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **腾讯 · 后台开发 · 原帖未明确批次**：HashMap 与 ConcurrentHashMap 有哪些区别？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/721777560887013376)；原帖编辑于 2025-02-19。
+- **美团 · 开发（含 AI 项目追问） · 原帖未明确批次**：HashMap 的底层结构是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/794987987544133632)；原帖发布于 2025-09-09。
+- **字节跳动 · 后端（番茄小说） · 实习**：HashMap 的底层结构、扩容时机和复杂度是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353159640278048768)；面试记录为 2021 年 1 月；原帖发布于 2022-04-29。
+- **京东 · Java后台 · 校招**：HashMap 怎样处理哈希冲突与扩容，ConcurrentHashMap 怎样保证线程安全？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353155278348689408)；原帖编辑于 2019-08-23（历史校招面经）。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

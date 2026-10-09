@@ -1,6 +1,6 @@
 # 浏览器为什么会跨域？CORS 预检请求和携带 Cookie 怎么处理？
 
-[小米前端面试真题](../companies/xiaomi-frontend.md) · [网易前端面试真题](../companies/netease-frontend.md)
+[小米前端面试真题](../companies/xiaomi-frontend.md) · [网易前端面试真题](../companies/netease-frontend.md) · [腾讯前端面试真题](../companies/tencent-frontend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -110,6 +110,8 @@ OPTIONS 表达的是：“这个来源想用 POST，并带这些请求头，可�
 
 - **小米 · 前端 · 原帖未明确批次**：浏览器跨域有哪些处理方式？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
 - **网易 · 前端 · 原帖未明确批次**：浏览器跨域有哪些处理方式？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+- **腾讯 · 前端（TEG / QQ音乐 / PCG） · 暑期实习**：跨域如何解决，各种方案的原理是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156343349583872)；面试记录为 2020 年 3 月；原帖编辑于 2020-04-19。
+- **腾讯 · 前端 · 原帖未明确批次**：跨域怎样解决？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/529319096907726848)；腾讯面试记录为 2023-08-28、2023-08-30；原帖编辑于 2023-09-07。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

@@ -1,6 +1,6 @@
 # HTTP/1.1、HTTP/2、HTTP/3 有什么区别？队头阻塞是怎么解决的？
 
-[小米前端面试真题](../companies/xiaomi-frontend.md) · [阿里前端面试真题](../companies/alibaba-frontend.md)
+[小米前端面试真题](../companies/xiaomi-frontend.md) · [阿里前端面试真题](../companies/alibaba-frontend.md) · [字节前端面试真题](../companies/bytedance-frontend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -96,6 +96,7 @@ UDP 只负责承载数据报；QUIC 在其上实现可靠流和恢复机制，�
 
 - **小米 · 前端 · 原帖未明确批次**：HTTP 的不同版本有哪些变化？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/625366409853280256)；原帖编辑于 2024-05-29。
 - **阿里巴巴 · 前端 · 原帖未明确批次**：HTTP 的不同版本有哪些变化？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156404150214656)；历史面经，面试年份未明确；页面编辑于 2025-03-08。
+- **字节跳动 · 前端 · 校招**：HTTP/2、HTTP/3 有哪些改进？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158686203912192)；面试记录为 2021 年秋招；原帖编辑于 2021-10-09。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

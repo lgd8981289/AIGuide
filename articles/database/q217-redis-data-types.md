@@ -1,6 +1,6 @@
 # Redis 常用数据类型有哪些？String、Hash、List、Set、ZSet 应该怎么选？
 
-[京东后端面试真题](../companies/jd-backend.md)
+[京东后端面试真题](../companies/jd-backend.md) · [美团后端面试真题](../companies/meituan-backend.md)
 
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
@@ -106,6 +106,7 @@ Hash 允许直接操作指定字段，少做整份搬运。不过，Hash 并不�
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
 - **京东 · 数据开发 / 后端 · 校招**：Redis 的数据类型和底层结构有哪些？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/791720598454935552)；原帖发布于 2025-08-31（秋招记录）。
+- **美团 · Java后端 · 实习**：Redis 常见数据类型的底层结构是什么？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353156355747946496)；面试记录为 2020-04-21、2020-04-24；原帖编辑于 2020-11-14。
 
 [浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 

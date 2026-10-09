@@ -1,6 +1,8 @@
 // 只记录公开面经明确出现的考点；related 表示由考点延伸到本站解析。
 // 日期描述保留“发表 / 编辑 / 面试”区别，不用页面更新时间冒充面试时间。
-export const INTERVIEW_REVIEWED_AT = '2026-10-08';
+import { ADDITIONAL_INTERVIEW_SOURCES, ADDITIONAL_INTERVIEW_TOPICS } from './company-interview-expansion.mjs';
+
+export const INTERVIEW_REVIEWED_AT = '2026-10-09';
 export const INTERVIEW_NOTE = '真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。';
 export const INTERVIEW_EMPTY_NOTE = '这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。';
 export const INTERVIEW_ROLES = [
@@ -9,6 +11,7 @@ export const INTERVIEW_ROLES = [
   { id: 'development', name: '开发' },
   { id: 'agent', name: 'Agent开发' },
   { id: 'ai-application', name: 'AI应用开发' },
+  { id: 'algorithm', name: '算法' },
 ];
 
 export const COMPANIES = [
@@ -21,6 +24,8 @@ export const COMPANIES = [
   { id: 'xiaomi', name: '小米', label: '小米前端面试题', href: '/companies/xiaomi/', focus: 'JavaScript、浏览器与计算机基础' },
   { id: 'netease', name: '网易', label: '网易前端面试题', href: '/companies/netease/', focus: '跨域、缓存与服务端渲染' },
   { id: 'qunar', name: '去哪儿', label: '去哪儿AI应用开发面试题', href: '/companies/qunar/', focus: 'Java 并发与 AI 应用工程' },
+  { id: 'shopee', name: '虾皮', label: '虾皮Agent开发面试题', href: '/companies/shopee/', focus: 'RAG 混合检索、文档解析与多 Agent 协作' },
+  { id: 'kuaishou', name: '快手', label: '快手AI应用开发面试题', href: '/companies/kuaishou/', focus: 'LangGraph 状态、向量索引与模型推理' },
 ];
 
 const topic = (qnum, topic, relation = 'mentioned') => ({ qnum, topic, relation });
@@ -164,11 +169,11 @@ const questions = {
   Q343: '怎样实现线程安全的单例？',
 };
 
-export const INTERVIEW_SOURCES = sources.map(source => ({
+export const INTERVIEW_SOURCES = [...sources, ...ADDITIONAL_INTERVIEW_SOURCES].map(source => ({
   ...source,
   roleKey: source.roleKey ?? (source.role === '前端' ? 'frontend' : source.company === 'meituan' ? 'development' : 'backend'),
-  reviewedAt: INTERVIEW_REVIEWED_AT,
-  topics: [...source.topics, ...(additions[source.id] ?? [])].map(item => ({
+  reviewedAt: source.reviewedAt ?? (ADDITIONAL_INTERVIEW_TOPICS[source.id] ? INTERVIEW_REVIEWED_AT : '2026-10-08'),
+  topics: [...source.topics, ...(additions[source.id] ?? []), ...(ADDITIONAL_INTERVIEW_TOPICS[source.id] ?? [])].map(item => ({
     ...item,
     ...(item.relation === 'mentioned' ? { question: item.question ?? questions[item.qnum] } : {}),
   })),

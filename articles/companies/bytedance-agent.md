@@ -6,6 +6,8 @@
 
 ## Agent面试题
 
+- [什么是 Tool Calling？大模型是如何调用外部工具的？](../agent/q004-tool-calling-execution-flow.md)
+  Tool Calling 并不是大模型自己去执行某个工具，而是模型和应用之间约定的一套调用方式。应用会先把工具名称、用途和参数结构告诉模型。模型判断需要使用工具时，会返回一份结构化的调用请求，里面通常包含工具名称、参数和调用标识。
 - [Agent 上下文太长怎么办？压缩与关键信息保留](../agent/q056-agent-context-compression.md)
   Agent 的上下文压缩，不能只是把聊天记录缩写一遍。因为后面的执行依赖前面留下的目标、限制、证据和进度，漏掉其中一项，任务就可能走偏。因此，我会先把这些内容分开处理：当前目标和操作限制单独保留；已经完成的过程整理成摘要；
 - [Agent Harness 是什么？模型之外的执行与状态管理](../agent/q057-agent-harness.md)
@@ -15,6 +17,8 @@
 
 ## AI应用工程面试题
 
+- [AI 文件解析与建索引的异步任务怎么设计？](../engineering/q012-async-file-parsing-indexing.md)
+  文件上传和解析建索引要分开。上传接口把文件可靠保存下来，再创建一条任务，返回文件 ID、任务 ID 和当前状态；OCR、切片、Embedding、写索引由后台 Worker 执行。
 - [大模型结构化输出怎么校验？JSON 入库与失败处理](../engineering/q019-structured-output-validation.md)
   合法 JSON 不能直接入库。它只说明语法上能解析；即使用 JSON Schema 约束了字段和类型，也只能说明结构符合预期，不能证明金额、订单归属和业务条件正确。我会把链路分几关：先检查模型调用是否完成、有没有拒答或截断；再做结构校验；
 - [Agent 执行越来越慢，应该怎么定位性能瓶颈？](../engineering/q067-agent-performance-bottleneck.md)

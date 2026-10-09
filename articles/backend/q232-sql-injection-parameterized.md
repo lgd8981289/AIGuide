@@ -1,5 +1,7 @@
 # SQL 注入是什么？为什么参数化查询能防注入，拼接排序字段却仍有风险？
 
+[字节前端面试真题](../companies/bytedance-frontend.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/backend/q232-sql-injection-parameterized/) · [题库目录](../../README.md)
@@ -131,9 +133,11 @@ ORDER BY name 的 name，是查询结构里的列标识符。把一个普通参�
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **字节跳动 · 前端 · 校招**：SQL 注入如何发生，怎样预防？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/353158686203912192)；面试记录为 2021 年秋招；原帖编辑于 2021-10-09。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 

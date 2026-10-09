@@ -1,5 +1,7 @@
 # Agent 如何选择和加载 Skill？
 
+[百度AI应用开发面试真题](../companies/baidu-ai-application.md) · [美团AI应用开发面试真题](../companies/meituan-ai-application.md)
+
 > 作者：程序员Sunday · [Sunday面试指南](https://note.lgdsunday.club/)
 >
 > [在线阅读与配图](https://note.lgdsunday.club/agent/q059-skill-selection-loading/) · [题库目录](../../README.md)
@@ -112,9 +114,12 @@ Skill 往往包含一份主说明，例如 `SKILL.md`，以及按需使用的脚
 
 ## 公司面试真题
 
-这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。
+真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-[浏览公司面试真题](https://note.lgdsunday.club/companies/)
+- **百度 · 大模型生态集成 · 实习**：Agent Skill 怎样开发？（题意整理）。[面经来源](https://www.nowcoder.com/feed/main/detail/62d4ca9866d84d63bf6eafbb0a947bb8)；标题记录 2026 年 4 月；页面显示 04-22 编辑。
+- **美团 · AI应用开发 · 原帖未明确批次**：Skill 的按需加载有什么优势？（题意整理）。[面经来源](https://www.nowcoder.com/discuss/870623192925167616)；标题记录 3 月 30 日面试，页面显示 04-06 发布；未明确年份。
+
+[浏览更多公司面试真题](https://note.lgdsunday.club/companies/)
 
 ---
 
