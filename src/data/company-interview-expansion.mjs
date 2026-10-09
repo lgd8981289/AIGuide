@@ -325,4 +325,43 @@ export const ADDITIONAL_INTERVIEW_SOURCES = [
       question('Q188', 'Redis 事务', 'Redis 事务和 Pipeline 有什么区别？'),
       question('Q113', 'Kafka 消息可靠性', 'Kafka 怎样保证消息不丢失？'),
     ] },
+  // Q496—Q508：只关联本批文章的具体命题。泛泛的“长期记忆”问题
+  // 不推导为 MemGPT、Graphiti、LangMem、记忆评测或记忆投毒真题。
+  { id: 'byte-agent-context-intern', company: 'bytedance', role: '后端Agent开发', roleKey: 'agent', stage: '实习',
+    title: '字节后端agent开发实习一面 1h', url: 'https://www.nowcoder.com/feed/main/detail/d73020680b3b42c3ac579e2f25721d90',
+    dateLabel: '页面显示 04-19 发布，未明确年份', topics: [
+      question('Q496', '上下文工程与提示词工程', '提示词工程和上下文工程有什么区别？'),
+    ] },
+  { id: 'dongchedi-agent-autumn', company: 'dongchedi', role: 'AI Agent开发', roleKey: 'agent', stage: '27届秋招（原帖标题）',
+    title: '27秋招懂车帝AI Agent一面面经', url: 'https://www.nowcoder.com/feed/main/detail/69e209d77a4647b7896ef3fd835239b6',
+    dateLabel: '页面显示 08-28 发布，未明确年份；原帖标题为 27 届秋招', topics: [
+      question('Q496', 'Agent 上下文工程', 'Agent 上下文工程是什么，在实际应用中解决什么问题？'),
+      question('Q500', 'AGENTS.md 项目规则', 'AGENTS.md 这类规则文件应该包含哪些开发规范和约束？'),
+    ] },
+  { id: 'taotian-agent-memory-social', company: 'taotian', role: 'Agent开发', roleKey: 'agent', stage: '社招（原帖标题）',
+    title: '2026-07-22_淘天Agent社招一面面经分享（含完整答案）', url: 'https://www.nowcoder.com/discuss/909920471301226496',
+    dateLabel: '标题标注 2026-07-22，不以页面编辑时间推算面试日期', topics: [
+      question('Q497', 'Memory 与 RAG 的职责', 'Agent 中的 Skill、Memory 和 RAG 分别解决什么核心问题？'),
+    ] },
+  { id: 'tencent-backend-context', company: 'tencent', role: '后台开发（含 Agent 项目）', roleKey: 'backend', stage: '原帖未明确批次',
+    title: '补个第一次面试的凉经', url: 'https://www.nowcoder.com/feed/main/detail/96a432c81e6b46c2adddba68b91bec85',
+    dateLabel: '页面显示 06-02 编辑，未明确年份', topics: [
+      question('Q496', '上下文组成与工程', '上下文有哪些组成部分，怎样做上下文工程并防止上下文过长？'),
+      question('Q501', '按需检索长期记忆', '大模型怎样按需调用工具检索长期记忆？'),
+    ] },
+  { id: 'ali-platform-mem0-intern', company: 'alibaba', role: '基础平台研发', roleKey: 'development', stage: '实习（原帖提及实习时长）',
+    title: '阿里巴巴控股一面-基础平台研发（已挂）', url: 'https://www.nowcoder.com/discuss/893146683545034752',
+    dateLabel: '正文记录 5 月 28 日面试，页面显示 06-10 编辑；未明确年份', topics: [
+      question('Q499', 'Mem0 记忆组件', '是否了解 Mem0？'),
+    ] },
+  { id: 'meituan-keeta-mem0', company: 'meituan', role: 'Agent开发（Keeta 智能客服）', roleKey: 'agent', stage: '原帖未明确批次',
+    title: '美团Keeta Agent开发（智能客服方向）一面面经', url: 'https://www.nowcoder.com/feed/main/detail/abef26e941054c9db854cba7c81049cd',
+    dateLabel: '页面显示 04-28 发布，未明确年份', topics: [
+      question('Q499', '项目中的 Mem0 记忆系统', '介绍项目中使用的 Mem0 记忆系统。'),
+    ] },
+  { id: 'shuzimali-code-retrieval', company: 'shuzimali', role: '开发（含 AI 工程与 AI 编程）', roleKey: 'development', stage: '校企合作（原帖标题）',
+    title: '数字马力校企合作面经', url: 'https://www.nowcoder.com/feed/main/detail/2819107bc38343f89ee6fc4366ae4df8',
+    dateLabel: '页面显示 06-14 发布，未明确年份', topics: [
+      question('Q502', '代码检索的 grep 与 RAG 取舍', 'Claude Code 使用 grep 检索代码，与 RAG 的检索方式有什么区别？'),
+    ] },
 ].map(source => ({ ...source, reviewedAt: '2026-10-09' }));

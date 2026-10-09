@@ -501,5 +501,18 @@
   "Q492": "instant-messaging-system-design",
   "Q493": "feed-system-fanout",
   "Q494": "java-bio-nio-aio",
-  "Q495": "linux-file-directory-permissions"
+  "Q495": "linux-file-directory-permissions",
+  "Q496": "context-engineering-vs-prompt-engineering",
+  "Q497": "agent-memory-vs-rag",
+  "Q498": "agent-semantic-episodic-procedural-memory",
+  "Q499": "mem0-agent-memory-pipeline",
+  "Q500": "agents-md-claude-md-project-rules",
+  "Q501": "agent-memory-retrieval-ranking",
+  "Q502": "ai-code-context-indexing-vs-grep",
+  "Q503": "memgpt-hierarchical-memory",
+  "Q504": "zep-graphiti-temporal-memory",
+  "Q505": "langmem-hot-path-background-memory",
+  "Q506": "llmlingua-prompt-compression-vs-summary",
+  "Q507": "agent-memory-evaluation-longmemeval-locomo",
+  "Q508": "agent-memory-poisoning-defense"
 }

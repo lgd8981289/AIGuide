@@ -27,3 +27,4 @@
 - [BPE 分词算法是什么？Tokenizer 怎样把文本切成 Token？](./q433-bpe-tokenizer.md) · [在线阅读](https://note.lgdsunday.club/llm/q433-bpe-tokenizer/)
 - [推理模型和普通大模型有什么区别？Agent 一定要用推理模型吗？](./q460-reasoning-models-agent-selection.md) · [在线阅读](https://note.lgdsunday.club/llm/q460-reasoning-models-agent-selection/)
 - [Embedding 模型如何训练？正负样本和对比学习分别有什么作用？](./q461-embedding-contrastive-training.md) · [在线阅读](https://note.lgdsunday.club/llm/q461-embedding-contrastive-training/)
+- [LLMLingua 是什么？提示词压缩和对话摘要有什么区别？](./q506-llmlingua-prompt-compression-vs-summary.md) · [在线阅读](https://note.lgdsunday.club/llm/q506-llmlingua-prompt-compression-vs-summary/)

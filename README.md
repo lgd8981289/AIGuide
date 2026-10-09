@@ -1,6 +1,6 @@
 # Sunday面试指南 · AI 与全栈面试题
 
-**500 篇完整文章**，由 **程序员Sunday** 整理，覆盖大模型、Agent、RAG、JavaScript、Vue、React、后端、MySQL、Redis、计算机基础和系统设计。每道题讲清原理、工程取舍与面试追问，适合校招、实习与社招复习。
+**513 篇完整文章**，由 **程序员Sunday** 整理，覆盖大模型、Agent、RAG、JavaScript、Vue、React、后端、MySQL、Redis、计算机基础和系统设计。每道题讲清原理、工程取舍与面试追问，适合校招、实习与社招复习。
 
 📖 [在线阅读 Sunday面试指南](https://note.lgdsunday.club/) · [GitHub 正文目录](articles/)
 
@@ -15,12 +15,12 @@
 | 字节前端面试真题 | 38 | [题目与答案](articles/companies/bytedance-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/frontend/) |
 | 百度前端面试真题 | 15 | [题目与答案](articles/companies/baidu-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/frontend/) |
 | 阿里后端面试真题 | 16 | [题目与答案](articles/companies/alibaba-backend.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/backend/) |
-| 腾讯后端面试真题 | 10 | [题目与答案](articles/companies/tencent-backend.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/backend/) |
+| 腾讯后端面试真题 | 12 | [题目与答案](articles/companies/tencent-backend.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/backend/) |
 | 美团开发面试真题 | 15 | [题目与答案](articles/companies/meituan-development.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/development/) |
 | 京东后端面试真题 | 27 | [题目与答案](articles/companies/jd-backend.md) | [网站列表](https://note.lgdsunday.club/companies/jd/backend/) |
 | 小米前端面试真题 | 18 | [题目与答案](articles/companies/xiaomi-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/xiaomi/frontend/) |
 | 网易前端面试真题 | 5 | [题目与答案](articles/companies/netease-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/netease/frontend/) |
-| 字节Agent开发面试真题 | 8 | [题目与答案](articles/companies/bytedance-agent.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/agent/) |
+| 字节Agent开发面试真题 | 9 | [题目与答案](articles/companies/bytedance-agent.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/agent/) |
 | 百度Agent开发面试真题 | 6 | [题目与答案](articles/companies/baidu-agent.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/agent/) |
 | 阿里前端面试真题 | 4 | [题目与答案](articles/companies/alibaba-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/frontend/) |
 | 腾讯前端面试真题 | 27 | [题目与答案](articles/companies/tencent-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/frontend/) |
@@ -34,6 +34,11 @@
 | 美团AI应用开发面试真题 | 13 | [题目与答案](articles/companies/meituan-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/ai-application/) |
 | 虾皮Agent开发面试真题 | 11 | [题目与答案](articles/companies/shopee-agent.md) | [网站列表](https://note.lgdsunday.club/companies/shopee/agent/) |
 | 快手AI应用开发面试真题 | 13 | [题目与答案](articles/companies/kuaishou-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/kuaishou/ai-application/) |
+| 懂车帝Agent开发面试真题 | 2 | [题目与答案](articles/companies/dongchedi-agent.md) | [网站列表](https://note.lgdsunday.club/companies/dongchedi/agent/) |
+| 淘天Agent开发面试真题 | 1 | [题目与答案](articles/companies/taotian-agent.md) | [网站列表](https://note.lgdsunday.club/companies/taotian/agent/) |
+| 阿里开发面试真题 | 1 | [题目与答案](articles/companies/alibaba-development.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/development/) |
+| 美团Agent开发面试真题 | 1 | [题目与答案](articles/companies/meituan-agent.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/agent/) |
+| 数字马力开发面试真题 | 1 | [题目与答案](articles/companies/shuzimali-development.md) | [网站列表](https://note.lgdsunday.club/companies/shuzimali/development/) |
 
 [全部公司真题目录](articles/companies/README.md) · [网站真题列表](https://note.lgdsunday.club/companies/) · [校招与实习准备路线](https://note.lgdsunday.club/guides/campus-interview/)
 
@@ -41,12 +46,12 @@
 
 | 分类 | 篇数 | GitHub 阅读 | 在线阅读 |
 | --- | ---: | --- | --- |
-| 大模型基础面试题 | 25 | [正文目录](articles/llm/README.md) | [网站专题](https://note.lgdsunday.club/llm/) |
+| 大模型基础面试题 | 26 | [正文目录](articles/llm/README.md) | [网站专题](https://note.lgdsunday.club/llm/) |
 | RAG面试题 | 25 | [正文目录](articles/rag/README.md) | [网站专题](https://note.lgdsunday.club/rag/) |
-| Agent面试题 | 31 | [正文目录](articles/agent/README.md) | [网站专题](https://note.lgdsunday.club/agent/) |
+| Agent面试题 | 42 | [正文目录](articles/agent/README.md) | [网站专题](https://note.lgdsunday.club/agent/) |
 | AI应用工程面试题 | 24 | [正文目录](articles/engineering/README.md) | [网站专题](https://note.lgdsunday.club/engineering/) |
 | AI项目与系统设计面试题 | 9 | [正文目录](articles/system-design/README.md) | [网站专题](https://note.lgdsunday.club/system-design/) |
-| LangChain生态面试题 | 14 | [正文目录](articles/langchain/README.md) | [网站专题](https://note.lgdsunday.club/langchain/) |
+| LangChain生态面试题 | 15 | [正文目录](articles/langchain/README.md) | [网站专题](https://note.lgdsunday.club/langchain/) |
 | 前端面试题 | 116 | [正文目录](articles/frontend/README.md) | [网站专题](https://note.lgdsunday.club/frontend/) |
 | 后端面试题 | 108 | [正文目录](articles/backend/README.md) | [网站专题](https://note.lgdsunday.club/backend/) |
 | 数据库与缓存面试题 | 62 | [正文目录](articles/database/README.md) | [网站专题](https://note.lgdsunday.club/database/) |
@@ -86,6 +91,7 @@
 - [BPE 分词算法是什么？Tokenizer 怎样把文本切成 Token？](articles/llm/q433-bpe-tokenizer.md) · [在线阅读](https://note.lgdsunday.club/llm/q433-bpe-tokenizer/)
 - [推理模型和普通大模型有什么区别？Agent 一定要用推理模型吗？](articles/llm/q460-reasoning-models-agent-selection.md) · [在线阅读](https://note.lgdsunday.club/llm/q460-reasoning-models-agent-selection/)
 - [Embedding 模型如何训练？正负样本和对比学习分别有什么作用？](articles/llm/q461-embedding-contrastive-training.md) · [在线阅读](https://note.lgdsunday.club/llm/q461-embedding-contrastive-training/)
+- [LLMLingua 是什么？提示词压缩和对话摘要有什么区别？](articles/llm/q506-llmlingua-prompt-compression-vs-summary.md) · [在线阅读](https://note.lgdsunday.club/llm/q506-llmlingua-prompt-compression-vs-summary/)
 
 ### RAG面试题
 
@@ -148,6 +154,17 @@
 - [CodeAct 是什么？让 Agent 执行代码和调用工具有什么区别？](articles/agent/q420-codeact-code-actions.md) · [在线阅读](https://note.lgdsunday.club/agent/q420-codeact-code-actions/)
 - [MCP Elicitation 是什么？工具需要补充信息时，怎样向用户发起询问？](articles/agent/q423-mcp-elicitation-user-input.md) · [在线阅读](https://note.lgdsunday.club/agent/q423-mcp-elicitation-user-input/)
 - [Prompt Engineering 是什么？Agent 提示词应该怎样设计？](articles/agent/q456-agent-prompt-engineering.md) · [在线阅读](https://note.lgdsunday.club/agent/q456-agent-prompt-engineering/)
+- [Context Engineering 是什么？和 Prompt Engineering 有什么区别？](articles/agent/q496-context-engineering-vs-prompt-engineering.md) · [在线阅读](https://note.lgdsunday.club/agent/q496-context-engineering-vs-prompt-engineering/)
+- [Agent Memory 和 RAG 有什么区别？有了向量数据库就算有记忆了吗？](articles/agent/q497-agent-memory-vs-rag.md) · [在线阅读](https://note.lgdsunday.club/agent/q497-agent-memory-vs-rag/)
+- [Agent 的语义记忆、情景记忆和程序性记忆有什么区别？](articles/agent/q498-agent-semantic-episodic-procedural-memory.md) · [在线阅读](https://note.lgdsunday.club/agent/q498-agent-semantic-episodic-procedural-memory/)
+- [Mem0 是什么？如何从对话中提取并检索 Agent 的长期记忆？](articles/agent/q499-mem0-agent-memory-pipeline.md) · [在线阅读](https://note.lgdsunday.club/agent/q499-mem0-agent-memory-pipeline/)
+- [AGENTS.md 和 CLAUDE.md 有什么用？AI 编程助手如何加载项目规则？](articles/agent/q500-agents-md-claude-md-project-rules.md) · [在线阅读](https://note.lgdsunday.club/agent/q500-agents-md-claude-md-project-rules/)
+- [Agent 如何检索历史记忆？为什么不能只按向量相似度排序？](articles/agent/q501-agent-memory-retrieval-ranking.md) · [在线阅读](https://note.lgdsunday.club/agent/q501-agent-memory-retrieval-ranking/)
+- [AI 编程助手如何检索代码上下文？代码库索引和 Grep 搜索有什么区别？](articles/agent/q502-ai-code-context-indexing-vs-grep.md) · [在线阅读](https://note.lgdsunday.club/agent/q502-ai-code-context-indexing-vs-grep/)
+- [MemGPT 是什么？为什么要让 Agent 主动管理分层记忆？](articles/agent/q503-memgpt-hierarchical-memory.md) · [在线阅读](https://note.lgdsunday.club/agent/q503-memgpt-hierarchical-memory/)
+- [Zep 和 Graphiti 是什么？Agent 为什么需要时序知识图谱记忆？](articles/agent/q504-zep-graphiti-temporal-memory.md) · [在线阅读](https://note.lgdsunday.club/agent/q504-zep-graphiti-temporal-memory/)
+- [Agent 长期记忆怎么评测？LongMemEval 和 LoCoMo 分别测什么？](articles/agent/q507-agent-memory-evaluation-longmemeval-locomo.md) · [在线阅读](https://note.lgdsunday.club/agent/q507-agent-memory-evaluation-longmemeval-locomo/)
+- [什么是 Agent 记忆投毒？如何防止错误信息在跨会话中持续生效？](articles/agent/q508-agent-memory-poisoning-defense.md) · [在线阅读](https://note.lgdsunday.club/agent/q508-agent-memory-poisoning-defense/)
 
 ### AI应用工程面试题
 
@@ -204,6 +221,7 @@
 - [LangGraph Time Travel 怎么用？如何从历史检查点重放或分叉执行？](articles/langchain/q425-langgraph-time-travel-replay-fork.md) · [在线阅读](https://note.lgdsunday.club/langchain/q425-langgraph-time-travel-replay-fork/)
 - [LangGraph 为什么报 GraphRecursionError？recursion_limit 应该怎么设置？](articles/langchain/q426-langgraph-recursion-limit.md) · [在线阅读](https://note.lgdsunday.club/langchain/q426-langgraph-recursion-limit/)
 - [LangChain 和 LlamaIndex 有什么区别？开发 RAG 和 Agent 应该怎么选？](articles/langchain/q457-langchain-vs-llamaindex.md) · [在线阅读](https://note.lgdsunday.club/langchain/q457-langchain-vs-llamaindex/)
+- [LangMem 是什么？Agent 的记忆应该同步写入，还是后台整理？](articles/langchain/q505-langmem-hot-path-background-memory.md) · [在线阅读](https://note.lgdsunday.club/langchain/q505-langmem-hot-path-background-memory/)
 
 ### 前端面试题
 

@@ -78,3 +78,20 @@ test('新增文章由具体原帖承接，来源问法不扩写为文章全部�
   assert.equal(INTERVIEW_SOURCES.find(source => source.id === 'byte-feishu').reviewedAt, '2026-10-09');
   assert.equal(getInterviewCollections().find(view => view.id === 'shopee/agent').qnums.length, 11);
 });
+
+test('记忆专题只登记原帖明确的问题，不由通用记忆推导具体框架', () => {
+  const expectations = { Q496: 'byte-agent-context-intern', Q497: 'taotian-agent-memory-social',
+    Q499: 'ali-platform-mem0-intern', Q500: 'dongchedi-agent-autumn',
+    Q501: 'tencent-backend-context', Q502: 'shuzimali-code-retrieval' };
+  for (const [qnum, sourceId] of Object.entries(expectations)) {
+    assert.ok(realQuestionsForArticle(qnum).some(match => match.source.id === sourceId), `${qnum} 缺少本批来源`);
+  }
+  const batchIds = [...new Set([...Object.values(expectations), 'meituan-keeta-mem0'])];
+  const sources = INTERVIEW_SOURCES.filter(source => batchIds.includes(source.id));
+  for (const qnum of ['Q498', 'Q503', 'Q504', 'Q505', 'Q506', 'Q507', 'Q508']) {
+    assert.deepEqual(questionTags(qnum, sources), [], `${qnum} 不应由本批泛化问题推导真题标签`);
+  }
+  assert.equal(realQuestionsForArticle('Q499').find(match => match.source.id === 'ali-platform-mem0-intern').question, '是否了解 Mem0？');
+  assert.ok(!realQuestionsForArticle('Q502').some(match => match.source.url.includes('/discuss/896102139431223296')),
+    '代码检索问题须引用候选人原帖，不能引用他人的 AI 润色参考答案');
+});

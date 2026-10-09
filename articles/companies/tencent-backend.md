@@ -4,6 +4,13 @@
 
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
+## Agent面试题
+
+- [Context Engineering 是什么？和 Prompt Engineering 有什么区别？](../agent/q496-context-engineering-vs-prompt-engineering.md)
+  结合代码排错场景，讲清上下文工程与提示词工程的区别、每轮输入如何组装，以及怎样定位证据没有进入模型的问题。
+- [Agent 如何检索历史记忆？为什么不能只按向量相似度排序？](../agent/q501-agent-memory-retrieval-ranking.md)
+  通过旧偏好与历史查询的对比，解释记忆检索为何不能只按向量相似度排序，以及范围过滤、时间条件、重要性与来源如何配合。
+
 ## AI应用工程面试题
 
 - [Redis 和数据库如何保持一致？为什么更新数据库后删缓存，仍然可能读到旧数据？](../engineering/q074-cache-database-consistency.md)

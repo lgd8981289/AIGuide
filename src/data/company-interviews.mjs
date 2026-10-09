@@ -26,6 +26,9 @@ export const COMPANIES = [
   { id: 'qunar', name: '去哪儿', label: '去哪儿AI应用开发面试题', href: '/companies/qunar/', focus: 'Java 并发与 AI 应用工程' },
   { id: 'shopee', name: '虾皮', label: '虾皮Agent开发面试题', href: '/companies/shopee/', focus: 'RAG 混合检索、文档解析与多 Agent 协作' },
   { id: 'kuaishou', name: '快手', label: '快手AI应用开发面试题', href: '/companies/kuaishou/', focus: 'LangGraph 状态、向量索引与模型推理' },
+  { id: 'dongchedi', name: '懂车帝', label: '懂车帝Agent开发面试题', href: '/companies/dongchedi/', focus: '上下文工程与 AI 编程项目规则' },
+  { id: 'taotian', name: '淘天', label: '淘天Agent开发面试题', href: '/companies/taotian/', focus: 'Skill、Memory 与 RAG 的职责边界' },
+  { id: 'shuzimali', name: '数字马力', label: '数字马力开发面试题', href: '/companies/shuzimali/', focus: 'AI 编程助手的代码检索与工程判断' },
 ];
 
 const topic = (qnum, topic, relation = 'mentioned') => ({ qnum, topic, relation });

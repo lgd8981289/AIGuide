@@ -14,6 +14,8 @@
   Agent Harness 可以理解为围绕模型搭建的一套运行系统。模型负责根据当前信息做判断，Harness 则负责把需要的信息交给模型、执行允许的工具调用，再把结果送回去。
 - [Computer Use 是什么？Agent 如何看懂页面并操作电脑？](../agent/q070-computer-use.md)
   Computer Use 是让 Agent 通过电脑界面完成任务的一种方式。模型可以读取截图，判断当前页面，并提出点击、输入、滚动等操作；真正操作鼠标和键盘的，仍然是应用中的执行工具。
+- [Context Engineering 是什么？和 Prompt Engineering 有什么区别？](../agent/q496-context-engineering-vs-prompt-engineering.md)
+  结合代码排错场景，讲清上下文工程与提示词工程的区别、每轮输入如何组装，以及怎样定位证据没有进入模型的问题。
 
 ## AI应用工程面试题
 

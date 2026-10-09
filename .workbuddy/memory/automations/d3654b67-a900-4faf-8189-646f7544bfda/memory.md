@@ -10,6 +10,10 @@
   - 当前规模：线上 sitemap **601** URL（注意：已从记忆中的 561 增长到 601，文章页 460）。
   - 累计已推 7 / 601，队列下一批预计为 `/system-design/`、`/agent-ext/`、`/tutorial/`、`/tools/`、`/practice/`、`/reviews/`、`/frontend/`、`/backend/`、`/database/`（20 个入口页剩余部分），之后才是文章页。
 
+- **2026-10-09 21:00**：结果 **成功提交 10 条，退出码 0**。首页 + 9 个入口页（system-design、agent-ext、tutorial、tools、practice、reviews、frontend、backend、database）。回执 `.baidu/receipt-20261009T130049Z.json`。
+  - 规模变化：线上 sitemap **652** URL（入口页 20、文章页 500、其他 131）。累计已推 **16 / 652**。
+  - 下一批（preview 实测）：首页 + 剩余 4 个新入口页（cs-basics、fullstack-system-design、programmer、companies）+ agent-course，之后是入口页轮转、再进文章页。
+
 ## 判断要点（勿误判）
 
 - `"error": 400, "message": "over quota"` + 退出码 0 = **正常**，说明当天配额已被消耗，无需重试、不改脚本。
