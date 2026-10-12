@@ -60,3 +60,5 @@
 - [三数之和怎么去重？排序加双指针为什么能做到 O(n²)？](./q490-three-sum-two-pointers.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q490-three-sum-two-pointers/)
 - [合并区间怎么做？为什么要先按区间左端点排序？](./q491-merge-intervals.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q491-merge-intervals/)
 - [Linux 的 rwx 权限是什么意思？为什么文件不能写，却仍然可能被删除？](./q495-linux-file-directory-permissions.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q495-linux-file-directory-permissions/)
+- [红黑树和 AVL 树有什么区别？查询与插入性能怎么比较？](./q526-red-black-tree-vs-avl.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q526-red-black-tree-vs-avl/)
+- [0-1 背包和完全背包有什么区别？为什么容量遍历顺序不同？](./q527-zero-one-vs-unbounded-knapsack.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q527-zero-one-vs-unbounded-knapsack/)

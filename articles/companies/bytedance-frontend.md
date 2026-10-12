@@ -56,6 +56,8 @@
   解释 Babel 的解析、AST 转换与代码生成，区分语法兼容、辅助函数和 Polyfill，说明 preset-env、core-js 配置及应用与库的不同兼容责任。
 - [JavaScript 函数柯里化是什么？如何实现支持多次传参的 curry？](../frontend/q466-javascript-currying.md)
   用 TS 与 Python 实现固定参数数量的 curry，解释闭包、分支复用、默认参数、function.length、this 和占位符边界，并区分柯里化与偏函数应用。
+- [Promise 并发控制怎么实现？如何保证最多同时执行 N 个任务？](../frontend/q514-promise-concurrency-limit.md)
+  Promise 并发控制怎么实现？从尚未启动的任务函数、执行名额与自动补位讲起，提供经过测试的 TypeScript 和 Python 示例，说明结果顺序、失败与取消边界。
 
 ## 后端面试题
 

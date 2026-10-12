@@ -26,3 +26,5 @@
 - [AG-UI 是什么？它和 MCP、A2A 分别解决什么问题？](./q421-ag-ui-agent-user-interaction.md) · [在线阅读](https://note.lgdsunday.club/engineering/q421-ag-ui-agent-user-interaction/)
 - [A2UI 是什么？Agent 生成的界面为什么不直接使用 HTML？](./q422-a2ui-declarative-interface.md) · [在线阅读](https://note.lgdsunday.club/engineering/q422-a2ui-declarative-interface/)
 - [大模型本地部署需要多少显存？参数量、精度和并发数怎么估算？](./q462-llm-vram-capacity-estimation.md) · [在线阅读](https://note.lgdsunday.club/engineering/q462-llm-vram-capacity-estimation/)
+- [Dify 的 Chatflow 和 Workflow 有什么区别？多轮对话应该怎么选？](./q511-dify-chatflow-vs-workflow.md) · [在线阅读](https://note.lgdsunday.club/engineering/q511-dify-chatflow-vs-workflow/)
+- [MCP Apps 是什么？MCP 工具如何返回可交互的界面？](./q512-mcp-apps-interactive-tool-ui.md) · [在线阅读](https://note.lgdsunday.club/engineering/q512-mcp-apps-interactive-tool-ui/)

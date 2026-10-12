@@ -110,3 +110,8 @@
 - [Kafka 为什么吞吐量高？顺序写、批处理和零拷贝分别起什么作用？](./q481-kafka-high-throughput-design.md) · [在线阅读](https://note.lgdsunday.club/backend/q481-kafka-high-throughput-design/)
 - [Nacos 如何实现服务注册与发现？服务下线后为什么还可能收到请求？](./q482-nacos-service-registration-discovery.md) · [在线阅读](https://note.lgdsunday.club/backend/q482-nacos-service-registration-discovery/)
 - [Java 的 BIO、NIO、AIO 有什么区别？阻塞、非阻塞和异步怎么区分？](./q494-java-bio-nio-aio.md) · [在线阅读](https://note.lgdsunday.club/backend/q494-java-bio-nio-aio/)
+- [Spring Boot 启动流程是什么？SpringApplication.run() 做了哪些事？](./q519-spring-boot-startup-process.md) · [在线阅读](https://note.lgdsunday.club/backend/q519-spring-boot-startup-process/)
+- [BeanFactory 和 FactoryBean 有什么区别？为什么 getBean 可能拿到不同对象？](./q520-beanfactory-vs-factorybean.md) · [在线阅读](https://note.lgdsunday.club/backend/q520-beanfactory-vs-factorybean/)
+- [CopyOnWriteArrayList 是什么？为什么适合读多写少的场景？](./q521-copyonwritearraylist-read-write-snapshots.md) · [在线阅读](https://note.lgdsunday.club/backend/q521-copyonwritearraylist-read-write-snapshots/)
+- [ReentrantReadWriteLock 和 StampedLock 有什么区别？读多写少时怎么选？](./q522-reentrantreadwritelock-vs-stampedlock.md) · [在线阅读](https://note.lgdsunday.club/backend/q522-reentrantreadwritelock-vs-stampedlock/)
+- [Python 描述符是什么？property 如何控制属性的读取和赋值？](./q523-python-descriptors-property.md) · [在线阅读](https://note.lgdsunday.club/backend/q523-python-descriptors-property/)

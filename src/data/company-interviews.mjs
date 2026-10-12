@@ -1,6 +1,6 @@
 // 只记录公开面经明确出现的考点；related 表示由考点延伸到本站解析。
 // 日期描述保留“发表 / 编辑 / 面试”区别，不用页面更新时间冒充面试时间。
-import { ADDITIONAL_INTERVIEW_SOURCES, ADDITIONAL_INTERVIEW_TOPICS } from './company-interview-expansion.mjs';
+import { ADDITIONAL_INTERVIEW_SOURCES, ADDITIONAL_INTERVIEW_TOPICS, OCTOBER_11_INTERVIEW_SOURCES } from './company-interview-expansion.mjs';
 
 export const INTERVIEW_REVIEWED_AT = '2026-10-09';
 export const INTERVIEW_NOTE = '真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。';
@@ -29,6 +29,10 @@ export const COMPANIES = [
   { id: 'dongchedi', name: '懂车帝', label: '懂车帝Agent开发面试题', href: '/companies/dongchedi/', focus: '上下文工程与 AI 编程项目规则' },
   { id: 'taotian', name: '淘天', label: '淘天Agent开发面试题', href: '/companies/taotian/', focus: 'Skill、Memory 与 RAG 的职责边界' },
   { id: 'shuzimali', name: '数字马力', label: '数字马力开发面试题', href: '/companies/shuzimali/', focus: 'AI 编程助手的代码检索与工程判断' },
+  { id: 'ctrip', name: '携程', label: '携程前端面试题', href: '/companies/ctrip/', focus: 'Promise 并发控制与 npm 依赖分类' },
+  { id: 'duandian', name: '端点', label: '端点前端面试题', href: '/companies/duandian/', focus: 'React 引用与 useImperativeHandle' },
+  { id: 'transwarp', name: '星环科技', label: '星环科技后端面试题', href: '/companies/transwarp/', focus: 'Spring Boot 启动流程' },
+  { id: 'youzan', name: '有赞', label: '有赞开发面试题', href: '/companies/youzan/', focus: 'Python property 与属性访问' },
 ];
 
 const topic = (qnum, topic, relation = 'mentioned') => ({ qnum, topic, relation });
@@ -172,7 +176,7 @@ const questions = {
   Q343: '怎样实现线程安全的单例？',
 };
 
-export const INTERVIEW_SOURCES = [...sources, ...ADDITIONAL_INTERVIEW_SOURCES].map(source => ({
+export const INTERVIEW_SOURCES = [...sources, ...ADDITIONAL_INTERVIEW_SOURCES, ...OCTOBER_11_INTERVIEW_SOURCES].map(source => ({
   ...source,
   roleKey: source.roleKey ?? (source.role === '前端' ? 'frontend' : source.company === 'meituan' ? 'development' : 'backend'),
   reviewedAt: source.reviewedAt ?? (ADDITIONAL_INTERVIEW_TOPICS[source.id] ? INTERVIEW_REVIEWED_AT : '2026-10-08'),

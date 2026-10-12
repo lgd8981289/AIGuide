@@ -47,7 +47,7 @@ URL 形态 `/{分类}/{编号}-{英文关键词}/`（2026-10-07 全站语义化�
 
 ## SEO / 提交通道
 
-- **Bing API** `scripts/submit-bing.py`（`npm run bing:preview` / `bing:submit -- --site all`）。密钥在 `.env` 的 `BING-API—KEY`（键名含连字符与长破折号，读取已归一化）。状态在 `.bing/`。含预检 canonical/robots + sha256 记忆 + 额度预检 + `pending` 锁防重复。
+- **Bing API** `scripts/submit-bing.py`（`npm run bing:preview` / `bing:submit -- --site all`）。密钥在 `.env` 的 `BING-API—KEY`（键名含连字符与长破折号，读取已归一化）。状态在 `.bing/`。含预检 canonical/robots（**按整站全有或全无：任一页预检失败即中止整站，当天额度作废**）+ sha256 记忆 + 额度预检 + `pending` 锁防重复。2026-10-11 起预检对**非 HTTPError 的网络类瞬时异常**（TimeoutError 等）自动重试 3 次（`fetch()`，退避 2s/4s）；HTTPError 与 canonical/robots/Content-Type 判定不变。
 - **IndexNow 已启用**：`deploy.sh` 顶部 `INDEXNOW_KEY`，密钥文件 `public/{key}.txt`。覆盖 Bing/Yandex/Naver/Seznam。
 - **百度（2026-10-08 状态已变，以此条为准）**：token `O77VS8F6Br5oe0OD` **现在对 note.lgdsunday.club 可用**了 —— 实测 `curl --data-binary "https://note.lgdsunday.club/" "http://data.zz.baidu.com/urls?site=note.lgdsunday.club&token=O77VS8F6Br5oe0OD"` → `{"remain":9,"success":1}`；对照 `site=example.com` → `{"error":401,"message":"site error"}`。说明用户已在百度账号里把 note 站加上并通过验证；早先「token 归属 www」只是当时快照。**带协议头 `site=https://note.lgdsunday.club` 现在也返 success** → 「必须裸域名」的旧结论不成立。
   - **额度很小：note 站约 10 条/天**（实测推 3 条后 `remain=7`）。→ 百度只能推**增量改动页**，绝不能拿 495 条 sitemap 全量刷。

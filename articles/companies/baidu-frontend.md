@@ -32,6 +32,10 @@
   CSS 常见定位值包括 static、relative、absolute、fixed 和 sticky。static 参与普通布局，定位偏移不按定位方式生效。relative 保留原本的布局位置，再相对正常位置偏移。
 - [var、let、const 有什么区别？暂时性死区和变量提升怎么理解？](../frontend/q236-var-let-const-tdz.md)
   var、let、const 的区别，主要看作用域、初始化时机和能不能重新赋值。var 通常以函数为作用域，普通 if、for 代码块不会单独限制它。进入相应作用域时，var 绑定已经初始化为 undefined；
+- [dependencies、devDependencies、peerDependencies 有什么区别？依赖应该放在哪里？](../frontend/q515-npm-dependencies-devdependencies-peerdependencies.md)
+  dependencies、devDependencies、peerDependencies 怎么选？用应用和 React 组件库说明三类依赖的责任，区分 npm 安装与构建打包，纠正 peer 永不自动安装等旧结论。
+- [Web Components 是什么？Shadow DOM 如何实现样式隔离？](../frontend/q517-web-components-shadow-dom.md)
+  Web Components 和 Shadow DOM 分别解决什么问题？结合自定义元素、样式选择器与 slot 说明封装机制，讲清继承、CSS 变量和 closed 模式的边界。
 
 ## 计算机基础面试题
 
@@ -39,4 +43,9 @@
   HTTP 定义请求和响应的语义，HTTPS 通常指通过 TLS 保护的 HTTP 通信。HTTP/3 使用 QUIC，而 QUIC 也集成了 TLS 1.3 的安全机制。TLS 主要处理保密性、完整性和身份验证。
 - [HTTP 常见状态码有哪些？401、403 和 502、503、504 怎么区分？](../cs-basics/q251-http-status-codes.md)
   HTTP 状态码描述本次请求的处理结果与响应语义。1xx 是信息响应，2xx 表示成功处理，3xx 涉及重定向等后续处理，4xx、5xx 分别属于客户端错误和服务端错误类别，但这些分类不是对真实故障责任人的直接判决。
+
+## 系统设计面试题
+
+- [观察者模式和发布订阅模式有什么区别？事件通知应该怎么设计？](../fullstack-system-design/q528-observer-vs-publish-subscribe.md)
+  观察者模式和发布订阅有什么区别？从订阅关系与事件中心说明耦合位置，提供 TypeScript、Python 最小实现，讲清退订、通知快照和异常边界。
 

@@ -12,6 +12,8 @@
   闭包是函数与它所处词法环境的组合，使函数能够访问定义位置外层的变量。外层函数返回以后，只要相关函数及环境仍然可达，需要的变量就可能继续存在。闭包不是把当时所有变量都拍成一份快照。多个函数可以共享同一个变量，读取时看到后续修改；
 - [从输入 URL 到页面显示，浏览器到底经历了什么？](../frontend/q129-browser-navigation-rendering.md)
   浏览器先解析 URL，确定导航目标，再按缓存、已有连接和协议情况获取页面。需要时进行域名解析与连接建立；HTTPS 还涉及安全握手，但不能把每次导航都说成重新走完整 TCP 流程，HTTP/3 也不使用 TCP。
+- [Web Components 是什么？Shadow DOM 如何实现样式隔离？](../frontend/q517-web-components-shadow-dom.md)
+  Web Components 和 Shadow DOM 分别解决什么问题？结合自定义元素、样式选择器与 slot 说明封装机制，讲清继承、CSS 变量和 closed 模式的边界。
 
 ## 计算机基础面试题
 

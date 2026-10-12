@@ -95,3 +95,25 @@ test('记忆专题只登记原帖明确的问题，不由通用记忆推导具�
   assert.ok(!realQuestionsForArticle('Q502').some(match => match.source.url.includes('/discuss/896102139431223296')),
     '代码检索问题须引用候选人原帖，不能引用他人的 AI 润色参考答案');
 });
+
+test('Q509至Q528保留核验边界，不把匿名公司、参考回答或通用框架贴成真题', () => {
+  const expected = {
+    Q509: ['bytedance/backend'], Q514: ['bytedance/frontend', 'ctrip/frontend'],
+    Q515: ['baidu/frontend', 'ctrip/frontend'], Q516: ['duandian/frontend'],
+    Q517: ['alibaba/frontend', 'baidu/frontend'], Q518: ['jd/frontend'],
+    Q519: ['transwarp/backend'], Q520: ['baidu/backend', 'bytedance/backend'],
+    Q521: ['baidu/backend', 'kuaishou/backend'], Q522: ['bytedance/development'],
+    Q523: ['youzan/development'], Q524: ['bytedance/backend'], Q525: ['baidu/development'],
+    Q526: ['bytedance/backend', 'netease/development'], Q527: ['tencent/development'],
+    Q528: ['baidu/frontend', 'meituan/frontend', 'netease/development'],
+  };
+  for (const [qnum, ids] of Object.entries(expected)) {
+    assert.deepEqual(questionTags(qnum).map(tag => tag.id).sort(), ids.sort(), `${qnum} 公司岗位不符`);
+    assert.ok(realQuestionsForArticle(qnum).every(match => match.source.reviewedAt === '2026-10-11'));
+  }
+  for (const qnum of ['Q510', 'Q511', 'Q512', 'Q513']) assert.deepEqual(questionTags(qnum), []);
+  assert.equal(realQuestionsForArticle('Q523')[0].question, '怎样用 Python 的 property 创建只读属性？');
+  assert.ok(!realQuestionsForArticle('Q524').some(match => match.company.id === 'meituan'), '混合面经只归属实际提问的公司');
+  assert.doesNotMatch(realQuestionsForArticle('Q525')[0].question, /MySQL|8\.0/);
+  assert.match(realQuestionsForArticle('Q509')[0].source.dateLabel, /未明确年份/);
+});

@@ -1,6 +1,6 @@
 # Sunday面试指南 · AI 与全栈面试题
 
-**513 篇完整文章**，由 **程序员Sunday** 整理，覆盖大模型、Agent、RAG、JavaScript、Vue、React、后端、MySQL、Redis、计算机基础和系统设计。每道题讲清原理、工程取舍与面试追问，适合校招、实习与社招复习。
+**533 篇完整文章**，由 **程序员Sunday** 整理，覆盖大模型、Agent、RAG、JavaScript、Vue、React、后端、MySQL、Redis、计算机基础和系统设计。每道题讲清原理、工程取舍与面试追问，适合校招、实习与社招复习。
 
 📖 [在线阅读 Sunday面试指南](https://note.lgdsunday.club/) · [GitHub 正文目录](articles/)
 
@@ -12,8 +12,8 @@
 
 | 公司 / 岗位 | 题目数 | GitHub 真题列表 | 在线阅读 |
 | --- | ---: | --- | --- |
-| 字节前端面试真题 | 38 | [题目与答案](articles/companies/bytedance-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/frontend/) |
-| 百度前端面试真题 | 15 | [题目与答案](articles/companies/baidu-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/frontend/) |
+| 字节前端面试真题 | 39 | [题目与答案](articles/companies/bytedance-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/frontend/) |
+| 百度前端面试真题 | 18 | [题目与答案](articles/companies/baidu-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/frontend/) |
 | 阿里后端面试真题 | 16 | [题目与答案](articles/companies/alibaba-backend.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/backend/) |
 | 腾讯后端面试真题 | 12 | [题目与答案](articles/companies/tencent-backend.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/backend/) |
 | 美团开发面试真题 | 15 | [题目与答案](articles/companies/meituan-development.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/development/) |
@@ -22,14 +22,14 @@
 | 网易前端面试真题 | 5 | [题目与答案](articles/companies/netease-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/netease/frontend/) |
 | 字节Agent开发面试真题 | 9 | [题目与答案](articles/companies/bytedance-agent.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/agent/) |
 | 百度Agent开发面试真题 | 6 | [题目与答案](articles/companies/baidu-agent.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/agent/) |
-| 阿里前端面试真题 | 4 | [题目与答案](articles/companies/alibaba-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/frontend/) |
+| 阿里前端面试真题 | 5 | [题目与答案](articles/companies/alibaba-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/frontend/) |
 | 腾讯前端面试真题 | 27 | [题目与答案](articles/companies/tencent-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/frontend/) |
 | 去哪儿AI应用开发面试真题 | 1 | [题目与答案](articles/companies/qunar-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/qunar/ai-application/) |
-| 字节后端面试真题 | 27 | [题目与答案](articles/companies/bytedance-backend.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/backend/) |
+| 字节后端面试真题 | 31 | [题目与答案](articles/companies/bytedance-backend.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/backend/) |
 | 美团后端面试真题 | 46 | [题目与答案](articles/companies/meituan-backend.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/backend/) |
 | 字节算法面试真题 | 3 | [题目与答案](articles/companies/bytedance-algorithm.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/algorithm/) |
 | 腾讯AI应用开发面试真题 | 5 | [题目与答案](articles/companies/tencent-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/ai-application/) |
-| 腾讯开发面试真题 | 7 | [题目与答案](articles/companies/tencent-development.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/development/) |
+| 腾讯开发面试真题 | 8 | [题目与答案](articles/companies/tencent-development.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/development/) |
 | 百度AI应用开发面试真题 | 6 | [题目与答案](articles/companies/baidu-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/ai-application/) |
 | 美团AI应用开发面试真题 | 13 | [题目与答案](articles/companies/meituan-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/ai-application/) |
 | 虾皮Agent开发面试真题 | 11 | [题目与答案](articles/companies/shopee-agent.md) | [网站列表](https://note.lgdsunday.club/companies/shopee/agent/) |
@@ -39,6 +39,17 @@
 | 阿里开发面试真题 | 1 | [题目与答案](articles/companies/alibaba-development.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/development/) |
 | 美团Agent开发面试真题 | 1 | [题目与答案](articles/companies/meituan-agent.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/agent/) |
 | 数字马力开发面试真题 | 1 | [题目与答案](articles/companies/shuzimali-development.md) | [网站列表](https://note.lgdsunday.club/companies/shuzimali/development/) |
+| 携程前端面试真题 | 2 | [题目与答案](articles/companies/ctrip-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/ctrip/frontend/) |
+| 端点前端面试真题 | 1 | [题目与答案](articles/companies/duandian-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/duandian/frontend/) |
+| 京东前端面试真题 | 1 | [题目与答案](articles/companies/jd-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/jd/frontend/) |
+| 星环科技后端面试真题 | 1 | [题目与答案](articles/companies/transwarp-backend.md) | [网站列表](https://note.lgdsunday.club/companies/transwarp/backend/) |
+| 百度后端面试真题 | 2 | [题目与答案](articles/companies/baidu-backend.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/backend/) |
+| 快手后端面试真题 | 1 | [题目与答案](articles/companies/kuaishou-backend.md) | [网站列表](https://note.lgdsunday.club/companies/kuaishou/backend/) |
+| 字节开发面试真题 | 1 | [题目与答案](articles/companies/bytedance-development.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/development/) |
+| 有赞开发面试真题 | 1 | [题目与答案](articles/companies/youzan-development.md) | [网站列表](https://note.lgdsunday.club/companies/youzan/development/) |
+| 百度开发面试真题 | 1 | [题目与答案](articles/companies/baidu-development.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/development/) |
+| 网易开发面试真题 | 2 | [题目与答案](articles/companies/netease-development.md) | [网站列表](https://note.lgdsunday.club/companies/netease/development/) |
+| 美团前端面试真题 | 1 | [题目与答案](articles/companies/meituan-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/frontend/) |
 
 [全部公司真题目录](articles/companies/README.md) · [网站真题列表](https://note.lgdsunday.club/companies/) · [校招与实习准备路线](https://note.lgdsunday.club/guides/campus-interview/)
 
@@ -48,15 +59,15 @@
 | --- | ---: | --- | --- |
 | 大模型基础面试题 | 26 | [正文目录](articles/llm/README.md) | [网站专题](https://note.lgdsunday.club/llm/) |
 | RAG面试题 | 25 | [正文目录](articles/rag/README.md) | [网站专题](https://note.lgdsunday.club/rag/) |
-| Agent面试题 | 42 | [正文目录](articles/agent/README.md) | [网站专题](https://note.lgdsunday.club/agent/) |
-| AI应用工程面试题 | 24 | [正文目录](articles/engineering/README.md) | [网站专题](https://note.lgdsunday.club/engineering/) |
+| Agent面试题 | 44 | [正文目录](articles/agent/README.md) | [网站专题](https://note.lgdsunday.club/agent/) |
+| AI应用工程面试题 | 26 | [正文目录](articles/engineering/README.md) | [网站专题](https://note.lgdsunday.club/engineering/) |
 | AI项目与系统设计面试题 | 9 | [正文目录](articles/system-design/README.md) | [网站专题](https://note.lgdsunday.club/system-design/) |
-| LangChain生态面试题 | 15 | [正文目录](articles/langchain/README.md) | [网站专题](https://note.lgdsunday.club/langchain/) |
-| 前端面试题 | 116 | [正文目录](articles/frontend/README.md) | [网站专题](https://note.lgdsunday.club/frontend/) |
-| 后端面试题 | 108 | [正文目录](articles/backend/README.md) | [网站专题](https://note.lgdsunday.club/backend/) |
-| 数据库与缓存面试题 | 62 | [正文目录](articles/database/README.md) | [网站专题](https://note.lgdsunday.club/database/) |
-| 计算机基础面试题 | 58 | [正文目录](articles/cs-basics/README.md) | [网站专题](https://note.lgdsunday.club/cs-basics/) |
-| 系统设计面试题 | 23 | [正文目录](articles/fullstack-system-design/README.md) | [网站专题](https://note.lgdsunday.club/fullstack-system-design/) |
+| LangChain生态面试题 | 16 | [正文目录](articles/langchain/README.md) | [网站专题](https://note.lgdsunday.club/langchain/) |
+| 前端面试题 | 121 | [正文目录](articles/frontend/README.md) | [网站专题](https://note.lgdsunday.club/frontend/) |
+| 后端面试题 | 113 | [正文目录](articles/backend/README.md) | [网站专题](https://note.lgdsunday.club/backend/) |
+| 数据库与缓存面试题 | 64 | [正文目录](articles/database/README.md) | [网站专题](https://note.lgdsunday.club/database/) |
+| 计算机基础面试题 | 60 | [正文目录](articles/cs-basics/README.md) | [网站专题](https://note.lgdsunday.club/cs-basics/) |
+| 系统设计面试题 | 24 | [正文目录](articles/fullstack-system-design/README.md) | [网站专题](https://note.lgdsunday.club/fullstack-system-design/) |
 | AI编程工具与平台 | 2 | [正文目录](articles/tools/README.md) | [网站专题](https://note.lgdsunday.club/tools/) |
 | Agent能力扩展 | 1 | [正文目录](articles/agent-ext/README.md) | [网站专题](https://note.lgdsunday.club/agent-ext/) |
 | AI编程方法与工程实践 | 1 | [正文目录](articles/practice/README.md) | [网站专题](https://note.lgdsunday.club/practice/) |
@@ -165,6 +176,8 @@
 - [Zep 和 Graphiti 是什么？Agent 为什么需要时序知识图谱记忆？](articles/agent/q504-zep-graphiti-temporal-memory.md) · [在线阅读](https://note.lgdsunday.club/agent/q504-zep-graphiti-temporal-memory/)
 - [Agent 长期记忆怎么评测？LongMemEval 和 LoCoMo 分别测什么？](articles/agent/q507-agent-memory-evaluation-longmemeval-locomo.md) · [在线阅读](https://note.lgdsunday.club/agent/q507-agent-memory-evaluation-longmemeval-locomo/)
 - [什么是 Agent 记忆投毒？如何防止错误信息在跨会话中持续生效？](articles/agent/q508-agent-memory-poisoning-defense.md) · [在线阅读](https://note.lgdsunday.club/agent/q508-agent-memory-poisoning-defense/)
+- [Claude Agent SDK 是什么？和直接调用 Claude API 有什么区别？](articles/agent/q510-claude-agent-sdk-vs-api.md) · [在线阅读](https://note.lgdsunday.club/agent/q510-claude-agent-sdk-vs-api/)
+- [τ-bench 和 τ²-bench 是什么？如何评测 Agent 的工具调用与用户协作？](articles/agent/q513-tau-bench-tau2-agent-evaluation.md) · [在线阅读](https://note.lgdsunday.club/agent/q513-tau-bench-tau2-agent-evaluation/)
 
 ### AI应用工程面试题
 
@@ -192,6 +205,8 @@
 - [AG-UI 是什么？它和 MCP、A2A 分别解决什么问题？](articles/engineering/q421-ag-ui-agent-user-interaction.md) · [在线阅读](https://note.lgdsunday.club/engineering/q421-ag-ui-agent-user-interaction/)
 - [A2UI 是什么？Agent 生成的界面为什么不直接使用 HTML？](articles/engineering/q422-a2ui-declarative-interface.md) · [在线阅读](https://note.lgdsunday.club/engineering/q422-a2ui-declarative-interface/)
 - [大模型本地部署需要多少显存？参数量、精度和并发数怎么估算？](articles/engineering/q462-llm-vram-capacity-estimation.md) · [在线阅读](https://note.lgdsunday.club/engineering/q462-llm-vram-capacity-estimation/)
+- [Dify 的 Chatflow 和 Workflow 有什么区别？多轮对话应该怎么选？](articles/engineering/q511-dify-chatflow-vs-workflow.md) · [在线阅读](https://note.lgdsunday.club/engineering/q511-dify-chatflow-vs-workflow/)
+- [MCP Apps 是什么？MCP 工具如何返回可交互的界面？](articles/engineering/q512-mcp-apps-interactive-tool-ui.md) · [在线阅读](https://note.lgdsunday.club/engineering/q512-mcp-apps-interactive-tool-ui/)
 
 ### AI项目与系统设计面试题
 
@@ -222,6 +237,7 @@
 - [LangGraph 为什么报 GraphRecursionError？recursion_limit 应该怎么设置？](articles/langchain/q426-langgraph-recursion-limit.md) · [在线阅读](https://note.lgdsunday.club/langchain/q426-langgraph-recursion-limit/)
 - [LangChain 和 LlamaIndex 有什么区别？开发 RAG 和 Agent 应该怎么选？](articles/langchain/q457-langchain-vs-llamaindex.md) · [在线阅读](https://note.lgdsunday.club/langchain/q457-langchain-vs-llamaindex/)
 - [LangMem 是什么？Agent 的记忆应该同步写入，还是后台整理？](articles/langchain/q505-langmem-hot-path-background-memory.md) · [在线阅读](https://note.lgdsunday.club/langchain/q505-langmem-hot-path-background-memory/)
+- [Deep Agents 是什么？它和 LangChain、LangGraph 有什么关系？](articles/langchain/q509-deep-agents-langchain-langgraph.md) · [在线阅读](https://note.lgdsunday.club/langchain/q509-deep-agents-langchain-langgraph/)
 
 ### 前端面试题
 
@@ -341,6 +357,11 @@
 - [前端异常监控怎么做？运行时错误、资源加载失败和 Promise 异常怎样捕获？](articles/frontend/q470-frontend-error-monitoring.md) · [在线阅读](https://note.lgdsunday.club/frontend/q470-frontend-error-monitoring/)
 - [git reset 和 git revert 有什么区别？已经推送的提交应该怎样撤销？](articles/frontend/q471-git-reset-vs-revert.md) · [在线阅读](https://note.lgdsunday.club/frontend/q471-git-reset-vs-revert/)
 - [package.json 版本号中的 ^ 和 ~ 有什么区别？为什么安装结果可能变化？](articles/frontend/q472-npm-semver-caret-tilde.md) · [在线阅读](https://note.lgdsunday.club/frontend/q472-npm-semver-caret-tilde/)
+- [Promise 并发控制怎么实现？如何保证最多同时执行 N 个任务？](articles/frontend/q514-promise-concurrency-limit.md) · [在线阅读](https://note.lgdsunday.club/frontend/q514-promise-concurrency-limit/)
+- [dependencies、devDependencies、peerDependencies 有什么区别？依赖应该放在哪里？](articles/frontend/q515-npm-dependencies-devdependencies-peerdependencies.md) · [在线阅读](https://note.lgdsunday.club/frontend/q515-npm-dependencies-devdependencies-peerdependencies/)
+- [React 的 useImperativeHandle 有什么用？父组件怎样调用子组件的方法？](articles/frontend/q516-react-useimperativehandle.md) · [在线阅读](https://note.lgdsunday.club/frontend/q516-react-useimperativehandle/)
+- [Web Components 是什么？Shadow DOM 如何实现样式隔离？](articles/frontend/q517-web-components-shadow-dom.md) · [在线阅读](https://note.lgdsunday.club/frontend/q517-web-components-shadow-dom/)
+- [git cherry-pick 是什么？如何只合并某几个提交？](articles/frontend/q518-git-cherry-pick-selected-commits.md) · [在线阅读](https://note.lgdsunday.club/frontend/q518-git-cherry-pick-selected-commits/)
 
 ### 后端面试题
 
@@ -452,6 +473,11 @@
 - [Kafka 为什么吞吐量高？顺序写、批处理和零拷贝分别起什么作用？](articles/backend/q481-kafka-high-throughput-design.md) · [在线阅读](https://note.lgdsunday.club/backend/q481-kafka-high-throughput-design/)
 - [Nacos 如何实现服务注册与发现？服务下线后为什么还可能收到请求？](articles/backend/q482-nacos-service-registration-discovery.md) · [在线阅读](https://note.lgdsunday.club/backend/q482-nacos-service-registration-discovery/)
 - [Java 的 BIO、NIO、AIO 有什么区别？阻塞、非阻塞和异步怎么区分？](articles/backend/q494-java-bio-nio-aio.md) · [在线阅读](https://note.lgdsunday.club/backend/q494-java-bio-nio-aio/)
+- [Spring Boot 启动流程是什么？SpringApplication.run() 做了哪些事？](articles/backend/q519-spring-boot-startup-process.md) · [在线阅读](https://note.lgdsunday.club/backend/q519-spring-boot-startup-process/)
+- [BeanFactory 和 FactoryBean 有什么区别？为什么 getBean 可能拿到不同对象？](articles/backend/q520-beanfactory-vs-factorybean.md) · [在线阅读](https://note.lgdsunday.club/backend/q520-beanfactory-vs-factorybean/)
+- [CopyOnWriteArrayList 是什么？为什么适合读多写少的场景？](articles/backend/q521-copyonwritearraylist-read-write-snapshots.md) · [在线阅读](https://note.lgdsunday.club/backend/q521-copyonwritearraylist-read-write-snapshots/)
+- [ReentrantReadWriteLock 和 StampedLock 有什么区别？读多写少时怎么选？](articles/backend/q522-reentrantreadwritelock-vs-stampedlock.md) · [在线阅读](https://note.lgdsunday.club/backend/q522-reentrantreadwritelock-vs-stampedlock/)
+- [Python 描述符是什么？property 如何控制属性的读取和赋值？](articles/backend/q523-python-descriptors-property.md) · [在线阅读](https://note.lgdsunday.club/backend/q523-python-descriptors-property/)
 
 ### 数据库与缓存面试题
 
@@ -517,6 +543,8 @@
 - [MySQL 主键用自增 ID 还是 UUID？为什么会影响索引和写入性能？](articles/database/q484-mysql-primary-key-auto-increment-uuid.md) · [在线阅读](https://note.lgdsunday.club/database/q484-mysql-primary-key-auto-increment-uuid/)
 - [MySQL 视图是什么？和普通表有什么区别，能不能更新？](articles/database/q485-mysql-views.md) · [在线阅读](https://note.lgdsunday.club/database/q485-mysql-views/)
 - [Redis 和 Memcached 有什么区别？纯缓存场景应该怎么选？](articles/database/q486-redis-vs-memcached.md) · [在线阅读](https://note.lgdsunday.club/database/q486-redis-vs-memcached/)
+- [MySQL 一条 SELECT 语句是怎么执行的？解析器、优化器、执行器分别做什么？](articles/database/q524-mysql-select-execution-process.md) · [在线阅读](https://note.lgdsunday.club/database/q524-mysql-select-execution-process/)
+- [MySQL 的 Nested Loop Join 和 Hash Join 有什么区别？关联查询为什么会慢？](articles/database/q525-mysql-nested-loop-vs-hash-join.md) · [在线阅读](https://note.lgdsunday.club/database/q525-mysql-nested-loop-vs-hash-join/)
 
 ### 计算机基础面试题
 
@@ -578,6 +606,8 @@
 - [三数之和怎么去重？排序加双指针为什么能做到 O(n²)？](articles/cs-basics/q490-three-sum-two-pointers.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q490-three-sum-two-pointers/)
 - [合并区间怎么做？为什么要先按区间左端点排序？](articles/cs-basics/q491-merge-intervals.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q491-merge-intervals/)
 - [Linux 的 rwx 权限是什么意思？为什么文件不能写，却仍然可能被删除？](articles/cs-basics/q495-linux-file-directory-permissions.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q495-linux-file-directory-permissions/)
+- [红黑树和 AVL 树有什么区别？查询与插入性能怎么比较？](articles/cs-basics/q526-red-black-tree-vs-avl.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q526-red-black-tree-vs-avl/)
+- [0-1 背包和完全背包有什么区别？为什么容量遍历顺序不同？](articles/cs-basics/q527-zero-one-vs-unbounded-knapsack.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q527-zero-one-vs-unbounded-knapsack/)
 
 ### 系统设计面试题
 
@@ -604,6 +634,7 @@
 - [Event Sourcing 事件溯源是什么？和普通操作日志有什么区别？](articles/fullstack-system-design/q415-event-sourcing-audit-log.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q415-event-sourcing-audit-log/)
 - [即时通讯系统怎么设计？消息顺序、离线消息和多端同步怎么处理？](articles/fullstack-system-design/q492-instant-messaging-system-design.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q492-instant-messaging-system-design/)
 - [Feed 流系统怎么设计？推模式、拉模式和推拉结合怎么选？](articles/fullstack-system-design/q493-feed-system-fanout.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q493-feed-system-fanout/)
+- [观察者模式和发布订阅模式有什么区别？事件通知应该怎么设计？](articles/fullstack-system-design/q528-observer-vs-publish-subscribe.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q528-observer-vs-publish-subscribe/)
 
 ### AI编程工具与平台
 

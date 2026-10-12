@@ -64,3 +64,5 @@
 - [MySQL 主键用自增 ID 还是 UUID？为什么会影响索引和写入性能？](./q484-mysql-primary-key-auto-increment-uuid.md) · [在线阅读](https://note.lgdsunday.club/database/q484-mysql-primary-key-auto-increment-uuid/)
 - [MySQL 视图是什么？和普通表有什么区别，能不能更新？](./q485-mysql-views.md) · [在线阅读](https://note.lgdsunday.club/database/q485-mysql-views/)
 - [Redis 和 Memcached 有什么区别？纯缓存场景应该怎么选？](./q486-redis-vs-memcached.md) · [在线阅读](https://note.lgdsunday.club/database/q486-redis-vs-memcached/)
+- [MySQL 一条 SELECT 语句是怎么执行的？解析器、优化器、执行器分别做什么？](./q524-mysql-select-execution-process.md) · [在线阅读](https://note.lgdsunday.club/database/q524-mysql-select-execution-process/)
+- [MySQL 的 Nested Loop Join 和 Hash Join 有什么区别？关联查询为什么会慢？](./q525-mysql-nested-loop-vs-hash-join.md) · [在线阅读](https://note.lgdsunday.club/database/q525-mysql-nested-loop-vs-hash-join/)

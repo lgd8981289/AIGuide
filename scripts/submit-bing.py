@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -25,6 +26,10 @@ TARGETS = {
     "note": (SITE, "sitemap-index.xml"),
 }
 MAX_BYTES = 8 * 1024 * 1024
+# 线上站点偶发单页超时（约 30 秒无响应）；预检对任一页失败都会中止整站提交，
+# 会白白损失当天额度。故对网络类瞬时错误做有限重试，真正的 4xx/5xx 与预检不通过仍照旧立即报错。
+TRANSIENT_ATTEMPTS = 3
+TRANSIENT_BACKOFF = 2.0
 
 
 class SubmissionError(Exception):
@@ -84,6 +89,19 @@ def request(url, payload=None):
         if len(body) > MAX_BYTES:
             raise SubmissionError("响应过大，已停止处理")
         return body, response.headers
+
+
+def fetch(url):
+    """request 的瞬时错误重试包装：HTTPError 原样抛出，网络类异常重试后仍失败才抛出。"""
+    for attempt in range(1, TRANSIENT_ATTEMPTS + 1):
+        try:
+            return request(url)
+        except urllib.error.HTTPError:
+            raise
+        except Exception:
+            if attempt == TRANSIENT_ATTEMPTS:
+                raise
+            time.sleep(TRANSIENT_BACKOFF * attempt)
 
 
 def api_call(key, method, params=None, post=False):
@@ -152,7 +170,7 @@ def inspect_page(url, allow_trailing_slash_redirect=False):
     try:
         redirected_to = None
         try:
-            body, headers = request(url)
+            body, headers = fetch(url)
         except urllib.error.HTTPError as error:
             destination = urllib.parse.urljoin(url, error.headers.get("Location", ""))
             # 简历汪静态服务会补尾斜杠，而地图与 canonical 使用无斜杠地址。
@@ -160,7 +178,7 @@ def inspect_page(url, allow_trailing_slash_redirect=False):
             if not (allow_trailing_slash_redirect and error.code in (301, 308)
                     and not url.endswith("/") and destination == url + "/"):
                 raise
-            body, headers = request(destination)
+            body, headers = fetch(destination)
             redirected_to = destination
         parser = PageHead()
         parser.feed(body.decode("utf-8"))

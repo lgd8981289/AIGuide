@@ -2,6 +2,123 @@
 // 同一篇解析可以承接多个问题；不把正文里的技术扩展当成面试官追问。
 const question = (qnum, topic, question) => ({ qnum, topic, question, relation: 'mentioned' });
 
+// Q509–Q528：2026-10-11 核对候选人原帖。只登记实际问法，
+// 不把参考回答、框架扩展或未具名公司的面经当成公司真题。
+export const OCTOBER_11_INTERVIEW_SOURCES = [
+  { id: 'byte-jianying-deepagents', company: 'bytedance', role: '后端AI开发（剪映）', roleKey: 'backend', stage: '原帖未明确批次',
+    title: '字节剪映后端ai开发三面面经分享 1h', url: 'https://www.nowcoder.com/feed/main/detail/4b4ca6f48d6a4f3dba68ad57d9316b3a',
+    dateLabel: '页面显示 04-29 发布，未明确年份', topics: [
+      question('Q509', 'Deep Agents 架构', '介绍 Deep Agents 的框架设计，并画出大致架构图。'),
+    ] },
+  { id: 'byte-education-promise-queue', company: 'bytedance', role: '前端（教育）', roleKey: 'frontend', stage: '实习',
+    title: '字节跳动教育前端实习一，二，三面面经（附心得后记', url: 'https://www.nowcoder.com/discuss/353157589376638976',
+    dateLabel: '原帖编辑于 2021-03-04', topics: [
+      question('Q514', 'Promise 并发队列', '怎样实现一个最多并发执行 N 个 Promise 任务的队列？'),
+    ] },
+  { id: 'ctrip-frontend-autumn-dependencies', company: 'ctrip', role: '前端', roleKey: 'frontend', stage: '秋招（原帖标题）',
+    title: '携程秋招前端一二+hr面经', url: 'https://www.nowcoder.com/feed/main/detail/49c19c8ee0f74b149d7db81956b22f86',
+    dateLabel: '原帖编辑于 2024-11-12', topics: [
+      question('Q514', 'Promise 并发控制', '怎样手写 Promise 并发控制？'),
+      question('Q515', 'npm 依赖分类', 'peerDependencies 是什么，哪些依赖需要放入 devDependencies？'),
+    ] },
+  { id: 'baidu-frontend-dependencies', company: 'baidu', role: '前端', roleKey: 'frontend', stage: '原帖未明确批次',
+    title: '百度前端面经', url: 'https://www.nowcoder.com/discuss/535581489552011264',
+    dateLabel: '原帖发布于 2023-09-24', topics: [
+      question('Q515', 'dependencies 与 devDependencies', 'dependencies 和 devDependencies 有什么区别？'),
+    ] },
+  { id: 'duandian-frontend-imperative-handle', company: 'duandian', role: '前端', roleKey: 'frontend', stage: '原帖未明确批次',
+    title: '杭州端点前端一面，被打麻了', url: 'https://www.nowcoder.com/feed/main/detail/1df5be8aea734dcc980c3b9ef7ccb7c7',
+    dateLabel: '原帖发布于 2024-10-30', topics: [
+      question('Q516', 'useImperativeHandle', 'React 父组件怎样获取子组件的引用，useImperativeHandle 如何使用？'),
+    ] },
+  { id: 'baidu-frontend-shadow-pubsub', company: 'baidu', role: '前端', roleKey: 'frontend', stage: '原帖未明确批次',
+    title: '百度前端一面面经', url: 'https://www.nowcoder.com/feed/main/detail/d088a8c478cd4256b098776b0d143918',
+    dateLabel: '原帖发布于 2025-09-28', topics: [
+      question('Q517', 'Shadow DOM 与样式隔离', '样式隔离有哪些方法，是否了解 Shadow DOM？'),
+      question('Q528', '发布订阅模式', '怎样用 JavaScript 实现一个简单的发布订阅模式？'),
+    ] },
+  { id: 'ali-entertainment-frontend-shadow', company: 'alibaba', role: '前端（大文娱）', roleKey: 'frontend', stage: '原帖未明确批次',
+    title: '阿里大文娱要这么kpi吗，附上前端一面面经', url: 'https://www.nowcoder.com/discuss/669179217484984320',
+    dateLabel: '正文记录 9 月 26 日面试；原帖编辑于 2024-09-28', topics: [
+      question('Q517', 'Shadow DOM', 'Shadow DOM 是什么，与普通 DOM 有什么区别？'),
+    ] },
+  { id: 'jd-retail-frontend-cherry-pick', company: 'jd', role: '前端（零售营销平台）', roleKey: 'frontend', stage: '秋招',
+    title: '京东零售 前端面经（一面）', url: 'https://www.nowcoder.com/discuss/353158574471847936',
+    dateLabel: '正文记录 9 月 17 日面试；原帖发布于 2021-09-21', topics: [
+      question('Q518', 'Git cherry-pick 与 rebase', 'git cherry-pick 与 rebase 如何使用？'),
+    ] },
+  { id: 'transwarp-java-boot-startup', company: 'transwarp', role: 'Java后端', roleKey: 'backend', stage: '秋招',
+    title: '星环科技 Java后端 一面面经', url: 'https://www.nowcoder.com/feed/main/detail/f698bb4d6d6f4e5a95013c7b2847e93c',
+    dateLabel: '正文记录 2023-11-10 面试；原帖编辑于 2024-03-07', topics: [
+      question('Q519', 'Spring Boot 启动流程', 'Spring Boot 的启动流程是什么？'),
+    ] },
+  { id: 'byte-ecommerce-factory-bean', company: 'bytedance', role: '后端（抖音电商）', roleKey: 'backend', stage: '实习',
+    title: '字节跳动抖音电商 后端实习 二面面经 已过（压力）', url: 'https://www.nowcoder.com/discuss/353157731001507840',
+    dateLabel: '原帖编辑于 2021-03-29', topics: [
+      question('Q520', 'BeanFactory 与 FactoryBean', 'BeanFactory 和 FactoryBean 有什么区别，FactoryBean 的 BeanName 如何区分工厂与返回对象？'),
+    ] },
+  { id: 'baidu-backend-factory-bean', company: 'baidu', role: '后端', roleKey: 'backend', stage: '原帖未明确批次',
+    title: '百度后端一面面经', url: 'https://www.nowcoder.com/discuss/792082986211483648',
+    dateLabel: '原帖发布于 2025-09-01', topics: [
+      question('Q520', 'FactoryBean 与 BeanFactory', 'FactoryBean 和 BeanFactory 有什么区别，哪一个是容器？'),
+    ] },
+  { id: 'baidu-java-campus-copy-on-write', company: 'baidu', role: 'Java后端', roleKey: 'backend', stage: '2022届校招提前批（原帖标题）',
+    title: '2022百度校招提前批java后端一面面经', url: 'https://www.nowcoder.com/discuss/353158089106989056',
+    dateLabel: '原帖发布于 2021-07-13；标题的 2022 为校招届次', topics: [
+      question('Q521', 'CopyOnWriteArrayList 线程安全', 'CopyOnWriteArrayList 如何保证线程安全，实现原理是什么？'),
+    ] },
+  { id: 'kuaishou-java-copy-on-write', company: 'kuaishou', role: 'Java开发', roleKey: 'backend', stage: '原帖未明确批次',
+    title: '快手Java开发面经（附阿里，头条，美团面经，学习经验）', url: 'https://www.nowcoder.com/discuss/353156433057357824',
+    dateLabel: '快手部分记录 5 月 13 日、5 月 18 日面试，未明确面试年份；原帖编辑于 2021-08-22', topics: [
+      question('Q521', 'CopyOnWriteArrayList 读写安全', 'CopyOnWriteArrayList 怎样保证线程安全，写入时读取会不会读到空数据？'),
+    ] },
+  { id: 'byte-development-stamped-lock', company: 'bytedance', role: '开发（原帖未明确具体岗位）', roleKey: 'development', stage: '原帖未明确批次',
+    title: '字节复活赛', url: 'https://www.nowcoder.com/feed/main/detail/429054bd108b42df99e7be9bc62455f9',
+    dateLabel: '原帖发布于 2025-07-24', topics: [
+      question('Q522', 'StampedLock 乐观读', 'StampedLock 的乐观读相比 ReadWriteLock 有何优势，戳记机制如何校验读写冲突？'),
+    ] },
+  { id: 'youzan-python-property', company: 'youzan', role: 'Python开发', roleKey: 'development', stage: '校招（原帖标签）',
+    title: '有赞 Python开发 面经，二面保佑', url: 'https://www.nowcoder.com/discuss/353156916811603968',
+    dateLabel: '正文记录 9 月 7 日一面；原帖编辑于 2020-09-07', topics: [
+      question('Q523', 'Python property', '怎样用 Python 的 property 创建只读属性？'),
+    ] },
+  { id: 'byte-ads-backend-sql-flow', company: 'bytedance', role: '后端（广告部门）', roleKey: 'backend', stage: '实习',
+    title: '【实习】字节后端一面(凉)、美团(offer)后端一二面面经 · 字节部分', url: 'https://www.nowcoder.com/discuss/353157917853556736',
+    dateLabel: '字节一面记录为 2021-05-11；原帖编辑于 2021-05-31', topics: [
+      question('Q524', 'MySQL SQL 执行流程', '在 MySQL 中，一条 SQL 的执行流程是什么？'),
+    ] },
+  { id: 'baidu-database-join-algorithms', company: 'baidu', role: '数据库工程（运维部）', roleKey: 'development', stage: '原帖未明确批次',
+    title: '2016年8月百度运维部数据库岗位内推面经', url: 'https://www.nowcoder.com/discuss/353153898464616448',
+    dateLabel: '一面记录为 2016-08-25；原帖编辑于 2016-09-27', topics: [
+      question('Q525', 'Nested Loop Join 与 Hash Join', '数据库的 Nested Loop Join 和 Hash Join 有什么优缺点，分别适合什么场景？'),
+    ] },
+  { id: 'netease-game-avl-red-black', company: 'netease', role: '游戏研发', roleKey: 'development', stage: '原帖未明确批次',
+    title: '网易互娱游戏研发面经+时间线', url: 'https://www.nowcoder.com/feed/main/detail/5a6df8a7c4804be19e7854807961255d',
+    dateLabel: '正文记录 3 月 27 日一面；原帖编辑于 2025-04-25', topics: [
+      question('Q526', 'AVL 树与红黑树', 'AVL 树和红黑树有什么区别？'),
+    ] },
+  { id: 'byte-backend-avl-red-black', company: 'bytedance', role: '后端', roleKey: 'backend', stage: '秋招',
+    title: '字节-秋招-后端开发-二面', url: 'https://www.nowcoder.com/feed/main/detail/895710e048ac41a69dc9afba4e5433e4',
+    dateLabel: '正文记录 9 月 10 日面试；原帖发布于 2025-09-13', topics: [
+      question('Q526', 'AVL 树与红黑树', '展开讲讲 AVL 树和红黑树。'),
+    ] },
+  { id: 'tencent-intern-knapsack', company: 'tencent', role: '开发（原帖未明确具体岗位）', roleKey: 'development', stage: '实习',
+    title: '腾讯实习生面经（已拿offer）-菜逼的逆袭', url: 'https://www.nowcoder.com/discuss/353153878994657280',
+    dateLabel: '正文记录 4 月 16 日二面；原帖编辑于 2016-04-23', topics: [
+      question('Q527', '背包问题', '0-1 背包、部分背包和完全背包分别怎样求解？'),
+    ] },
+  { id: 'meituan-frontend-observer-pubsub', company: 'meituan', role: '前端', roleKey: 'frontend', stage: '暑期实习',
+    title: '4.1美团转暑期二面72min/已offer', url: 'https://www.nowcoder.com/discuss/606480513750007808',
+    dateLabel: '标题记录 4 月 1 日二面；原帖发布于 2024-04-07', topics: [
+      question('Q528', '观察者与发布订阅', '观察者模式和发布订阅模式有什么不同？'),
+    ] },
+  { id: 'netease-game-observer-pubsub', company: 'netease', role: '游戏研发工程师', roleKey: 'development', stage: '27届暑期实习（原帖标题）',
+    title: '网易互娱27暑期 游戏研发工程师 一面', url: 'https://www.nowcoder.com/feed/main/detail/17005da380b74636be2b5b4a7049b709',
+    dateLabel: '页面显示 04-27 编辑，未明确年份；标题为 27 届暑期', topics: [
+      question('Q528', '观察者与发布订阅', '观察者模式和发布订阅模式有什么区别，它们的通知关系如何组织？'),
+    ] },
+].map(source => ({ ...source, reviewedAt: '2026-10-11' }));
+
 export const ADDITIONAL_INTERVIEW_TOPICS = {
   'byte-feishu': [question('Q466', '函数柯里化', '怎样实现函数柯里化？')],
   'byte-agent-september': [

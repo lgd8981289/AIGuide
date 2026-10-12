@@ -17,9 +17,12 @@ export async function getCompanyPages() {
   function groups(entries: ReturnType<typeof resolve>) {
     return CATEGORIES.map(category => ({ category, entries: entries.filter(item => item.article.entry.data.category === category.slug) })).filter(group => group.entries.length)
   }
+  function reviewedAt(sources: typeof collections[number]['sources']) {
+    return sources.map(source => source.reviewedAt).sort().at(-1) ?? INTERVIEW_REVIEWED_AT
+  }
   const rolePages = collections.map(view => {
     const entries = resolve(view.sources)
-    return { ...view, kind: 'role' as const, name: view.company.name, updated: INTERVIEW_REVIEWED_AT,
+    return { ...view, kind: 'role' as const, name: view.company.name, updated: reviewedAt(view.sources),
       title: `${view.label}及答案`, articleCount: entries.length, entries, groups: groups(entries),
       description: `${view.label}及答案：收录 ${entries.length} 篇已有技术解析，按知识分类展示题目、摘要和原文入口，并附公开面经中的题意、岗位、批次与来源。`,
       guideSlug: '' }
@@ -30,7 +33,7 @@ export async function getCompanyPages() {
     const sources = roles.flatMap(view => view.sources)
     const entries = resolve(sources)
     return [{ id: company.id, kind: 'company' as const, company, role: null, name: company.name,
-      label: `${company.name}面试真题`, href: `/companies/${company.id}/`, updated: INTERVIEW_REVIEWED_AT,
+      label: `${company.name}面试真题`, href: `/companies/${company.id}/`, updated: reviewedAt(sources),
       title: `${company.name}面试真题及答案：按岗位浏览`, articleCount: entries.length, sources, entries, groups: groups(entries),
       description: `${company.name}面试真题及答案：按${roles.map(r => r.role.name).join('、')}岗位浏览 ${entries.length} 篇技术解析，查看具体题目、答案和公开面经出处。`, guideSlug: '' }]
   })

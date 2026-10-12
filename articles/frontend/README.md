@@ -118,3 +118,8 @@
 - [前端异常监控怎么做？运行时错误、资源加载失败和 Promise 异常怎样捕获？](./q470-frontend-error-monitoring.md) · [在线阅读](https://note.lgdsunday.club/frontend/q470-frontend-error-monitoring/)
 - [git reset 和 git revert 有什么区别？已经推送的提交应该怎样撤销？](./q471-git-reset-vs-revert.md) · [在线阅读](https://note.lgdsunday.club/frontend/q471-git-reset-vs-revert/)
 - [package.json 版本号中的 ^ 和 ~ 有什么区别？为什么安装结果可能变化？](./q472-npm-semver-caret-tilde.md) · [在线阅读](https://note.lgdsunday.club/frontend/q472-npm-semver-caret-tilde/)
+- [Promise 并发控制怎么实现？如何保证最多同时执行 N 个任务？](./q514-promise-concurrency-limit.md) · [在线阅读](https://note.lgdsunday.club/frontend/q514-promise-concurrency-limit/)
+- [dependencies、devDependencies、peerDependencies 有什么区别？依赖应该放在哪里？](./q515-npm-dependencies-devdependencies-peerdependencies.md) · [在线阅读](https://note.lgdsunday.club/frontend/q515-npm-dependencies-devdependencies-peerdependencies/)
+- [React 的 useImperativeHandle 有什么用？父组件怎样调用子组件的方法？](./q516-react-useimperativehandle.md) · [在线阅读](https://note.lgdsunday.club/frontend/q516-react-useimperativehandle/)
+- [Web Components 是什么？Shadow DOM 如何实现样式隔离？](./q517-web-components-shadow-dom.md) · [在线阅读](https://note.lgdsunday.club/frontend/q517-web-components-shadow-dom/)
+- [git cherry-pick 是什么？如何只合并某几个提交？](./q518-git-cherry-pick-selected-commits.md) · [在线阅读](https://note.lgdsunday.club/frontend/q518-git-cherry-pick-selected-commits/)

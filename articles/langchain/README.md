@@ -17,3 +17,4 @@
 - [LangGraph 为什么报 GraphRecursionError？recursion_limit 应该怎么设置？](./q426-langgraph-recursion-limit.md) · [在线阅读](https://note.lgdsunday.club/langchain/q426-langgraph-recursion-limit/)
 - [LangChain 和 LlamaIndex 有什么区别？开发 RAG 和 Agent 应该怎么选？](./q457-langchain-vs-llamaindex.md) · [在线阅读](https://note.lgdsunday.club/langchain/q457-langchain-vs-llamaindex/)
 - [LangMem 是什么？Agent 的记忆应该同步写入，还是后台整理？](./q505-langmem-hot-path-background-memory.md) · [在线阅读](https://note.lgdsunday.club/langchain/q505-langmem-hot-path-background-memory/)
+- [Deep Agents 是什么？它和 LangChain、LangGraph 有什么关系？](./q509-deep-agents-langchain-langgraph.md) · [在线阅读](https://note.lgdsunday.club/langchain/q509-deep-agents-langchain-langgraph/)

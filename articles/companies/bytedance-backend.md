@@ -4,6 +4,11 @@
 
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
+## LangChain生态面试题
+
+- [Deep Agents 是什么？它和 LangChain、LangGraph 有什么关系？](../langchain/q509-deep-agents-langchain-langgraph.md)
+  Deep Agents 不是 LangGraph 的替代品。本文从规划、文件后端、子 Agent 与底层运行时讲清三者分工，并说明预置能力的使用边界与选型方法。
+
 ## 前端面试题
 
 - [从输入 URL 到页面显示，浏览器到底经历了什么？](../frontend/q129-browser-navigation-rendering.md)
@@ -21,6 +26,8 @@
   ThreadLocal 让不同线程分别保存和读取自己的变量值。同一个 ThreadLocal 对象，在不同线程中可以对应不同的值，不是让所有线程共享一个普通字段。线程池会复用线程，因此任务结束不等于线程结束。
 - [Spring 的 @Async 为什么会失效？异步方法的线程池和异常怎么处理？](../backend/q474-spring-async-execution.md)
   解释 Spring @Async 的代理调用与自身调用失效，区分线程池排队、Future 和 void 异常处理，讲清事务、ThreadLocal 与重要任务持久化的边界。
+- [BeanFactory 和 FactoryBean 有什么区别？为什么 getBean 可能拿到不同对象？](../backend/q520-beanfactory-vs-factorybean.md)
+  BeanFactory 和 FactoryBean 有什么区别？用容器、工厂和产品三个对象解释 getBean 的返回结果，并说明产品单例缓存与初始化、销毁职责的边界。
 
 ## 数据库与缓存面试题
 
@@ -34,6 +41,8 @@
   Redis Pipeline 是客户端连续发送多条命令，不在每条后都停下来等待回复，再按顺序处理结果。它主要减少往返等待，并提高批量 IO 效率。服务器仍要执行这些命令，Pipeline 不把十条操作变成一条，也不保证整批原子执行。
 - [MySQL Online DDL 是什么？ALGORITHM=INSTANT、INPLACE 和 COPY 有什么区别？](../database/q321-mysql-online-ddl.md)
   MySQL Online DDL 是什么？ALGORITHM=INSTANT、INPLACE 和 COPY 有什么区别？在线能力取决于具体操作和版本，不代表完全无锁、无重建。讲清三种算法的代价与适用条件。
+- [MySQL 一条 SELECT 语句是怎么执行的？解析器、优化器、执行器分别做什么？](../database/q524-mysql-select-execution-process.md)
+  MySQL 一条 SELECT 怎样执行？按解析与准备、优化、执行器和 InnoDB 梳理查询流程，区分 Buffer Pool 与旧查询缓存，并解释 EXPLAIN 与 EXPLAIN ANALYZE。
 
 ## 计算机基础面试题
 
@@ -65,6 +74,8 @@
   对比链地址法与开放寻址法，通过冲突和删除算例解释探测路径、墓碑、实际键比较、负载因子与扩容，说明平均复杂度和最坏情况边界。
 - [合并区间怎么做？为什么要先按区间左端点排序？](../cs-basics/q491-merge-intervals.md)
   提供 TS、Python 合并区间实现，解释左端点排序、包含关系与不变条件，区分闭区间和半开区间，分析最后追加、输入校验及时间空间复杂度。
+- [红黑树和 AVL 树有什么区别？查询与插入性能怎么比较？](../cs-basics/q526-red-black-tree-vs-avl.md)
+  红黑树和 AVL 树有什么区别？用树形图解释高度平衡、颜色约束与旋转，两者都保持对数高度，但实际查询和更新性能还取决于负载与实现。
 
 ## 系统设计面试题
 

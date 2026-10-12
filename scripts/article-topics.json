@@ -1226,5 +1226,177 @@
   {
     "qnum": "Q495",
     "topic": "cs-basics:os"
+  },
+  {
+    "qnum": "Q514",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q515",
+    "topic": "frontend:engineering"
+  },
+  {
+    "qnum": "Q516",
+    "topic": "frontend:react"
+  },
+  {
+    "qnum": "Q517",
+    "topic": "frontend:browser"
+  },
+  {
+    "qnum": "Q518",
+    "topic": "frontend:engineering"
+  },
+  {
+    "qnum": "Q519",
+    "topic": "backend:frameworks"
+  },
+  {
+    "qnum": "Q520",
+    "topic": "backend:frameworks"
+  },
+  {
+    "qnum": "Q521",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q522",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q523",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q524",
+    "topic": "database:mysql"
+  },
+  {
+    "qnum": "Q525",
+    "topic": "database:mysql"
+  },
+  {
+    "qnum": "Q526",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q527",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q528",
+    "topic": "fullstack-system-design:architecture"
+  },
+  {
+    "qnum": "Q537",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q538",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q539",
+    "topic": "frontend:html-css"
+  },
+  {
+    "qnum": "Q540",
+    "topic": "frontend:engineering"
+  },
+  {
+    "qnum": "Q541",
+    "topic": "frontend:react"
+  },
+  {
+    "qnum": "Q542",
+    "topic": "frontend:react"
+  },
+  {
+    "qnum": "Q543",
+    "topic": "frontend:vue"
+  },
+  {
+    "qnum": "Q544",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q545",
+    "topic": "backend:frameworks"
+  },
+  {
+    "qnum": "Q546",
+    "topic": "backend:frameworks"
+  },
+  {
+    "qnum": "Q547",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q548",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q549",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q550",
+    "topic": "backend:frameworks"
+  },
+  {
+    "qnum": "Q551",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q552",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q553",
+    "topic": "backend:services"
+  },
+  {
+    "qnum": "Q554",
+    "topic": "backend:services"
+  },
+  {
+    "qnum": "Q555",
+    "topic": "backend:services"
+  },
+  {
+    "qnum": "Q556",
+    "topic": "database:mysql"
+  },
+  {
+    "qnum": "Q557",
+    "topic": "database:mysql"
+  },
+  {
+    "qnum": "Q558",
+    "topic": "database:redis"
+  },
+  {
+    "qnum": "Q559",
+    "topic": "cs-basics:network"
+  },
+  {
+    "qnum": "Q560",
+    "topic": "cs-basics:os"
+  },
+  {
+    "qnum": "Q561",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q562",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q563",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q564",
+    "topic": "fullstack-system-design:architecture"
   }
 ]

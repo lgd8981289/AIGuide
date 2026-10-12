@@ -44,3 +44,5 @@
 - [Zep 和 Graphiti 是什么？Agent 为什么需要时序知识图谱记忆？](./q504-zep-graphiti-temporal-memory.md) · [在线阅读](https://note.lgdsunday.club/agent/q504-zep-graphiti-temporal-memory/)
 - [Agent 长期记忆怎么评测？LongMemEval 和 LoCoMo 分别测什么？](./q507-agent-memory-evaluation-longmemeval-locomo.md) · [在线阅读](https://note.lgdsunday.club/agent/q507-agent-memory-evaluation-longmemeval-locomo/)
 - [什么是 Agent 记忆投毒？如何防止错误信息在跨会话中持续生效？](./q508-agent-memory-poisoning-defense.md) · [在线阅读](https://note.lgdsunday.club/agent/q508-agent-memory-poisoning-defense/)
+- [Claude Agent SDK 是什么？和直接调用 Claude API 有什么区别？](./q510-claude-agent-sdk-vs-api.md) · [在线阅读](https://note.lgdsunday.club/agent/q510-claude-agent-sdk-vs-api/)
+- [τ-bench 和 τ²-bench 是什么？如何评测 Agent 的工具调用与用户协作？](./q513-tau-bench-tau2-agent-evaluation.md) · [在线阅读](https://note.lgdsunday.club/agent/q513-tau-bench-tau2-agent-evaluation/)
