@@ -1,0 +1,32 @@
+{
+  "files": [
+    {
+      "path": "index.html",
+      "before": "4ec1b7f21b760a58c79e4f871b3e16eb4952057986c4e911413ce35577d9de8f",
+      "after": "b8edb91279865975dc0796aad720ba8a187eb420f86ca29ea77eaae721a32098"
+    },
+    {
+      "path": "companies/index.html",
+      "before": "0c114ca5020c33d6b63e6cb842c7070955cabd08ccb713d68630afdda13ea4d7",
+      "after": "2c54705daa47b090153a801eb362d8ef9d1d1e2bbe9220dd36654448f6060237"
+    },
+    {
+      "path": "_astro/company-pages.CZu4Or8a.css",
+      "before": "MISSING",
+      "after": "ce02e0d34b4c3e107d331320f272ed928def46439b1d335f177cb7f23f513cc8"
+    }
+  ],
+  "baseline": {
+    "index.html": "4ec1b7f21b760a58c79e4f871b3e16eb4952057986c4e911413ce35577d9de8f",
+    "companies/index.html": "0c114ca5020c33d6b63e6cb842c7070955cabd08ccb713d68630afdda13ea4d7",
+    "_astro/ArticleBrowser.astro_astro_type_script_index_0_lang.B1Pr1UTg.js": "e23be1b3b7645b83e1462842cefde91839e6286ecb16112eac1fe8bed719459c",
+    "_astro/BaseLayout.BOKLLu7t.css": "8339a36195bd0c1c4be5f0f9eb057beb7e68b915ad8a52c1c3840d05825a3ed5",
+    "_astro/BaseLayout.astro_astro_type_script_index_0_lang.DQExYDk8.js": "396d139a356cb14bd46bdb5afc2e429afaa418ef21826f575759b56e66bd103d",
+    "_astro/article-browser.DZQBGhHu.css": "5a358f7245c28716d8c0c08eb8c49c83122436a90bec97e6fd1589ad01d7a14a",
+    "_astro/company-pages.CZu4Or8a.css": "MISSING",
+    "_astro/learning-guides.CmNir1_d.css": "6f9acd2e38654c1abca996c04f68c95102490d4cf0b67a32a901b45572d3751a"
+  },
+  "backup": "_ops/backups/navigation-20261014T143809Z.tar.gz",
+  "http_verified": true,
+  "sitemap_urls": 861
+}

@@ -35,7 +35,11 @@
 
 新增文章后运行 `npm run report:companies` 查看真实来源的覆盖率、分类缺口和最新未匹配题目；每次完整构建也自动输出该报告。`npm run report:companies -- --unmatched` 列出全部待核验文章，`npm run report:companies -- --json` 提供结构化清单。覆盖率只统计 Q 编号面试题，教程与 `related` 延伸阅读不计入。多公司同帖按公司段落维护独立来源记录，面经篇数按 URL 去重。未匹配是维护队列，不意味着公司没有问过，也不能按关键词自动贴标签。
 
+2026-10-14 的 Python 批次来源保存在 `src/data/company-interviews-2026-10-14.mjs`。测试与测试开发分别使用 `testing`、`test-development`；Python 语言分类与实际招聘岗位分别登记，不能因为文章属于 Python 就给原帖补成后端岗位。元类、WSGI、JSON 等原题只说明该知识点，不能扩写成文章中的新版本 API 和全部追问。原帖公司匿名、只见备考汇编、或接口名称仅出现在参考回答时，继续保留待核验。
+
 2026-10-09 的扩充来源保存在 `src/data/company-interview-expansion.mjs`，由主数据统一合并，网站和 GitHub 继续使用同一套读取逻辑。新来源逐条保留原帖题意与日期；没有重新阅读的旧来源保留原核验日期。
+
+2026-10-12 的新增来源与复核补题保存在 `src/data/company-interviews-2026-10-12.mjs`。岗位列表支持原帖明确的运维方向；历史框架问题只保留当时实际问法，不把当前解析的新 API、版本或实现细节扩写成历史真题。
 
 网站入口：[note.lgdsunday.club](https://note.lgdsunday.club/)。指南部署在独立子域名的根目录；原 `lgdsunday.club/note/` 和 `www.lgdsunday.club/note/` 均逐页 301 到新地址。
 
@@ -88,6 +92,8 @@ AIGuide/
 
 ### 增量同步与图片缓存
 
+原稿图片可放在文章目录的 `正文.assets/` 或 `正文/`，Markdown 尖括号路径与 HTML 图片都会同步为公开地址。`正文/` 中的代码与笔记不会作为图片发布；两个目录产生同名目标时停止同步，避免覆盖配图。
+
 `./deploy.sh --sync` 会比较最终正文和图片内容：正文未变化时不重写；图片按原图 SHA-256、处理脚本/参数、字体、Pillow/WebP 版本和输出哈希判断是否复用。仅修改文字不会重新打水印或压缩全部图片；同名换图、调整水印或压缩设置、删除/损坏输出都会触发相应更新。全量扫描成功后清理已删除资源，来源根目录不可用时停止以保留已有结果。
 
 缓存位于 `.cache/image-pipeline/`，不提交、不上传。升级后的第一次运行需要建立可信缓存，会完整处理图片；之后自动复用。默认最多 4 个图片工作进程，内存紧张时可用 `AIGUIDE_IMAGE_WORKERS=1 ./deploy.sh --sync`。画质、尺寸和水印样式沿用原设置。
@@ -129,12 +135,18 @@ npm run build
 | 本地分类 | 分类 URL | 内容边界 |
 | --- | --- | --- |
 | 前端面试题 | `/frontend/` | 浏览器、页面、前端框架与工程化 |
-| 后端面试题 | `/backend/` | 接口、鉴权、队列、服务端实现与治理 |
+| Java面试题（兼容源目录：后端面试题） | `/backend/` | Java/JVM/并发/Spring/MyBatis 与后端工程；历史内容不自动迁移 |
+| Python面试题 | `/python/` | Python 语言、标准库、并发 API、测试及专属框架机制 |
+| Go面试题 | `/go/` | Go 语言、标准库、并发 API、运行时及专属框架机制 |
 | 数据库与缓存面试题 | `/database/` | MySQL、Redis、索引、事务与缓存机制 |
 | 计算机基础面试题 | `/cs-basics/` | 网络、操作系统、数据结构与算法 |
 | 系统设计面试题 | `/fullstack-system-design/` | 组合多个模块完成业务目标的系统方案 |
 
-`scripts/sources.json` 的来源根目录为 `../文章/全栈面试题`，五个子目录均同步为 `module: programmer`。文章地址使用 `/{分类 slug}/q编号/`。原先暂用的 `programming` 分类尚无正文、未发布，已由这五类替代；模块入口 `/programmer/` 与顶部导航顺序保持不变。
+`scripts/sources.json` 的来源根目录为 `../文章/全栈面试题`，七个子目录均同步为 `module: programmer`。新文章地址使用 `/{分类 slug}/q编号-英文slug/`；已发布的旧地址由登记表保护，不随分类新增而迁移。模块入口 `/programmer/` 与顶部导航顺序保持不变。
+
+2026-10-14 原后端栏目更名为 Java 面试题。`src/data/site.ts` 管网站名称；`scripts/sources.json` 的 `categoryLabels.backend` 管 GitHub 导出显示名，目录映射仍使用真实的“后端面试题”。保留 backend 分类、专题 ID、已发布 URL 和历史非 Java 文章，不创建 /java/ 重复入口。下次经授权导出时，GitHub 目录名称按新标签生成；本次不全量重导出或发布。
+
+2026-10-14 用户确认 Go 与前端、后端、Python 平级。Go 三级专题为语言基础、并发编程、运行时、工程与框架；通用后端问题仍归后端。分类暂时没有正文时，页面保留空状态并标记 noindex，不进入 sitemap；空专题不展示。本次只新增本地配置，不代表已发布。
 
 2026-10-01 候选清单的第 11～20 题已划入此模块，仍为候选，不计入公开文章数量。现有文章不在此次调整中迁移，因此旧链接保持不变。未来若移动已发布文章，须同时设计永久重定向并更新题库记录。
 

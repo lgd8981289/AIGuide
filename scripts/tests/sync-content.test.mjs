@@ -23,7 +23,7 @@ function fixture(t) {
   fs.writeFileSync(path.join(root, "src/data/topics.json"), "[]");
   fs.writeFileSync(path.join(root, "scripts/article-topics.json"), "[]");
   const fixtureSlugs = { Q001: 'agent-vs-workflow', T009: 'tutorial-example', Q076: 'cache-recovery',
-    ...Object.fromEntries(Array.from({ length: 5 }, (_, i) => [`Q${900 + i}`, `test-topic-${900 + i}`])) };
+    ...Object.fromEntries(Array.from({ length: Object.keys(fullstackSource.categories).length }, (_, i) => [`Q${900 + i}`, `test-topic-${900 + i}`])) };
   fs.writeFileSync(path.join(root, "scripts/article-slugs.json"), JSON.stringify(fixtureSlugs));
   fs.writeFileSync(path.join(root, 'scripts/article-published-urls.json'), JSON.stringify({
     version: 1, site: 'https://note.lgdsunday.club', verifiedAt: '2026-10-07T00:00:00Z', articles: {},
@@ -78,6 +78,41 @@ test('增量同步保留未变正文和水印的时间戳，原图变化时更�
   fs.unlinkSync(sourceImage);
   assert.equal(f.run('--only=Q001').status, 0);
   assert.ok(!fs.existsSync(outputImage));
+});
+
+test('正文图片目录支持尖括号 Markdown、编码路径和 HTML，非图片文件不发布', (t) => {
+  const f = fixture(t);
+  const folder = path.join(path.dirname(f.sourceFile), '正文');
+  fs.mkdirSync(folder);
+  fs.writeFileSync(path.join(folder, 'diagram.png'), 'original image');
+  fs.writeFileSync(path.join(folder, 'notes.md'), 'private supporting notes');
+  const embeds = '\n![图](<正文/diagram.png>)\n![图](./%E6%AD%A3%E6%96%87/diagram.png)\n<img src="正文/diagram.png" alt="图">\n';
+  fs.appendFileSync(f.sourceFile, embeds);
+  assert.equal(f.run('--only=Q001').status, 0);
+  const output = fs.readFileSync(f.output, 'utf8');
+  assert.ok(output.includes('![图](</img/Q001/diagram.png>)'));
+  assert.ok(output.includes('![图](/img/Q001/diagram.png)'));
+  assert.ok(output.includes('src="/img/Q001/diagram.png"'));
+  assert.equal(fs.readFileSync(path.join(f.root, 'img-src/Q001/diagram.png'), 'utf8'), 'original image');
+  assert.ok(!fs.existsSync(path.join(f.root, 'img-src/Q001/notes.md')));
+  assert.equal(fs.readFileSync(f.sourceFile, 'utf8'), f.source + embeds);
+});
+
+test('两种图片目录中有同名目标时停止，保留上次正文与配图', (t) => {
+  const f = fixture(t);
+  assert.equal(f.run().status, 0);
+  const before = fs.readFileSync(f.output, 'utf8');
+  for (const folder of ['正文.assets', '正文']) {
+    const directory = path.join(path.dirname(f.sourceFile), folder);
+    fs.mkdirSync(directory);
+    fs.writeFileSync(path.join(directory, 'diagram.png'), folder);
+  }
+  fs.appendFileSync(f.sourceFile, '\n新正文。\n');
+  const result = f.run('--only=Q001');
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /图片目标重复/);
+  assert.equal(fs.readFileSync(f.output, 'utf8'), before);
+  assert.ok(!fs.existsSync(path.join(f.root, 'img-src/Q001/diagram.png')));
 });
 
 test('增量同步清理改名和已删除文章；来源缺失时保留上次结果', (t) => {
@@ -243,7 +278,7 @@ test("全栈面试题独立同步，沿用速答摘要与全局 Q 编号，不�
   assert.equal(fs.readFileSync(output, "utf8"), generated);
 });
 
-test("五个全栈子分类均可从嵌套目录同步，不混入 AI 或教程目录", (t) => {
+test("七个全栈子分类均可从嵌套目录同步，不混入 AI 或教程目录", (t) => {
   const f = fixture(t);
   const configPath = path.join(f.root, "scripts/sources.json");
   const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
@@ -256,7 +291,7 @@ test("五个全栈子分类均可从嵌套目录同步，不混入 AI 或教程�
     fs.writeFileSync(input, `# ${name}同步测试\n\n## 面试速答（60 秒版）\n\n这是一段用于检查分类归属的完整回答。\n\n## 知识点详解\n\n测试正文。\n`);
     return { name, slug, num };
   });
-  assert.equal(cases.length, 5);
+  assert.equal(cases.length, 7);
   const result = f.run();
   assert.equal(result.status, 0, result.stderr);
   for (const { slug, num } of cases) {

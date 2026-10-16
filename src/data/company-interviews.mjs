@@ -1,6 +1,9 @@
 // 只记录公开面经明确出现的考点；related 表示由考点延伸到本站解析。
 // 日期描述保留“发表 / 编辑 / 面试”区别，不用页面更新时间冒充面试时间。
 import { ADDITIONAL_INTERVIEW_SOURCES, ADDITIONAL_INTERVIEW_TOPICS, OCTOBER_11_INTERVIEW_SOURCES } from './company-interview-expansion.mjs';
+import { NEW_INTERVIEW_SOURCES, REVIEWED_INTERVIEW_TOPICS, REVIEWED_AT } from './company-interviews-2026-10-12.mjs';
+import { PYTHON_INTERVIEW_SOURCES, PYTHON_REVIEWED_TOPICS, PYTHON_REVIEWED_AT } from './company-interviews-2026-10-14.mjs';
+import { OCTOBER_15_INTERVIEW_SOURCES, OCTOBER_15_REVIEWED_TOPICS, OCTOBER_15_REVIEWED_AT } from './company-interviews-2026-10-15.mjs';
 
 export const INTERVIEW_REVIEWED_AT = '2026-10-09';
 export const INTERVIEW_NOTE = '真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。';
@@ -12,6 +15,9 @@ export const INTERVIEW_ROLES = [
   { id: 'agent', name: 'Agent开发' },
   { id: 'ai-application', name: 'AI应用开发' },
   { id: 'algorithm', name: '算法' },
+  { id: 'operations', name: '运维' },
+  { id: 'testing', name: '测试' },
+  { id: 'test-development', name: '测试开发' },
 ];
 
 export const COMPANIES = [
@@ -33,6 +39,35 @@ export const COMPANIES = [
   { id: 'duandian', name: '端点', label: '端点前端面试题', href: '/companies/duandian/', focus: 'React 引用与 useImperativeHandle' },
   { id: 'transwarp', name: '星环科技', label: '星环科技后端面试题', href: '/companies/transwarp/', focus: 'Spring Boot 启动流程' },
   { id: 'youzan', name: '有赞', label: '有赞开发面试题', href: '/companies/youzan/', focus: 'Python property 与属性访问' },
+  { id: 'geely', name: '吉利', label: '吉利后端面试题', href: '/companies/geely/', focus: 'MyBatis 动态 SQL' },
+  { id: 'sangfor', name: '深信服', label: '深信服开发面试题', href: '/companies/sangfor/', focus: 'Python 内存管理与垃圾回收' },
+  { id: 'huawei', name: '华为', label: '华为开发面试题', href: '/companies/huawei/', focus: 'Python 框架、Java 比较器与 SOLID' },
+  { id: 'jiawei', name: '嘉为', label: '嘉为后端面试题', href: '/companies/jiawei/', focus: 'Django、Flask 与 FastAPI 选型' },
+  { id: 'suunto', name: '颂拓运动', label: '颂拓运动前端面试题', href: '/companies/suunto/', focus: 'Node.js Buffer 与 Array' },
+  { id: 'lilith', name: '莉莉丝', label: '莉莉丝运维面试题', href: '/companies/lilith/', focus: 'Deployment 与 StatefulSet' },
+  { id: 'pingtouge', name: '平头哥', label: '平头哥开发面试题', href: '/companies/pingtouge/', focus: 'CPU 缓存伪共享' },
+  { id: 'cambricon', name: '寒武纪', label: '寒武纪开发面试题', href: '/companies/cambricon/', focus: '并行编程与 CPU 缓存伪共享' },
+  { id: 'megvii', name: '旷视', label: '旷视算法面试题', href: '/companies/megvii/', focus: 'Python 字符串拼接' },
+  { id: 'sf', name: '顺丰', label: '顺丰开发面试题', href: '/companies/sf/', focus: 'Python 容器、异常处理与执行方式' },
+  { id: 'hikvision', name: '海康威视', label: '海康威视测试面试题', href: '/companies/hikvision/', focus: 'Python 切片、真值与异常处理' },
+  { id: 'weipai', name: '微派', label: '微派测试面试题', href: '/companies/weipai/', focus: 'pytest、unittest 与 fixture' },
+  { id: 'pony', name: '小马智行', label: '小马智行测试面试题', href: '/companies/pony/', focus: 'pytest fixture' },
+  { id: 'dahua', name: '大华', label: '大华开发面试题', href: '/companies/dahua/', focus: 'Python 容器、作用域与类属性' },
+  { id: 'arcsoft', name: '虹软', label: '虹软测试开发面试题', href: '/companies/arcsoft/', focus: 'Python 字节码缓存' },
+  { id: 'xiaoduo', name: '晓多科技', label: '晓多科技测试面试题', href: '/companies/xiaoduo/', focus: 'Python 列表与 pytest 参数化' },
+  { id: 'ant', name: '蚂蚁集团', label: '蚂蚁测试开发面试题', href: '/companies/ant/', focus: 'Python 正则匹配范围' },
+  { id: 'wangsu', name: '网宿科技', label: '网宿后端面试题', href: '/companies/wangsu/', focus: 'Go GMP、context 与垃圾回收' },
+  { id: 'changtianyou', name: '畅天游', label: '畅天游开发面试题', href: '/companies/changtianyou/', focus: 'Go channel、map、接口与 context' },
+  { id: '4399', name: '4399', label: '4399后端面试题', href: '/companies/4399/', focus: 'Go sync.Once 与请求超时' },
+  { id: 'codingcat', name: '编程猫', label: '编程猫前端面试题', href: '/companies/codingcat/', focus: 'TypeScript 声明文件' },
+  { id: 'xiaohongshu', name: '小红书', label: '小红书前端面试题', href: '/companies/xiaohongshu/', focus: 'Vue 导航守卫' },
+  { id: 'cmbnt', name: '招银网络科技', label: '招银网络科技开发面试题', href: '/companies/cmbnt/', focus: 'Java BigDecimal' },
+  { id: 'pingan', name: '平安银行', label: '平安银行开发面试题', href: '/companies/pingan/', focus: 'Java SPI' },
+  { id: 'nomura', name: '野村证券', label: '野村证券开发面试题', href: '/companies/nomura/', focus: 'HashMap 与 Spring WebFlux' },
+  { id: 'shannon', name: '香侬科技', label: '香侬科技开发面试题', href: '/companies/shannon/', focus: 'Dockerfile 启动指令与服务网格' },
+  { id: 'thunder', name: '雷霆游戏', label: '雷霆游戏运维面试题', href: '/companies/thunder/', focus: 'Nginx location 匹配优先级' },
+  { id: 'weibu', name: '微步在线', label: '微步在线前端面试题', href: '/companies/weibu/', focus: '手写 Promise 与链式调用' },
+  { id: 'vastai', name: '瀚博半导体', label: '瀚博半导体开发面试题', href: '/companies/vastai/', focus: '每日温度与合并有序链表' },
 ];
 
 const topic = (qnum, topic, relation = 'mentioned') => ({ qnum, topic, relation });
@@ -176,11 +211,11 @@ const questions = {
   Q343: '怎样实现线程安全的单例？',
 };
 
-export const INTERVIEW_SOURCES = [...sources, ...ADDITIONAL_INTERVIEW_SOURCES, ...OCTOBER_11_INTERVIEW_SOURCES].map(source => ({
+export const INTERVIEW_SOURCES = [...sources, ...ADDITIONAL_INTERVIEW_SOURCES, ...OCTOBER_11_INTERVIEW_SOURCES, ...NEW_INTERVIEW_SOURCES, ...PYTHON_INTERVIEW_SOURCES, ...OCTOBER_15_INTERVIEW_SOURCES].map(source => ({
   ...source,
   roleKey: source.roleKey ?? (source.role === '前端' ? 'frontend' : source.company === 'meituan' ? 'development' : 'backend'),
-  reviewedAt: source.reviewedAt ?? (ADDITIONAL_INTERVIEW_TOPICS[source.id] ? INTERVIEW_REVIEWED_AT : '2026-10-08'),
-  topics: [...source.topics, ...(additions[source.id] ?? []), ...(ADDITIONAL_INTERVIEW_TOPICS[source.id] ?? [])].map(item => ({
+  reviewedAt: OCTOBER_15_REVIEWED_TOPICS[source.id] ? OCTOBER_15_REVIEWED_AT : PYTHON_REVIEWED_TOPICS[source.id] ? PYTHON_REVIEWED_AT : REVIEWED_INTERVIEW_TOPICS[source.id] ? REVIEWED_AT : source.reviewedAt ?? (ADDITIONAL_INTERVIEW_TOPICS[source.id] ? INTERVIEW_REVIEWED_AT : '2026-10-08'),
+  topics: [...source.topics, ...(additions[source.id] ?? []), ...(ADDITIONAL_INTERVIEW_TOPICS[source.id] ?? []), ...(REVIEWED_INTERVIEW_TOPICS[source.id] ?? []), ...(PYTHON_REVIEWED_TOPICS[source.id] ?? []), ...(OCTOBER_15_REVIEWED_TOPICS[source.id] ?? [])].map(item => ({
     ...item,
     ...(item.relation === 'mentioned' ? { question: item.question ?? questions[item.qnum] } : {}),
   })),

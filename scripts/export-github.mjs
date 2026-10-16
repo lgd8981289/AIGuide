@@ -14,7 +14,7 @@ const readJSON = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'ut
 const published = readJSON('scripts/article-published-urls.json').articles;
 const manifest = readJSON('public/img/.manifest.json');
 const categories = readJSON('scripts/sources.json').sources.flatMap((source) =>
-  Object.entries(source.categories).map(([name, slug]) => ({ name: name.replace(/^\d+-/, ''), slug })));
+  Object.entries(source.categories).map(([name, slug]) => ({ name: source.categoryLabels?.[slug] ?? name.replace(/^\d+-/, ''), slug })));
 const articles = fs.readdirSync(source, { recursive: true }).filter((file) => file.endsWith('.md')).map((relative) => ({
   ...parseArticle(fs.readFileSync(path.join(source, relative), 'utf8')), relative,
 }));

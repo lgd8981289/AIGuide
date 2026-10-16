@@ -11,7 +11,7 @@
 - [Redis 和数据库如何保持一致？为什么更新数据库后删缓存，仍然可能读到旧数据？](../engineering/q074-cache-database-consistency.md)
   Redis 和数据库使用 Cache-Aside 时，通常先读缓存，未命中再查数据库并回填；修改数据时，先提交数据库更新，再删除对应缓存。但是，这个顺序不能保证每个并发请求都读到最新值。
 
-## 后端面试题
+## Java 面试题
 
 - [Java 线程池的核心参数怎么设置？队列越大越安全吗？](../backend/q157-java-thread-pool.md)
   Java 的 ThreadPoolExecutor 接到任务后，通常先补足核心线程，再尝试入队；队列放不下时，才继续创建线程，直到最大线程数。再接不下，就执行拒绝策略。因此，队列越大并不一定越安全。
@@ -51,6 +51,16 @@
   解释 Nacos 服务注册、订阅与客户端选择过程，分析实例下线后的缓存、传播、旧连接和在途请求，提供优雅退出与分层排查方法。
 - [Java 的 BIO、NIO、AIO 有什么区别？阻塞、非阻塞和异步怎么区分？](../backend/q494-java-bio-nio-aio.md)
   准确区分 Java BIO、NIO、AIO 的阻塞、就绪和完成语义，说明 Selector、FileChannel、异步通道与虚拟线程边界，避免把 NIO 全部说成非阻塞。
+- [MyBatis 动态 SQL 是怎么实现的？if、where、choose 和 foreach 分别有什么用？](../backend/q546-mybatis-dynamic-sql.md)
+  MyBatis 动态 SQL 怎样生成查询？解释 if、choose、where、foreach 的作用，给出 XML 查询例子，说明空集合、参数绑定和可选条件的合同，区分 Mapper 代理与 SQL 生成。
+- [JVM 安全点 Safepoint 是什么？Stop-The-World 一定是垃圾回收造成的吗？](../backend/q552-jvm-safepoint-stop-the-world.md)
+  解释HotSpot JVM Safepoint与Stop-The-World的关系，区分线程到达安全点的等待和VM操作耗时，说明为何停顿不一定来自垃圾回收。
+- [RPC 是什么？一次远程方法调用要经过哪些步骤，和本地调用有什么区别？](../backend/q553-rpc-call-process.md)
+  从一次库存服务调用讲解RPC代理、序列化、网络传输与服务端执行，分析超时结果不确定、重试和业务幂等的工程边界。
+- [synchronized 底层怎么实现？对象头、Monitor 和锁膨胀是什么关系？](../backend/q653-java-synchronized-monitor-inflation.md)
+  synchronized 底层怎么实现？从字节码和 HotSpot 实现解释对象监视器与竞争过程。
+- [Spring Security 的过滤器链怎么工作？认证和授权分别在哪一步完成？](../backend/q660-spring-security-filter-chain.md)
+  Spring Security 的过滤器链怎么工作？还原 Servlet 请求如何匹配链、建立身份并作访问判断。
 
 ## 数据库与缓存面试题
 
@@ -95,6 +105,10 @@
   二叉树前序、中序、后序遍历有什么区别？递归和迭代怎样实现？前中后说的是根节点被处理的时机，遍历顺序与显式栈要一一对应。讲清两种写法的对应关系与常见错误。
 - [最长无重复子串怎么用滑动窗口实现？为什么左边界只能向前移动？](../cs-basics/q332-longest-substring-without-repeating.md)
   最长无重复子串怎么用滑动窗口实现？为什么左边界只能向前移动？重复字符只影响当前窗口，已经离开窗口的位置不能把左边界拉回去。讲清窗口收缩的判断依据。
+- [二叉树的最近公共祖先怎么找？普通二叉树和二叉搜索树的解法有什么区别？](../cs-basics/q563-binary-tree-lowest-common-ancestor.md)
+  通过递归返回值讲清二叉树最近公共祖先，提供TS与Python实现，比较节点身份、目标缺失检查及二叉搜索树有序条件下的查找方法。
+- [搜索旋转排序数组怎么做？为什么每次还能排除一半区间？](../cs-basics/q686-search-rotated-sorted-array.md)
+  搜索旋转排序数组怎么做？先判断有序半区，再根据目标范围缩小区间。
 
 ## 系统设计面试题
 

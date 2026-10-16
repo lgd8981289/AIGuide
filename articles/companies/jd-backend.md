@@ -9,7 +9,7 @@
 - [Redis 和数据库如何保持一致？为什么更新数据库后删缓存，仍然可能读到旧数据？](../engineering/q074-cache-database-consistency.md)
   Redis 和数据库使用 Cache-Aside 时，通常先读缓存，未命中再查数据库并回填；修改数据时，先提交数据库更新，再删除对应缓存。但是，这个顺序不能保证每个并发请求都读到最新值。
 
-## 后端面试题
+## Java 面试题
 
 - [Java 线程池的核心参数怎么设置？队列越大越安全吗？](../backend/q157-java-thread-pool.md)
   Java 的 ThreadPoolExecutor 接到任务后，通常先补足核心线程，再尝试入队；队列放不下时，才继续创建线程，直到最大线程数。再接不下，就执行拒绝策略。因此，队列越大并不一定越安全。
@@ -43,6 +43,10 @@
   解释 Stream 的惰性流水线与 parallelStream 的拆分、并行和合并，用共享写入与阻塞调用说明并行不一定更快的原因。
 - [MyBatis 的 Mapper 接口为什么不需要实现类？SQL 是怎样被执行的？](../backend/q473-mybatis-mapper-proxy-execution.md)
   沿着 MapperProxy、映射语句、参数处理、Executor、JDBC 和结果映射解释 MyBatis 原理，说明 namespace、方法重载及 MyBatis-Spring 会话管理边界。
+- [HashMap 底层怎么实现？put、扩容和链表转红黑树经历了什么？](../backend/q652-java-hashmap-put-resize-treeify.md)
+  HashMap 底层怎么实现？沿一次写入追踪桶定位、冲突处理、树化条件与扩容迁移。
+- [ZooKeeper 分布式锁怎么实现？临时顺序节点和 Watch 如何配合？](../backend/q675-zookeeper-ephemeral-sequential-lock.md)
+  ZooKeeper 分布式锁怎么实现？说明排队、监听前驱、会话失效及重新检查，补上业务侧 fencing 边界。
 
 ## 数据库与缓存面试题
 
@@ -58,6 +62,8 @@
   Redis 常见的基础类型包括 String、Hash、List、Set 和 ZSet，但 Redis 的类型并不只有这五种。String 适合保存一个完整值，例如缓存 JSON，或者配合自增命令做计数。
 - [MySQL 的 InnoDB 和 MyISAM 有什么区别？为什么默认使用 InnoDB？](../database/q263-innodb-vs-myisam.md)
   InnoDB 和 MyISAM 都是 MySQL 的存储引擎，负责表数据与索引的具体组织和访问。当前 MySQL 的默认引擎是 InnoDB。
+- [Redis 的 quicklist 是什么？为什么 List 不直接使用普通链表或一个 listpack？](../database/q677-redis-quicklist-listpack.md)
+  Redis 的 quicklist 是什么？解释分段紧凑存储、链式连接和规模变化时的时间空间取舍。
 
 ## 计算机基础面试题
 
@@ -69,4 +75,6 @@
   二分适用于有序数组，或者能形成单调真假分界的条件。查一个相等元素和查第一个大于等于目标的位置，是不同任务。我会先定义 lower_bound：返回首个不小于目标的位置，没有则返回 n。
 - [如何判断链表有环并找到入环节点？快慢指针为什么有效？](../cs-basics/q344-linked-list-cycle.md)
   如何判断链表有环并找到入环节点？快慢指针为什么有效？快慢指针先在环内相遇，再用距离关系找到入环节点。讲清相遇点的推导过程，以及排查时真正怎么用。
+- [如何验证二叉搜索树？为什么只比较节点和左右孩子不够？](../cs-basics/q693-validate-binary-search-tree.md)
+  如何验证二叉搜索树？以祖先约束上下界或中序严格有序性验证整棵树。
 

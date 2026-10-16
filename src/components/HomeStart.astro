@@ -1,36 +1,28 @@
 ---
 import { LEARNING_GUIDES, guideHref } from '../data/learning-guides'
-import { getInterviewCollections } from '../lib/company-interviews.mjs'
+import HomeCompanyInterviews from './HomeCompanyInterviews.astro'
 import { url } from '../utils'
 import '../styles/learning-guides.css'
 ---
 
-<section class="home-start" aria-labelledby="home-start-title" data-home-start>
-  <div class="home-start-heading">
-    <h2 id="home-start-title">从这里开始</h2>
-    <span>选一个目标，找到阅读顺序</span>
-  </div>
-  <div class="home-start-grid">
-    {LEARNING_GUIDES.filter((guide) => !guide.note).map((guide, index) => (
-      <a class="start-link" href={url(guideHref(guide))}>
-        <span class="start-number" aria-hidden="true">0{index + 1}</span>
-        <div class="start-copy">
-          <h3>{guide.label}</h3>
-          <p>{guide.cardDescription}</p>
-          <span class="start-action">{guide.action}<span aria-hidden="true">↗</span></span>
-        </div>
-      </a>
-    ))}
-  </div>
-  <nav class="recruitment-links" aria-label="公司与岗位面试真题">
-    <a href={url('/companies/')}>公司面试真题</a>
-    {getInterviewCollections().map((view) => (
-      <a href={url(view.href)}>{view.label}<span aria-hidden="true"> ↗</span></a>
-    ))}
-  </nav>
-</section>
-
-<style>
-  .recruitment-links { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem 1.25rem; margin-top: 1rem; font-size: .875rem; }
-  .recruitment-links > span { color: var(--text-2); }
-</style>
+<div data-home-start>
+  <section class="home-start" aria-labelledby="home-start-title">
+    <div class="home-start-heading">
+      <h2 id="home-start-title">从这里开始</h2>
+      <span>选一个目标，找到阅读顺序</span>
+    </div>
+    <div class="home-start-grid">
+      {LEARNING_GUIDES.filter((guide) => !guide.note).map((guide, index) => (
+        <a class="start-link" href={url(guideHref(guide))}>
+          <span class="start-number" aria-hidden="true">0{index + 1}</span>
+          <div class="start-copy">
+            <h3>{guide.label}</h3>
+            <p>{guide.cardDescription}</p>
+            <span class="start-action">{guide.action}<span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+  <HomeCompanyInterviews />
+</div>

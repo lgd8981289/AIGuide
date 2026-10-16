@@ -1,0 +1,3 @@
+index.html
+companies/index.html
+_astro/company-pages.CZu4Or8a.css

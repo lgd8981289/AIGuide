@@ -1,25 +1,105 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getCompanyPages } from '../../data/company-pages'
-import { INTERVIEW_NOTE } from '../../data/company-interviews.mjs'
+import { INTERVIEW_NOTE, INTERVIEW_ROLES } from '../../data/company-interviews.mjs'
 import { url } from '../../utils'
 import '../../styles/company-interviews.css'
 const pages = await getCompanyPages()
 const companies = pages.filter(page => page.kind === 'company')
 const lists = pages.filter(page => page.kind === 'role')
 const articleCount = new Set(lists.flatMap(page => page.entries.map(item => item.article.entry.data.qnum))).size
+const availableRoles = INTERVIEW_ROLES.filter(role => lists.some(list => list.role?.id === role.id))
 ---
 <BaseLayout title="公司面试真题及答案：前端、后端与Agent开发" description={`公司面试真题及答案：按 ${companies.length} 家公司、${lists.length} 个岗位列表浏览 ${articleCount} 篇技术解析，包含字节、百度、阿里、腾讯等公司的公开面经题目与来源。`} path="/companies/">
-  <div class="company-page">
-    <nav class="crumbs"><a href={url('/')}>首页</a> / 公司面试真题</nav>
+  <div class="company-page company-directory" data-company-directory>
+    <nav class="crumbs" aria-label="面包屑"><a href={url('/')}>首页</a> / 公司面试真题</nav>
     <header class="company-header"><h1>公司面试真题及答案</h1><p>按公司和岗位选题，阅读完整解析与面试追问。已收录 {articleCount} 道题。</p></header>
-    <nav class="company-category-links" aria-label="选择公司">{companies.map(company => <a href={`#company-${company.id}`}>{company.name}</a>)}</nav>
-    {companies.map(company => <section class="company-question-group" aria-labelledby={`company-${company.id}`}>
-      <h2 id={`company-${company.id}`}><a href={url(company.href)}>{company.name}</a></h2>
-      <div class="company-grid">{lists.filter(list => list.company.id === company.id).map(list => <a class="company-card" href={url(list.href)}>
-        <h3>{list.label}</h3><p>{list.groups.map(group => group.category.name).join('、')}</p><span>{list.articleCount} 道题 · 阅读题目与解析 →</span>
+    <form class="company-directory-filters" aria-label="筛选公司真题" data-company-filters hidden>
+      <div>
+        <label for="company-search">搜索公司</label>
+        <input id="company-search" name="company" type="search" placeholder="输入公司名，如字节、腾讯" autocomplete="off" />
+      </div>
+      <div>
+        <label for="company-role">面试岗位</label>
+        <select id="company-role" name="role">
+          <option value="">全部岗位</option>
+          {availableRoles.map(role => <option value={role.id}>{role.name}</option>)}
+        </select>
+      </div>
+    </form>
+    <div class="company-directory-status">
+      <p role="status" aria-live="polite" aria-atomic="true" data-company-result-count>{companies.length} 家公司 · {lists.length} 个岗位题单</p>
+      <button type="button" data-company-clear hidden>清除筛选</button>
+    </div>
+    <div class="company-directory-empty" data-company-empty hidden>
+      <h2>没有找到匹配的公司或岗位</h2>
+      <p>换个公司名，或选择“全部岗位”再试试。</p>
+    </div>
+    {companies.map(company => <section class="company-question-group" aria-labelledby={`company-${company.id}`} data-company-group data-company-search={`${company.name} ${company.id}`}>
+      <div class="company-directory-heading">
+        <h2 id={`company-${company.id}`}><a href={url(company.href)}>{company.name}</a></h2>
+        <a class="company-directory-all" href={url(company.href)}>公司全部真题 <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="company-grid">{lists.filter(list => list.company.id === company.id).map(list => <a class="company-card" href={url(list.href)} aria-label={`${list.label}，${list.articleCount} 道题`} data-company-role={list.role?.id}>
+        <h3>{list.role?.name}</h3><span>{list.articleCount} 道题 <span aria-hidden="true">→</span></span>
       </a>)}</div>
     </section>)}
     <p class="company-note">{INTERVIEW_NOTE}</p>
   </div>
 </BaseLayout>
+
+<script>
+  const directory = document.querySelector<HTMLElement>('[data-company-directory]')
+  if (directory) {
+    const form = directory.querySelector<HTMLFormElement>('[data-company-filters]')!
+    const search = directory.querySelector<HTMLInputElement>('#company-search')!
+    const role = directory.querySelector<HTMLSelectElement>('#company-role')!
+    const status = directory.querySelector<HTMLElement>('[data-company-result-count]')!
+    const clear = directory.querySelector<HTMLButtonElement>('[data-company-clear]')!
+    const empty = directory.querySelector<HTMLElement>('[data-company-empty]')!
+    const groups = [...directory.querySelectorAll<HTMLElement>('[data-company-group]')].map(element => ({
+      element,
+      searchText: normalize(element.dataset.companySearch ?? ''),
+      links: [...element.querySelectorAll<HTMLAnchorElement>('[data-company-role]')],
+    }))
+
+    function normalize(value: string) {
+      return value.normalize('NFKC').toLowerCase().replace(/\s+/g, '')
+    }
+
+    function filterCompanies() {
+      const query = normalize(search.value)
+      let companyCount = 0
+      let listCount = 0
+      for (const group of groups) {
+        const matchesCompany = group.searchText.includes(query)
+        let visibleRoles = 0
+        for (const link of group.links) {
+          const matches = matchesCompany && (!role.value || link.dataset.companyRole === role.value)
+          link.hidden = !matches
+          if (matches) visibleRoles++
+        }
+        group.element.hidden = visibleRoles === 0
+        if (visibleRoles) companyCount++
+        listCount += visibleRoles
+      }
+      status.textContent = `${companyCount} 家公司 · ${listCount} 个岗位题单`
+      empty.hidden = companyCount > 0
+      clear.hidden = !query && !role.value
+    }
+
+    form.addEventListener('submit', event => event.preventDefault())
+    search.addEventListener('input', filterCompanies)
+    role.addEventListener('change', filterCompanies)
+    clear.addEventListener('click', () => {
+      search.value = ''
+      role.value = ''
+      filterCompanies()
+      search.focus()
+    })
+    // 全部入口先由服务端输出；脚本可用时才显示筛选控件。
+    form.hidden = false
+    filterCompanies()
+    window.addEventListener('pageshow', filterCompanies)
+  }
+</script>

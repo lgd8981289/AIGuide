@@ -26,3 +26,6 @@
 - [即时通讯系统怎么设计？消息顺序、离线消息和多端同步怎么处理？](./q492-instant-messaging-system-design.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q492-instant-messaging-system-design/)
 - [Feed 流系统怎么设计？推模式、拉模式和推拉结合怎么选？](./q493-feed-system-fanout.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q493-feed-system-fanout/)
 - [观察者模式和发布订阅模式有什么区别？事件通知应该怎么设计？](./q528-observer-vs-publish-subscribe.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q528-observer-vs-publish-subscribe/)
+- [SOLID 五大设计原则是什么？怎样判断代码需要拆分还是抽象？](./q564-solid-design-principles.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q564-solid-design-principles/)
+- [OT 和 CRDT 有什么区别？多人协同编辑时怎样合并并发修改？](./q694-ot-vs-crdt-collaborative-editing.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q694-ot-vs-crdt-collaborative-editing/)
+- [Service Mesh 是什么？Sidecar 和 Ambient 模式如何管理服务间通信？](./q695-service-mesh-sidecar-ambient.md) · [在线阅读](https://note.lgdsunday.club/fullstack-system-design/q695-service-mesh-sidecar-ambient/)

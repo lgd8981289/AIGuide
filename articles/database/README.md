@@ -66,3 +66,8 @@
 - [Redis 和 Memcached 有什么区别？纯缓存场景应该怎么选？](./q486-redis-vs-memcached.md) · [在线阅读](https://note.lgdsunday.club/database/q486-redis-vs-memcached/)
 - [MySQL 一条 SELECT 语句是怎么执行的？解析器、优化器、执行器分别做什么？](./q524-mysql-select-execution-process.md) · [在线阅读](https://note.lgdsunday.club/database/q524-mysql-select-execution-process/)
 - [MySQL 的 Nested Loop Join 和 Hash Join 有什么区别？关联查询为什么会慢？](./q525-mysql-nested-loop-vs-hash-join.md) · [在线阅读](https://note.lgdsunday.club/database/q525-mysql-nested-loop-vs-hash-join/)
+- [MySQL 慢查询日志怎么看？如何找到真正拖慢系统的 SQL？](./q556-mysql-slow-query-log.md) · [在线阅读](https://note.lgdsunday.club/database/q556-mysql-slow-query-log/)
+- [MySQL 删除大量数据后，为什么磁盘空间没有变小？OPTIMIZE TABLE 能解决吗？](./q557-mysql-delete-disk-space-optimize-table.md) · [在线阅读](https://note.lgdsunday.club/database/q557-mysql-delete-disk-space-optimize-table/)
+- [Redis SLOWLOG 怎么用？为什么请求很慢，慢查询日志却没有记录？](./q558-redis-slowlog-latency-troubleshooting.md) · [在线阅读](https://note.lgdsunday.club/database/q558-redis-slowlog-latency-troubleshooting/)
+- [MySQL 的 COMPACT 和 DYNAMIC 行格式有什么区别？长字段为什么会放到溢出页？](./q676-mysql-compact-dynamic-row-format.md) · [在线阅读](https://note.lgdsunday.club/database/q676-mysql-compact-dynamic-row-format/)
+- [Redis 的 quicklist 是什么？为什么 List 不直接使用普通链表或一个 listpack？](./q677-redis-quicklist-listpack.md) · [在线阅读](https://note.lgdsunday.club/database/q677-redis-quicklist-listpack/)

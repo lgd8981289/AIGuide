@@ -9,3 +9,8 @@
 - [MySQL 的 Nested Loop Join 和 Hash Join 有什么区别？关联查询为什么会慢？](../database/q525-mysql-nested-loop-vs-hash-join.md)
   MySQL Nested Loop Join 和 Hash Join 有什么区别？用逐行索引查找与哈希匹配图解连接过程，说明重复键、过滤和内存溢出的影响，以及如何检查实际执行计划。
 
+## 计算机基础面试题
+
+- [滑动窗口最大值怎么求？单调队列为什么能做到 O(n)？](../cs-basics/q692-sliding-window-maximum-deque.md)
+  滑动窗口最大值怎么求？维护仍可能成为最大值的下标，处理过期和被支配候选。
+

@@ -1,0 +1,8 @@
+set timeout 25
+log_user 0
+spawn -noecho {*}$argv
+expect {
+  -re "(?i)password:" { send -- "$env(NAV_SSH_PASSWORD)\r"; exp_continue }
+  eof { catch wait result; exit [lindex $result 3] }
+  timeout { exit 124 }
+}

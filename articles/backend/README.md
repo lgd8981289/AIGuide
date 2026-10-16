@@ -1,4 +1,4 @@
-# 后端面试题 · Sunday面试指南
+# Java 面试题 · Sunday面试指南
 
 [返回总目录](../../README.md) · [在线阅读](https://note.lgdsunday.club/backend/)
 
@@ -115,3 +115,26 @@
 - [CopyOnWriteArrayList 是什么？为什么适合读多写少的场景？](./q521-copyonwritearraylist-read-write-snapshots.md) · [在线阅读](https://note.lgdsunday.club/backend/q521-copyonwritearraylist-read-write-snapshots/)
 - [ReentrantReadWriteLock 和 StampedLock 有什么区别？读多写少时怎么选？](./q522-reentrantreadwritelock-vs-stampedlock.md) · [在线阅读](https://note.lgdsunday.club/backend/q522-reentrantreadwritelock-vs-stampedlock/)
 - [Python 描述符是什么？property 如何控制属性的读取和赋值？](./q523-python-descriptors-property.md) · [在线阅读](https://note.lgdsunday.club/backend/q523-python-descriptors-property/)
+- [Spring 的 @Valid 和 @Validated 有什么区别？嵌套校验和分组校验怎么做？](./q545-spring-valid-vs-validated.md) · [在线阅读](https://note.lgdsunday.club/backend/q545-spring-valid-vs-validated/)
+- [MyBatis 动态 SQL 是怎么实现的？if、where、choose 和 foreach 分别有什么用？](./q546-mybatis-dynamic-sql.md) · [在线阅读](https://note.lgdsunday.club/backend/q546-mybatis-dynamic-sql/)
+- [Python 的垃圾回收机制是什么？引用计数为什么处理不了循环引用？](./q547-python-reference-counting-garbage-collection.md) · [在线阅读](https://note.lgdsunday.club/backend/q547-python-reference-counting-garbage-collection/)
+- [Python 的 *args 和 **kwargs 有什么区别？函数传参和参数解包怎么理解？](./q548-python-args-kwargs-unpacking.md) · [在线阅读](https://note.lgdsunday.club/backend/q548-python-args-kwargs-unpacking/)
+- [Node.js 的 Buffer 是什么？它和字符串有什么区别，为什么会出现中文乱码？](./q549-node-buffer-string-encoding.md) · [在线阅读](https://note.lgdsunday.club/backend/q549-node-buffer-string-encoding/)
+- [FastAPI、Flask 和 Django 有什么区别？Python 后端开发应该怎么选？](./q550-fastapi-vs-flask-vs-django.md) · [在线阅读](https://note.lgdsunday.club/backend/q550-fastapi-vs-flask-vs-django/)
+- [Java 的 Comparable 和 Comparator 有什么区别？多字段排序怎么实现？](./q551-java-comparable-vs-comparator.md) · [在线阅读](https://note.lgdsunday.club/backend/q551-java-comparable-vs-comparator/)
+- [JVM 安全点 Safepoint 是什么？Stop-The-World 一定是垃圾回收造成的吗？](./q552-jvm-safepoint-stop-the-world.md) · [在线阅读](https://note.lgdsunday.club/backend/q552-jvm-safepoint-stop-the-world/)
+- [RPC 是什么？一次远程方法调用要经过哪些步骤，和本地调用有什么区别？](./q553-rpc-call-process.md) · [在线阅读](https://note.lgdsunday.club/backend/q553-rpc-call-process/)
+- [Docker 的 Volume 和 Bind Mount 有什么区别？容器删除后数据还在吗？](./q554-docker-volumes-vs-bind-mounts.md) · [在线阅读](https://note.lgdsunday.club/backend/q554-docker-volumes-vs-bind-mounts/)
+- [Kubernetes 的 Deployment、StatefulSet 和 DaemonSet 有什么区别？](./q555-kubernetes-deployment-statefulset-daemonset.md) · [在线阅读](https://note.lgdsunday.club/backend/q555-kubernetes-deployment-statefulset-daemonset/)
+- [HashMap 底层怎么实现？put、扩容和链表转红黑树经历了什么？](./q652-java-hashmap-put-resize-treeify.md) · [在线阅读](https://note.lgdsunday.club/backend/q652-java-hashmap-put-resize-treeify/)
+- [synchronized 底层怎么实现？对象头、Monitor 和锁膨胀是什么关系？](./q653-java-synchronized-monitor-inflation.md) · [在线阅读](https://note.lgdsunday.club/backend/q653-java-synchronized-monitor-inflation/)
+- [Java 自动装箱和拆箱是什么？Integer 缓存与空指针异常怎么产生？](./q654-java-boxing-unboxing-integer-cache.md) · [在线阅读](https://note.lgdsunday.club/backend/q654-java-boxing-unboxing-integer-cache/)
+- [BigDecimal 为什么适合金额计算？equals、compareTo 和舍入规则有什么区别？](./q655-java-bigdecimal-scale-rounding.md) · [在线阅读](https://note.lgdsunday.club/backend/q655-java-bigdecimal-scale-rounding/)
+- [Java 重载和重写有什么区别？编译期选方法和运行时多态怎样配合？](./q656-java-overloading-overriding-dispatch.md) · [在线阅读](https://note.lgdsunday.club/backend/q656-java-overloading-overriding-dispatch/)
+- [Java SPI 是什么？ServiceLoader 如何发现和加载实现类？](./q657-java-spi-serviceloader.md) · [在线阅读](https://note.lgdsunday.club/backend/q657-java-spi-serviceloader/)
+- [Java 注解是怎么生效的？SOURCE、CLASS、RUNTIME 三种保留策略有什么区别？](./q658-java-annotations-retention.md) · [在线阅读](https://note.lgdsunday.club/backend/q658-java-annotations-retention/)
+- [Spring MVC 和 WebFlux 有什么区别？用了响应式就一定更快吗？](./q659-spring-mvc-vs-webflux.md) · [在线阅读](https://note.lgdsunday.club/backend/q659-spring-mvc-vs-webflux/)
+- [Spring Security 的过滤器链怎么工作？认证和授权分别在哪一步完成？](./q660-spring-security-filter-chain.md) · [在线阅读](https://note.lgdsunday.club/backend/q660-spring-security-filter-chain/)
+- [Nginx location 匹配顺序是什么？proxy_pass 带不带斜杠有什么区别？](./q667-nginx-location-proxy-pass-uri.md) · [在线阅读](https://note.lgdsunday.club/backend/q667-nginx-location-proxy-pass-uri/)
+- [Dockerfile 的 RUN、CMD 和 ENTRYPOINT 有什么区别？容器启动参数如何组合？](./q668-dockerfile-run-cmd-entrypoint.md) · [在线阅读](https://note.lgdsunday.club/backend/q668-dockerfile-run-cmd-entrypoint/)
+- [ZooKeeper 分布式锁怎么实现？临时顺序节点和 Watch 如何配合？](./q675-zookeeper-ephemeral-sequential-lock.md) · [在线阅读](https://note.lgdsunday.club/backend/q675-zookeeper-ephemeral-sequential-lock/)

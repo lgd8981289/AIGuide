@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
-import { parseArticle } from './lib/github-articles.mjs';
+import { markdownLinkTargets, parseArticle } from './lib/github-articles.mjs';
 import { getInterviewCollections, questionTags, realQuestionsForArticle, validateInterviewSources } from '../src/lib/company-interviews.mjs';
 
 const root = new URL('../', import.meta.url);
@@ -52,7 +52,7 @@ for (const view of collections) {
 // GitHub 新增的相对目录链接需要在仓库内真实存在。
 for (const relative of fs.readdirSync(new URL('articles/', root), { recursive: true }).filter(file => file.endsWith('.md'))) {
   const markdown = read(`articles/${relative}`);
-  for (const [, target] of markdown.matchAll(/\]\(([^\s)]+)\)/g)) {
+  for (const target of markdownLinkTargets(markdown)) {
     if (/^(https?:|#)/.test(target)) continue;
     const file = path.resolve(fileURLToPath(new URL('articles/', root)), path.dirname(relative), decodeURI(target.split('#')[0]));
     assert.ok(fs.existsSync(file), `GitHub 内链不存在：${relative} → ${target}`);

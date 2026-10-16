@@ -16,7 +16,7 @@
 - [Redis 和数据库如何保持一致？为什么更新数据库后删缓存，仍然可能读到旧数据？](../engineering/q074-cache-database-consistency.md)
   Redis 和数据库使用 Cache-Aside 时，通常先读缓存，未命中再查数据库并回填；修改数据时，先提交数据库更新，再删除对应缓存。但是，这个顺序不能保证每个并发请求都读到最新值。
 
-## 后端面试题
+## Java 面试题
 
 - [Java 线程池的核心参数怎么设置？队列越大越安全吗？](../backend/q157-java-thread-pool.md)
   Java 的 ThreadPoolExecutor 接到任务后，通常先补足核心线程，再尝试入队；队列放不下时，才继续创建线程，直到最大线程数。再接不下，就执行拒绝策略。因此，队列越大并不一定越安全。
@@ -26,6 +26,8 @@
   synchronized 和 ReentrantLock 都可以实现可重入的互斥访问，并提供相应的内存可见性保证。一个线程已经持有这把锁，还能再次进入受同一把锁保护的代码。
 - [Java 单例模式怎么实现？双重检查锁为什么需要 volatile？](../backend/q343-singleton-safe-publication.md)
   Java 单例模式怎么实现？双重检查锁为什么需要 volatile？单例要同时说清实例创建、发布与唯一范围，实例唯一也不代表成员操作线程安全。讲清指令重排带来的风险。
+- [RPC 是什么？一次远程方法调用要经过哪些步骤，和本地调用有什么区别？](../backend/q553-rpc-call-process.md)
+  从一次库存服务调用讲解RPC代理、序列化、网络传输与服务端执行，分析超时结果不确定、重试和业务幂等的工程边界。
 
 ## 数据库与缓存面试题
 
@@ -42,4 +44,17 @@
 
 - [进程间通信有哪些方式？管道、消息队列、共享内存怎么选？](../cs-basics/q198-ipc-process-communication.md)
   IPC 是进程间交换数据或通知的机制。管道适合连接生产者和消费者；消息队列强调消息组织；共享内存让进程访问同一片数据；Socket 适合连接式通信，Unix 域 Socket 用于本机，网络 Socket 可以跨机器。
+- [Socket 的 bind、listen、accept、connect 分别做什么？为什么 accept 会返回新的 Socket？](../cs-basics/q679-socket-bind-listen-accept-connect.md)
+  Socket 的 bind、listen、accept、connect 分别做什么？区分监听端点与已连接端点，跟踪一次服务端 API 调用流程。
+- [大端序和小端序有什么区别？网络字节序为什么需要转换？](../cs-basics/q680-endianness-network-byte-order.md)
+  大端序和小端序有什么区别？从多字节数值在内存和报文中的顺序解释跨机器解析。
+- [编辑距离怎么求？插入、删除和替换的动态规划状态如何定义？](../cs-basics/q684-edit-distance-dynamic-programming.md)
+  编辑距离怎么求？用两个前缀定义状态，逐项解释转移与空串边界。
+- [最长公共子序列怎么求？为什么它和最长公共子串不是同一道题？](../cs-basics/q691-longest-common-subsequence.md)
+  最长公共子序列怎么求？用不要求连续的匹配目标推导二维前缀状态，比较连续子串。
+
+## 系统设计面试题
+
+- [Service Mesh 是什么？Sidecar 和 Ambient 模式如何管理服务间通信？](../fullstack-system-design/q695-service-mesh-sidecar-ambient.md)
+  Service Mesh 是什么？区分业务进程与数据平面，解释流量治理能力、部署方式和引入代价。
 

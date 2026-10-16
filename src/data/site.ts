@@ -81,11 +81,11 @@ export const MODULE_META: Record<ModuleKey, ModuleMeta> = {
 		key: 'programmer',
 		name: '全栈面试题',
 		href: '/programmer/',
-		title: '全栈面试题及答案：前端、后端、数据库与系统设计',
+		title: '全栈面试题及答案：前端、Java、数据库与系统设计',
 		description:
-			'围绕前端、后端、MySQL、Redis、计算机网络、操作系统与并发等全栈开发知识，讲清面试题的原理、适用条件和常见追问。',
+			'围绕前端、Java、Python、Go、MySQL、Redis、计算机网络与系统设计等全栈开发知识，讲清面试题的原理、适用条件和常见追问。',
 		shortIntro:
-			'前端、后端、数据库与缓存、计算机基础、系统设计，按五个分类准备全栈面试。',
+			'前端、Java、Python、Go、数据库与缓存、计算机基础、系统设计，按七个分类准备全栈面试。',
 		countUnit: '道题',
 		prevLabel: '上一题',
 		nextLabel: '下一题'
@@ -224,13 +224,30 @@ export const CATEGORIES: Category[] = [
 			'JavaScript、TypeScript、浏览器、React、Vue、页面性能与前端工程化，关注客户端如何工作。'
 	},
 	{
+		// 2026-10-14 栏目更名；保留 backend 标识和已发布网址，不自动迁移历史文章。
 		slug: 'backend',
-		name: '后端面试题',
-		nav: '后端',
-		seoTitle: '后端面试题及答案：高频考点与解析',
+		name: 'Java 面试题',
+		nav: 'Java',
+		seoTitle: 'Java 面试题及答案：JVM、并发与 Spring',
 		module: 'programmer',
 		intro:
-			'接口、鉴权、服务端框架、消息队列、异步任务与服务治理，关注服务端功能如何实现。'
+			'以 Java 基础、JVM、并发、Spring、MyBatis 及后端工程为主，保留原后端栏目中的 Node.js、Python 与通用后端题，已有文章地址不变。'
+	},
+	{
+		slug: 'python',
+		name: 'Python 面试题',
+		nav: 'Python',
+		seoTitle: 'Python 面试题及答案：语言、并发与工程实践',
+		module: 'programmer',
+		intro: 'Python 语言与容器、对象机制、并发异步、标准库、测试工程化和 Web 框架，沿执行过程讲清常见问题。'
+	},
+	{
+		slug: 'go',
+		name: 'Go 面试题',
+		nav: 'Go',
+		seoTitle: 'Go 面试题及答案：语言、并发与运行时',
+		module: 'programmer',
+		intro: 'Go 语言、goroutine 与 channel、GMP 调度、内存管理、标准库与框架，沿执行过程讲清原理、边界和工程取舍。'
 	},
 	{
 		slug: 'database',

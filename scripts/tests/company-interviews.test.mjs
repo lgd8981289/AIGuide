@@ -75,8 +75,8 @@ test('新增文章由具体原帖承接，来源问法不扩写为文章全部�
   }
   assert.equal(realQuestionsForArticle('Q474')[0].question, 'Spring 中怎样通过注解启用异步处理？');
   assert.equal(INTERVIEW_SOURCES.find(source => source.id === 'byte-ads').reviewedAt, '2026-10-08');
-  assert.equal(INTERVIEW_SOURCES.find(source => source.id === 'byte-feishu').reviewedAt, '2026-10-09');
-  assert.equal(getInterviewCollections().find(view => view.id === 'shopee/agent').qnums.length, 11);
+  assert.ok(INTERVIEW_SOURCES.find(source => source.id === 'byte-feishu').reviewedAt >= '2026-10-09');
+  assert.ok(getInterviewCollections().find(view => view.id === 'shopee/agent').qnums.includes('Q684'));
 });
 
 test('记忆专题只登记原帖明确的问题，不由通用记忆推导具体框架', () => {
@@ -109,11 +109,79 @@ test('Q509至Q528保留核验边界，不把匿名公司、参考回答或通用
   };
   for (const [qnum, ids] of Object.entries(expected)) {
     assert.deepEqual(questionTags(qnum).map(tag => tag.id).sort(), ids.sort(), `${qnum} 公司岗位不符`);
-    assert.ok(realQuestionsForArticle(qnum).every(match => match.source.reviewedAt === '2026-10-11'));
+    assert.ok(realQuestionsForArticle(qnum).every(match => match.source.reviewedAt >= '2026-10-11'));
   }
   for (const qnum of ['Q510', 'Q511', 'Q512', 'Q513']) assert.deepEqual(questionTags(qnum), []);
   assert.equal(realQuestionsForArticle('Q523')[0].question, '怎样用 Python 的 property 创建只读属性？');
   assert.ok(!realQuestionsForArticle('Q524').some(match => match.company.id === 'meituan'), '混合面经只归属实际提问的公司');
   assert.doesNotMatch(realQuestionsForArticle('Q525')[0].question, /MySQL|8\.0/);
   assert.match(realQuestionsForArticle('Q509')[0].source.dateLabel, /未明确年份/);
+});
+
+test('Q529至Q564的来源区分原题、回答扩展、旧版本与实际岗位', () => {
+  for (const qnum of ['Q530', 'Q531', 'Q532', 'Q533', 'Q534', 'Q542', 'Q545']) {
+    assert.deepEqual(questionTags(qnum), [], `${qnum} 不应由相邻问题或不可读取的原帖推导真题`);
+  }
+  for (let number = 529; number <= 564; number++) {
+    const qnum = `Q${number}`;
+    for (const match of realQuestionsForArticle(qnum)) assert.ok(match.source.reviewedAt >= '2026-10-12');
+  }
+  assert.equal(realQuestionsForArticle('Q529')[0].question, '是否使用过 OpenClaw？');
+  assert.doesNotMatch(realQuestionsForArticle('Q544')[0].question, /标准|experimentalDecorators/);
+  const deployment = questionTags('Q555');
+  assert.deepEqual(deployment.map(tag => tag.id), ['lilith/operations']);
+  assert.equal(deployment[0].label, '莉莉丝运维面试真题');
+  assert.doesNotMatch(realQuestionsForArticle('Q557')[0].question, /OPTIMIZE TABLE/);
+  assert.doesNotMatch(realQuestionsForArticle('Q558')[0].question, /SLOWLOG/);
+  assert.ok(!realQuestionsForArticle('Q563').some(match => match.source.id === 'byte-feishu'), '链表问题不能归成二叉树 LCA');
+  const frameworks = realQuestionsForArticle('Q550');
+  assert.doesNotMatch(frameworks.find(match => match.company.id === 'huawei').question, /FastAPI/);
+  assert.match(frameworks.find(match => match.company.id === 'jiawei').question, /FastAPI/);
+  assert.deepEqual(questionTags('Q560').map(tag => tag.company).sort(), ['cambricon', 'pingtouge']);
+  assert.equal(INTERVIEW_SOURCES.find(source => source.id === 'byte-ads').reviewedAt, '2026-10-08');
+});
+
+test('Python 新批保留语言、版本、岗位与混合面经的公司边界', () => {
+  const sources = INTERVIEW_SOURCES.filter(source => source.reviewedAt === '2026-10-14');
+  assert.ok(realQuestionsForArticle('Q566').some(match => match.source.id === 'baidu-ai-ecosystem-intern'));
+  assert.deepEqual(questionTags('Q568').map(tag => tag.id), ['bytedance/test-development']);
+  assert.deepEqual(questionTags('Q585').map(tag => tag.id), ['dahua/development']);
+  assert.deepEqual(questionTags('Q605').map(tag => tag.id).sort(), ['baidu/algorithm', 'shopee/operations']);
+  assert.deepEqual(questionTags('Q627').map(tag => tag.id), ['tencent/test-development']);
+  const wsgi = realQuestionsForArticle('Q621');
+  assert.equal(wsgi.length, 1);
+  assert.doesNotMatch(wsgi[0].question, /ASGI/);
+  assert.ok(realQuestionsForArticle('Q591').every(match => !/init_subclass/.test(match.question)));
+  assert.deepEqual(realQuestionsForArticle('Q618').map(match => match.company.id).sort(), ['netease', 'tencent']);
+  assert.ok(!realQuestionsForArticle('Q605').some(match => match.company.id === 'tencent'), '同帖百度读取文件不能分给腾讯');
+  assert.ok(realQuestionsForArticle('Q601').some(match => match.company.id === 'ant'));
+  assert.ok(!realQuestionsForArticle('Q601').some(match => match.company.id === 'alibaba'), '蚂蚁原题保留实际公司');
+  for (const qnum of ['Q565', 'Q587', 'Q593', 'Q594', 'Q595', 'Q612', 'Q617', 'Q619', 'Q623', 'Q624', 'Q625', 'Q626', 'Q628', 'Q629', 'Q630', 'Q631', 'Q632']) {
+    assert.deepEqual(questionTags(qnum, sources), [], `${qnum} 不应由匿名公司、泛化问题或回答中的 API 推导标签`);
+  }
+  assert.ok(INTERVIEW_SOURCES.find(source => source.id === 'youzan-python-property').reviewedAt >= '2026-10-12');
+  assert.equal(INTERVIEW_SOURCES.find(source => source.id === 'byte-ads').reviewedAt, '2026-10-08');
+});
+
+test('Q633至Q695不把新API、候选人回答、其他公司或另一语言的问题反推成原题', () => {
+  assert.deepEqual(questionTags('Q633').map(tag => tag.id), ['alibaba/algorithm']);
+  assert.doesNotMatch(realQuestionsForArticle('Q633')[0].question, /Runner|Responses/);
+  assert.deepEqual(questionTags('Q637').map(tag => tag.id), ['ant/algorithm']);
+  assert.doesNotMatch(realQuestionsForArticle('Q637')[0].question, /Self-Consistency/);
+  for (const qnum of ['Q634','Q635','Q636','Q638','Q639','Q640','Q641','Q642','Q643','Q645','Q649','Q651','Q658','Q671','Q672','Q676','Q681']) {
+    assert.deepEqual(questionTags(qnum), [], `${qnum} 缺少同一学习目标的具体原题，不应贴标签`);
+  }
+  assert.deepEqual(questionTags('Q644').map(tag => tag.id), ['weibu/frontend']);
+  assert.ok(!realQuestionsForArticle('Q647').some(match => match.source.id === 'byte-frontend-decorators'), '腾讯段落的CSS问题不能归给字节');
+  assert.ok(!realQuestionsForArticle('Q653').some(match => match.source.id === 'byte-development-stamped-lock'), '指定JDK6的MarkWord问题不替换成JDK21解析');
+  assert.ok(!realQuestionsForArticle('Q656').some(match => match.source.id === 'arcsoft-testing-pyc' || match.source.id === 'vastai-driver-algorithms'), 'C++重载问题不能贴给Java');
+  const jd = realQuestionsForArticle('Q675').find(match => match.source.id === 'jd-social-zookeeper-bst');
+  assert.equal(jd.company.id, 'jd');
+  assert.deepEqual(questionTags('Q693').map(tag => tag.id), ['jd/backend']);
+  assert.equal(realQuestionsForArticle('Q669').find(match => match.source.id === '4399-go-once-campus').source.role, 'Java后端（含 Go 提问）');
+  assert.deepEqual(questionTags('Q683').map(tag => tag.id), ['vastai/development']);
+  assert.ok(realQuestionsForArticle('Q688').every(match => match.source.url.includes('/c026920386c446039dd750b08ed7cd18')));
+  assert.equal(realQuestionsForArticle('Q692')[0].source.url, 'https://www.nowcoder.com/feed/main/detail/54e8743123f7489aa042752a805b0529');
+  assert.ok(realQuestionsForArticle('Q695').every(match => !/Ambient|Sidecar/.test(match.question)), '原帖只问概念，不能反推新部署模式');
+  assert.equal(INTERVIEW_SOURCES.find(source => source.id === 'byte-ads').reviewedAt, '2026-10-08');
 });

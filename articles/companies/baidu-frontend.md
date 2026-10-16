@@ -7,7 +7,7 @@
 ## 前端面试题
 
 - [JavaScript 事件循环是什么？宏任务、微任务和 async/await 怎么执行？](../frontend/q104-js-event-loop.md)
-  浏览器中的 JavaScript，通常先执行当前任务里的同步代码。当前调用栈清空后，会在微任务检查点处理排队的微任务，随后浏览器才有机会渲染、选择下一项任务。Promise 的后续回调和 await 后面的继续执行，通常进入微任务队列；
+  逐步推导浏览器 JavaScript 事件循环，通过队列快照解释宏任务、微任务、Promise、async/await 执行顺序及渲染卡顿边界。
 - [HTTP 强缓存和协商缓存有什么区别？Cache-Control、ETag 和 304 怎么配合？](../frontend/q105-http-browser-cache.md)
   强缓存是浏览器在缓存仍然新鲜时，直接复用已有响应，不需要为了这个资源向服务器验证。常用 Cache-Control: max-age 指定新鲜期。协商缓存是在需要验证时，带着资源标识询问服务器。
 - [JavaScript 闭包是什么？为什么变量没有被释放，什么时候会内存泄漏？](../frontend/q110-js-closure-memory.md)
@@ -36,6 +36,14 @@
   dependencies、devDependencies、peerDependencies 怎么选？用应用和 React 组件库说明三类依赖的责任，区分 npm 安装与构建打包，纠正 peer 永不自动安装等旧结论。
 - [Web Components 是什么？Shadow DOM 如何实现样式隔离？](../frontend/q517-web-components-shadow-dom.md)
   Web Components 和 Shadow DOM 分别解决什么问题？结合自定义元素、样式选择器与 slot 说明封装机制，讲清继承、CSS 变量和 closed 模式的边界。
+- [JavaScript 数组扁平化怎么实现？flat 的 depth 参数和空数组项怎么处理？](../frontend/q537-javascript-array-flat-implementation.md)
+  数组扁平化怎样手写？按 depth 追踪递归层数，解释 flat 跳过空槽与保留对象引用的行为，提供 TypeScript、Python 实现，并说明深层和循环输入限制。
+- [CSS 如何实现水平垂直居中？元素宽高不固定时应该怎么写？](../frontend/q539-css-horizontal-vertical-centering.md)
+  CSS 水平垂直居中如何选择写法？区分文字和盒子、Flex/Grid 对齐与定位加 transform，说明不定宽高、父容器尺寸和溢出时的边界。
+- [Vue 组件中的 data 为什么是函数？多个组件实例怎样避免共享数据？](../frontend/q543-vue-data-function-instance-isolation.md)
+  Vue data 为什么使用函数？从两个筛选面板说明实例数据归属，提供 TypeScript、Python 对象工厂例子，解释返回共享对象、浅复制和 Composition API 模块变量的边界。
+- [CSS 的 block、inline、inline-block 有什么区别？为什么行内元素设置宽高不生效？](../frontend/q647-css-block-inline-inline-block.md)
+  比较 CSS block、inline 和 inline-block 的换行、尺寸与盒子行为，说明替换元素、基线和父级 Flex 为什么会改变判断。
 
 ## 计算机基础面试题
 

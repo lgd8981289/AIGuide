@@ -4,6 +4,11 @@
 
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
+## Agent面试题
+
+- [OpenClaw 是什么？Gateway、Agent 和工具之间是怎样协作的？](../agent/q529-openclaw-gateway-agent-architecture.md)
+  OpenClaw 如何接收消息并执行任务？沿一次文件整理请求，讲清 Gateway、会话路由、Agent 运行时、模型和工具的分工，以及权限和恢复边界。
+
 ## LangChain生态面试题
 
 - [Deep Agents 是什么？它和 LangChain、LangGraph 有什么关系？](../langchain/q509-deep-agents-langchain-langgraph.md)
@@ -14,7 +19,7 @@
 - [从输入 URL 到页面显示，浏览器到底经历了什么？](../frontend/q129-browser-navigation-rendering.md)
   浏览器先解析 URL，确定导航目标，再按缓存、已有连接和协议情况获取页面。需要时进行域名解析与连接建立；HTTPS 还涉及安全握手，但不能把每次导航都说成重新走完整 TCP 流程，HTTP/3 也不使用 TCP。
 
-## 后端面试题
+## Java 面试题
 
 - [消息队列如何保证消息不丢失？为什么收到 ACK 还不一定代表业务完成？](../backend/q113-message-queue-reliability.md)
   消息是否可靠，需要分别检查业务到生产者、生产者到 Broker、Broker 存储与复制，以及消费者处理这几段。生产者要处理发送失败和确认不确定，Broker 要按产品机制配置持久化、复制与故障恢复。
@@ -28,6 +33,22 @@
   解释 Spring @Async 的代理调用与自身调用失效，区分线程池排队、Future 和 void 异常处理，讲清事务、ThreadLocal 与重要任务持久化的边界。
 - [BeanFactory 和 FactoryBean 有什么区别？为什么 getBean 可能拿到不同对象？](../backend/q520-beanfactory-vs-factorybean.md)
   BeanFactory 和 FactoryBean 有什么区别？用容器、工厂和产品三个对象解释 getBean 的返回结果，并说明产品单例缓存与初始化、销毁职责的边界。
+- [Python 的 *args 和 **kwargs 有什么区别？函数传参和参数解包怎么理解？](../backend/q548-python-args-kwargs-unpacking.md)
+  args 与 kwargs 怎样收集和展开参数？对照函数定义与调用，说明 tuple/dict、仅关键字参数和重复绑定，提供 Python、TypeScript 转发例子并明确语言差异。
+- [HashMap 底层怎么实现？put、扩容和链表转红黑树经历了什么？](../backend/q652-java-hashmap-put-resize-treeify.md)
+  HashMap 底层怎么实现？沿一次写入追踪桶定位、冲突处理、树化条件与扩容迁移。
+
+## Python面试题
+
+- [Python 的 metaclass 是什么？和 `__init_subclass__` 各适合做什么？](../python/q591-python-metaclass-init-subclass.md)
+  Python 的类本身也是对象。metaclass 参与创建这个类对象，默认通常是 type。它可以影响类命名空间准备、类对象创建和初始化等过程。
+- [Python 的 WSGI 和 ASGI 有什么区别？为什么支持 async 不等于换成了 ASGI？](../python/q621-python-wsgi-vs-asgi.md)
+  WSGI 和 ASGI 都规定 Python Web 服务器怎样和应用交互。它们是接口规范，不是具体框架。
+
+## Go面试题
+
+- [Go channel 有缓冲和无缓冲有什么区别？关闭后读写会发生什么？](../go/q662-go-channel-buffer-close.md)
+  Go channel 有缓冲和无缓冲有什么区别？理解发送接收、阻塞、关闭和零值语义，补上 nil channel 边界。
 
 ## 数据库与缓存面试题
 
@@ -43,6 +64,10 @@
   MySQL Online DDL 是什么？ALGORITHM=INSTANT、INPLACE 和 COPY 有什么区别？在线能力取决于具体操作和版本，不代表完全无锁、无重建。讲清三种算法的代价与适用条件。
 - [MySQL 一条 SELECT 语句是怎么执行的？解析器、优化器、执行器分别做什么？](../database/q524-mysql-select-execution-process.md)
   MySQL 一条 SELECT 怎样执行？按解析与准备、优化、执行器和 InnoDB 梳理查询流程，区分 Buffer Pool 与旧查询缓存，并解释 EXPLAIN 与 EXPLAIN ANALYZE。
+- [MySQL 慢查询日志怎么看？如何找到真正拖慢系统的 SQL？](../database/q556-mysql-slow-query-log.md)
+  解释MySQL慢查询日志配置与Query_time、Lock_time、Rows_examined等字段，说明高频SQL聚合、执行计划验证及慢日志看不到的链路耗时。
+- [Redis SLOWLOG 怎么用？为什么请求很慢，慢查询日志却没有记录？](../database/q558-redis-slowlog-latency-troubleshooting.md)
+  讲清Redis SLOWLOG的执行时间范围、微秒阈值和有限记录，解释请求慢但无慢日志的原因，以及网络、排队和客户端处理的排查方法。
 
 ## 计算机基础面试题
 
@@ -76,6 +101,10 @@
   提供 TS、Python 合并区间实现，解释左端点排序、包含关系与不变条件，区分闭区间和半开区间，分析最后追加、输入校验及时间空间复杂度。
 - [红黑树和 AVL 树有什么区别？查询与插入性能怎么比较？](../cs-basics/q526-red-black-tree-vs-avl.md)
   红黑树和 AVL 树有什么区别？用树形图解释高度平衡、颜色约束与旋转，两者都保持对数高度，但实际查询和更新性能还取决于负载与实现。
+- [最长回文子串怎么求？中心扩展法和动态规划有什么区别？](../cs-basics/q562-longest-palindromic-substring.md)
+  用奇偶中心讲解最长回文子串，比较中心扩展和动态规划的状态、复杂度，提供TS与Python实现以及空串、偶数长度和字符边界测试。
+- [二叉树的最近公共祖先怎么找？普通二叉树和二叉搜索树的解法有什么区别？](../cs-basics/q563-binary-tree-lowest-common-ancestor.md)
+  通过递归返回值讲清二叉树最近公共祖先，提供TS与Python实现，比较节点身份、目标缺失检查及二叉搜索树有序条件下的查找方法。
 
 ## 系统设计面试题
 
@@ -83,4 +112,6 @@
   跨服务各自使用本地事务，无法直接靠一个普通数据库事务覆盖全部资源。2PC 让支持协议的参与者准备后统一决定提交或回滚，但有协调、等待和恢复成本。
 - [分库分表怎么设计？分片键、跨库查询和在线扩容怎么处理？](../fullstack-system-design/q210-sharding.md)
   分库分表可以按职责垂直拆分，也可以按分片键把同结构数据水平分到多个表或库。它用于处理单节点容量与负载约束，不是数据库变大就自动必须做。水平分片先看访问模式。能带分片键的查询可以定向路由，不带就可能散射到多片再汇总；
+- [SOLID 五大设计原则是什么？怎样判断代码需要拆分还是抽象？](../fullstack-system-design/q564-solid-design-principles.md)
+  用通知模块串联SOLID五大原则，讲清单一职责、开闭、里氏替换、接口隔离和依赖倒置，说明何时拆分及如何避免过度抽象。
 

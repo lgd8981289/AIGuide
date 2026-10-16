@@ -18,10 +18,15 @@
 - [Agent 如何选择和加载 Skill？](../agent/q059-skill-selection-loading.md)
   Agent 使用 Skill，一般可以分为发现、选择和加载。应用先提供名称、描述等简要信息；模型判断当前任务需要哪些 Skill，再读取对应的完整说明和必要材料。
 
-## 后端面试题
+## Java 面试题
 
 - [Python 装饰器是什么？functools.wraps 为什么不能随便省略？](../backend/q155-python-decorator.md)
   Python 装饰器接收一个函数或其他可装饰对象，返回处理后的对象。对函数来说，@decorator 可以理解为定义完成后执行 func = decorator(func)。
+
+## Python面试题
+
+- [Python 的 list 和 tuple 有什么区别？什么情况下应该用元组？](../python/q566-python-list-vs-tuple.md)
+  list 和 tuple 都是有顺序的序列，可以按下标读取，也可以遍历。主要区别是，列表允许修改自己的成员位置和数量，元组创建以后，这些成员引用就固定下来了。
 
 ## 系统设计面试题
 

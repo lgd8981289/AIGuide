@@ -1,6 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { publicMarkdown, selectPublished } from '../lib/github-articles.mjs';
+import { markdownLinkTargets, publicMarkdown, selectPublished } from '../lib/github-articles.mjs';
+
+test('内链检查忽略代码中的链接形状，保留真实链接、图片和引用定义', () => {
+  const markdown = '[真实](../README.md)\n\n![图](./image.webp)\n\n[引用][target]\n\n[target]: ./article.md\n\n`[0](inlineErr)`\n\n```go\nhandler[0](err)\n```';
+  assert.deepEqual(markdownLinkTargets(markdown), ['../README.md', './image.webp', './article.md']);
+});
 
 test('GitHub 只导出已发布且地址匹配的文章', () => {
   const articles = [{ qnum: 'Q001', relative: 'agent/q001-test.md' }, { qnum: 'Q002', relative: 'agent/q002-draft.md' }];

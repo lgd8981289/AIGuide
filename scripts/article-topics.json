@@ -1398,5 +1398,485 @@
   {
     "qnum": "Q564",
     "topic": "fullstack-system-design:architecture"
+  },
+  {
+    "qnum": "Q565",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q566",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q567",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q568",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q569",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q570",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q571",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q572",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q573",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q574",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q575",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q576",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q577",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q578",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q579",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q580",
+    "topic": "python:language-containers"
+  },
+  {
+    "qnum": "Q581",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q582",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q583",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q584",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q585",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q586",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q587",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q588",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q589",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q590",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q591",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q592",
+    "topic": "python:functions-objects"
+  },
+  {
+    "qnum": "Q593",
+    "topic": "python:concurrency-async"
+  },
+  {
+    "qnum": "Q594",
+    "topic": "python:concurrency-async"
+  },
+  {
+    "qnum": "Q595",
+    "topic": "python:concurrency-async"
+  },
+  {
+    "qnum": "Q596",
+    "topic": "python:concurrency-async"
+  },
+  {
+    "qnum": "Q597",
+    "topic": "python:concurrency-async"
+  },
+  {
+    "qnum": "Q598",
+    "topic": "python:concurrency-async"
+  },
+  {
+    "qnum": "Q599",
+    "topic": "python:concurrency-async"
+  },
+  {
+    "qnum": "Q600",
+    "topic": "python:concurrency-async"
+  },
+  {
+    "qnum": "Q601",
+    "topic": "python:standard-library"
+  },
+  {
+    "qnum": "Q602",
+    "topic": "python:standard-library"
+  },
+  {
+    "qnum": "Q603",
+    "topic": "python:standard-library"
+  },
+  {
+    "qnum": "Q604",
+    "topic": "python:standard-library"
+  },
+  {
+    "qnum": "Q605",
+    "topic": "python:standard-library"
+  },
+  {
+    "qnum": "Q606",
+    "topic": "python:standard-library"
+  },
+  {
+    "qnum": "Q607",
+    "topic": "python:standard-library"
+  },
+  {
+    "qnum": "Q608",
+    "topic": "python:standard-library"
+  },
+  {
+    "qnum": "Q609",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q610",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q611",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q612",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q613",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q614",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q615",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q616",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q617",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q618",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q619",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q620",
+    "topic": "python:engineering-testing"
+  },
+  {
+    "qnum": "Q621",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q622",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q623",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q624",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q625",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q626",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q627",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q628",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q629",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q630",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q631",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q632",
+    "topic": "python:web-frameworks"
+  },
+  {
+    "qnum": "Q644",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q645",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q646",
+    "topic": "frontend:vue"
+  },
+  {
+    "qnum": "Q647",
+    "topic": "frontend:html-css"
+  },
+  {
+    "qnum": "Q648",
+    "topic": "frontend:html-css"
+  },
+  {
+    "qnum": "Q649",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q650",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q651",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q652",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q653",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q654",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q655",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q656",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q657",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q658",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q659",
+    "topic": "backend:frameworks"
+  },
+  {
+    "qnum": "Q660",
+    "topic": "backend:api-auth"
+  },
+  {
+    "qnum": "Q661",
+    "topic": "go:runtime"
+  },
+  {
+    "qnum": "Q662",
+    "topic": "go:concurrency"
+  },
+  {
+    "qnum": "Q663",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q664",
+    "topic": "go:concurrency"
+  },
+  {
+    "qnum": "Q665",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q666",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q667",
+    "topic": "backend:services"
+  },
+  {
+    "qnum": "Q668",
+    "topic": "backend:services"
+  },
+  {
+    "qnum": "Q669",
+    "topic": "go:concurrency"
+  },
+  {
+    "qnum": "Q670",
+    "topic": "go:concurrency"
+  },
+  {
+    "qnum": "Q671",
+    "topic": "go:runtime"
+  },
+  {
+    "qnum": "Q672",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q673",
+    "topic": "go:runtime"
+  },
+  {
+    "qnum": "Q674",
+    "topic": "go:runtime"
+  },
+  {
+    "qnum": "Q675",
+    "topic": "backend:services"
+  },
+  {
+    "qnum": "Q676",
+    "topic": "database:mysql"
+  },
+  {
+    "qnum": "Q677",
+    "topic": "database:redis"
+  },
+  {
+    "qnum": "Q678",
+    "topic": "cs-basics:network"
+  },
+  {
+    "qnum": "Q679",
+    "topic": "cs-basics:network"
+  },
+  {
+    "qnum": "Q680",
+    "topic": "cs-basics:network"
+  },
+  {
+    "qnum": "Q681",
+    "topic": "cs-basics:network"
+  },
+  {
+    "qnum": "Q682",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q683",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q684",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q685",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q686",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q687",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q688",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q689",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q690",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q691",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q692",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q693",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q694",
+    "topic": "fullstack-system-design:distributed"
+  },
+  {
+    "qnum": "Q695",
+    "topic": "fullstack-system-design:architecture"
   }
 ]

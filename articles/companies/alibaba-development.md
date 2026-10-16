@@ -9,3 +9,8 @@
 - [Mem0 是什么？如何从对话中提取并检索 Agent 的长期记忆？](../agent/q499-mem0-agent-memory-pipeline.md)
   解释 Mem0 如何抽取和检索长期记忆，提供 TypeScript 与 Python 读取示例，并说明身份过滤、异步写入和上下文注入仍需应用处理。
 
+## 计算机基础面试题
+
+- [K 个一组反转链表怎么实现？不足 K 个节点时怎样处理？](../cs-basics/q687-reverse-nodes-k-group.md)
+  K 个一组反转链表怎么实现？维护组前驱、组尾和后继，先验证长度再反转并接回。
+

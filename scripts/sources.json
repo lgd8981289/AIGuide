@@ -17,9 +17,14 @@
       "module": "programmer",
       "label": "全栈面试题",
       "root": "../文章/全栈面试题",
+      "categoryLabels": {
+        "backend": "Java 面试题"
+      },
       "categories": {
         "前端面试题": "frontend",
         "后端面试题": "backend",
+        "Python面试题": "python",
+        "Go面试题": "go",
         "数据库与缓存面试题": "database",
         "计算机基础面试题": "cs-basics",
         "系统设计面试题": "fullstack-system-design"

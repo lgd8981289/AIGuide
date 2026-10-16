@@ -171,6 +171,30 @@ class ImagePipelineTest(unittest.TestCase):
         self.assertEqual(self.webp().read_bytes(), before)
         self.assertEqual(list((self.root / "public/img").rglob(".image-tmp-*")), [])
 
+    def test_body_image_folder_is_watermarked_and_other_files_stay_private(self):
+        article = self.source().parent.parent
+        folder = article / "正文"
+        self.source().parent.rename(folder)
+        (folder / "notes.md").write_text("private supporting notes")
+        original = (folder / "image.png").read_bytes()
+        self.sync()
+        self.assertNotEqual(self.marked().read_bytes(), original)
+        self.assertTrue(self.webp().exists())
+        self.assertFalse((self.root / "img-src/Q001/notes.md").exists())
+        self.assertEqual((folder / "image.png").read_bytes(), original)
+        before = self.snapshot()
+        self.assertIn("命中缓存 1", self.run_script("watermark-images.py", "--only=Q001"))
+        self.assertEqual(self.snapshot(), before)
+
+    def test_duplicate_body_image_targets_preserve_previous_outputs(self):
+        self.sync()
+        before = self.snapshot()
+        folder = self.source().parent.parent / "正文"
+        folder.mkdir()
+        shutil.copyfile(self.source(), folder / "image.png")
+        self.run_script("watermark-images.py", "--only=Q001", success=False)
+        self.assertEqual(self.snapshot(), before)
+
 
 if __name__ == "__main__":
     unittest.main()

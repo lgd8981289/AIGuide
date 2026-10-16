@@ -7,7 +7,7 @@
 ## 前端面试题
 
 - [JavaScript 事件循环是什么？宏任务、微任务和 async/await 怎么执行？](../frontend/q104-js-event-loop.md)
-  浏览器中的 JavaScript，通常先执行当前任务里的同步代码。当前调用栈清空后，会在微任务检查点处理排队的微任务，随后浏览器才有机会渲染、选择下一项任务。Promise 的后续回调和 await 后面的继续执行，通常进入微任务队列；
+  逐步推导浏览器 JavaScript 事件循环，通过队列快照解释宏任务、微任务、Promise、async/await 执行顺序及渲染卡顿边界。
 - [HTTP 强缓存和协商缓存有什么区别？Cache-Control、ETag 和 304 怎么配合？](../frontend/q105-http-browser-cache.md)
   强缓存是浏览器在缓存仍然新鲜时，直接复用已有响应，不需要为了这个资源向服务器验证。常用 Cache-Control: max-age 指定新鲜期。协商缓存是在需要验证时，带着资源标识询问服务器。
 - [浏览器为什么会跨域？CORS 预检请求和携带 Cookie 怎么处理？](../frontend/q107-cors-cross-origin.md)
@@ -48,6 +48,14 @@
   解释 Fetch 和 Axios 在 404、500 时的默认错误语义，区分网络、HTTP、JSON 解析和业务失败，提供 TS Fetch 与 Python httpx 示例及取消、重试边界。
 - [JavaScript 垃圾回收怎么工作？标记清除为什么能处理循环引用？](../frontend/q467-javascript-garbage-collection.md)
   通过对象引用环和窗口监听器解释 JavaScript 垃圾回收，讲清可达性、标记清除、闭包与内存泄漏，提供堆快照和保留路径的排查思路。
+- [扁平数组如何转换成树形结构？如何避免重复遍历和父子关系出错？](../frontend/q538-flat-array-to-tree.md)
+  扁平数组怎样转成树？先用 ID 索引再连接 parentId，提供 TypeScript、Python 实现，检查乱序、重复、孤儿和环，并说明复杂度和输入不变的边界。
+- [CSS 如何实现水平垂直居中？元素宽高不固定时应该怎么写？](../frontend/q539-css-horizontal-vertical-centering.md)
+  CSS 水平垂直居中如何选择写法？区分文字和盒子、Flex/Grid 对齐与定位加 transform，说明不定宽高、父容器尺寸和溢出时的边界。
+- [preload、prefetch 和 preconnect 有什么区别？前端资源预加载应该怎么选？](../frontend/q540-preload-prefetch-preconnect.md)
+  preload、prefetch、preconnect 怎样选？从资源发现到连接和下载解释三种提示，说明 as、crossorigin、请求复用与带宽竞争，避免预加载后仍重复请求。
+- [CSS 的 block、inline、inline-block 有什么区别？为什么行内元素设置宽高不生效？](../frontend/q647-css-block-inline-inline-block.md)
+  比较 CSS block、inline 和 inline-block 的换行、尺寸与盒子行为，说明替换元素、基线和父级 Flex 为什么会改变判断。
 
 ## 计算机基础面试题
 
@@ -61,6 +69,8 @@
   LRU 淘汰最近最少使用的条目。命中读取和写入都要更新最近使用位置，容量超限时删除最久未使用的条目。经典结构是哈希表加双向链表：表定位节点，链表移动节点和删除尾部，在常见哈希假设下实现平均 O(1) 的 get、put。
 - [如何判断括号字符串是否合法？为什么要用栈？](../cs-basics/q359-valid-parentheses.md)
   如何判断括号字符串是否合法？为什么要用栈？右括号必须匹配最近一个尚未关闭的左括号，扫描结束也不能留下未关闭项。讲清匹配规则与容易被忽略的边界情况。
+- [WebSocket 是怎么建立连接的？HTTP 握手、数据帧和心跳分别有什么作用？](../cs-basics/q559-websocket-handshake-frames-heartbeat.md)
+  讲清WebSocket传统HTTP握手、消息与帧、掩码和Ping/Pong心跳，区分浏览器应用心跳、TLS安全与业务消息确认。
 
 ## 系统设计面试题
 

@@ -11,10 +11,21 @@
 - [Prompt Engineering 是什么？Agent 提示词应该怎样设计？](../agent/q456-agent-prompt-engineering.md)
   从退款查询任务解释 Prompt Engineering，讲清 Agent 提示词的目标、输入、工具边界、失败处理与评测方法，避免把角色设定或长提示词当成可靠性保证。
 
-## 后端面试题
+## Java 面试题
 
 - [Nginx 的反向代理和负载均衡怎么工作？轮询与一致性哈希怎么选？](../backend/q171-nginx-reverse-proxy.md)
   反向代理是客户端先访问代理，由代理代表后端接收并转发请求。负载均衡是在多个上游实例之间选择目标，是反向代理可以提供的一项能力。Nginx 可以按轮询、权重、最少连接或哈希等方式选择上游。轮询适合工作相近的请求；
+- [ZooKeeper 分布式锁怎么实现？临时顺序节点和 Watch 如何配合？](../backend/q675-zookeeper-ephemeral-sequential-lock.md)
+  ZooKeeper 分布式锁怎么实现？说明排队、监听前驱、会话失效及重新检查，补上业务侧 fencing 边界。
+
+## Go面试题
+
+- [Go 的 GMP 调度模型是什么？G、M、P 如何配合运行 goroutine？](../go/q661-go-gmp-scheduler.md)
+  Go 的 GMP 调度模型是什么？解释运行时任务、操作系统线程、执行资源与阻塞时的调度。
+- [Go 的 defer、panic、recover 按什么顺序执行？为什么 recover 有时无效？](../go/q666-go-defer-panic-recover.md)
+  Go 的 defer、panic、recover 按什么顺序执行？追踪注册时参数求值、延迟调用顺序、命名返回值和恢复所在调用路径。
+- [Go context 如何传递超时和取消？cancel 后 goroutine 会自动退出吗？](../go/q669-go-context-cancellation-timeout.md)
+  Go context 如何传递超时和取消？解释取消信号的传播、观察与清理责任，而不是强制杀掉任务。
 
 ## 计算机基础面试题
 

@@ -6,7 +6,7 @@
 // 做四件事：
 //   1. 按 scripts/sources.json 配置，读取各来源 {分类}/{编号-主题}/正文.md
 //   2. 自动提取元数据：网站标题配置优先、H1 兜底；描述与 FAQ 答案；文件修改时间 → 日期
-//   3. 改写图片路径（正文.assets/ → /img/{编号}/），并把图片拷贝到 public/img/
+//   3. 改写图片路径（正文.assets/ 或 正文/ → /img/{编号}/），并同步原图
 //   4. 生成带 frontmatter 的 Markdown 到 src/content/articles/{分类}/{编号}-{slug}.md
 //
 // 注意：已发布文章的 slug 必须保持稳定；更换地址时需要先安排永久重定向。
@@ -229,7 +229,7 @@ function rewriteImages(md, num) {
   // Markdown 图片和正文中的 HTML <img src="..."> 都要改写。
   // 保留原稿不动，避免每次 --sync 又把 HTML 图片变回失效的相对路径。
   return md.replace(
-    /(\(|\bsrc\s*=\s*["'])(?:\.\/)?(?:%E6%AD%A3%E6%96%87\.assets|正文\.assets)\//gi,
+    /(\(<?|\bsrc\s*=\s*["'])(?:\.\/)?(?:%E6%AD%A3%E6%96%87(?:\.assets)?|正文(?:\.assets)?)\//gi,
     `$1${BASE}/img/${num}/`
   );
 }
@@ -382,10 +382,15 @@ function main() {
         const outCatDir = path.join(OUT_DIR, catSlug);
         articles.set(path.join(outCatDir, `${fileStem}.md`), fm + body + "\n");
 
-        // 拷贝图片（实验素材等子目录不处理，只拷贝 正文.assets）
-        const assets = path.join(catDir, entry.name, "正文.assets");
-        for (const file of filesIn(assets)) {
-          images.set(path.join(IMG_SRC_DIR, num, path.relative(assets, file)), file);
+        // 两种原稿图片目录均可使用；正文/ 中的代码、笔记等不作为图片发布。
+        for (const folder of ["正文.assets", "正文"]) {
+          const assets = path.join(dir, folder);
+          for (const file of filesIn(assets)) {
+            if (folder === "正文" && !/\.(?:png|jpe?g|gif|svg|webp|avif)$/i.test(file)) continue;
+            const destination = path.join(IMG_SRC_DIR, num, path.relative(assets, file));
+            if (images.has(destination)) throw new Error(`图片目标重复：${num}/${path.relative(assets, file)}`);
+            images.set(destination, file);
+          }
         }
 
         count++;

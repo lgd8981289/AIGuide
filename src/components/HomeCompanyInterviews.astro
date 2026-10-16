@@ -1,0 +1,71 @@
+---
+import { getInterviewCollections } from '../lib/company-interviews.mjs'
+import { url } from '../utils'
+
+const collections = getInterviewCollections()
+const companyCount = new Set(collections.map(view => view.company.id)).size
+// 首页保持稳定的精选顺序，完整公司和岗位入口由目录承接。
+const featuredIds = ['bytedance', 'tencent', 'meituan', 'baidu', 'alibaba', 'jd']
+const featured = featuredIds.flatMap(id => {
+  const roles = collections.filter(view => view.company.id === id)
+    .sort((a, b) => b.qnums.length - a.qnums.length)
+  if (!roles.length) return []
+  return [{ company: roles[0].company, roles,
+    href: `/companies/${id}/`,
+    questionCount: new Set(roles.flatMap(view => view.qnums)).size }]
+})
+---
+
+{featured.length > 0 && <section class="home-companies" aria-labelledby="home-companies-title">
+  <header class="home-companies-heading">
+    <div>
+      <h2 id="home-companies-title">公司面试真题</h2>
+      <p>选公司、看岗位，开始有针对性的准备</p>
+    </div>
+    <a class="home-companies-all" href={url('/companies/')}>全部 {companyCount} 家公司 <span aria-hidden="true">→</span></a>
+  </header>
+  <div class="home-companies-grid">
+    {featured.map(({ company, roles, href, questionCount }) => <article class="home-company">
+      <div class="home-company-heading">
+        <h3><a href={url(href)}>{company.name}</a></h3>
+        <span>{questionCount} 道题</span>
+      </div>
+      <nav class="home-company-roles" aria-label={`${company.name}面试岗位`}>
+        {roles.slice(0, 3).map(view => <a href={url(view.href)} aria-label={view.label}>{view.role.name}</a>)}
+        {roles.length > 3 && <a class="home-company-more" href={url(href)} aria-label={`查看${company.name}全部 ${roles.length} 个岗位`}>+{roles.length - 3} 岗位</a>}
+      </nav>
+    </article>)}
+  </div>
+  <div class="home-companies-footer">
+    <span>{companyCount} 家公司 · {collections.length} 个岗位题单</span>
+    <span>题目附解析与公开面经来源</span>
+  </div>
+</section>}
+
+<style>
+  .home-companies { margin-bottom: 32px; }
+  .home-companies-heading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px 18px; margin-bottom: 16px; }
+  .home-companies-heading h2 { margin: 0; font-size: 17px; }
+  .home-companies-heading p { margin: 5px 0 0; color: var(--text-2); font-size: 12px; }
+  .home-companies-all { font-size: 12px; white-space: nowrap; }
+  .home-companies-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .home-company { min-width: 0; padding: 15px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-soft); }
+  .home-company-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 9px; }
+  .home-company-heading h3 { margin: 0; font-size: 15px; }
+  .home-company-heading h3 a { color: var(--text); }
+  .home-company-heading h3 a:hover { color: var(--accent); }
+  .home-company-heading > span { color: var(--text-2); font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .home-company-roles { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: 12px; }
+  .home-company-more { white-space: nowrap; }
+  .home-companies-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 5px 16px; margin-top: 14px; color: var(--text-2); font-size: 12px; }
+  .home-companies a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+  @media (max-width: 600px) {
+    .home-companies { margin-bottom: 26px; }
+    .home-companies-grid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+    .home-company { padding: 13px 14px; }
+  }
+  @media (pointer: coarse) {
+    .home-company-roles a, .home-company-heading a, .home-companies-all { display: inline-flex; align-items: center; min-height: 44px; }
+    .home-company-heading { margin-bottom: 0; }
+  }
+</style>

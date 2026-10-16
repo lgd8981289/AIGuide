@@ -28,3 +28,8 @@
 - [大模型本地部署需要多少显存？参数量、精度和并发数怎么估算？](./q462-llm-vram-capacity-estimation.md) · [在线阅读](https://note.lgdsunday.club/engineering/q462-llm-vram-capacity-estimation/)
 - [Dify 的 Chatflow 和 Workflow 有什么区别？多轮对话应该怎么选？](./q511-dify-chatflow-vs-workflow.md) · [在线阅读](https://note.lgdsunday.club/engineering/q511-dify-chatflow-vs-workflow/)
 - [MCP Apps 是什么？MCP 工具如何返回可交互的界面？](./q512-mcp-apps-interactive-tool-ui.md) · [在线阅读](https://note.lgdsunday.club/engineering/q512-mcp-apps-interactive-tool-ui/)
+- [OpenAI Responses API 和 Chat Completions 有什么区别？开发 Agent 应该怎么选？](./q532-responses-api-vs-chat-completions.md) · [在线阅读](https://note.lgdsunday.club/engineering/q532-responses-api-vs-chat-completions/)
+- [DSPy 是什么？它如何自动优化提示词，与手工写 Prompt 有什么区别？](./q533-dspy-prompt-optimization.md) · [在线阅读](https://note.lgdsunday.club/engineering/q533-dspy-prompt-optimization/)
+- [什么是 SDD 规格驱动开发？使用 AI 编程时，Spec、Plan、Task 应该怎么配合？](./q535-spec-driven-development.md) · [在线阅读](https://note.lgdsunday.club/engineering/q535-spec-driven-development/)
+- [BFCL 是什么？如何评测大模型的工具选择、参数生成和多轮调用？](./q638-bfcl-function-calling-evaluation.md) · [在线阅读](https://note.lgdsunday.club/engineering/q638-bfcl-function-calling-evaluation/)
+- [WebArena 和 OSWorld 有什么区别？浏览器 Agent 和电脑操作 Agent 怎么评测？](./q639-webarena-vs-osworld-evaluation.md) · [在线阅读](https://note.lgdsunday.club/engineering/q639-webarena-vs-osworld-evaluation/)

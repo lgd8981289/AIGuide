@@ -11,3 +11,6 @@
 - [Deep Research Agent 怎么设计？怎样保证研究报告的引用可靠？](./q098-deep-research-citation-reliability.md) · [在线阅读](https://note.lgdsunday.club/system-design/q098-deep-research-citation-reliability/)
 - [Dify 和 LangChain 有什么区别？AI 应用开发该选平台还是代码框架？](./q458-dify-vs-langchain.md) · [在线阅读](https://note.lgdsunday.club/system-design/q458-dify-vs-langchain/)
 - [Spring AI 和 LangChain4j 有什么区别？Java 开发 Agent 应该怎么选？](./q459-spring-ai-vs-langchain4j.md) · [在线阅读](https://note.lgdsunday.club/system-design/q459-spring-ai-vs-langchain4j/)
+- [CrewAI 和 AutoGen 有什么区别？多 Agent 协作框架应该怎么选？](./q530-crewai-vs-autogen.md) · [在线阅读](https://note.lgdsunday.club/system-design/q530-crewai-vs-autogen/)
+- [n8n 和 Dify 有什么区别？搭建 AI Agent 与自动化流程应该怎么选？](./q531-n8n-vs-dify.md) · [在线阅读](https://note.lgdsunday.club/system-design/q531-n8n-vs-dify/)
+- [实时语音 Agent 怎么设计？ASR、LLM、TTS 如何配合处理延迟和用户打断？](./q536-realtime-voice-agent-architecture.md) · [在线阅读](https://note.lgdsunday.club/system-design/q536-realtime-voice-agent-architecture/)

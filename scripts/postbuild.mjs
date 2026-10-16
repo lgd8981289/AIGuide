@@ -121,6 +121,8 @@ function collectDates() {
     langchain: "interview",
     frontend: "programmer",
     backend: "programmer",
+    python: "programmer",
+    go: "programmer",
     database: "programmer",
     "cs-basics": "programmer",
     "fullstack-system-design": "programmer",

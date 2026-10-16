@@ -3,7 +3,7 @@
 """
 图片水印脚本：给文章配图打上「lgdsunday.club@程序员Sunday」水印
 
-- 输入：写作仓库 ../文章/{分类}/{Q编号}-{主题}/正文.assets/ 下的原图（保持干净，不动它）
+- 输入：写作仓库文章目录中 正文.assets/ 或 正文/ 下的原图（保持干净，不动它）
 - 输出：站点 img-src/{Q编号}/ 下的同名文件（带水印）
 - 幂等：每次都从原始素材重新生成，重复跑不会叠加水印
 - 增量：原图、处理参数及输出哈希均未变化时复用；--force 强制重建
@@ -232,28 +232,32 @@ def main():
                     raise ValueError(f"正文编号重复：{num}")
                 seen_articles.add(num)
 
-                assets = entry / "正文.assets"
-                if not assets.exists():
-                    continue
-
-                for src in sorted(assets.rglob("*")):
-                    if not src.is_file():
+                for folder in ["正文.assets", "正文"]:
+                    assets = entry / folder
+                    if not assets.exists():
                         continue
-                    suffix = src.suffix.lower()
-                    key = (Path(num) / src.relative_to(assets)).as_posix()
-                    expected.add(key)
-                    dst = IMG_DIR / key
-                    if suffix in SKIP_SUFFIXES or suffix not in SUPPORTED_SUFFIXES:
-                        skipped += 1
-                        passthrough.append((src, dst))
-                        continue
-                    source_hash = file_hash(src)
-                    previous = cache.get(key, {})
-                    if not args.force and cache_hit(previous, source_hash, recipe, dst):
-                        entries[key] = previous
-                        hits += 1
-                    else:
-                        jobs.append((key, src, dst, source_hash, recipe))
+                    for src in sorted(assets.rglob("*")):
+                        if not src.is_file():
+                            continue
+                        suffix = src.suffix.lower()
+                        if folder == "正文" and suffix not in {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".avif"}:
+                            continue
+                        key = (Path(num) / src.relative_to(assets)).as_posix()
+                        if key in expected:
+                            raise ValueError(f"图片目标重复：{key}")
+                        expected.add(key)
+                        dst = IMG_DIR / key
+                        if suffix in SKIP_SUFFIXES or suffix not in SUPPORTED_SUFFIXES:
+                            skipped += 1
+                            passthrough.append((src, dst))
+                            continue
+                        source_hash = file_hash(src)
+                        previous = cache.get(key, {})
+                        if not args.force and cache_hit(previous, source_hash, recipe, dst):
+                            entries[key] = previous
+                            hits += 1
+                        else:
+                            jobs.append((key, src, dst, source_hash, recipe))
 
     if selected is not None and selected - seen_articles:
         raise ValueError("限定同步的文章不存在：" + ",".join(sorted(selected - seen_articles)))

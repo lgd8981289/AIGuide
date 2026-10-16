@@ -7,7 +7,7 @@
 ## 前端面试题
 
 - [JavaScript 事件循环是什么？宏任务、微任务和 async/await 怎么执行？](../frontend/q104-js-event-loop.md)
-  浏览器中的 JavaScript，通常先执行当前任务里的同步代码。当前调用栈清空后，会在微任务检查点处理排队的微任务，随后浏览器才有机会渲染、选择下一项任务。Promise 的后续回调和 await 后面的继续执行，通常进入微任务队列；
+  逐步推导浏览器 JavaScript 事件循环，通过队列快照解释宏任务、微任务、Promise、async/await 执行顺序及渲染卡顿边界。
 - [HTTP 强缓存和协商缓存有什么区别？Cache-Control、ETag 和 304 怎么配合？](../frontend/q105-http-browser-cache.md)
   强缓存是浏览器在缓存仍然新鲜时，直接复用已有响应，不需要为了这个资源向服务器验证。常用 Cache-Control: max-age 指定新鲜期。协商缓存是在需要验证时，带着资源标识询问服务器。
 - [React 的 useEffect 怎么工作？依赖数组、清理函数和重复执行如何理解？](../frontend/q108-react-useeffect.md)
@@ -58,8 +58,12 @@
   用 TS 与 Python 实现固定参数数量的 curry，解释闭包、分支复用、默认参数、function.length、this 和占位符边界，并区分柯里化与偏函数应用。
 - [Promise 并发控制怎么实现？如何保证最多同时执行 N 个任务？](../frontend/q514-promise-concurrency-limit.md)
   Promise 并发控制怎么实现？从尚未启动的任务函数、执行名额与自动补位讲起，提供经过测试的 TypeScript 和 Python 示例，说明结果顺序、失败与取消边界。
+- [React 自定义 Hook 是什么？多个组件调用同一个 Hook，会共享状态吗？](../frontend/q541-react-custom-hooks-state-isolation.md)
+  自定义 Hook 共享的是逻辑还是状态？用两个计数器解释每次 Hook 调用的状态归属，区分模块变量、状态提升与外部 Store，并说明清理和参数变化的检查方法。
+- [TypeScript 装饰器是什么？标准装饰器和 experimentalDecorators 有什么区别？](../frontend/q544-typescript-standard-vs-legacy-decorators.md)
+  TypeScript 两套装饰器有什么区别？解释定义阶段和方法调用阶段、新版 value/context 与旧版参数约定，以及参数装饰器、元数据和旧框架迁移的兼容检查。
 
-## 后端面试题
+## Java 面试题
 
 - [JWT 和 Session 有什么区别？Cookie 在登录认证中负责什么？](../backend/q106-jwt-vs-session.md)
   Session 方案通常在服务端保存会话状态，浏览器携带会话标识，服务端查到有效记录以后才接受身份。JWT 是一种 Token 格式。常见签名 JWT 携带声明，服务端验证签名、过期时间、签发方和目标接收方等条件后才能接受。
@@ -90,4 +94,11 @@
   BFS 按距离起点的层次扩展，常用队列；DFS 沿分支深入再回退，用递归栈或显式栈。邻接表下完整遍历常见复杂度都是 O(V+E)。在无权图或各边等权的情况下，BFS 可以找最少边数的路径；
 - [两数之和怎么用哈希表实现？为什么要先查再存，不能重复使用同一个元素？](../cs-basics/q331-two-sum.md)
   两数之和怎么用哈希表实现？为什么要先查再存？每轮只在已经经过的元素里找补数，找到的自然就是另一个位置，也不会重复使用同一个元素。讲清查与存的顺序为何不能颠倒。
+- [K 个一组反转链表怎么实现？不足 K 个节点时怎样处理？](../cs-basics/q687-reverse-nodes-k-group.md)
+  K 个一组反转链表怎么实现？维护组前驱、组尾和后继，先验证长度再反转并接回。
+
+## 系统设计面试题
+
+- [OT 和 CRDT 有什么区别？多人协同编辑时怎样合并并发修改？](../fullstack-system-design/q694-ot-vs-crdt-collaborative-editing.md)
+  OT 和 CRDT 有什么区别？跟踪同位置并发编辑，比较操作变换与可收敛数据结构的约束。
 

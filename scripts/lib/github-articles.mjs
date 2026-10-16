@@ -6,6 +6,18 @@ import { gfmToMarkdown } from 'mdast-util-gfm';
 import { companyMarkdown, companyTagMarkdown } from '../../src/lib/company-interviews.mjs';
 import { BRAND } from '../../src/lib/brand.mjs';
 
+// 读取 Markdown 链接节点，避免把代码示例中的 ](err) 等片段当成内链。
+export function markdownLinkTargets(markdown) {
+  const tree = unified().use(remarkParse).use(remarkGfm).parse(markdown);
+  const targets = [];
+  function visit(node) {
+    if (['link', 'image', 'definition'].includes(node.type)) targets.push(node.url);
+    node.children?.forEach(visit);
+  }
+  visit(tree);
+  return targets;
+}
+
 export function parseArticle(raw) {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
   if (!match) throw new Error('文章缺少同步元数据');

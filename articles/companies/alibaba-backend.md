@@ -4,7 +4,7 @@
 
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
-## 后端面试题
+## Java 面试题
 
 - [JVM 垃圾回收怎么判断对象可以回收？GC Roots 和可达性分析是什么？](../backend/q223-gc-roots-reachability.md)
   Java 的对象存活判断，主要需要理解从 GC Roots 出发的可达性分析，不是只数一个对象被引用了几次。GC Roots 是分析的起点，例如活动线程中的相关引用和 JVM 内部引用。沿引用关系能够到达的对象，仍可能被程序使用；
@@ -20,6 +20,10 @@
   JIT 和 AOT 编译有什么区别？Java 服务为什么需要预热？JIT 利用运行时反馈生成代码，AOT 提前生成代码，启动与稳态性能应分别评估。讲清预热成本的来源与观测方式。
 - [Java 线程有哪几种状态？BLOCKED、WAITING 和 TIMED_WAITING 有什么区别？](../backend/q475-java-thread-states.md)
   按 Java Thread.State 六种状态解释线程生命周期，重点区分 BLOCKED、WAITING 和 TIMED_WAITING，说明 RUNNABLE、sleep、wait 与死锁判断的常见误区。
+- [HashMap 底层怎么实现？put、扩容和链表转红黑树经历了什么？](../backend/q652-java-hashmap-put-resize-treeify.md)
+  HashMap 底层怎么实现？沿一次写入追踪桶定位、冲突处理、树化条件与扩容迁移。
+- [synchronized 底层怎么实现？对象头、Monitor 和锁膨胀是什么关系？](../backend/q653-java-synchronized-monitor-inflation.md)
+  synchronized 底层怎么实现？从字节码和 HotSpot 实现解释对象监视器与竞争过程。
 
 ## 数据库与缓存面试题
 
