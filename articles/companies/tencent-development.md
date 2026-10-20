@@ -17,6 +17,8 @@
   反向代理是客户端先访问代理，由代理代表后端接收并转发请求。负载均衡是在多个上游实例之间选择目标，是反向代理可以提供的一项能力。Nginx 可以按轮询、权重、最少连接或哈希等方式选择上游。轮询适合工作相近的请求；
 - [ZooKeeper 分布式锁怎么实现？临时顺序节点和 Watch 如何配合？](../backend/q675-zookeeper-ephemeral-sequential-lock.md)
   ZooKeeper 分布式锁怎么实现？说明排队、监听前驱、会话失效及重新检查，补上业务侧 fencing 边界。
+- [TreeMap 和 HashMap 有什么区别？floorKey、ceilingKey 如何做范围查找？](../backend/q733-java-treemap-navigablemap-range-queries.md)
+  对比 TreeMap 与 HashMap，解释 floorKey、ceilingKey 的边界、比较器身份和 subMap 关联视图。
 
 ## Go面试题
 

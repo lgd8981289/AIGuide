@@ -5,6 +5,8 @@ import { NEW_INTERVIEW_SOURCES, REVIEWED_INTERVIEW_TOPICS, REVIEWED_AT } from '.
 import { PYTHON_INTERVIEW_SOURCES, PYTHON_REVIEWED_TOPICS, PYTHON_REVIEWED_AT } from './company-interviews-2026-10-14.mjs';
 import { OCTOBER_15_INTERVIEW_SOURCES, OCTOBER_15_REVIEWED_TOPICS, OCTOBER_15_REVIEWED_AT } from './company-interviews-2026-10-15.mjs';
 
+import { OCTOBER_19_INTERVIEW_SOURCES, OCTOBER_19_REVIEWED_TOPICS, OCTOBER_19_REVIEWED_AT } from './company-interviews-2026-10-19.mjs';
+
 export const INTERVIEW_REVIEWED_AT = '2026-10-09';
 export const INTERVIEW_NOTE = '真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。';
 export const INTERVIEW_EMPTY_NOTE = '这道题暂未收录可核验的公司真题来源。你可以先阅读本文解析，或浏览已收录的公司面试真题。';
@@ -68,6 +70,18 @@ export const COMPANIES = [
   { id: 'thunder', name: '雷霆游戏', label: '雷霆游戏运维面试题', href: '/companies/thunder/', focus: 'Nginx location 匹配优先级' },
   { id: 'weibu', name: '微步在线', label: '微步在线前端面试题', href: '/companies/weibu/', focus: '手写 Promise 与链式调用' },
   { id: 'vastai', name: '瀚博半导体', label: '瀚博半导体开发面试题', href: '/companies/vastai/', focus: '每日温度与合并有序链表' },
+  { id: 'anker', name: '安克创新', label: '安克创新面试题', href: '/companies/anker/', focus: 'Go pprof 与 HTTP 连接池' },
+  { id: 'yunlan', name: '云览科技', label: '云览科技面试题', href: '/companies/yunlan/', focus: 'Go 并发、原子更新与泄漏排查' },
+  { id: 'pingcap', name: 'PingCAP', label: 'PingCAP面试题', href: '/companies/pingcap/', focus: 'Go Mutex 与 RWMutex' },
+  { id: 'didi', name: '滴滴', label: '滴滴面试题', href: '/companies/didi/', focus: 'singleflight 请求合并' },
+  { id: 'liblib', name: 'Liblib', label: 'Liblib面试题', href: '/companies/liblib/', focus: '回文链表' },
+  { id: 'yuanfudao', name: '猿辅导', label: '猿辅导面试题', href: '/companies/yuanfudao/', focus: 'TreeMap 与 HashMap' },
+  { id: 'microsoft', name: '微软', label: '微软面试题', href: '/companies/microsoft/', focus: '最长递增子序列' },
+  { id: 'pdd', name: '拼多多', label: '拼多多面试题', href: '/companies/pdd/', focus: 'JavaScript sort 比较器' },
+  { id: 'kunlun', name: '昆仑数智', label: '昆仑数智面试题', href: '/companies/kunlun/', focus: 'Spring 参数绑定' },
+  { id: 'nio', name: '蔚来', label: '蔚来面试题', href: '/companies/nio/', focus: 'Go io.Reader 与大文件读取' },
+  { id: 'banma', name: '斑马智行', label: '斑马智行面试题', href: '/companies/banma/', focus: '颜色分类' },
+  { id: 'zhihu', name: '知乎', label: '知乎面试题', href: '/companies/zhihu/', focus: 'singleflight 与 Trie' },
 ];
 
 const topic = (qnum, topic, relation = 'mentioned') => ({ qnum, topic, relation });
@@ -211,11 +225,11 @@ const questions = {
   Q343: '怎样实现线程安全的单例？',
 };
 
-export const INTERVIEW_SOURCES = [...sources, ...ADDITIONAL_INTERVIEW_SOURCES, ...OCTOBER_11_INTERVIEW_SOURCES, ...NEW_INTERVIEW_SOURCES, ...PYTHON_INTERVIEW_SOURCES, ...OCTOBER_15_INTERVIEW_SOURCES].map(source => ({
+export const INTERVIEW_SOURCES = [...sources, ...ADDITIONAL_INTERVIEW_SOURCES, ...OCTOBER_11_INTERVIEW_SOURCES, ...NEW_INTERVIEW_SOURCES, ...PYTHON_INTERVIEW_SOURCES, ...OCTOBER_15_INTERVIEW_SOURCES, ...OCTOBER_19_INTERVIEW_SOURCES].map(source => ({
   ...source,
   roleKey: source.roleKey ?? (source.role === '前端' ? 'frontend' : source.company === 'meituan' ? 'development' : 'backend'),
-  reviewedAt: OCTOBER_15_REVIEWED_TOPICS[source.id] ? OCTOBER_15_REVIEWED_AT : PYTHON_REVIEWED_TOPICS[source.id] ? PYTHON_REVIEWED_AT : REVIEWED_INTERVIEW_TOPICS[source.id] ? REVIEWED_AT : source.reviewedAt ?? (ADDITIONAL_INTERVIEW_TOPICS[source.id] ? INTERVIEW_REVIEWED_AT : '2026-10-08'),
-  topics: [...source.topics, ...(additions[source.id] ?? []), ...(ADDITIONAL_INTERVIEW_TOPICS[source.id] ?? []), ...(REVIEWED_INTERVIEW_TOPICS[source.id] ?? []), ...(PYTHON_REVIEWED_TOPICS[source.id] ?? []), ...(OCTOBER_15_REVIEWED_TOPICS[source.id] ?? [])].map(item => ({
+  reviewedAt: OCTOBER_19_REVIEWED_TOPICS[source.id] ? OCTOBER_19_REVIEWED_AT : OCTOBER_15_REVIEWED_TOPICS[source.id] ? OCTOBER_15_REVIEWED_AT : PYTHON_REVIEWED_TOPICS[source.id] ? PYTHON_REVIEWED_AT : REVIEWED_INTERVIEW_TOPICS[source.id] ? REVIEWED_AT : source.reviewedAt ?? (ADDITIONAL_INTERVIEW_TOPICS[source.id] ? INTERVIEW_REVIEWED_AT : '2026-10-08'),
+  topics: [...source.topics, ...(additions[source.id] ?? []), ...(ADDITIONAL_INTERVIEW_TOPICS[source.id] ?? []), ...(REVIEWED_INTERVIEW_TOPICS[source.id] ?? []), ...(PYTHON_REVIEWED_TOPICS[source.id] ?? []), ...(OCTOBER_15_REVIEWED_TOPICS[source.id] ?? []), ...(OCTOBER_19_REVIEWED_TOPICS[source.id] ?? [])].map(item => ({
     ...item,
     ...(item.relation === 'mentioned' ? { question: item.question ?? questions[item.qnum] } : {}),
   })),

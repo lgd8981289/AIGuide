@@ -53,9 +53,35 @@
   - 下一批（preview 实测，未发请求）：首页 + companies、agent-course、ai、llm、python、agent、rag、engineering、langchain —— **仍全为复推**。
   - **饥饿问题持续第 9 轮**（10-09 起）：700 个文章页 0 条入队，22 条「首页+入口页」恒占前排把 10 条/天配额吃干。建议（未执行，待用户定）：入口页复推降级为「轮转一轮后才允许复推」/ 入口页设 maxCount / 入口页与文章页混排。
 
+- **2026-10-16 22:27**（本次，21:00 窗口延迟执行）：结果 **成功提交 10 条，退出码 0**（当天首次跑，deploy.sh 未消耗配额）。命中首页 + companies、agent-course、ai、llm、python、agent、rag、engineering、langchain，**10 条全部为复推**。回执 `.baidu/receipt-20261016T142703Z.json`。
+  - 规模：线上 sitemap **954** URL（首页 1｜入口页 22｜文章页 700｜其他 231）。累计去重仍 **23 / 954**，从未推过 931。
+  - 下一批（preview 实测，未发请求）：首页 + system-design、agent-ext、tutorial、tools、go、practice、reviews、frontend、backend —— **仍全为复推**。
+  - **饥饿问题持续第 10 轮**（10-09 起）：700 个文章页 0 条入队，23 条「首页+入口页」恒占前排把 10 条/天配额吃干。建议（未执行，待用户定）：入口页复推降级为「轮转一轮后才允许复推」/ 入口页设 maxCount / 入口页与文章页混排。
+
+- **2026-10-18 17:03**（本次，21:00 窗口提前/延迟执行）：首次触发遇 **505 `please retry later`**（非配额、非 site error），0 条；等 20s 重试成功，**提交 10 条，退出码 0**，`remain` 归零。命中 system-design、agent-ext、tutorial、tools、go、practice、reviews、frontend、backend、database，**全为复推**。回执 `.baidu/receipt-20261018T090351Z.json`。
+  - 规模：线上 sitemap **954** URL（入口页 22｜文章页 700｜其他 231）。累计去重仍 **23 / 954**。
+  - 下一批（preview 实测，未发请求）：cs-basics、fullstack-system-design、programmer、companies、agent-course、ai、llm、python、agent、rag —— **仍全为复推**。
+  - **饥饿问题第 11 轮**（10-09 起）：700 个文章页 0 条入队。
+  - **⚠️ 新缺陷：首页被误判无效**。`mark()` 的 `attempts` 是累计值、成功不清零（首页 attempts=9 / count=8），而 `INVALID_AFTER_ATTEMPTS=3` 直接看该值 → 首次单点失败（505）即把 `https://note.lgdsunday.club/` 写进 `invalid`，此后不再入队；且所有被复推 ≥3 次的入口页遇到一次瞬时失败都会被同样误杀。`push()` 只对 `message` 含 `quota` 的情况豁免计失败，505 不豁免。按用户要求未改脚本、未改 state。
+  - 建议（待用户定）：`attempts` 改为**连续失败计数**（成功时重置），或 invalid 判定加 `not record.get("firstPushedAt")` 条件；临时补救是从 `.baidu/state.json` 的 `invalid` 移除首页。
+
+- **2026-10-18 21:22**（本次，21:00 窗口）：结果 **over quota，提交 0 条，退出码 0** → 正常。原因：当天 17:03 的上一次运行已把约 10 条配额推满（`remain` 归零）。回执 `.baidu/receipt-20261018T132226Z.json`。
+  - 规模：线上 sitemap **954** URL（入口页 22｜文章页 700｜其他 231）。累计去重 **23 / 954**，从未推过 931，已判无效 1。
+  - 本批计划（因配额为零未发出，**10 条全为复推**）：cs-basics、fullstack-system-design、programmer、companies、agent-course、ai、llm、python、agent、rag。
+  - **首页仍处于 `invalid` 名单**（`.baidu/state.json`：`invalid: ["https://note.lgdsunday.club/"]`，record `attempts=9 / count=8 / firstPushedAt=2026-10-08`）→ 昨天记录里说的「attempts 累加导致首页被误杀」缺陷**未修复、仍在生效**，首页已连续两轮不进队列。按用户要求未改脚本、未改 state。
+  - **饥饿问题第 12 轮**（10-09 起）：22 条「入口页」复推恒占前排，700 个文章页 0 条入队。
+
+- **2026-10-19 21:00**（本次）：结果 **成功提交 10 条，退出码 0**（当天首次跑，deploy.sh 未消耗配额）。首条探测后 `remain=9` → 批量 9 条全部成功，`remain` 归零。命中 cs-basics、fullstack-system-design、programmer、companies、agent-course、ai、llm、python、agent、rag，**10 条全为入口页复推**。回执 `.baidu/receipt-20261019T130045Z.json`。
+  - 规模：线上 sitemap **1046** URL（10-18 为 954，增 92；入口页 22｜文章页 763｜其他 260）。累计去重仍 **23 / 1046**，从未推过 1023，已判无效 1。
+  - 下一批（preview 实测，未发请求）：engineering、langchain、system-design、agent-ext、tutorial、tools、go、practice、reviews、frontend —— **仍全为复推**。
+  - **首页仍在 `invalid` 名单**（`invalid: ["https://note.lgdsunday.club/"]`）→ 10-18 记录的「attempts 累加致首页被误杀」缺陷**未修复、连续第 3 轮不进队列**。
+  - **饥饿问题第 13 轮**（10-09 起）：763 个文章页 0 条入队，22 条入口页复推恒占前排把 10 条/天配额吃干。
+  - 建议仍待用户定（未改脚本/state）：入口页复推降级为「轮转一轮后才允许复推」/ 入口页设 maxCount / 入口页与文章页混排；`attempts` 改连续失败计数。
+
 ## 判断要点（勿误判）
 
 - `"error": 400, "message": "over quota"` + 退出码 0 = **正常**，说明当天配额已被消耗，无需重试、不改脚本。
+- `"error": 505, "message": "please retry later"` = 百度侧**瞬时抖动**，**可等 20–30 秒重试一次**（重试往往就能推满 10 条）。注意它会计一次失败次数，可能触发上面的「首页被误判无效」问题。
 - 若出现 `site error` / 网络不可用 / Python 异常 → 才是真故障，需原文上报，不动脚本与 deploy.sh。
 - 若 21:00 这次是当天第一次跑（即 deploy.sh 当天没发布过），预期能推约 10 条。
 - 队列会跨天接力，一轮覆盖完后自动开第二轮。

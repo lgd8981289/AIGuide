@@ -17,4 +17,8 @@
 
 - [Go 逃逸分析是什么？变量什么时候分配到堆上？](../go/q673-go-escape-analysis-stack-heap.md)
   Go 逃逸分析是什么？把变量生命周期、编译器分析和实际分配结果联系起来。
+- [Go 的 byte、rune 和 string 有什么区别？中文字符串长度怎么算？](../go/q714-go-byte-rune-string-utf8.md)
+  Go byte、rune、string 有什么区别？用你好和组合重音解释字节长度、range 字节偏移、码点计数与用户字符边界。
+- [Go pprof 怎么用？CPU、堆内存和 goroutine profile 分别看什么？](../go/q722-go-pprof-cpu-heap-goroutine-profiles.md)
+  Go pprof 怎么用？区分 CPU、heap、allocs 与 goroutine profile，解释采样范围、内存保留、锁竞争和可比负载下的复测方法。
 

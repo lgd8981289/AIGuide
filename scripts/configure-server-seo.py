@@ -144,6 +144,21 @@ def merge_robots(text):
     return re.sub(r"(?mi)^Sitemap:[ \t]*https://(?:www\.)?lgdsunday\.club/note/[^\n]*\n?", "", text)
 
 
+def render_note_config(seo_dir, prepare=False):
+    # 精确旧址映射独立保存在 _ops；后续常规发布不能移除已安装的 301。
+    # 新环境没有此文件时不输出 include，避免 Nginx 因缺失文件无法启动。
+    text = NOTE_CONFIG
+    redirects = seo_dir / "nginx-search-legacy-redirects.conf"
+    if redirects.is_file():
+        text = text.replace(
+            "    error_page 404 /404.html;\n",
+            "    error_page 404 /404.html;\n"
+            + "    include " + str(redirects) + ";\n",
+            1,
+        )
+    return text + ("" if prepare else LEGACY_HTTP)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true", help="只检查，不写入或重载")
@@ -174,7 +189,7 @@ def main():
         return
     if not (SITE_ROOT / "index.html").is_file():
         raise ValueError("新站内容尚未上传")
-    desired = {note_config: (NOTE_CONFIG + ("" if args.prepare else LEGACY_HTTP)).encode()}
+    desired = {note_config: render_note_config(seo_dir, args.prepare).encode()}
     if not args.prepare:
         desired.update({config: updated, robots_file: robots})
     previous = {p: p.read_bytes() if p.exists() else None for p in desired}

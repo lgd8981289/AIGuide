@@ -8,6 +8,8 @@
 
 - [ReentrantReadWriteLock 和 StampedLock 有什么区别？读多写少时怎么选？](../backend/q522-reentrantreadwritelock-vs-stampedlock.md)
   ReentrantReadWriteLock 与 StampedLock 怎么选？图解悲观读、乐观读验证与失败回退，解释局部副本、重入及锁降级，避免把读多写少当成性能保证。
+- [Java 泛型的 extends 和 super 怎么选？PECS 为什么这样规定？](../backend/q731-java-generics-wildcards-pecs.md)
+  通过集合复制解释 Java 泛型不变性、extends 与 super 的读写限制，以及 PECS 的适用条件。
 
 ## Python面试题
 

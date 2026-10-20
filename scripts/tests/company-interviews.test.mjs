@@ -5,6 +5,22 @@ import { INTERVIEW_SOURCES } from '../../src/data/company-interviews.mjs';
 import { realQuestionsForArticle, questionTags, getInterviewCollections, getInterviewCoverage, interviewDescription, companyMarkdown, validateInterviewSources } from '../../src/lib/company-interviews.mjs';
 import { publicMarkdown } from '../lib/github-articles.mjs';
 
+test('Q696至Q758按原帖公司段落匹配，不用通用框架题推断具体API', () => {
+  const ant = realQuestionsForArticle('Q739').find(m => m.source.id === 'ant-misuan-request-binding');
+  assert.equal(ant.company.id, 'ant');
+  assert.equal(ant.source.roleKey, 'development');
+  assert.ok(!questionTags('Q739').some(tag => tag.company === 'bytedance'));
+  const baidu = realQuestionsForArticle('Q756').find(m => m.source.id === 'baidu-testing-median');
+  assert.equal(baidu.source.roleKey, 'test-development');
+  assert.ok(realQuestionsForArticle('Q718').some(m => m.source.id === 'zhihu-monitor-singleflight-trie'));
+  assert.ok(!realQuestionsForArticle('Q718').some(m => m.company.id === '4399'));
+  assert.ok(!realQuestionsForArticle('Q731').some(m => m.source.url.endsWith('/353150202716561408')),
+    '明确混合多家公司且没有分段的问法不能反推为 TikTok 真题');
+  for (const n of [696,697,698,699,700,701,702,703,704,705,706,707,708,709,711,713,715,721,725,728,729,730,734,735,736,737,738,742,743,744,745,746,747,748,749]) {
+    assert.deepEqual(realQuestionsForArticle(`Q${n}`), [], `Q${n} 缺少明确原帖时应保留待核验`);
+  }
+});
+
 test('面经只关联已发布文章，缺失文章阻止导出', () => {
   const published = JSON.parse(fs.readFileSync(new URL('../article-published-urls.json', import.meta.url))).articles;
   validateInterviewSources(Object.keys(published).map(qnum => ({ qnum })));

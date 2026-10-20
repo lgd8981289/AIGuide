@@ -14,4 +14,6 @@
   Go 的 interface 为什么不等于 nil？通过类型化 nil 指针装入接口解释判断结果和 error 返回陷阱。
 - [Go context 如何传递超时和取消？cancel 后 goroutine 会自动退出吗？](../go/q669-go-context-cancellation-timeout.md)
   Go context 如何传递超时和取消？解释取消信号的传播、观察与清理责任，而不是强制杀掉任务。
+- [Go 的 init 按什么顺序执行？包初始化为什么不能依赖文件名？](../go/q716-go-package-initialization-init-order.md)
+  Go init 按什么顺序执行？从包依赖和变量初始化解释多个 init、文件输入顺序、空白导入，以及关键启动为什么应显式调用。
 

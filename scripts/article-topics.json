@@ -1878,5 +1878,205 @@
   {
     "qnum": "Q695",
     "topic": "fullstack-system-design:architecture"
+  },
+  {
+    "qnum": "Q709",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q710",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q711",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q712",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q713",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q714",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q715",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q716",
+    "topic": "go:language"
+  },
+  {
+    "qnum": "Q717",
+    "topic": "go:concurrency"
+  },
+  {
+    "qnum": "Q718",
+    "topic": "go:concurrency"
+  },
+  {
+    "qnum": "Q719",
+    "topic": "go:concurrency"
+  },
+  {
+    "qnum": "Q720",
+    "topic": "go:concurrency"
+  },
+  {
+    "qnum": "Q721",
+    "topic": "go:concurrency"
+  },
+  {
+    "qnum": "Q722",
+    "topic": "go:runtime"
+  },
+  {
+    "qnum": "Q723",
+    "topic": "go:runtime"
+  },
+  {
+    "qnum": "Q724",
+    "topic": "go:engineering"
+  },
+  {
+    "qnum": "Q725",
+    "topic": "go:engineering"
+  },
+  {
+    "qnum": "Q726",
+    "topic": "go:engineering"
+  },
+  {
+    "qnum": "Q727",
+    "topic": "go:engineering"
+  },
+  {
+    "qnum": "Q728",
+    "topic": "go:engineering"
+  },
+  {
+    "qnum": "Q729",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q730",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q731",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q732",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q733",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q734",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q735",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q736",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q737",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q738",
+    "topic": "backend:frameworks"
+  },
+  {
+    "qnum": "Q739",
+    "topic": "backend:frameworks"
+  },
+  {
+    "qnum": "Q740",
+    "topic": "backend:runtime"
+  },
+  {
+    "qnum": "Q741",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q742",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q743",
+    "topic": "frontend:javascript-typescript"
+  },
+  {
+    "qnum": "Q744",
+    "topic": "frontend:react"
+  },
+  {
+    "qnum": "Q745",
+    "topic": "frontend:react"
+  },
+  {
+    "qnum": "Q746",
+    "topic": "frontend:react"
+  },
+  {
+    "qnum": "Q747",
+    "topic": "frontend:vue"
+  },
+  {
+    "qnum": "Q748",
+    "topic": "frontend:html-css"
+  },
+  {
+    "qnum": "Q749",
+    "topic": "frontend:html-css"
+  },
+  {
+    "qnum": "Q750",
+    "topic": "frontend:browser"
+  },
+  {
+    "qnum": "Q751",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q752",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q753",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q754",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q755",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q756",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q757",
+    "topic": "cs-basics:algorithms"
+  },
+  {
+    "qnum": "Q758",
+    "topic": "cs-basics:algorithms"
   }
 ]

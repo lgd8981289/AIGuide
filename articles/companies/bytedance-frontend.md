@@ -62,6 +62,8 @@
   自定义 Hook 共享的是逻辑还是状态？用两个计数器解释每次 Hook 调用的状态归属，区分模块变量、状态提升与外部 Store，并说明清理和参数变化的检查方法。
 - [TypeScript 装饰器是什么？标准装饰器和 experimentalDecorators 有什么区别？](../frontend/q544-typescript-standard-vs-legacy-decorators.md)
   TypeScript 两套装饰器有什么区别？解释定义阶段和方法调用阶段、新版 value/context 与旧版参数约定，以及参数装饰器、元数据和旧框架迁移的兼容检查。
+- [requestIdleCallback 和 scheduler.yield 有什么区别？长任务怎样分片才不阻塞交互？](../frontend/q750-requestidlecallback-scheduler-yield-long-tasks.md)
+  比较 requestIdleCallback 与 scheduler.yield，解释微任务为何未必让出交互机会，给出分片与降级代码，说明单项长计算、Worker 和取消边界。
 
 ## Java 面试题
 
@@ -96,6 +98,10 @@
   两数之和怎么用哈希表实现？为什么要先查再存？每轮只在已经经过的元素里找补数，找到的自然就是另一个位置，也不会重复使用同一个元素。讲清查与存的顺序为何不能颠倒。
 - [K 个一组反转链表怎么实现？不足 K 个节点时怎样处理？](../cs-basics/q687-reverse-nodes-k-group.md)
   K 个一组反转链表怎么实现？维护组前驱、组尾和后继，先验证长度再反转并接回。
+- [Trie 前缀树怎么实现？完整匹配和前缀匹配有什么区别？](../cs-basics/q753-trie-prefix-tree-implementation.md)
+  用字符路径与结束标记解释 Trie 前缀树，提供 TypeScript、Python 插入和查询，区分完整匹配、前缀匹配、候选枚举和删除边界。
+- [二叉搜索树第 K 小的元素怎么找？中序遍历与子树大小怎样选？](../cs-basics/q758-kth-smallest-bst-inorder-subtree-size.md)
+  解释 BST 第 K 小的中序提前终止与栈计数，提供双语言实现，并对比维护子树大小的频繁查询方案及平衡树更新成本。
 
 ## 系统设计面试题
 

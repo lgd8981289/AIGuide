@@ -61,6 +61,10 @@
   synchronized 底层怎么实现？从字节码和 HotSpot 实现解释对象监视器与竞争过程。
 - [Spring Security 的过滤器链怎么工作？认证和授权分别在哪一步完成？](../backend/q660-spring-security-filter-chain.md)
   Spring Security 的过滤器链怎么工作？还原 Servlet 请求如何匹配链、建立身份并作访问判断。
+- [Java PriorityQueue 底层是什么？为什么遍历结果不一定有序？](../backend/q732-java-priorityqueue-heap-iteration.md)
+  讲清 Java PriorityQueue 的堆结构、遍历无序、poll 顺序、比较器稳定性和可变优先级风险。
+- [JVM 逃逸分析和 TLAB 是什么？对象一定分配在堆上吗？](../backend/q740-jvm-escape-analysis-tlab-scalar-replacement.md)
+  区分 JVM 逃逸分析、标量替换与 TLAB，解释 new 不必对应实际分配，以及 TLAB 仍在堆内的原因。
 
 ## 数据库与缓存面试题
 

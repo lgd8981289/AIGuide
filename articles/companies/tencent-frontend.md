@@ -71,6 +71,8 @@
   如何判断括号字符串是否合法？为什么要用栈？右括号必须匹配最近一个尚未关闭的左括号，扫描结束也不能留下未关闭项。讲清匹配规则与容易被忽略的边界情况。
 - [WebSocket 是怎么建立连接的？HTTP 握手、数据帧和心跳分别有什么作用？](../cs-basics/q559-websocket-handshake-frames-heartbeat.md)
   讲清WebSocket传统HTTP握手、消息与帧、掩码和Ping/Pong心跳，区分浏览器应用心跳、TLS安全与业务消息确认。
+- [颜色分类怎么原地排序？三路划分中为什么有时不能移动扫描指针？](../cs-basics/q757-sort-colors-dutch-national-flag.md)
+  从四段区域不变量解释颜色分类的荷兰国旗算法，讲清遇到 2 为什么不能前进 mid，提供双语言原地实现与穷举验证。
 
 ## 系统设计面试题
 

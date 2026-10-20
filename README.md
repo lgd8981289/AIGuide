@@ -1,6 +1,6 @@
 # Sunday面试指南 · AI 与全栈面试题
 
-**700 篇完整文章**，由 **程序员Sunday** 整理，覆盖大模型、Agent、RAG、JavaScript、Vue、React、后端、MySQL、Redis、计算机基础和系统设计。每道题讲清原理、工程取舍与面试追问，适合校招、实习与社招复习。
+**763 篇完整文章**，由 **程序员Sunday** 整理，覆盖大模型、Agent、RAG、JavaScript、Vue、React、后端、MySQL、Redis、计算机基础和系统设计。每道题讲清原理、工程取舍与面试追问，适合校招、实习与社招复习。
 
 📖 [在线阅读 Sunday面试指南](https://note.lgdsunday.club/) · [GitHub 正文目录](articles/)
 
@@ -12,10 +12,10 @@
 
 | 公司 / 岗位 | 题目数 | GitHub 真题列表 | 在线阅读 |
 | --- | ---: | --- | --- |
-| 字节前端面试真题 | 43 | [题目与答案](articles/companies/bytedance-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/frontend/) |
+| 字节前端面试真题 | 46 | [题目与答案](articles/companies/bytedance-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/frontend/) |
 | 百度前端面试真题 | 22 | [题目与答案](articles/companies/baidu-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/frontend/) |
-| 阿里后端面试真题 | 18 | [题目与答案](articles/companies/alibaba-backend.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/backend/) |
-| 腾讯后端面试真题 | 18 | [题目与答案](articles/companies/tencent-backend.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/backend/) |
+| 阿里后端面试真题 | 19 | [题目与答案](articles/companies/alibaba-backend.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/backend/) |
+| 腾讯后端面试真题 | 25 | [题目与答案](articles/companies/tencent-backend.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/backend/) |
 | 美团开发面试真题 | 20 | [题目与答案](articles/companies/meituan-development.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/development/) |
 | 京东后端面试真题 | 31 | [题目与答案](articles/companies/jd-backend.md) | [网站列表](https://note.lgdsunday.club/companies/jd/backend/) |
 | 小米前端面试真题 | 18 | [题目与答案](articles/companies/xiaomi-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/xiaomi/frontend/) |
@@ -23,32 +23,32 @@
 | 字节Agent开发面试真题 | 9 | [题目与答案](articles/companies/bytedance-agent.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/agent/) |
 | 百度Agent开发面试真题 | 7 | [题目与答案](articles/companies/baidu-agent.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/agent/) |
 | 阿里前端面试真题 | 6 | [题目与答案](articles/companies/alibaba-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/frontend/) |
-| 腾讯前端面试真题 | 32 | [题目与答案](articles/companies/tencent-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/frontend/) |
+| 腾讯前端面试真题 | 33 | [题目与答案](articles/companies/tencent-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/frontend/) |
 | 去哪儿AI应用开发面试真题 | 1 | [题目与答案](articles/companies/qunar-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/qunar/ai-application/) |
-| 字节后端面试真题 | 42 | [题目与答案](articles/companies/bytedance-backend.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/backend/) |
-| 美团后端面试真题 | 53 | [题目与答案](articles/companies/meituan-backend.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/backend/) |
+| 字节后端面试真题 | 47 | [题目与答案](articles/companies/bytedance-backend.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/backend/) |
+| 美团后端面试真题 | 55 | [题目与答案](articles/companies/meituan-backend.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/backend/) |
 | 字节算法面试真题 | 4 | [题目与答案](articles/companies/bytedance-algorithm.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/algorithm/) |
 | 腾讯AI应用开发面试真题 | 5 | [题目与答案](articles/companies/tencent-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/ai-application/) |
-| 腾讯开发面试真题 | 12 | [题目与答案](articles/companies/tencent-development.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/development/) |
+| 腾讯开发面试真题 | 13 | [题目与答案](articles/companies/tencent-development.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/development/) |
 | 百度AI应用开发面试真题 | 7 | [题目与答案](articles/companies/baidu-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/ai-application/) |
 | 美团AI应用开发面试真题 | 13 | [题目与答案](articles/companies/meituan-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/ai-application/) |
 | 虾皮Agent开发面试真题 | 12 | [题目与答案](articles/companies/shopee-agent.md) | [网站列表](https://note.lgdsunday.club/companies/shopee/agent/) |
 | 快手AI应用开发面试真题 | 14 | [题目与答案](articles/companies/kuaishou-ai-application.md) | [网站列表](https://note.lgdsunday.club/companies/kuaishou/ai-application/) |
 | 懂车帝Agent开发面试真题 | 2 | [题目与答案](articles/companies/dongchedi-agent.md) | [网站列表](https://note.lgdsunday.club/companies/dongchedi/agent/) |
 | 淘天Agent开发面试真题 | 1 | [题目与答案](articles/companies/taotian-agent.md) | [网站列表](https://note.lgdsunday.club/companies/taotian/agent/) |
-| 阿里开发面试真题 | 2 | [题目与答案](articles/companies/alibaba-development.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/development/) |
+| 阿里开发面试真题 | 4 | [题目与答案](articles/companies/alibaba-development.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/development/) |
 | 美团Agent开发面试真题 | 1 | [题目与答案](articles/companies/meituan-agent.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/agent/) |
 | 数字马力开发面试真题 | 3 | [题目与答案](articles/companies/shuzimali-development.md) | [网站列表](https://note.lgdsunday.club/companies/shuzimali/development/) |
 | 携程前端面试真题 | 3 | [题目与答案](articles/companies/ctrip-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/ctrip/frontend/) |
 | 端点前端面试真题 | 1 | [题目与答案](articles/companies/duandian-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/duandian/frontend/) |
 | 京东前端面试真题 | 1 | [题目与答案](articles/companies/jd-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/jd/frontend/) |
 | 星环科技后端面试真题 | 1 | [题目与答案](articles/companies/transwarp-backend.md) | [网站列表](https://note.lgdsunday.club/companies/transwarp/backend/) |
-| 百度后端面试真题 | 4 | [题目与答案](articles/companies/baidu-backend.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/backend/) |
+| 百度后端面试真题 | 6 | [题目与答案](articles/companies/baidu-backend.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/backend/) |
 | 快手后端面试真题 | 2 | [题目与答案](articles/companies/kuaishou-backend.md) | [网站列表](https://note.lgdsunday.club/companies/kuaishou/backend/) |
-| 字节开发面试真题 | 4 | [题目与答案](articles/companies/bytedance-development.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/development/) |
+| 字节开发面试真题 | 5 | [题目与答案](articles/companies/bytedance-development.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/development/) |
 | 有赞开发面试真题 | 3 | [题目与答案](articles/companies/youzan-development.md) | [网站列表](https://note.lgdsunday.club/companies/youzan/development/) |
-| 百度开发面试真题 | 2 | [题目与答案](articles/companies/baidu-development.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/development/) |
-| 网易开发面试真题 | 2 | [题目与答案](articles/companies/netease-development.md) | [网站列表](https://note.lgdsunday.club/companies/netease/development/) |
+| 百度开发面试真题 | 3 | [题目与答案](articles/companies/baidu-development.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/development/) |
+| 网易开发面试真题 | 3 | [题目与答案](articles/companies/netease-development.md) | [网站列表](https://note.lgdsunday.club/companies/netease/development/) |
 | 美团前端面试真题 | 1 | [题目与答案](articles/companies/meituan-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/frontend/) |
 | 快手前端面试真题 | 3 | [题目与答案](articles/companies/kuaishou-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/kuaishou/frontend/) |
 | 吉利后端面试真题 | 1 | [题目与答案](articles/companies/geely-backend.md) | [网站列表](https://note.lgdsunday.club/companies/geely/backend/) |
@@ -67,9 +67,9 @@
 | 虾皮运维面试真题 | 1 | [题目与答案](articles/companies/shopee-operations.md) | [网站列表](https://note.lgdsunday.club/companies/shopee/operations/) |
 | 百度算法面试真题 | 3 | [题目与答案](articles/companies/baidu-algorithm.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/algorithm/) |
 | 腾讯算法面试真题 | 1 | [题目与答案](articles/companies/tencent-algorithm.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/algorithm/) |
-| 字节测试开发面试真题 | 2 | [题目与答案](articles/companies/bytedance-test-development.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/test-development/) |
+| 字节测试开发面试真题 | 5 | [题目与答案](articles/companies/bytedance-test-development.md) | [网站列表](https://note.lgdsunday.club/companies/bytedance/test-development/) |
 | 腾讯测试面试真题 | 2 | [题目与答案](articles/companies/tencent-testing.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/testing/) |
-| 百度测试开发面试真题 | 1 | [题目与答案](articles/companies/baidu-test-development.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/test-development/) |
+| 百度测试开发面试真题 | 2 | [题目与答案](articles/companies/baidu-test-development.md) | [网站列表](https://note.lgdsunday.club/companies/baidu/test-development/) |
 | 微派测试面试真题 | 2 | [题目与答案](articles/companies/weipai-testing.md) | [网站列表](https://note.lgdsunday.club/companies/weipai/testing/) |
 | 小马智行测试面试真题 | 1 | [题目与答案](articles/companies/pony-testing.md) | [网站列表](https://note.lgdsunday.club/companies/pony/testing/) |
 | 大华开发面试真题 | 5 | [题目与答案](articles/companies/dahua-development.md) | [网站列表](https://note.lgdsunday.club/companies/dahua/development/) |
@@ -78,15 +78,15 @@
 | 虹软测试开发面试真题 | 1 | [题目与答案](articles/companies/arcsoft-test-development.md) | [网站列表](https://note.lgdsunday.club/companies/arcsoft/test-development/) |
 | 晓多科技测试面试真题 | 2 | [题目与答案](articles/companies/xiaoduo-testing.md) | [网站列表](https://note.lgdsunday.club/companies/xiaoduo/testing/) |
 | 腾讯测试开发面试真题 | 1 | [题目与答案](articles/companies/tencent-test-development.md) | [网站列表](https://note.lgdsunday.club/companies/tencent/test-development/) |
-| 蚂蚁集团测试开发面试真题 | 1 | [题目与答案](articles/companies/ant-test-development.md) | [网站列表](https://note.lgdsunday.club/companies/ant/test-development/) |
-| 快手测试开发面试真题 | 2 | [题目与答案](articles/companies/kuaishou-test-development.md) | [网站列表](https://note.lgdsunday.club/companies/kuaishou/test-development/) |
+| 蚂蚁集团测试开发面试真题 | 2 | [题目与答案](articles/companies/ant-test-development.md) | [网站列表](https://note.lgdsunday.club/companies/ant/test-development/) |
+| 快手测试开发面试真题 | 3 | [题目与答案](articles/companies/kuaishou-test-development.md) | [网站列表](https://note.lgdsunday.club/companies/kuaishou/test-development/) |
 | 美团测试开发面试真题 | 1 | [题目与答案](articles/companies/meituan-test-development.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/test-development/) |
 | 阿里算法面试真题 | 1 | [题目与答案](articles/companies/alibaba-algorithm.md) | [网站列表](https://note.lgdsunday.club/companies/alibaba/algorithm/) |
 | 蚂蚁集团算法面试真题 | 2 | [题目与答案](articles/companies/ant-algorithm.md) | [网站列表](https://note.lgdsunday.club/companies/ant/algorithm/) |
-| 网宿科技后端面试真题 | 3 | [题目与答案](articles/companies/wangsu-backend.md) | [网站列表](https://note.lgdsunday.club/companies/wangsu/backend/) |
-| 畅天游开发面试真题 | 4 | [题目与答案](articles/companies/changtianyou-development.md) | [网站列表](https://note.lgdsunday.club/companies/changtianyou/development/) |
-| 小米开发面试真题 | 3 | [题目与答案](articles/companies/xiaomi-development.md) | [网站列表](https://note.lgdsunday.club/companies/xiaomi/development/) |
-| 4399后端面试真题 | 2 | [题目与答案](articles/companies/4399-backend.md) | [网站列表](https://note.lgdsunday.club/companies/4399/backend/) |
+| 网宿科技后端面试真题 | 4 | [题目与答案](articles/companies/wangsu-backend.md) | [网站列表](https://note.lgdsunday.club/companies/wangsu/backend/) |
+| 畅天游开发面试真题 | 5 | [题目与答案](articles/companies/changtianyou-development.md) | [网站列表](https://note.lgdsunday.club/companies/changtianyou/development/) |
+| 小米开发面试真题 | 4 | [题目与答案](articles/companies/xiaomi-development.md) | [网站列表](https://note.lgdsunday.club/companies/xiaomi/development/) |
+| 4399后端面试真题 | 4 | [题目与答案](articles/companies/4399-backend.md) | [网站列表](https://note.lgdsunday.club/companies/4399/backend/) |
 | 编程猫前端面试真题 | 1 | [题目与答案](articles/companies/codingcat-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/codingcat/frontend/) |
 | 淘天前端面试真题 | 1 | [题目与答案](articles/companies/taotian-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/taotian/frontend/) |
 | 小红书前端面试真题 | 1 | [题目与答案](articles/companies/xiaohongshu-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/xiaohongshu/frontend/) |
@@ -98,6 +98,23 @@
 | 微步在线前端面试真题 | 1 | [题目与答案](articles/companies/weibu-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/weibu/frontend/) |
 | 瀚博半导体开发面试真题 | 2 | [题目与答案](articles/companies/vastai-development.md) | [网站列表](https://note.lgdsunday.club/companies/vastai/development/) |
 | 美团算法面试真题 | 1 | [题目与答案](articles/companies/meituan-algorithm.md) | [网站列表](https://note.lgdsunday.club/companies/meituan/algorithm/) |
+| 安克创新开发面试真题 | 2 | [题目与答案](articles/companies/anker-development.md) | [网站列表](https://note.lgdsunday.club/companies/anker/development/) |
+| 云览科技开发面试真题 | 4 | [题目与答案](articles/companies/yunlan-development.md) | [网站列表](https://note.lgdsunday.club/companies/yunlan/development/) |
+| PingCAP开发面试真题 | 1 | [题目与答案](articles/companies/pingcap-development.md) | [网站列表](https://note.lgdsunday.club/companies/pingcap/development/) |
+| 滴滴开发面试真题 | 1 | [题目与答案](articles/companies/didi-development.md) | [网站列表](https://note.lgdsunday.club/companies/didi/development/) |
+| Liblib开发面试真题 | 1 | [题目与答案](articles/companies/liblib-development.md) | [网站列表](https://note.lgdsunday.club/companies/liblib/development/) |
+| 猿辅导开发面试真题 | 1 | [题目与答案](articles/companies/yuanfudao-development.md) | [网站列表](https://note.lgdsunday.club/companies/yuanfudao/development/) |
+| 快手开发面试真题 | 2 | [题目与答案](articles/companies/kuaishou-development.md) | [网站列表](https://note.lgdsunday.club/companies/kuaishou/development/) |
+| 淘天开发面试真题 | 1 | [题目与答案](articles/companies/taotian-development.md) | [网站列表](https://note.lgdsunday.club/companies/taotian/development/) |
+| 懂车帝后端面试真题 | 2 | [题目与答案](articles/companies/dongchedi-backend.md) | [网站列表](https://note.lgdsunday.club/companies/dongchedi/backend/) |
+| 微软开发面试真题 | 1 | [题目与答案](articles/companies/microsoft-development.md) | [网站列表](https://note.lgdsunday.club/companies/microsoft/development/) |
+| 虾皮后端面试真题 | 1 | [题目与答案](articles/companies/shopee-backend.md) | [网站列表](https://note.lgdsunday.club/companies/shopee/backend/) |
+| 斑马智行算法面试真题 | 1 | [题目与答案](articles/companies/banma-algorithm.md) | [网站列表](https://note.lgdsunday.club/companies/banma/algorithm/) |
+| 拼多多前端面试真题 | 1 | [题目与答案](articles/companies/pdd-frontend.md) | [网站列表](https://note.lgdsunday.club/companies/pdd/frontend/) |
+| 昆仑数智开发面试真题 | 1 | [题目与答案](articles/companies/kunlun-development.md) | [网站列表](https://note.lgdsunday.club/companies/kunlun/development/) |
+| 蚂蚁集团开发面试真题 | 1 | [题目与答案](articles/companies/ant-development.md) | [网站列表](https://note.lgdsunday.club/companies/ant/development/) |
+| 蔚来开发面试真题 | 1 | [题目与答案](articles/companies/nio-development.md) | [网站列表](https://note.lgdsunday.club/companies/nio/development/) |
+| 知乎开发面试真题 | 2 | [题目与答案](articles/companies/zhihu-development.md) | [网站列表](https://note.lgdsunday.club/companies/zhihu/development/) |
 
 [全部公司真题目录](articles/companies/README.md) · [网站真题列表](https://note.lgdsunday.club/companies/) · [校招与实习准备路线](https://note.lgdsunday.club/guides/campus-interview/)
 
@@ -107,16 +124,16 @@
 | --- | ---: | --- | --- |
 | 大模型基础面试题 | 26 | [正文目录](articles/llm/README.md) | [网站专题](https://note.lgdsunday.club/llm/) |
 | RAG面试题 | 25 | [正文目录](articles/rag/README.md) | [网站专题](https://note.lgdsunday.club/rag/) |
-| Agent面试题 | 53 | [正文目录](articles/agent/README.md) | [网站专题](https://note.lgdsunday.club/agent/) |
+| Agent面试题 | 60 | [正文目录](articles/agent/README.md) | [网站专题](https://note.lgdsunday.club/agent/) |
 | AI应用工程面试题 | 31 | [正文目录](articles/engineering/README.md) | [网站专题](https://note.lgdsunday.club/engineering/) |
 | AI项目与系统设计面试题 | 12 | [正文目录](articles/system-design/README.md) | [网站专题](https://note.lgdsunday.club/system-design/) |
-| LangChain生态面试题 | 18 | [正文目录](articles/langchain/README.md) | [网站专题](https://note.lgdsunday.club/langchain/) |
-| 前端面试题 | 137 | [正文目录](articles/frontend/README.md) | [网站专题](https://note.lgdsunday.club/frontend/) |
-| Java 面试题 | 136 | [正文目录](articles/backend/README.md) | [网站专题](https://note.lgdsunday.club/backend/) |
+| LangChain生态面试题 | 24 | [正文目录](articles/langchain/README.md) | [网站专题](https://note.lgdsunday.club/langchain/) |
+| 前端面试题 | 147 | [正文目录](articles/frontend/README.md) | [网站专题](https://note.lgdsunday.club/frontend/) |
+| Java 面试题 | 148 | [正文目录](articles/backend/README.md) | [网站专题](https://note.lgdsunday.club/backend/) |
 | Python面试题 | 68 | [正文目录](articles/python/README.md) | [网站专题](https://note.lgdsunday.club/python/) |
-| Go面试题 | 12 | [正文目录](articles/go/README.md) | [网站专题](https://note.lgdsunday.club/go/) |
+| Go面试题 | 32 | [正文目录](articles/go/README.md) | [网站专题](https://note.lgdsunday.club/go/) |
 | 数据库与缓存面试题 | 69 | [正文目录](articles/database/README.md) | [网站专题](https://note.lgdsunday.club/database/) |
-| 计算机基础面试题 | 81 | [正文目录](articles/cs-basics/README.md) | [网站专题](https://note.lgdsunday.club/cs-basics/) |
+| 计算机基础面试题 | 89 | [正文目录](articles/cs-basics/README.md) | [网站专题](https://note.lgdsunday.club/cs-basics/) |
 | 系统设计面试题 | 27 | [正文目录](articles/fullstack-system-design/README.md) | [网站专题](https://note.lgdsunday.club/fullstack-system-design/) |
 | AI编程工具与平台 | 2 | [正文目录](articles/tools/README.md) | [网站专题](https://note.lgdsunday.club/tools/) |
 | Agent能力扩展 | 1 | [正文目录](articles/agent-ext/README.md) | [网站专题](https://note.lgdsunday.club/agent-ext/) |
@@ -237,6 +254,13 @@
 - [ToT 思维树是什么？和 CoT、Self-Consistency 有什么区别？](articles/agent/q637-tree-of-thoughts-self-consistency.md) · [在线阅读](https://note.lgdsunday.club/agent/q637-tree-of-thoughts-self-consistency/)
 - [MCP 为什么改为无状态协议？2026-07-28 版本如何处理能力声明与兼容？](articles/agent/q642-mcp-stateless-protocol-versioning.md) · [在线阅读](https://note.lgdsunday.club/agent/q642-mcp-stateless-protocol-versioning/)
 - [MCP 的 MRTR 是什么？无状态请求如何承接服务端的补充输入请求？](articles/agent/q643-mcp-multi-round-trip-requests.md) · [在线阅读](https://note.lgdsunday.club/agent/q643-mcp-multi-round-trip-requests/)
+- [PydanticAI 是什么？依赖注入和类型化输出如何组织 Agent？](articles/agent/q696-pydantic-ai-dependencies-output.md) · [在线阅读](https://note.lgdsunday.club/agent/q696-pydantic-ai-dependencies-output/)
+- [Microsoft Agent Framework 是什么？它与 Semantic Kernel、AutoGen 是什么关系？](articles/agent/q697-microsoft-agent-framework-semantic-kernel-autogen.md) · [在线阅读](https://note.lgdsunday.club/agent/q697-microsoft-agent-framework-semantic-kernel-autogen/)
+- [Haystack 是什么？Component、Pipeline 和 Agent 怎样配合？](articles/agent/q698-haystack-components-pipelines-agents.md) · [在线阅读](https://note.lgdsunday.club/agent/q698-haystack-components-pipelines-agents/)
+- [Mastra 是什么？Agent 和 Workflow 如何接入 TypeScript 项目？](articles/agent/q699-mastra-typescript-agent-workflow.md) · [在线阅读](https://note.lgdsunday.club/agent/q699-mastra-typescript-agent-workflow/)
+- [Spring AI 的 Advisor 是什么？顾问链顺序如何影响模型调用？](articles/agent/q700-spring-ai-advisor-chain-order.md) · [在线阅读](https://note.lgdsunday.club/agent/q700-spring-ai-advisor-chain-order/)
+- [MCP 的工具注解有什么用？readOnlyHint、destructiveHint、idempotentHint 怎样理解？](articles/agent/q707-mcp-tool-annotations-safety-hints.md) · [在线阅读](https://note.lgdsunday.club/agent/q707-mcp-tool-annotations-safety-hints/)
+- [MCP 工具的 content、structuredContent 和 isError 有什么区别？](articles/agent/q708-mcp-tool-result-content-structuredcontent-iserror.md) · [在线阅读](https://note.lgdsunday.club/agent/q708-mcp-tool-result-content-structuredcontent-iserror/)
 
 ### AI应用工程面试题
 
@@ -307,6 +331,12 @@
 - [Deep Agents 是什么？它和 LangChain、LangGraph 有什么关系？](articles/langchain/q509-deep-agents-langchain-langgraph.md) · [在线阅读](https://note.lgdsunday.club/langchain/q509-deep-agents-langchain-langgraph/)
 - [LangGraph 的 Command 和条件边有什么区别？怎样同时更新状态并决定下一步？](articles/langchain/q640-langgraph-command-conditional-edges.md) · [在线阅读](https://note.lgdsunday.club/langchain/q640-langgraph-command-conditional-edges/)
 - [LangChain 结构化输出怎么选？ProviderStrategy 和 ToolStrategy 有什么区别？](articles/langchain/q641-langchain-provider-tool-strategy.md) · [在线阅读](https://note.lgdsunday.club/langchain/q641-langchain-provider-tool-strategy/)
+- [LangGraph 的 sync、async、exit 持久化模式有什么区别？](articles/langchain/q701-langgraph-durability-sync-async-exit.md) · [在线阅读](https://note.lgdsunday.club/langchain/q701-langgraph-durability-sync-async-exit/)
+- [LangGraph 的 State、Runtime Context 和 Config 有什么区别？](articles/langchain/q702-langgraph-state-runtime-context-config.md) · [在线阅读](https://note.lgdsunday.club/langchain/q702-langgraph-state-runtime-context-config/)
+- [LangGraph 的 RetryPolicy 怎么用？节点失败后如何安全重试？](articles/langchain/q703-langgraph-retry-policy-node-failures.md) · [在线阅读](https://note.lgdsunday.club/langchain/q703-langgraph-retry-policy-node-failures/)
+- [LangGraph 如何清空带 reducer 的状态？Overwrite 和普通更新有什么区别？](articles/langchain/q704-langgraph-overwrite-reset-reducer-state.md) · [在线阅读](https://note.lgdsunday.club/langchain/q704-langgraph-overwrite-reset-reducer-state/)
+- [LangGraph 的 input、output 和 private state 有什么区别？怎样避免内部状态泄露？](articles/langchain/q705-langgraph-input-output-private-state-schema.md) · [在线阅读](https://note.lgdsunday.club/langchain/q705-langgraph-input-output-private-state-schema/)
+- [LangChain 的 ToolRuntime 是什么？工具怎样取得用户身份和状态？](articles/langchain/q706-langchain-toolruntime-injected-context.md) · [在线阅读](https://note.lgdsunday.club/langchain/q706-langchain-toolruntime-injected-context/)
 
 ### 前端面试题
 
@@ -447,6 +477,16 @@
 - [JavaScript 原型污染是什么？对象合并为什么可能影响其他对象？](articles/frontend/q649-javascript-prototype-pollution.md) · [在线阅读](https://note.lgdsunday.club/frontend/q649-javascript-prototype-pollution/)
 - [TypeScript 的 .d.ts 声明文件有什么用？declare 和运行时代码是什么关系？](articles/frontend/q650-typescript-declaration-files.md) · [在线阅读](https://note.lgdsunday.club/frontend/q650-typescript-declaration-files/)
 - [正则表达式为什么会卡死页面？贪婪匹配、回溯和 ReDoS 应该怎么理解？](articles/frontend/q651-regex-backtracking-redos.md) · [在线阅读](https://note.lgdsunday.club/frontend/q651-regex-backtracking-redos/)
+- [JavaScript sort 为什么可能排错数字？比较器、稳定性和 toSorted 有什么区别？](articles/frontend/q741-javascript-sort-comparator-tosorted.md) · [在线阅读](https://note.lgdsunday.club/frontend/q741-javascript-sort-comparator-tosorted/)
+- [for await...of 是什么？异步迭代、普通 for...of 和并发有什么区别？](articles/frontend/q742-javascript-for-await-of-async-iteration.md) · [在线阅读](https://note.lgdsunday.club/frontend/q742-javascript-for-await-of-async-iteration/)
+- [TypeScript 的 module 和 moduleResolution 有什么区别？NodeNext 与 Bundler 怎么选？](articles/frontend/q743-typescript-module-moduleresolution-nodenext-bundler.md) · [在线阅读](https://note.lgdsunday.club/frontend/q743-typescript-module-moduleresolution-nodenext-bundler/)
+- [React useId 有什么用？为什么不能拿它当列表 key？](articles/frontend/q744-react-useid-accessibility-hydration.md) · [在线阅读](https://note.lgdsunday.club/frontend/q744-react-useid-accessibility-hydration/)
+- [React useActionState 和 useFormStatus 有什么区别？表单状态由谁维护？](articles/frontend/q745-react-useactionstate-useformstatus.md) · [在线阅读](https://note.lgdsunday.club/frontend/q745-react-useactionstate-useformstatus/)
+- [React createPortal 和 createRoot 有什么区别？跨容器渲染时状态与 Context 怎样共享？](articles/frontend/q746-react-createportal-vs-createroot-context.md) · [在线阅读](https://note.lgdsunday.club/frontend/q746-react-createportal-vs-createroot-context/)
+- [Vue 3.5 的 props 解构为什么还能响应更新？与 reactive 解构有什么区别？](articles/frontend/q747-vue-reactive-props-destructure-compiler.md) · [在线阅读](https://note.lgdsunday.club/frontend/q747-vue-reactive-props-destructure-compiler/)
+- [CSS content-visibility 是什么？和 display:none、虚拟列表有什么区别？](articles/frontend/q748-css-content-visibility-contain-intrinsic-size.md) · [在线阅读](https://note.lgdsunday.club/frontend/q748-css-content-visibility-contain-intrinsic-size/)
+- [CSS object-fit 和 background-size 有什么区别？图片为什么会裁切或变形？](articles/frontend/q749-css-object-fit-background-size.md) · [在线阅读](https://note.lgdsunday.club/frontend/q749-css-object-fit-background-size/)
+- [requestIdleCallback 和 scheduler.yield 有什么区别？长任务怎样分片才不阻塞交互？](articles/frontend/q750-requestidlecallback-scheduler-yield-long-tasks.md) · [在线阅读](https://note.lgdsunday.club/frontend/q750-requestidlecallback-scheduler-yield-long-tasks/)
 
 ### Java 面试题
 
@@ -586,6 +626,18 @@
 - [Nginx location 匹配顺序是什么？proxy_pass 带不带斜杠有什么区别？](articles/backend/q667-nginx-location-proxy-pass-uri.md) · [在线阅读](https://note.lgdsunday.club/backend/q667-nginx-location-proxy-pass-uri/)
 - [Dockerfile 的 RUN、CMD 和 ENTRYPOINT 有什么区别？容器启动参数如何组合？](articles/backend/q668-dockerfile-run-cmd-entrypoint.md) · [在线阅读](https://note.lgdsunday.club/backend/q668-dockerfile-run-cmd-entrypoint/)
 - [ZooKeeper 分布式锁怎么实现？临时顺序节点和 Watch 如何配合？](articles/backend/q675-zookeeper-ephemeral-sequential-lock.md) · [在线阅读](https://note.lgdsunday.club/backend/q675-zookeeper-ephemeral-sequential-lock/)
+- [Java record 是什么？为什么 final 字段不代表对象深度不可变？](articles/backend/q729-java-record-shallow-immutability.md) · [在线阅读](https://note.lgdsunday.club/backend/q729-java-record-shallow-immutability/)
+- [Java sealed class 有什么用？与 final、穷尽 switch 怎样配合？](articles/backend/q730-java-sealed-classes-exhaustive-switch.md) · [在线阅读](https://note.lgdsunday.club/backend/q730-java-sealed-classes-exhaustive-switch/)
+- [Java 泛型的 extends 和 super 怎么选？PECS 为什么这样规定？](articles/backend/q731-java-generics-wildcards-pecs.md) · [在线阅读](https://note.lgdsunday.club/backend/q731-java-generics-wildcards-pecs/)
+- [Java PriorityQueue 底层是什么？为什么遍历结果不一定有序？](articles/backend/q732-java-priorityqueue-heap-iteration.md) · [在线阅读](https://note.lgdsunday.club/backend/q732-java-priorityqueue-heap-iteration/)
+- [TreeMap 和 HashMap 有什么区别？floorKey、ceilingKey 如何做范围查找？](articles/backend/q733-java-treemap-navigablemap-range-queries.md) · [在线阅读](https://note.lgdsunday.club/backend/q733-java-treemap-navigablemap-range-queries/)
+- [EnumMap 和 EnumSet 有什么区别？枚举集合为什么不一定要用 HashMap？](articles/backend/q734-java-enummap-enumset-collections.md) · [在线阅读](https://note.lgdsunday.club/backend/q734-java-enummap-enumset-collections/)
+- [WeakHashMap 是什么？弱引用为什么不等于一个可靠的缓存？](articles/backend/q735-java-weakhashmap-weak-keys.md) · [在线阅读](https://note.lgdsunday.club/backend/q735-java-weakhashmap-weak-keys/)
+- [Java 性能测试为什么用 JMH？预热、死代码消除和常量折叠如何影响结果？](articles/backend/q736-java-jmh-microbenchmark-pitfalls.md) · [在线阅读](https://note.lgdsunday.club/backend/q736-java-jmh-microbenchmark-pitfalls/)
+- [Java JFR 是什么？和线程 Dump、Heap Dump 各适合查什么？](articles/backend/q737-java-jfr-thread-heap-dump.md) · [在线阅读](https://note.lgdsunday.club/backend/q737-java-jfr-thread-heap-dump/)
+- [Spring 的事件监听什么时候执行？EventListener 和 TransactionalEventListener 有什么区别？](articles/backend/q738-spring-eventlistener-transactional-event-listener.md) · [在线阅读](https://note.lgdsunday.club/backend/q738-spring-eventlistener-transactional-event-listener/)
+- [Spring MVC 的 RequestBody、RequestParam 和 ModelAttribute 有什么区别？](articles/backend/q739-spring-mvc-requestbody-requestparam-modelattribute.md) · [在线阅读](https://note.lgdsunday.club/backend/q739-spring-mvc-requestbody-requestparam-modelattribute/)
+- [JVM 逃逸分析和 TLAB 是什么？对象一定分配在堆上吗？](articles/backend/q740-jvm-escape-analysis-tlab-scalar-replacement.md) · [在线阅读](https://note.lgdsunday.club/backend/q740-jvm-escape-analysis-tlab-scalar-replacement/)
 
 ### Python面试题
 
@@ -672,6 +724,26 @@
 - [Go 的 errors.Is、errors.As 和错误包装怎么用？为什么不能只比较错误字符串？](articles/go/q672-go-errors-is-as-wrapping.md) · [在线阅读](https://note.lgdsunday.club/go/q672-go-errors-is-as-wrapping/)
 - [Go 逃逸分析是什么？变量什么时候分配到堆上？](articles/go/q673-go-escape-analysis-stack-heap.md) · [在线阅读](https://note.lgdsunday.club/go/q673-go-escape-analysis-stack-heap/)
 - [Go 垃圾回收怎么工作？三色标记、写屏障和 GOGC 分别做什么？](articles/go/q674-go-gc-tricolor-write-barrier.md) · [在线阅读](https://note.lgdsunday.club/go/q674-go-gc-tricolor-write-barrier/)
+- [Go 值接收者和指针接收者有什么区别？方法集如何决定接口实现？](articles/go/q709-go-value-pointer-receivers-method-sets.md) · [在线阅读](https://note.lgdsunday.club/go/q709-go-value-pointer-receivers-method-sets/)
+- [Go 泛型怎么用？类型约束、~ 和 comparable 分别表示什么？](articles/go/q710-go-generics-constraints-comparable.md) · [在线阅读](https://note.lgdsunday.club/go/q710-go-generics-constraints-comparable/)
+- [Go 结构体嵌入是什么？方法提升和继承有什么区别？](articles/go/q711-go-struct-embedding-method-promotion.md) · [在线阅读](https://note.lgdsunday.club/go/q711-go-struct-embedding-method-promotion/)
+- [Go 的 make 和 new 有什么区别？为什么 new(map) 后不能直接写？](articles/go/q712-go-make-new-zero-values.md) · [在线阅读](https://note.lgdsunday.club/go/q712-go-make-new-zero-values/)
+- [Go for range 的循环变量会共享吗？Go 1.22 前后如何理解闭包捕获？](articles/go/q713-go-range-loop-variable-closures.md) · [在线阅读](https://note.lgdsunday.club/go/q713-go-range-loop-variable-closures/)
+- [Go 的 byte、rune 和 string 有什么区别？中文字符串长度怎么算？](articles/go/q714-go-byte-rune-string-utf8.md) · [在线阅读](https://note.lgdsunday.club/go/q714-go-byte-rune-string-utf8/)
+- [Go 的 := 和 = 有什么区别？变量遮蔽为什么会让 err 判断失效？](articles/go/q715-go-short-declaration-variable-shadowing.md) · [在线阅读](https://note.lgdsunday.club/go/q715-go-short-declaration-variable-shadowing/)
+- [Go 的 init 按什么顺序执行？包初始化为什么不能依赖文件名？](articles/go/q716-go-package-initialization-init-order.md) · [在线阅读](https://note.lgdsunday.club/go/q716-go-package-initialization-init-order/)
+- [Go WaitGroup 和 errgroup 有什么区别？等待、错误与取消怎样配合？](articles/go/q717-go-waitgroup-errgroup-error-cancellation.md) · [在线阅读](https://note.lgdsunday.club/go/q717-go-waitgroup-errgroup-error-cancellation/)
+- [Go singleflight 是什么？为什么它不能代替缓存和分布式锁？](articles/go/q718-go-singleflight-duplicate-request-suppression.md) · [在线阅读](https://note.lgdsunday.club/go/q718-go-singleflight-duplicate-request-suppression/)
+- [Go Mutex 和 RWMutex 怎么选？为什么不能重入，也不该复制？](articles/go/q719-go-mutex-rwmutex-locking.md) · [在线阅读](https://note.lgdsunday.club/go/q719-go-mutex-rwmutex-locking/)
+- [Go atomic 和 Mutex 有什么区别？原子更新能保证整段逻辑安全吗？](articles/go/q720-go-atomic-mutex-state-invariants.md) · [在线阅读](https://note.lgdsunday.club/go/q720-go-atomic-mutex-state-invariants/)
+- [Go Timer 和 Ticker 有什么区别？Stop、Reset 与通道语义怎样受版本影响？](articles/go/q721-go-timer-ticker-stop-reset.md) · [在线阅读](https://note.lgdsunday.club/go/q721-go-timer-ticker-stop-reset/)
+- [Go pprof 怎么用？CPU、堆内存和 goroutine profile 分别看什么？](articles/go/q722-go-pprof-cpu-heap-goroutine-profiles.md) · [在线阅读](https://note.lgdsunday.club/go/q722-go-pprof-cpu-heap-goroutine-profiles/)
+- [Go goroutine 泄漏怎么排查？为什么它们一直等待却不会被 GC 清理？](articles/go/q723-go-goroutine-leak-diagnosis.md) · [在线阅读](https://note.lgdsunday.club/go/q723-go-goroutine-leak-diagnosis/)
+- [Go HTTP Client 为什么要复用？响应体、连接池和超时应该怎么管理？](articles/go/q724-go-http-client-reuse-body-timeouts.md) · [在线阅读](https://note.lgdsunday.club/go/q724-go-http-client-reuse-body-timeouts/)
+- [Go Modules 的 go.mod、go.sum 和 replace 各有什么作用？](articles/go/q725-go-modules-go-mod-go-sum-replace.md) · [在线阅读](https://note.lgdsunday.club/go/q725-go-modules-go-mod-go-sum-replace/)
+- [Go 交叉编译为什么会被 CGO 卡住？GOOS、GOARCH、CGO_ENABLED 怎么配合？](articles/go/q726-go-cross-compilation-cgo-goos-goarch.md) · [在线阅读](https://note.lgdsunday.club/go/q726-go-cross-compilation-cgo-goos-goarch/)
+- [Go 的 io.Reader 和 io.Writer 是什么？为什么 Read 一次不保证读满？](articles/go/q727-go-io-reader-writer-readfull.md) · [在线阅读](https://note.lgdsunday.club/go/q727-go-io-reader-writer-readfull/)
+- [Go JSON 的 omitempty 和指针字段有什么区别？零值与未传怎么区分？](articles/go/q728-go-json-omitempty-pointer-missing-fields.md) · [在线阅读](https://note.lgdsunday.club/go/q728-go-json-omitempty-pointer-missing-fields/)
 
 ### 数据库与缓存面试题
 
@@ -828,6 +900,14 @@
 - [最长公共子序列怎么求？为什么它和最长公共子串不是同一道题？](articles/cs-basics/q691-longest-common-subsequence.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q691-longest-common-subsequence/)
 - [滑动窗口最大值怎么求？单调队列为什么能做到 O(n)？](articles/cs-basics/q692-sliding-window-maximum-deque.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q692-sliding-window-maximum-deque/)
 - [如何验证二叉搜索树？为什么只比较节点和左右孩子不够？](articles/cs-basics/q693-validate-binary-search-tree.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q693-validate-binary-search-tree/)
+- [最长递增子序列怎么求？动态规划和二分 tails 为什么都正确？](articles/cs-basics/q751-longest-increasing-subsequence-dp-binary-search.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q751-longest-increasing-subsequence-dp-binary-search/)
+- [最小覆盖子串怎么求？重复字符为什么必须按数量匹配？](articles/cs-basics/q752-minimum-window-substring-counts.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q752-minimum-window-substring-counts/)
+- [Trie 前缀树怎么实现？完整匹配和前缀匹配有什么区别？](articles/cs-basics/q753-trie-prefix-tree-implementation.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q753-trie-prefix-tree-implementation/)
+- [二叉树的直径怎么求？为什么最长路径不一定经过根节点？](articles/cs-basics/q754-binary-tree-diameter-postorder.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q754-binary-tree-diameter-postorder/)
+- [如何判断回文链表？快慢指针与反转后半段怎样配合？](articles/cs-basics/q755-palindrome-linked-list-restore.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q755-palindrome-linked-list-restore/)
+- [两个有序数组的中位数怎么找？二分分割线为什么能降低复杂度？](articles/cs-basics/q756-median-two-sorted-arrays-partition.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q756-median-two-sorted-arrays-partition/)
+- [颜色分类怎么原地排序？三路划分中为什么有时不能移动扫描指针？](articles/cs-basics/q757-sort-colors-dutch-national-flag.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q757-sort-colors-dutch-national-flag/)
+- [二叉搜索树第 K 小的元素怎么找？中序遍历与子树大小怎样选？](articles/cs-basics/q758-kth-smallest-bst-inorder-subtree-size.md) · [在线阅读](https://note.lgdsunday.club/cs-basics/q758-kth-smallest-bst-inorder-subtree-size/)
 
 ### 系统设计面试题
 

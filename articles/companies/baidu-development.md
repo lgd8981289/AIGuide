@@ -4,6 +4,11 @@
 
 真题根据求职者公开面经整理，题意经过概括，非逐字原话或公司官方题库；本文为 Sunday 的独立解析。
 
+## Go面试题
+
+- [Go Mutex 和 RWMutex 怎么选？为什么不能重入，也不该复制？](../go/q719-go-mutex-rwmutex-locking.md)
+  Go Mutex 与 RWMutex 怎么选？解释读写互斥、等待写者导致的递归读锁死锁、锁不能复制，以及为什么读多不保证更快。
+
 ## 数据库与缓存面试题
 
 - [MySQL 的 Nested Loop Join 和 Hash Join 有什么区别？关联查询为什么会慢？](../database/q525-mysql-nested-loop-vs-hash-join.md)

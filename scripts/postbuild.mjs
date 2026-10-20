@@ -170,23 +170,28 @@ function collectDates() {
       }
     }
   }
-  // 学习路线按已声明的内容更新时间填写，避免每次构建都改变 lastmod。
-  const guidesDir = path.join(DIST, 'guides');
-  if (fs.existsSync(guidesDir)) {
-    for (const slug of fs.readdirSync(guidesDir)) {
-      const file = path.join(guidesDir, slug, 'index.html');
-      if (!fs.existsSync(file)) continue;
-      const date = fs.readFileSync(file, 'utf8').match(/"dateModified":"(\d{4}-\d{2}-\d{2})"/)?.[1];
-      if (date) byUrl.set(`/guides/${slug}/`, date);
+  // 路线、公司与岗位目录使用页面声明的实际内容日期；递归覆盖公司/岗位两层。
+  // 未知日期留空，不能把重新构建伪装成内容更新。
+  function collectPageDates(dir) {
+    if (!fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const file = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        collectPageDates(file);
+      } else if (entry.name === 'index.html') {
+        const date = fs.readFileSync(file, 'utf8').match(/"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})"/)?.[1];
+        if (date) byUrl.set(`/${path.relative(DIST, dir).split(path.sep).join('/')}/`, date);
+      }
     }
   }
+  collectPageDates(path.join(DIST, 'guides'));
+  collectPageDates(path.join(DIST, 'companies'));
   return { byUrl, byCategory, byModule, latest };
 }
 
 function injectLastmod() {
   if (!fs.existsSync(SITEMAP)) return 0;
   const { byUrl, byCategory, byModule, latest } = collectDates();
-  const today = new Date().toISOString().slice(0, 10);
 
   let count = 0;
   const xml = fs.readFileSync(SITEMAP, "utf-8").replace(
@@ -194,8 +199,8 @@ function injectLastmod() {
     (whole, loc) => {
       const url = new URL(loc).pathname;
       let date = byUrl.get(url) || byCategory.get(url) || byModule.get(url);
-      if (!date && url === `${BASE}/`) date = latest || today;
-      if (!date) date = today; // 其他页面（404 等）用构建日
+      if (!date && url === `${BASE}/`) date = latest;
+      if (!date) return whole;
       count += 1;
       return `<url><loc>${loc}</loc><lastmod>${date}</lastmod></url>`;
     }

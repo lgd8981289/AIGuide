@@ -12,4 +12,6 @@
   Go context 如何传递超时和取消？解释取消信号的传播、观察与清理责任，而不是强制杀掉任务。
 - [Go 垃圾回收怎么工作？三色标记、写屏障和 GOGC 分别做什么？](../go/q674-go-gc-tricolor-write-barrier.md)
   Go 垃圾回收怎么工作？理解可达性、并发维护与内存/CPU 权衡，区分算法概念和实现版本。
+- [Go WaitGroup 和 errgroup 有什么区别？等待、错误与取消怎样配合？](../go/q717-go-waitgroup-errgroup-error-cancellation.md)
+  Go WaitGroup 和 errgroup 有什么区别？用失败后协作取消的任务链解释 Wait、WithContext、Go1.25 WaitGroup.Go 与并发限制。
 

@@ -28,6 +28,19 @@
   Java 单例模式怎么实现？双重检查锁为什么需要 volatile？单例要同时说清实例创建、发布与唯一范围，实例唯一也不代表成员操作线程安全。讲清指令重排带来的风险。
 - [RPC 是什么？一次远程方法调用要经过哪些步骤，和本地调用有什么区别？](../backend/q553-rpc-call-process.md)
   从一次库存服务调用讲解RPC代理、序列化、网络传输与服务端执行，分析超时结果不确定、重试和业务幂等的工程边界。
+- [TreeMap 和 HashMap 有什么区别？floorKey、ceilingKey 如何做范围查找？](../backend/q733-java-treemap-navigablemap-range-queries.md)
+  对比 TreeMap 与 HashMap，解释 floorKey、ceilingKey 的边界、比较器身份和 subMap 关联视图。
+
+## Go面试题
+
+- [Go 泛型怎么用？类型约束、~ 和 comparable 分别表示什么？](../go/q710-go-generics-constraints-comparable.md)
+  Go 泛型的类型约束、~ 和 comparable 是什么意思？用自定义 ID 保留类型，并解释 any 满足 comparable 后仍可能因动态 slice 比较而 panic。
+- [Go 的 make 和 new 有什么区别？为什么 new(map) 后不能直接写？](../go/q712-go-make-new-zero-values.md)
+  Go make 和 new 有什么区别？拆开 new(map) 的指针与 nil map，比较 slice、map、channel 零值操作，并补充 Go1.26 new(表达式) 的变化。
+- [Go singleflight 是什么？为什么它不能代替缓存和分布式锁？](../go/q718-go-singleflight-duplicate-request-suppression.md)
+  Go singleflight 是什么？通过重叠请求与后续请求解释 Do/DoChan、二次缓存检查、取消边界以及为什么它不是分布式锁。
+- [Go pprof 怎么用？CPU、堆内存和 goroutine profile 分别看什么？](../go/q722-go-pprof-cpu-heap-goroutine-profiles.md)
+  Go pprof 怎么用？区分 CPU、heap、allocs 与 goroutine profile，解释采样范围、内存保留、锁竞争和可比负载下的复测方法。
 
 ## 数据库与缓存面试题
 
@@ -52,6 +65,10 @@
   编辑距离怎么求？用两个前缀定义状态，逐项解释转移与空串边界。
 - [最长公共子序列怎么求？为什么它和最长公共子串不是同一道题？](../cs-basics/q691-longest-common-subsequence.md)
   最长公共子序列怎么求？用不要求连续的匹配目标推导二维前缀状态，比较连续子串。
+- [最小覆盖子串怎么求？重复字符为什么必须按数量匹配？](../cs-basics/q752-minimum-window-substring-counts.md)
+  从重复字符计数推导最小覆盖子串，讲清缺口、扩张和收缩条件，提供 TypeScript、Python 线性实现及空串、Unicode 边界。
+- [如何判断回文链表？快慢指针与反转后半段怎样配合？](../cs-basics/q755-palindrome-linked-list-restore.md)
+  讲清回文链表的中点、后半段反转与配对比较，提供 TypeScript、Python O(1) 空间实现，并验证成功失败后原链接均恢复。
 
 ## 系统设计面试题
 

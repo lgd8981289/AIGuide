@@ -49,6 +49,10 @@
 
 - [Go channel 有缓冲和无缓冲有什么区别？关闭后读写会发生什么？](../go/q662-go-channel-buffer-close.md)
   Go channel 有缓冲和无缓冲有什么区别？理解发送接收、阻塞、关闭和零值语义，补上 nil channel 边界。
+- [Go 泛型怎么用？类型约束、~ 和 comparable 分别表示什么？](../go/q710-go-generics-constraints-comparable.md)
+  Go 泛型的类型约束、~ 和 comparable 是什么意思？用自定义 ID 保留类型，并解释 any 满足 comparable 后仍可能因动态 slice 比较而 panic。
+- [Go 的 make 和 new 有什么区别？为什么 new(map) 后不能直接写？](../go/q712-go-make-new-zero-values.md)
+  Go make 和 new 有什么区别？拆开 new(map) 的指针与 nil map，比较 slice、map、channel 零值操作，并补充 Go1.26 new(表达式) 的变化。
 
 ## 数据库与缓存面试题
 
@@ -105,6 +109,12 @@
   用奇偶中心讲解最长回文子串，比较中心扩展和动态规划的状态、复杂度，提供TS与Python实现以及空串、偶数长度和字符边界测试。
 - [二叉树的最近公共祖先怎么找？普通二叉树和二叉搜索树的解法有什么区别？](../cs-basics/q563-binary-tree-lowest-common-ancestor.md)
   通过递归返回值讲清二叉树最近公共祖先，提供TS与Python实现，比较节点身份、目标缺失检查及二叉搜索树有序条件下的查找方法。
+- [最长递增子序列怎么求？动态规划和二分 tails 为什么都正确？](../cs-basics/q751-longest-increasing-subsequence-dp-binary-search.md)
+  用动态规划状态和最小结尾不变量解释最长递增子序列，证明 tails 二分替换为何正确，给出双语言实现、重复值边界与恢复序列思路。
+- [二叉树的直径怎么求？为什么最长路径不一定经过根节点？](../cs-basics/q754-binary-tree-diameter-postorder.md)
+  推导二叉树直径的后序计算，区分向父节点返回的高度和全局最长路径，提供非递归双语言实现，说明边数与深链空间边界。
+- [二叉搜索树第 K 小的元素怎么找？中序遍历与子树大小怎样选？](../cs-basics/q758-kth-smallest-bst-inorder-subtree-size.md)
+  解释 BST 第 K 小的中序提前终止与栈计数，提供双语言实现，并对比维护子树大小的频繁查询方案及平衡树更新成本。
 
 ## 系统设计面试题
 

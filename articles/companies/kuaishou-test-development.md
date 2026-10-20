@@ -13,4 +13,6 @@
 
 - [全排列怎么用回溯实现？数组有重复元素时怎样去重？](../cs-basics/q690-permutations-backtracking-deduplication.md)
   全排列怎么用回溯实现？解释路径、候选、撤销选择，以及同一层重复分支的消除。
+- [最长递增子序列怎么求？动态规划和二分 tails 为什么都正确？](../cs-basics/q751-longest-increasing-subsequence-dp-binary-search.md)
+  用动态规划状态和最小结尾不变量解释最长递增子序列，证明 tails 二分替换为何正确，给出双语言实现、重复值边界与恢复序列思路。
 

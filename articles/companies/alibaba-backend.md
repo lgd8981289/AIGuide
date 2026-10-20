@@ -24,6 +24,8 @@
   HashMap 底层怎么实现？沿一次写入追踪桶定位、冲突处理、树化条件与扩容迁移。
 - [synchronized 底层怎么实现？对象头、Monitor 和锁膨胀是什么关系？](../backend/q653-java-synchronized-monitor-inflation.md)
   synchronized 底层怎么实现？从字节码和 HotSpot 实现解释对象监视器与竞争过程。
+- [Spring MVC 的 RequestBody、RequestParam 和 ModelAttribute 有什么区别？](../backend/q739-spring-mvc-requestbody-requestparam-modelattribute.md)
+  对比 Spring MVC RequestBody、RequestParam 和 ModelAttribute，按 Content-Type 与参数位置选择并控制过度绑定。
 
 ## 数据库与缓存面试题
 
