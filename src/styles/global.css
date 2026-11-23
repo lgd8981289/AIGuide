@@ -905,6 +905,48 @@ main {
   max-width: 760px;
 }
 
+.tldr-card {
+  max-width: 760px;
+  margin: 0 0 26px;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  background: var(--bg-soft);
+}
+
+.tldr-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-bottom: 8px;
+}
+
+.tldr-kicker {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+.tldr-jump {
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+
+.tldr-jump:hover {
+  color: var(--accent);
+}
+
+.tldr-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text);
+}
+
 .prose h2 {
   font-size: 21px;
   margin: 44px 0 14px;
@@ -926,6 +968,19 @@ main {
 
 .prose p {
   margin: 14px 0;
+}
+
+.prose a.prose-ilink {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+.prose a.prose-ilink:hover {
+  color: var(--accent);
+  text-decoration-style: solid;
 }
 
 .prose ul,

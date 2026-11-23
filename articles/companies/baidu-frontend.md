@@ -23,7 +23,7 @@
 - [从输入 URL 到页面显示，浏览器到底经历了什么？](../frontend/q129-browser-navigation-rendering.md)
   浏览器先解析 URL，确定导航目标，再按缓存、已有连接和协议情况获取页面。需要时进行域名解析与连接建立；HTTPS 还涉及安全握手，但不能把每次导航都说成重新走完整 TCP 流程，HTTP/3 也不使用 TCP。
 - [Vue Router 的 hash 和 history 模式有什么区别？刷新为什么会 404？](../frontend/q143-vue-router-modes.md)
-  hash 模式把前端路由放在后面，这一部分不会随 HTTP 请求发送到服务器，所以静态服务器通常只需要提供入口页面。history 模式使用正常的路径。
+  Vue Router 的 hash 与 history 模式使用不同的路由地址。本文解释刷新 404 的原因、服务器回退规则，以及静态资源、API 和未找到页面的处理。
 - [CSR、SSR、SSG、ISR 有什么区别？Next.js 项目怎么选？](../frontend/q147-ssr-csr-ssg-isr.md)
   CSR 主要由浏览器执行应用代码生成界面；SSR 在请求处理时生成 HTML；SSG 在构建阶段预生成页面。它们描述的重点是页面内容的生成位置与时机。
 - [虚拟列表是什么？几万条数据怎样做到滚动不卡顿？](../frontend/q149-virtual-list.md)

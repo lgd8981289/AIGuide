@@ -1,9 +1,12 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import { createHash } from "node:crypto";
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import rehypeCodeTabs from "./src/lib/rehype-code-tabs.mjs";
+import rehypeInternalLinks from "./src/lib/rehype-internal-links.mjs";
 import rehypeReadmoreBoundary from "./src/lib/rehype-readmore-boundary.mjs";
+import { getThinCompanyPaths } from "./src/lib/company-index-policy.mjs";
 
 // 空分类页（目前是 /agent-ext/）会渲染成「共 0 篇文章」的薄内容页。
 // 这类页面正是 Google 判定「已抓取 - 尚未编入索引」的典型画像，因此：
@@ -29,6 +32,30 @@ if (emptyCategoryPaths.size > 0) {
   console.log(`[sitemap] 排除空分类页：${[...emptyCategoryPaths].join("、")}`);
 }
 
+const thinCompanyPaths = getThinCompanyPaths(articlesDir);
+const courseDir = fileURLToPath(new URL("./src/content/course/", import.meta.url));
+const nonFreeCoursePaths = new Set();
+if (existsSync(courseDir)) {
+  for (const file of readdirSync(courseDir, { recursive: true })) {
+    const rel = String(file);
+    if (!rel.endsWith(".md")) continue;
+    const raw = readFileSync(`${courseDir}${rel}`, "utf8");
+    if (/^free:\s*false\s*$/m.test(raw)) {
+      nonFreeCoursePaths.add(`/agent-course/${rel.replace(/\.md$/, "").replace(/\\/g, "/")}/`);
+    }
+  }
+}
+if (thinCompanyPaths.size > 0 || nonFreeCoursePaths.size > 0) {
+  console.log(
+    `[sitemap] 排除薄公司/岗位页 ${thinCompanyPaths.size} 个、非公开试读课程页 ${nonFreeCoursePaths.size} 个`
+  );
+}
+
+const anchorHash = createHash("sha1")
+  .update(readFileSync(new URL("./src/data/internal-link-anchors.json", import.meta.url)))
+  .digest("hex")
+  .slice(0, 12);
+
 // 指南独立部署在子域名根目录；旧 /note/ 地址由 Nginx 逐页 301。
 export default defineConfig({
   site: "https://note.lgdsunday.club",
@@ -41,12 +68,13 @@ export default defineConfig({
         if (/\/404(?:\.html|\/)?$/.test(pathname)) return false;
         // 旧公司指南保留访问，canonical 指向公司岗位真题列表，不重复进入 sitemap。
         if (['bytedance-interview', 'baidu-frontend-interview', 'baidu-campus-interview', 'alibaba-backend-interview'].some(slug => pathname === `/guides/${slug}/`)) return false;
+        if (thinCompanyPaths.has(pathname) || nonFreeCoursePaths.has(pathname)) return false;
         return !emptyCategoryPaths.has(pathname);
       },
     }),
   ],
   markdown: {
-    rehypePlugins: [rehypeCodeTabs, rehypeReadmoreBoundary],
+    rehypePlugins: [rehypeCodeTabs, [rehypeInternalLinks, { anchorHash }], rehypeReadmoreBoundary],
     shikiConfig: {
       theme: "one-dark-pro",
       wrap: true,

@@ -1,0 +1,93 @@
+---
+// 文末非阻塞公众号引导卡片：全文无障碍阅读，在读者读完后自愿触发 FollowModal
+import { FOLLOW, TECHGROW } from "../data/site";
+---
+
+{
+  FOLLOW.enabled && (
+    <aside class="wechat-cta" aria-label="关注公众号获取资料" data-pagefind-ignore>
+      <div class="wc-body">
+        <span class="wc-kicker">系统复习 · 资料与题库更新</span>
+        <p class="wc-title">需要完整 PDF 面试速记手册、高频追问清单与可运行源码？</p>
+        <p class="wc-desc">
+          所有题解网页均已全文开放阅读。欢迎关注公众号「{TECHGROW.name}」，获取持续更新的 AI 工程、Agent、RAG 与全栈面试资料整理。
+        </p>
+      </div>
+      <button type="button" class="wc-btn" data-follow-open>
+        关注「{TECHGROW.name}」
+        <span aria-hidden="true">→</span>
+      </button>
+    </aside>
+  )
+}
+
+<style>
+  .wechat-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    max-width: 760px;
+    margin-top: 22px;
+    padding: 18px 22px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-soft);
+  }
+  .wc-body {
+    min-width: 0;
+  }
+  .wc-kicker {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .wc-title {
+    margin: 0;
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .wc-desc {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+  .wc-btn {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 13.5px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: opacity 0.15s ease;
+  }
+  .wc-btn:hover {
+    opacity: 0.9;
+  }
+  .wc-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  @media (max-width: 640px) {
+    .wechat-cta {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px 18px;
+    }
+    .wc-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

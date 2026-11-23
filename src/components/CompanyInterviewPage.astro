@@ -2,25 +2,33 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { INTERVIEW_NOTE } from '../data/company-interviews.mjs'
 import { getInterviewCollections } from '../lib/company-interviews.mjs'
+import { isCompanyPageIndexable } from '../lib/company-index-policy.mjs'
 import type { CompanyPage } from '../data/company-pages'
-import { SITE } from '../data/site'
+import { breadcrumbSchema, websiteSchema } from '../data/structured-data'
 import { url, absoluteUrl } from '../utils'
 import '../styles/company-interviews.css'
 interface Props { company: CompanyPage }
 const { company } = Astro.props
 const roles = getInterviewCollections().filter(view => view.company.id === company.company.id)
+const crumbs = [
+  { name: '首页', href: '/' },
+  { name: '公司面试真题', href: '/companies/' },
+  { name: company.name, href: `/companies/${company.company.id}/` },
+  ...(company.kind !== 'company' && company.role ? [{ name: company.role.name, href: company.href }] : []),
+]
 const schema = [
   { '@context': 'https://schema.org', '@type': 'CollectionPage', name: company.title,
     description: company.description, url: absoluteUrl(company.href), dateModified: company.updated,
-    inLanguage: 'zh-CN', isPartOf: { '@type': 'WebSite', name: SITE.name, url: absoluteUrl('/') } },
+    inLanguage: 'zh-CN', isPartOf: websiteSchema },
   { '@context': 'https://schema.org', '@type': 'ItemList', name: company.title, numberOfItems: company.entries.length,
     itemListElement: company.entries.map(({ article }, i) => ({ '@type': 'ListItem', position: i + 1, name: article.entry.data.title, url: absoluteUrl(`/${article.entry.id}/`) })) },
+  breadcrumbSchema(crumbs),
 ]
 ---
-<BaseLayout title={company.title} description={company.description} path={company.href} noindex={company.kind === 'legacy'}>
+<BaseLayout title={company.title} description={company.description} path={company.href} noindex={!isCompanyPageIndexable(company)}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
   <div class="company-page">
-    <nav class="crumbs" aria-label="面包屑"><a href={url('/')}>首页</a> / <a href={url('/companies/')}>公司面试真题</a> / {company.kind === 'company' ? company.name : <><a href={url(`/companies/${company.company.id}/`)}>{company.name}</a> / {company.role?.name}</>}</nav>
+    <nav class="crumbs" aria-label="面包屑">{crumbs.map((crumb, i) => <>{i > 0 && ' / '}{i === crumbs.length - 1 ? <span>{crumb.name}</span> : <a href={url(crumb.href)}>{crumb.name}</a>}</>)}</nav>
     <header class="company-header">
       <h1>{company.title}</h1>
       <p>{company.articleCount} 道题，按知识分类阅读完整解析和面试追问。</p>

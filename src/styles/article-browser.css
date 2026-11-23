@@ -55,6 +55,11 @@
 .browse-empty { border-top: 1px solid var(--border); padding: 40px 0; color: var(--text-2); }
 .browse-empty h2 { font-size: 18px; color: var(--text); }
 .browse-empty p { font-size: 14px; }
+.browse-category-hub { margin-top: 24px; padding: 18px 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-soft); }
+.browse-category-hub-title { margin: 0 0 12px; font-size: 13px; color: var(--text-2); }
+.browse-category-hub-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.browse-category-hub-links a { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg); color: var(--text); font-size: 13px; }
+.browse-category-hub-links a:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); text-decoration: none; }
 @media (min-width: 961px) {
   html[data-sidebar-collapsed="true"] .article-browser { grid-template-columns: minmax(0, 1fr); }
   html[data-sidebar-collapsed="true"] .browse-content { width: 100%; margin-inline: auto; }

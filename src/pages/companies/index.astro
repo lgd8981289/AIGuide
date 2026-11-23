@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getCompanyPages } from '../../data/company-pages'
 import { INTERVIEW_NOTE, INTERVIEW_ROLES } from '../../data/company-interviews.mjs'
+import { breadcrumbSchema, websiteSchema } from '../../data/structured-data'
 import { url, absoluteUrl } from '../../utils'
 import '../../styles/company-interviews.css'
 const pages = await getCompanyPages()
@@ -9,14 +10,15 @@ const companies = pages.filter(page => page.kind === 'company')
 const lists = pages.filter(page => page.kind === 'role')
 const articleCount = new Set(lists.flatMap(page => page.entries.map(item => item.article.entry.data.qnum))).size
 const availableRoles = INTERVIEW_ROLES.filter(role => lists.some(list => list.role?.id === role.id))
-const schema = {
+const schema = [{
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   name: '公司面试真题及答案',
   url: absoluteUrl('/companies/'),
   dateModified: companies.map(company => company.updated).sort().at(-1),
   inLanguage: 'zh-CN',
-}
+  isPartOf: websiteSchema,
+}, breadcrumbSchema([{ name: '首页', href: '/' }, { name: '公司面试真题', href: '/companies/' }])]
 ---
 <BaseLayout title="公司面试真题及答案：前端、后端与Agent开发" description={`公司面试真题及答案：按 ${companies.length} 家公司、${lists.length} 个岗位列表浏览 ${articleCount} 篇技术解析，包含字节、百度、阿里、腾讯等公司的公开面经题目与来源。`} path="/companies/">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />

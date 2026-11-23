@@ -44,9 +44,17 @@ for (const view of lists) {
 }
 files.set('companies/README.md', companyDirectory);
 let readme = `# ${BRAND.name} · AI 与全栈面试题\n\n` +
-  `**${selected.length} 篇完整文章**，由 **${BRAND.author}** 整理，覆盖大模型、Agent、RAG、JavaScript、Vue、React、后端、MySQL、Redis、计算机基础和系统设计。每道题讲清原理、工程取舍与面试追问，适合校招、实习与社招复习。\n\n` +
-  `📖 [在线阅读 ${BRAND.name}](${BRAND.url}/) · [GitHub 正文目录](articles/)\n\n` +
+  `**${selected.length} 篇完整文章**，由 **${BRAND.author}** 整理，覆盖大模型、Agent、RAG、JavaScript、Vue、React、Java、Python、Go、MySQL、Redis、计算机基础和系统设计。每道题讲清原理、工程取舍与面试追问，适合校招、实习与社招复习。\n\n` +
+  `📖 **网站在线版提供全文检索、语言切换标签、图解放大、核心结论速览与互动计算工具**：[在线阅读 ${BRAND.name}](${BRAND.url}/) · [GitHub 正文目录](articles/)\n\n` +
   `你也可以通过 **sunday面试指南**、**程序员Sunday** 找到本站。建议先按岗位选路线，再按具体问题查阅。\n\n` +
+  `## AI 工程互动工具箱（网页版免费免登录）\n\n` +
+  `- [LLM Token、上下文窗口与 API 成本计算器](${BRAND.url}/toolbox/llm-cost-calculator/)：中英文 Token 估算、RAG 上下文占比与 Prompt Cache 月费模拟。\n` +
+  `- [Agent vs Workflow 架构选型决策器](${BRAND.url}/toolbox/agent-vs-workflow/)：六维工程打分给出架构选型建议、失败检查清单与 Markdown 结论。\n\n` +
+  `## 专题学习路线\n\n` +
+  `- [AI 应用开发面试路线](${BRAND.url}/guides/ai-interview/)：大模型基础 → RAG → Agent → 框架选型 → 系统设计\n` +
+  `- [RAG 系统学习路线](${BRAND.url}/guides/rag/)：切片、父子检索、混合召回、Rerank 与评测体系\n` +
+  `- [校招与实习准备路线](${BRAND.url}/guides/campus-interview/)：前端、后端、数据库与计算机基础高频复习顺序\n` +
+  `- [AI 编程实操路线](${BRAND.url}/guides/ai-coding/)：Claude Code、WorkBuddy 配置与大型旧项目重构实践\n\n` +
   `## 公司面试真题\n\n` +
   `${INTERVIEW_NOTE}\n\n` +
   `| 公司 / 岗位 | 题目数 | GitHub 真题列表 | 在线阅读 |\n| --- | ---: | --- | --- |\n` +

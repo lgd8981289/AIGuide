@@ -4,8 +4,9 @@ import { getCompanyPages, type CompanyPage } from '../../data/company-pages'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import SidebarCollapse from '../../components/SidebarCollapse.astro'
 import { getLearningGuides, guideHref, type ResolvedGuide } from '../../data/learning-guides'
-import { SITE, MODULE_META } from '../../data/site'
+import { MODULE_META } from '../../data/site'
 import { absoluteUrl, url } from '../../utils'
+import { authorSchema, websiteSchema } from '../../data/structured-data'
 import '../../styles/article-browser.css'
 import '../../styles/learning-guides.css'
 
@@ -24,8 +25,8 @@ const schema = guide ? [
     '@context': 'https://schema.org', '@type': 'CollectionPage',
     name: guide.title, description: guide.description, url: absoluteUrl(pagePath),
     dateModified: guide.updated, inLanguage: 'zh-CN',
-    author: { '@type': 'Person', name: SITE.author },
-    isPartOf: { '@type': 'WebSite', name: SITE.name, url: absoluteUrl('/') },
+    author: authorSchema,
+    isPartOf: websiteSchema,
   },
   {
     '@context': 'https://schema.org', '@type': 'ItemList', name: guide.title,

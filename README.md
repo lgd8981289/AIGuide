@@ -1,10 +1,22 @@
 # Sunday面试指南 · AI 与全栈面试题
 
-**763 篇完整文章**，由 **程序员Sunday** 整理，覆盖大模型、Agent、RAG、JavaScript、Vue、React、后端、MySQL、Redis、计算机基础和系统设计。每道题讲清原理、工程取舍与面试追问，适合校招、实习与社招复习。
+**763 篇完整文章**，由 **程序员Sunday** 整理，覆盖大模型、Agent、RAG、JavaScript、Vue、React、Java、Python、Go、MySQL、Redis、计算机基础和系统设计。每道题讲清原理、工程取舍与面试追问，适合校招、实习与社招复习。
 
-📖 [在线阅读 Sunday面试指南](https://note.lgdsunday.club/) · [GitHub 正文目录](articles/)
+📖 **网站在线版提供全文检索、语言切换标签、图解放大、核心结论速览与互动计算工具**：[在线阅读 Sunday面试指南](https://note.lgdsunday.club/) · [GitHub 正文目录](articles/)
 
 你也可以通过 **sunday面试指南**、**程序员Sunday** 找到本站。建议先按岗位选路线，再按具体问题查阅。
+
+## AI 工程互动工具箱（网页版免费免登录）
+
+- [LLM Token、上下文窗口与 API 成本计算器](https://note.lgdsunday.club/toolbox/llm-cost-calculator/)：中英文 Token 估算、RAG 上下文占比与 Prompt Cache 月费模拟。
+- [Agent vs Workflow 架构选型决策器](https://note.lgdsunday.club/toolbox/agent-vs-workflow/)：六维工程打分给出架构选型建议、失败检查清单与 Markdown 结论。
+
+## 专题学习路线
+
+- [AI 应用开发面试路线](https://note.lgdsunday.club/guides/ai-interview/)：大模型基础 → RAG → Agent → 框架选型 → 系统设计
+- [RAG 系统学习路线](https://note.lgdsunday.club/guides/rag/)：切片、父子检索、混合召回、Rerank 与评测体系
+- [校招与实习准备路线](https://note.lgdsunday.club/guides/campus-interview/)：前端、后端、数据库与计算机基础高频复习顺序
+- [AI 编程实操路线](https://note.lgdsunday.club/guides/ai-coding/)：Claude Code、WorkBuddy 配置与大型旧项目重构实践
 
 ## 公司面试真题
 

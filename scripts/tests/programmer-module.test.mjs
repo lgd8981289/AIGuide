@@ -81,14 +81,20 @@ test("模块页与分类页高亮正确，具备独立 canonical 和结构化数
   }
 });
 
-test("空模块显示准备中并能返回首页；未来有正文时展示文章而非候选清单", () => {
+test("空模块显示准备中并能返回首页；未来有正文时展示最新摘要并在分类页保留全量文章", () => {
   const html = read("dist/programmer/index.html");
   assert.match(html, /<h1\b[^>]*>全栈面试题<\/h1>/);
   const articleCount = categorySlugs.reduce((total, slug) => {
     const sourceDir = new URL(`src/content/articles/${slug}/`, root);
     return total + (fs.existsSync(sourceDir) ? fs.readdirSync(sourceDir).filter((f) => f.endsWith(".md")).length : 0);
   }, 0);
-  assert.equal([...html.matchAll(/<li\b[^>]*class="browse-post"/g)].length, articleCount);
+  assert.equal([...html.matchAll(/<li\b[^>]*class="browse-post"/g)].length, Math.min(articleCount, 60));
+  for (const slug of categorySlugs) {
+    const sourceDir = new URL(`src/content/articles/${slug}/`, root);
+    const catCount = fs.existsSync(sourceDir) ? fs.readdirSync(sourceDir).filter((f) => f.endsWith(".md")).length : 0;
+    const catHtml = read(`dist/${slug}/index.html`);
+    assert.equal([...catHtml.matchAll(/<li\b[^>]*class="browse-post"/g)].length, catCount, `${slug} 分类页文章数`);
+  }
   if (articleCount === 0) {
     assert.match(html, /全栈面试题正在准备中/);
     const empty = html.match(/<div\b[^>]*class="browse-empty"[\s\S]*?<\/div>/)?.[0] ?? "";

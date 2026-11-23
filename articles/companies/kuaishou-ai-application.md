@@ -21,7 +21,7 @@
 - [什么是 Tool Calling？大模型是如何调用外部工具的？](../agent/q004-tool-calling-execution-flow.md)
   Tool Calling 并不是大模型自己去执行某个工具，而是模型和应用之间约定的一套调用方式。应用会先把工具名称、用途和参数结构告诉模型。模型判断需要使用工具时，会返回一份结构化的调用请求，里面通常包含工具名称、参数和调用标识。
 - [Agent 的 Context、Memory 和 State 有什么区别？](../agent/q007-context-memory-state.md)
-  Context 可以理解成这一轮真正交给模型看的信息。用户刚说的话、任务目标、最近的工具结果，都可能放进去；但系统保存过的内容，不代表模型这一轮一定看到了。State 记录的是任务现在进行到哪里。
+  Agent 的 Context 是本轮模型输入，State 保存任务进度，Memory 负责信息保留与取用。本文比较三者边界，并说明跨轮约束与持久化的关系。
 - [Agent 的长期记忆怎么设计？用户改口后，旧记忆怎么办？](../agent/q060-agent-long-term-memory.md)
   Agent 的长期记忆，是把跨会话仍然有用的信息保存下来，并在后续任务需要时取用，不是把所有聊天都永久保存。设计时，我会给记忆记录用户、适用范围、来源、更新时间和有效状态。
 - [ReAct 和 CoT 有什么区别？为什么一步步推理不等于 Agent？](../agent/q096-react-vs-cot.md)

@@ -9,7 +9,7 @@ import CodeTabs from '../../components/CodeTabs.astro';
 import ImageZoom from '../../components/ImageZoom.astro';
 import { getCourseLessons, lessonPath } from '../../data/course-lessons';
 import { COURSE } from '../../data/course';
-import { SITE } from '../../data/site';
+import { authorSchema, publisherSchema } from '../../data/structured-data';
 import { url, absoluteUrl } from '../../utils';
 import '../../styles/course.css';
 export async function getStaticPaths() {
@@ -20,14 +20,14 @@ const { entry, prev, next } = Astro.props;
 const { Content, headings } = await render(entry);
 const { title, chapter, chapterTitle, free, description } = entry.data;
 const pagePath = lessonPath(entry.id);
-const pageTitle = `${title}｜慕课网 ${COURSE.platformTitle}`;
+const pageTitle = title;
 const date = entry.data.date.toISOString().slice(0, 10);
 const jsonLd = [{
   '@context': 'https://schema.org', '@type': 'Article', headline: title, description,
   isAccessibleForFree: free,
   ...(!free ? { hasPart: { '@type': 'WebPageElement', isAccessibleForFree: false, cssSelector: '.course-paywall' } } : {}),
-  author: { '@type': 'Person', name: SITE.author },
-  publisher: { '@type': 'Organization', name: SITE.name },
+  author: authorSchema,
+  publisher: publisherSchema,
   dateModified: date, datePublished: date, inLanguage: 'zh-CN', articleSection: chapterTitle,
   image: absoluteUrl('/og-cover.jpg'), mainEntityOfPage: absoluteUrl(pagePath),
   isPartOf: { '@type': 'Course', '@id': `${absoluteUrl(COURSE.href)}#course`, name: COURSE.title, url: absoluteUrl(COURSE.href) },
@@ -40,7 +40,7 @@ const jsonLd = [{
   ],
 }];
 ---
-<BaseLayout title={pageTitle} description={description} path={pagePath} sidebar ogType="article" keywords={COURSE.keywords}>
+<BaseLayout title={pageTitle} description={description} path={pagePath} sidebar ogType="article" keywords={COURSE.keywords} noindex={!free}>
   <Fragment slot="head"><meta property="article:modified_time" content={date} /><script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} /></Fragment>
   <div class="article-layout with-toc course-article">
     <div class="article-col">

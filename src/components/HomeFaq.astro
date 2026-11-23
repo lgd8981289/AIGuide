@@ -1,0 +1,19 @@
+---
+import type { HomeFacts } from '../data/home'
+import { url } from '../utils'
+
+interface Props { facts: HomeFacts }
+const { facts } = Astro.props
+---
+
+<section class="home-section home-faq" aria-labelledby="home-faq" data-home-start>
+  <h2 id="home-faq">FAQ：学习顺序、面经来源与阅读条件</h2>
+  <p>以下 {facts.faq.length} 个问题说明如何使用题库、核对来源，以及区分面试题与系统课。</p>
+  {facts.faq.map((item, index) => (
+    <div class="home-faq-item">
+      <h3 id={`home-faq-${index + 1}`}>{item.question}</h3>
+      <p data-home-faq-answer>{item.answer}</p>
+      <a class="home-faq-source" href={url(item.href)}>{item.label} →</a>
+    </div>
+  ))}
+</section>

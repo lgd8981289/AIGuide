@@ -10,9 +10,7 @@ export const BRAND = {
 	],
 	author: '程序员Sunday',
 	url: 'https://note.lgdsunday.club',
-	// github: 'https://github.com/lgd8981289/AIGuide',
-	// 暂时去掉，先不展示
-	github: ''
+	github: 'https://github.com/lgd8981289/AIGuide'
 }
 
 export function brandedTitle(title) {
@@ -20,7 +18,6 @@ export function brandedTitle(title) {
 }
 
 export function brandedDescription(description) {
-	return description.includes(BRAND.name)
-		? description
-		: `${description.trim()}（${BRAND.name} · ${BRAND.author}）`
+	// 摘要只描述本页内容；作者与出版品牌由页面署名和结构化数据表达。
+	return description.trim()
 }

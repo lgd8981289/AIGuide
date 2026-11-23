@@ -36,6 +36,10 @@ class SubmissionError(Exception):
     pass
 
 
+class ShortResponse(SubmissionError):
+    """响应体少于 Content-Length：对端提前断开造成的短读，属可重试的瞬时故障。"""
+
+
 class ApiError(SubmissionError):
     def __init__(self, message, uncertain=False):
         super().__init__(message)
@@ -88,6 +92,12 @@ def request(url, payload=None):
         body = response.read(MAX_BYTES + 1)
         if len(body) > MAX_BYTES:
             raise SubmissionError("响应过大，已停止处理")
+        # read() 在连接被对端提前关闭时可能只返回部分字节而不报错（首页近 900KB 时更易发生），
+        # 截断的 HTML 会在 decode 时抛 UnicodeDecodeError，把可重试的瞬时故障升级成整站预检失败。
+        # 此处显式校验长度，交由 fetch() 重试。
+        declared = response.headers.get("Content-Length")
+        if declared and declared.strip().isdigit() and len(body) < int(declared):
+            raise ShortResponse(f"响应体不完整（{len(body)}/{declared.strip()} 字节）")
         return body, response.headers
 
 
@@ -102,6 +112,20 @@ def fetch(url):
             if attempt == TRANSIENT_ATTEMPTS:
                 raise
             time.sleep(TRANSIENT_BACKOFF * attempt)
+
+
+def read_page(url):
+    """取回字节并解码；截断导致的解码失败按瞬时故障整轮重取。"""
+    last = None
+    for attempt in range(1, TRANSIENT_ATTEMPTS + 1):
+        body, headers = fetch(url)
+        try:
+            return body, headers, body.decode("utf-8")
+        except UnicodeDecodeError as error:
+            last = error
+            if attempt < TRANSIENT_ATTEMPTS:
+                time.sleep(TRANSIENT_BACKOFF * attempt)
+    raise SubmissionError("页面内容不是有效的 UTF-8（已重试）") from last
 
 
 def api_call(key, method, params=None, post=False):
@@ -140,7 +164,9 @@ def sitemap_urls(site=SITE, sitemap="sitemap-index.xml"):
         visited.add(address)
         if len(visited) > 20:
             raise SubmissionError("网站地图层级或数量超出本脚本限制")
-        body, _ = request(address)
+        # 地图抓取同样走重试：本机到站点的链路偶发停摆（TLS 握手成功但响应不回），
+        # 若直接把瞬时故障抛成整站失败，当天额度与整轮提交都会作废。
+        body, _ = fetch(address)
         root = ET.fromstring(body)
         kind = root.tag.rsplit("}", 1)[-1]
         locations = [validate_url(n.text.strip(), site) for n in root.iter() if n.tag.rsplit("}", 1)[-1] == "loc" and n.text]
@@ -170,7 +196,7 @@ def inspect_page(url, allow_trailing_slash_redirect=False):
     try:
         redirected_to = None
         try:
-            body, headers = fetch(url)
+            body, headers, html = read_page(url)
         except urllib.error.HTTPError as error:
             destination = urllib.parse.urljoin(url, error.headers.get("Location", ""))
             # 简历汪静态服务会补尾斜杠，而地图与 canonical 使用无斜杠地址。
@@ -178,10 +204,10 @@ def inspect_page(url, allow_trailing_slash_redirect=False):
             if not (allow_trailing_slash_redirect and error.code in (301, 308)
                     and not url.endswith("/") and destination == url + "/"):
                 raise
-            body, headers = fetch(destination)
+            body, headers, html = read_page(destination)
             redirected_to = destination
         parser = PageHead()
-        parser.feed(body.decode("utf-8"))
+        parser.feed(html)
         directives = " ".join(parser.robots + [headers.get("X-Robots-Tag", "")]).lower()
         if parser.canonical != [url] or re.search(r"\b(noindex|none)\b", directives):
             raise SubmissionError("canonical 不匹配或页面禁止索引")
@@ -201,6 +227,49 @@ def write_json(path, value):
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
     temporary.replace(path)
+
+
+def resolve_pending(state, state_file, local, quota):
+    """上次提交结果未知时，用额度差额判断是否已被接收。
+
+    提交响应丢失（如 RemoteDisconnected）会把记录留在 pending 并阻断后续所有运行，
+    若不核对就会让该站点被永久锁死。Bing 一旦接收即扣减额度，故额度按本批数量
+    减少即说明这批 URL 已提交成功；无法核实时保持 pending（失败关闭，宁可锁死不错报）。
+    """
+    pending = {url for url, record in state.items() if record.get("status") == "pending"}
+    if not pending:
+        return
+    for path in sorted(local.glob("receipt-*.json"), reverse=True):
+        try:
+            receipt = json.loads(path.read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        if receipt.get("status") != "unknown":
+            continue
+        urls = [url for url in receipt.get("urls", []) if url in pending]
+        if not urls:
+            continue
+        before = receipt.get("quota_before") or {}
+        decreased = any(
+            type(before.get(name)) is int
+            and type(quota.get(name)) is int
+            and before[name] - quota[name] >= len(urls)
+            for name in ("DailyQuota", "MonthlyQuota")
+        )
+        if not decreased:
+            return
+        for url in urls:
+            state[url].update(
+                status="accepted",
+                accepted_at=receipt.get("started_at"),
+                resolution="额度差额核验：提交响应丢失，但额度已按本批数量扣减",
+            )
+        write_json(state_file, state)
+        receipt.update(status="accepted_quota_verified",
+                       quota_after={"DailyQuota": quota["DailyQuota"], "MonthlyQuota": quota["MonthlyQuota"]})
+        write_json(path, receipt)
+        print(f"核对：{len(urls)} 个在途 URL 经额度差额确认已被接收（{path.name}）", flush=True)
+        return
 
 
 def select_batch(pages, state, quota):
@@ -241,6 +310,7 @@ def run(args):
         print(f"提示：{len(redirected)} 个地址有永久尾斜杠跳转，落地页 canonical 与地图原地址一致；按该声明地址提交，建议后续统一跳转与 canonical。", flush=True)
     state_file = local / "state.json"
     state = json.loads(state_file.read_text()) if state_file.exists() else {}
+    resolve_pending(state, state_file, local, quota)
     changed, batch = select_batch(pages, state, quota)
     print(f"预检通过 {len(pages)}；新增／变化 {len(changed)}；未变化跳过 {len(pages) - len(changed)}；本轮可提交 {len(batch)}", flush=True)
     if not args.submit:

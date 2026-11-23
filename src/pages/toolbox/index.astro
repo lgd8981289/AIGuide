@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { authorSchema, breadcrumbSchema, publisherSchema, websiteSchema } from "../../data/structured-data";
+import { absoluteUrl, url } from "../../utils";
+import "../../styles/toolbox.css";
+
+const pagePath = "/toolbox/";
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "AI 工程实用工具箱",
+    description: "面向 AI 应用与全栈开发者的免费在线计算与架构决策工具：含 LLM Token 与 API 成本计算器、Agent vs Workflow 架构选型决策器。",
+    url: absoluteUrl(pagePath),
+    dateModified: "2026-11-23",
+    inLanguage: "zh-CN",
+    author: authorSchema,
+    publisher: publisherSchema,
+    isPartOf: websiteSchema,
+  },
+  breadcrumbSchema([
+    { name: "首页", href: "/" },
+    { name: "AI 工程工具箱", href: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="AI 工程工具箱：LLM 成本计算器与 Agent 选型器"
+  description="免费免登录的 AI 应用工程在线工具：快速估算 Token 与上下文预算、对比 Prompt Cache 成本节省，并通过六维工程打分判断项目该用 Workflow 还是 Agent。"
+  path={pagePath}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, "\\u003c")} />
+  <div class="toolbox-shell">
+    <nav class="toolbox-crumbs" aria-label="面包屑">
+      <a href={url("/")}>首页</a> / <span>AI 工程工具箱</span>
+    </nav>
+    <header class="toolbox-hero">
+      <p class="toolbox-eyebrow">免费开放 · 纯浏览器本地计算</p>
+      <h1>AI 工程实用工具箱</h1>
+      <p class="toolbox-lead">
+        把大模型应用开发中最常反复核对的两件事做成可交互工具：Token/上下文预算与月度 API 成本核算，以及 Agent vs Workflow 的工程架构选型评估。不上传文本、无需登录。
+      </p>
+    </header>
+
+    <section class="toolbox-grid" aria-label="在线工具列表">
+      <a class="toolbox-card" href={url("/toolbox/llm-cost-calculator/")}>
+        <span class="toolbox-card-tag">成本与上下文估算</span>
+        <h2>LLM Token、上下文窗口与 API 成本计算器</h2>
+        <p>
+          支持实时估算中英文文本 Token 量，结合 RAG 召回片段数、输出长度、日均请求量与 Prompt Cache 命中率，测算月度费用并检查上下文窗口利用率。单价支持自定义修改。
+        </p>
+        <span class="toolbox-card-cta">打开成本计算器 →</span>
+      </a>
+
+      <a class="toolbox-card" href={url("/toolbox/agent-vs-workflow/")}>
+        <span class="toolbox-card-tag">架构决策器</span>
+        <h2>Agent vs Workflow 架构选型决策器</h2>
+        <p>
+          围绕步骤确定性、写操作风险、延迟预算、可观测与回滚要求、人工审批和任务复杂度 6 个维度打分，给出推荐架构模式、常见失败检查清单及可分享选型结论。
+        </p>
+        <span class="toolbox-card-cta">开始架构选型 →</span>
+      </a>
+    </section>
+
+    <section class="toolbox-links-section" aria-labelledby="toolbox-guides">
+      <h2 id="toolbox-guides">配合阅读专题路线</h2>
+      <ul class="toolbox-reading-list">
+        <li>
+          <a href={url("/guides/ai-interview/")}>
+            AI 应用开发面试路线：大模型基础、RAG、Agent 到上线评测
+          </a>
+        </li>
+        <li>
+          <a href={url("/guides/rag/")}>
+            RAG 系统学习路线：文档切片、混合检索、重排与幻觉治理
+          </a>
+        </li>
+        <li>
+          <a href={url("/ai/")}>
+            浏览全部 AI 面试题目录
+          </a>
+        </li>
+        <li>
+          <a href={url("/companies/")}>
+            按公司和岗位浏览面试真题题单
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

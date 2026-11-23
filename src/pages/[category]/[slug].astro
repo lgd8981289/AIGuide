@@ -8,6 +8,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import TechGrow from "../../components/TechGrow.astro";
 import ResumeCta from "../../components/ResumeCta.astro";
 import ReadingGuideCta from "../../components/ReadingGuideCta.astro";
+import WechatCta from "../../components/WechatCta.astro";
 import Toc from "../../components/Toc.astro";
 import BackTop from "../../components/BackTop.astro";
 import ImmersiveToggle from "../../components/ImmersiveToggle.astro";
@@ -15,10 +16,10 @@ import CodeTabs from "../../components/CodeTabs.astro";
 import CopyGuard from "../../components/CopyGuard.astro";
 import CodeCopy from "../../components/CodeCopy.astro";
 import ImageZoom from "../../components/ImageZoom.astro";
-import { CATEGORIES, COPY_GUARD, MODULE_META, SITE, TECHGROW, categoriesOf, selectGatedArticles } from "../../data/site";
-import { getArticlesByCategory } from "../../data/articles";
-import { ARTICLE_RELATED } from "../../data/article-related";
-import { selectRelatedArticles } from "../../lib/related-articles.mjs";
+import { CATEGORIES, COPY_GUARD, MODULE_META, SITE, TECHGROW, selectGatedArticles } from "../../data/site";
+import { getArticleSeoTitle, getArticlesByCategory } from "../../data/articles";
+import { getRelatedArticles } from "../../data/article-related";
+import { authorSchema, publisherSchema, websiteSchema } from "../../data/structured-data";
 import { extractFaqPairs } from "../../lib/faq.mjs";
 import { resolveArticleImage } from "../../lib/article-image.mjs";
 import { url, absoluteUrl } from "../../utils";
@@ -40,10 +41,27 @@ export async function getStaticPaths() {
 }
 
 const { entry, displayNum } = Astro.props;
+const seoTitle = getArticleSeoTitle(entry);
 const companyMatches = realQuestionsForArticle(entry.data.qnum);
 const description = interviewDescription(entry.data.description, companyMatches);
 const { Content, headings } = await render(entry);
 const articleHeadings = [...headings, { depth: 2, slug: 'company-interview-questions', text: '公司面试真题' }];
+const firstH2 = headings.find((heading) => heading.depth === 2);
+
+function buildTldr(raw?: string): string {
+  const clean = (raw ?? "").replace(/\s+/g, " ").trim();
+  if (!clean) return "";
+  if (clean.length <= 180) return clean;
+  const sentences = clean.match(/[^。！？]+[。！？]/g) ?? [];
+  let acc = "";
+  for (const s of sentences) {
+    if (acc && acc.length + s.length > 180) break;
+    acc += s;
+    if (acc.length >= 90) break;
+  }
+  return acc || clean.slice(0, 180).replace(/[，、；：,\s]+$/, "") + "。";
+}
+const tldr = buildTldr(entry.data.faqAnswer);
 
 const cat = CATEGORIES.find((c) => c.slug === entry.data.category)!;
 const meta = MODULE_META[cat.module];
@@ -58,14 +76,7 @@ const idx = siblings.findIndex((s) => s.entry.id === entry.id);
 const prev = idx > 0 ? siblings[idx - 1] : null;
 const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
 
-// 相关文章（内链）：先同分类的其他文章，不够再从同模块补齐
-const byCat = await getArticlesByCategory();
-const sameCat = siblings.filter((s) => s.entry.id !== entry.id);
-const sameModule = categoriesOf(cat.module)
-  .flatMap((c) => (c.slug === cat.slug ? [] : byCat.get(c.slug) ?? []))
-  .filter((s) => s.entry.id !== entry.id);
-const related = selectRelatedArticles(entry.data.qnum, [...byCat.values()].flat(),
-  ARTICLE_RELATED[entry.data.qnum] ?? [], [...sameCat, ...sameModule]);
+const related = await getRelatedArticles(entry.data.qnum);
 
 const fmt = (d: Date) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
@@ -79,8 +90,7 @@ const gated = TECHGROW.enabled
   && selectGatedArticles(siblings.map((s) => s.entry.id)).has(entry.id);
 
 // 「面试官继续追问」板块的问答对。这些 H3 问句与紧随其后的答案本来就渲染在页面上，
-// 只是从未被结构化表达——搜索引擎读到的是连续正文，不知道该把它匹配给哪个问题。
-// 975 对问答全部来自正文，不新增、不改写任何文字。
+// 问答全部来自正文，不新增、不改写任何文字。
 const faqs = extractFaqPairs(entry.body ?? "");
 
 // 正文首图：让每篇文章的结构化数据与社交分享用上自己的示意图，
@@ -111,23 +121,9 @@ const jsonLd = [
     dateModified: dateISO,
     inLanguage: "zh-CN",
     articleSection: cat.name,
-    author: {
-      "@type": "Person",
-      name: SITE.author,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE.name,
-      logo: {
-        "@type": "ImageObject",
-        url: absoluteUrl(SITE.logo || "/favicon.svg"),
-      },
-    },
-    isPartOf: {
-      "@type": "WebSite",
-      name: SITE.name,
-      url: absoluteUrl("/"),
-    },
+    author: authorSchema,
+    publisher: publisherSchema,
+    isPartOf: websiteSchema,
     mainEntityOfPage: pageUrl,
     // 有文章自己的配图时用 ImageObject 带上真实尺寸，满足 Discover 对 1200px 大图的要求
     image: coverImage
@@ -164,10 +160,8 @@ const jsonLd = [
       { "@type": "ListItem", position: 4, name: entry.data.title, item: pageUrl },
     ],
   },
-  // FAQPage：把「面试官继续追问」的问答对显式声明出来，共 975 对、覆盖 325 篇文章。
-  // 收益主要在 Bing（仍正常展示 FAQ 富结果）、百度，以及 AI 搜索的答案抽取——
-  // Perplexity / ChatGPT Search 对成对 Q&A 的定位效率远高于连续段落。
-  // 注意：Google 自 2023-08 起把 FAQ 富结果收缩到权威政府/医疗站点，不要指望它带来 SERP 折叠块。
+  // FAQPage 与可见问答一致。Google 自 2026-05-07 停止展示 FAQ 富结果；
+  // 保留语义标记不代表能提高排名或获得 AI Overviews 引用。
   ...(faqs.length > 0
     ? [
         {
@@ -186,7 +180,7 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title={entry.data.title}
+  title={seoTitle}
   description={description}
   path={pagePath}
   sidebar
@@ -229,6 +223,22 @@ const jsonLd = [
           </div>
         </div>
 
+        {
+          tldr && (
+            <section class="tldr-card" aria-label="核心结论" data-pagefind-ignore>
+              <div class="tldr-head">
+                <span class="tldr-kicker">核心结论 · 30 秒速览</span>
+                {firstH2 && (
+                  <a class="tldr-jump" href={`#${firstH2.slug}`}>
+                    ↓ 查看完整工程拆解与追问
+                  </a>
+                )}
+              </div>
+              <p class="tldr-text">{tldr}</p>
+            </section>
+          )
+        }
+
         <div id="readmore-container" class="prose">
           <Content />
         </div>
@@ -260,6 +270,8 @@ const jsonLd = [
       </article>
 
       <ReadingGuideCta category={cat.slug} module={cat.module} />
+
+      <WechatCta />
 
       {
         related.length > 0 && (

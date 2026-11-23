@@ -20,7 +20,7 @@
 ## AI应用工程面试题
 
 - [AI 文件解析与建索引的异步任务怎么设计？](../engineering/q012-async-file-parsing-indexing.md)
-  文件上传和解析建索引要分开。上传接口把文件可靠保存下来，再创建一条任务，返回文件 ID、任务 ID 和当前状态；OCR、切片、Embedding、写索引由后台 Worker 执行。
+  AI 文件解析与建索引应拆成后台异步任务。本文说明文件版本、任务状态、OCR、Embedding、幂等重试和索引切换，区分上传成功与可检索状态。
 - [大模型结构化输出怎么校验？JSON 入库与失败处理](../engineering/q019-structured-output-validation.md)
   合法 JSON 不能直接入库。它只说明语法上能解析；即使用 JSON Schema 约束了字段和类型，也只能说明结构符合预期，不能证明金额、订单归属和业务条件正确。我会把链路分几关：先检查模型调用是否完成、有没有拒答或截断；再做结构校验；
 - [Agent 执行越来越慢，应该怎么定位性能瓶颈？](../engineering/q067-agent-performance-bottleneck.md)

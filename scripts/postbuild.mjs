@@ -186,6 +186,12 @@ function collectDates() {
   }
   collectPageDates(path.join(DIST, 'guides'));
   collectPageDates(path.join(DIST, 'companies'));
+  collectPageDates(path.join(DIST, 'toolbox'));
+  const homeFile = path.join(DIST, 'index.html');
+  const homeDate = fs.existsSync(homeFile)
+    ? fs.readFileSync(homeFile, 'utf8').match(/"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})"/)?.[1]
+    : undefined;
+  if (homeDate) byUrl.set(`${BASE}/`, [homeDate, latest].filter(Boolean).sort().at(-1));
   return { byUrl, byCategory, byModule, latest };
 }
 

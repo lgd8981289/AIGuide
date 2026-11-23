@@ -19,8 +19,8 @@ const featured = featuredIds.flatMap(id => {
 {featured.length > 0 && <section class="home-companies" aria-labelledby="home-companies-title">
   <header class="home-companies-heading">
     <div>
-      <h2 id="home-companies-title">公司面试真题</h2>
-      <p>选公司、看岗位，开始有针对性的准备</p>
+      <h2 id="home-companies-title">有哪些公司和岗位的面试题单？</h2>
+      <p>{companyCount} 家公司、{collections.length} 个岗位题单，题单附公开面经来源</p>
     </div>
     <a class="home-companies-all" href={url('/companies/')}>全部 {companyCount} 家公司 <span aria-hidden="true">→</span></a>
   </header>

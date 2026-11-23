@@ -5,7 +5,7 @@ export const COURSE = {
   // 平台关键词仅用于搜索元信息，页面可见文案突出课程与作者。
   platformTitle: '从 0 到 1 转型 Agent 应用开发工程师',
   seoTitle: '慕课网 从 0 到 1 转型 Agent 应用开发工程师｜课程目录与试读',
-  seoDescription: 'Sunday 的《Agent 大模型 0 到 1 系统课》，对应慕课网《从 0 到 1 转型 Agent 应用开发工程师》课程文章。系统学习大模型基础、RAG、MCP、LangChain、LangGraph 与多 Agent 应用开发。前两章全文免费，第三章起每节可试读约 15%，添加微信购买完整课程，价格 499 元。',
+  seoDescription: 'Agent 应用开发课程，涵盖大模型、RAG、MCP、LangChain 与多 Agent 实战。前两章全文免费，后续章节约 15% 试读，完整课程 499 元。',
   href: '/agent-course/',
   price: 499,
   wechatName: 'LGD_Sunday',

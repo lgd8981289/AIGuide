@@ -75,7 +75,7 @@ try {
       }
     }
     await rewrite(selected.tree);
-    const description = `慕课网《从 0 到 1 转型 Agent 应用开发工程师》第 ${lesson.chapter} 章：${title}。${free ? '本节全文免费阅读。' : '本节提供约 15% 免费试读，完整课程 499 元，添加作者微信购买。'}`;
+    const description = `${title}。Agent 应用开发课程第 ${lesson.chapter} 章，${free ? '本节全文免费阅读。' : '本节约 15% 免费试读；完整课程 499 元。'}`;
     // 指纹对应实际读取的原稿版本，仅用于本地构建校验，不把原稿保存到站点。
     const metadata = { title, description, chapter: lesson.chapter, chapterTitle: lesson.chapterTitle, order: lesson.order, free, previewRatio: Number(selected.ratio.toFixed(4)), sourceHash: courseSourceHash(raw), date: fs.statSync(file).mtime.toISOString().slice(0, 10) };
     const output = path.join(markdownDir, `${lesson.id}.md`);

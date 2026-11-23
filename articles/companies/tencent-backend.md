@@ -9,7 +9,7 @@
 - [Context Engineering 是什么？和 Prompt Engineering 有什么区别？](../agent/q496-context-engineering-vs-prompt-engineering.md)
   结合代码排错场景，讲清上下文工程与提示词工程的区别、每轮输入如何组装，以及怎样定位证据没有进入模型的问题。
 - [Agent 如何检索历史记忆？为什么不能只按向量相似度排序？](../agent/q501-agent-memory-retrieval-ranking.md)
-  通过旧偏好与历史查询的对比，解释记忆检索为何不能只按向量相似度排序，以及范围过滤、时间条件、重要性与来源如何配合。
+  Agent 记忆检索需要结合任务范围、查询时间、相关性、重要性与来源，不能只按向量相似度排序。本文用旧偏好与历史查询说明选择依据。
 
 ## AI应用工程面试题
 

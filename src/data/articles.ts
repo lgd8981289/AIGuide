@@ -8,6 +8,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import { CATEGORIES, type ModuleKey } from "./site";
 import topics from "./topics.json";
 import navigationTitles from "./article-navigation.json";
+import seoTitles from "../../scripts/article-seo-titles.json";
 import { validateArticleTopics } from "../lib/article-topics.mjs";
 
 validateArticleTopics(topics, [], CATEGORIES.map((category) => category.slug));
@@ -17,6 +18,11 @@ export type Article = CollectionEntry<"articles">;
 /** 人工维护的菜单文案；正文、SEO 和全局题号仍使用源文章数据。 */
 export function getArticleNavigationTitle(article: Article): string {
   return (navigationTitles as Record<string, string>)[article.data.qnum] ?? article.data.title;
+}
+
+/** 搜索结果页专用的精简标题（保留 H1 原问题与既有 URL 不变）。 */
+export function getArticleSeoTitle(article: Article): string {
+  return (seoTitles as Record<string, string>)[article.data.qnum] ?? article.data.title;
 }
 
 export interface ArticleWithOrder {

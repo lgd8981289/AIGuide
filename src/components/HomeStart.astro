@@ -3,21 +3,22 @@ import { LEARNING_GUIDES, guideHref } from '../data/learning-guides'
 import HomeCompanyInterviews from './HomeCompanyInterviews.astro'
 import { url } from '../utils'
 import '../styles/learning-guides.css'
+const guides = LEARNING_GUIDES.filter(guide => !guide.note)
 ---
 
 <div data-home-start>
   <section class="home-start" aria-labelledby="home-start-title">
     <div class="home-start-heading">
-      <h2 id="home-start-title">从这里开始</h2>
-      <span>选一个目标，找到阅读顺序</span>
+      <h2 id="home-start-title">怎样按目标安排阅读顺序？</h2>
+      <span>{guides.length} 条学习路线，分阶段链接题解与教程</span>
     </div>
     <div class="home-start-grid">
-      {LEARNING_GUIDES.filter((guide) => !guide.note).map((guide, index) => (
+      {guides.map((guide, index) => (
         <a class="start-link" href={url(guideHref(guide))}>
           <span class="start-number" aria-hidden="true">0{index + 1}</span>
           <div class="start-copy">
             <h3>{guide.label}</h3>
-            <p>{guide.cardDescription}</p>
+            <p>{guide.stages.length} 个阶段 · {new Set(guide.stages.flatMap(stage => stage.articles.map(article => article.qnum))).size} 篇阅读文章</p>
             <span class="start-action">{guide.action}<span aria-hidden="true">↗</span></span>
           </div>
         </a>
@@ -25,4 +26,34 @@ import '../styles/learning-guides.css'
     </div>
   </section>
   <HomeCompanyInterviews />
+  <section class="home-toolbox" aria-labelledby="home-toolbox-title">
+    <div class="home-start-heading">
+      <h2 id="home-toolbox-title">AI 工程实用工具箱（免费在线计算与选型）</h2>
+      <a class="home-toolbox-all" href={url('/toolbox/')}>进入工具箱 →</a>
+    </div>
+    <div class="home-toolbox-grid">
+      <a class="home-tool-card" href={url('/toolbox/llm-cost-calculator/')}>
+        <h3>LLM Token、上下文窗口与 API 成本计算器</h3>
+        <p>估算中英文提示词 Token 量，对比 RAG 切片与 Prompt Cache 命中率下的月度费用。</p>
+      </a>
+      <a class="home-tool-card" href={url('/toolbox/agent-vs-workflow/')}>
+        <h3>Agent vs Workflow 架构选型决策器</h3>
+        <p>从确定性、写操作风险、延迟与人工审批六维评估，生成架构建议与失败检查清单。</p>
+      </a>
+    </div>
+  </section>
 </div>
+
+<style>
+  .home-toolbox { margin-bottom: 32px; }
+  .home-toolbox-all { font-size: 12px; white-space: nowrap; }
+  .home-toolbox-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .home-tool-card { display: block; padding: 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-soft); color: var(--text); transition: border-color .15s, background .15s; }
+  .home-tool-card:hover { border-color: var(--accent); background: var(--accent-soft); text-decoration: none; }
+  .home-tool-card h3 { margin: 0 0 6px; font-size: 15px; }
+  .home-tool-card p { margin: 0; font-size: 12.5px; color: var(--text-2); line-height: 1.65; }
+  @media (max-width: 600px) {
+    .home-toolbox { margin-bottom: 26px; }
+    .home-toolbox-grid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  }
+</style>

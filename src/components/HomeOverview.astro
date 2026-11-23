@@ -1,0 +1,73 @@
+---
+import { COMPARISON_REVIEWED_AT, HOME_COMPARISONS, type HomeFacts } from '../data/home'
+import { url } from '../utils'
+import '../styles/home-overview.css'
+
+interface Props { facts: HomeFacts }
+const { facts } = Astro.props
+---
+
+<div class="home-overview" data-home-start>
+  <nav class="home-jump-links" aria-label="首页内容导航">
+    <a href="#home-coverage">题库范围</a>
+    <a href="#home-comparison">网站对比</a>
+    <a href="#home-start-title">学习路线</a>
+    <a href="#home-articles">浏览文章</a>
+    <a href="#home-faq">阅读与收费</a>
+  </nav>
+
+  <section class="home-section" aria-labelledby="home-coverage">
+    <h2 id="home-coverage">AI 与全栈面试题分别覆盖哪些方向？</h2>
+    <p>Sunday面试指南收录 {facts.ai.length + facts.fullstack.length} 篇面试题解析，分为 {facts.categories.length} 个分类；另有 {facts.tutorials.length} 篇 AI 编程教程。下面的数量对应各目录中的独立文章，不包含系统课课时。</p>
+    <div class="home-facts-grid">
+      <div class="home-fact">
+        <h3><a href={url('/ai/')}>AI 面试题</a></h3>
+        <p class="home-fact-number">{facts.ai.length}<span>篇题解</span></p>
+        <ul>{facts.categories.filter(category => category.module === 'interview').map(category => (
+          <li><a href={url(`/${category.slug}/`)}>{category.nav}</a><span>{category.count} 篇</span></li>
+        ))}</ul>
+      </div>
+      <div class="home-fact">
+        <h3><a href={url('/programmer/')}>全栈面试题</a></h3>
+        <p class="home-fact-number">{facts.fullstack.length}<span>篇题解</span></p>
+        <ul>{facts.categories.filter(category => category.module === 'programmer').map(category => (
+          <li><a href={url(`/${category.slug}/`)}>{category.nav}</a><span>{category.count} 篇</span></li>
+        ))}</ul>
+      </div>
+      <div class="home-fact">
+        <h3><a href={url('/companies/')}>公司面试题单</a></h3>
+        <p class="home-fact-number">{facts.coverage.companyCount}<span>家公司</span></p>
+        <p>{facts.coverage.roleCollectionCount} 个公司岗位题单，关联 {facts.coverage.matchedArticleCount} 篇题解。题单列出公开面经来源，模拟面试对话不计为公司真题来源。</p>
+        <a href={url('/companies/')}>查看公司、岗位与来源 →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="home-comparison">
+    <h2 id="home-comparison">Sunday面试指南与其他技术学习网站有什么区别？</h2>
+    <p>以下比较本站与 {HOME_COMPARISONS.length} 个网站的指定目录或文章。比较范围见各行，不代表对方全站，不按全站文章量或主观评分排序。</p>
+    <div class="home-table-scroll" role="region" aria-label="技术面试学习内容对比，可横向滚动" tabindex="0">
+      <table class="home-comparison">
+        <caption>技术面试学习内容对比 · 外部页面核验于 <time datetime={COMPARISON_REVIEWED_AT}>{COMPARISON_REVIEWED_AT}</time></caption>
+        <thead><tr><th scope="col">网站与比较范围</th><th scope="col">内容组织与示例</th><th scope="col">阅读条件</th><th scope="col">核验入口</th></tr></thead>
+        <tbody>
+          <tr>
+            <th scope="row">Sunday面试指南<small>本站 AI 与全栈面试题目录</small></th>
+            <td>按分类的一题一页，配有学习路线和公司题单；题解包含面试速答、工程分析与追问。</td>
+            <td>{facts.readingCondition}系统课单独收费。</td>
+            <td><a href={url('/ai/')}>AI 目录</a><a href={url('/programmer/')}>全栈目录</a><a href="#home-faq">阅读与收费</a></td>
+          </tr>
+          {HOME_COMPARISONS.map(site => (
+            <tr>
+              <th scope="row">{site.name}<small>{site.scope}</small></th>
+              <td>{site.organization}<br />{site.examples}</td>
+              <td>{site.access}</td>
+              <td>{site.sources.map(source => <a href={source.href} target="_blank" rel="noopener noreferrer">{source.label}<span class="sr-only">（新窗口）</span></a>)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="home-source-note">“正文可读取”仅描述所引页面的核验结果，不表示该网站所有内容免费。课程与专栏的价格、登录和解锁要求以对应页面为准。</p>
+  </section>
+</div>

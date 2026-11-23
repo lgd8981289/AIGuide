@@ -1,0 +1,253 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { authorSchema, breadcrumbSchema, publisherSchema } from "../../data/structured-data";
+import { absoluteUrl, url } from "../../utils";
+import "../../styles/toolbox.css";
+
+const pagePath = "/toolbox/agent-vs-workflow/";
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Agent vs Workflow 架构选型决策器",
+    description: "从步骤确定性、外部写操作风险、延迟预算、回滚可观测性、人工审批与任务复杂度六个工程维度评估，给出可落地的 Agent 与 Workflow 混合架构建议。",
+    url: absoluteUrl(pagePath),
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Any",
+    inLanguage: "zh-CN",
+    dateModified: "2026-11-23",
+    offers: {
+      "@type": "Offer",
+      price: 0,
+      priceCurrency: "CNY",
+    },
+    author: authorSchema,
+    publisher: publisherSchema,
+  },
+  breadcrumbSchema([
+    { name: "首页", href: "/" },
+    { name: "AI 工程工具箱", href: "/toolbox/" },
+    { name: "Agent vs Workflow 架构选型决策器", href: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Agent vs Workflow 架构选型决策器"
+  description="六维工程打分快速判断你的 AI 项目适合纯 Workflow、Workflow 主控 + 局部 Agent、单 Agent 沙箱还是 Multi-Agent 协作，并生成面试表达与失败检查清单。"
+  path={pagePath}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, "\\u003c")} />
+  <div class="toolbox-shell">
+    <nav class="toolbox-crumbs" aria-label="面包屑">
+      <a href={url("/")}>首页</a> / <a href={url("/toolbox/")}>AI 工程工具箱</a> / <span>Agent vs Workflow 架构选型决策器</span>
+    </nav>
+
+    <header class="toolbox-hero">
+      <p class="toolbox-eyebrow">工程决策工具 · 支持一键复制 Markdown 结论</p>
+      <h1>Agent vs Workflow 架构选型决策器</h1>
+      <p class="toolbox-lead">
+        面试与立项中最容易答偏的问题，是“能用大模型就一律上 Agent”。按下面 6 个工程约束选择你的业务真实条件，工具会计算建议架构、关键防护边界与失败排查清单。
+      </p>
+    </header>
+
+    <section class="tool-panel" aria-labelledby="sec-decision">
+      <h2 id="sec-decision">选择你的项目约束条件</h2>
+      <p class="tool-note">决策逻辑对应生产边界：越需要确定性与可审计回滚，控制权越应留在代码 Workflow；越需要动态分支与长链路试错，才把局部探索权交给 Agent。</p>
+
+      <div class="decision-dims" id="decision-form">
+        <div class="decision-dim" data-dim="determinism">
+          <p class="decision-dim-title">1. 步骤确定性：业务执行路径是否事先明确？</p>
+          <div class="decision-options">
+            <label class="decision-opt"><input type="radio" name="determinism" value="0" checked /> 步骤固定，仅局部节点需模型理解或提取</label>
+            <label class="decision-opt"><input type="radio" name="determinism" value="1" /> 主干流程固定，少数异常或检索路径需要动态调整</label>
+            <label class="decision-opt"><input type="radio" name="determinism" value="2" /> 输入高度开放，必须根据中间观察结果动态规划下一步</label>
+          </div>
+        </div>
+
+        <div class="decision-dim" data-dim="risk">
+          <p class="decision-dim-title">2. 外部写操作风险：是否涉及删改库、支付或外部发送？</p>
+          <div class="decision-options">
+            <label class="decision-opt"><input type="radio" name="risk" value="0" checked /> 只读查询 / 草稿生成，无不可逆副作用</label>
+            <label class="decision-opt"><input type="radio" name="risk" value="1" /> 有限写操作，但可通过幂等键、沙箱或白名单约束</label>
+            <label class="decision-opt"><input type="radio" name="risk" value="2" /> 涉及资金、权限或生产变更，容错空间极低</label>
+          </div>
+        </div>
+
+        <div class="decision-dim" data-dim="latency">
+          <p class="decision-dim-title">3. 延迟与成本约束：线上对单次耗时和 Token 预算有多敏感？</p>
+          <div class="decision-options">
+            <label class="decision-opt"><input type="radio" name="latency" value="0" checked /> 严格要求低延迟（&lt; 2–3 秒）和可控成本</label>
+            <label class="decision-opt"><input type="radio" name="latency" value="1" /> 可接受 5–15 秒多轮工具调用，有明确最大步数上限</label>
+            <label class="decision-opt"><input type="radio" name="latency" value="2" /> 允许异步长任务（数十秒至分钟级，如深度研究/重构）</label>
+          </div>
+        </div>
+
+        <div class="decision-dim" data-dim="rollback">
+          <p class="decision-dim-title">4. 可观测与回滚要求：线上出问题时怎样定位与恢复？</p>
+          <div class="decision-options">
+            <label class="decision-opt"><input type="radio" name="rollback" value="0" checked /> 必须每一步可预测、可回归测试、可秒级回滚</label>
+            <label class="decision-opt"><input type="radio" name="rollback" value="1" /> 需要记录完整 Trace 和 Tool 参数，支持从检查点恢复</label>
+            <label class="decision-opt"><input type="radio" name="rollback" value="2" /> 关注最终结果验收（如单测/Lint），允许过程多路径试错</label>
+          </div>
+        </div>
+
+        <div class="decision-dim" data-dim="hitl">
+          <p class="decision-dim-title">5. 人工审批节点（Human-in-the-Loop）：高风险动作谁拍板？</p>
+          <div class="decision-options">
+            <label class="decision-opt"><input type="radio" name="hitl" value="0" checked /> 无需人工介入，自动执行完预设节点</label>
+            <label class="decision-opt"><input type="radio" name="hitl" value="1" /> 关键动作前暂停等待人工确认，审批后恢复执行</label>
+            <label class="decision-opt"><input type="radio" name="hitl" value="2" /> 任务复杂，需要多角色各自汇总信息后再由人工验收</label>
+          </div>
+        </div>
+
+        <div class="decision-dim" data-dim="complexity">
+          <p class="decision-dim-title">6. 任务复杂度与上下文隔离：单个模型上下文能否装下全部职责？</p>
+          <div class="decision-options">
+            <label class="decision-opt"><input type="radio" name="complexity" value="0" checked /> 单一职责，少量 Prompt 即可稳定完成</label>
+            <label class="decision-opt"><input type="radio" name="complexity" value="1" /> 需要工具组合，但工具数在 5–15 个以内、状态共享简单</label>
+            <label class="decision-opt"><input type="radio" name="complexity" value="2" /> 跨多个独立子领域、工具极多且上下文易互相污染</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="decision-result" aria-live="polite" id="decision-output">
+      <span class="decision-badge" id="res-tag">推荐架构</span>
+      <h3 id="res-title">-</h3>
+      <p id="res-summary">-</p>
+      <p><strong>核心工程边界与失败检查清单：</strong></p>
+      <ul id="res-checklist"></ul>
+      <div class="decision-actions">
+        <button type="button" class="tool-btn is-primary" id="btn-copy-md">复制 Markdown 选型结论</button>
+        <button type="button" class="tool-btn" id="btn-copy-url">复制分享链接</button>
+      </div>
+    </section>
+
+    <section class="toolbox-links-section" aria-labelledby="decision-reading">
+      <h2 id="decision-reading">对应面试原题与工程详文</h2>
+      <ul class="toolbox-reading-list">
+        <li><a href={url("/agent/q001-agent-vs-workflow/")}>Agent 和 Workflow 有什么区别？实际项目中应该怎么选？</a></li>
+        <li><a href={url("/langchain/q003-langgraph-pause-resume/")}>LangGraph 如何实现暂停和恢复？人工审批后从哪里继续执行？</a></li>
+        <li><a href={url("/agent/q018-single-vs-multi-agent/")}>单 Agent 和多 Agent 应该怎么选？什么时候才需要 Handoff？</a></li>
+        <li><a href={url("/agent/q028-tool-timeout-retry-idempotency/")}>Agent 调用工具超时了，可以直接重试吗？</a></li>
+        <li><a href={url("/system-design/q036-agent-productionization/")}>Agent Demo 能跑，为什么离生产上线还很远？</a></li>
+        <li><a href={url("/langchain/q063-agent-framework-selection/")}>LangChain、LangGraph 和自研 Agent 应该怎么选？</a></li>
+        <li><a href={url("/engineering/q065-agent-task-failure-recovery/")}>Agent 任务中断后如何恢复？Checkpoint 与幂等设计</a></li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    var DIMS = ["determinism", "risk", "latency", "rollback", "hitl", "complexity"];
+    var PLANS = {
+      workflow: {
+        tag: "推荐模式 · 纯 Workflow（代码预设控制流）",
+        title: "优先使用代码控制的 Workflow，仅在局部节点调用模型",
+        summary: "你的任务步骤确定、要求低延迟、高可测试性或存在严格业务规范。把执行权留在代码状态机/DAG 里，让大模型只做结构化抽取、分类或文本生成，最容易控制成本、测试和回滚。",
+        checks: [
+          "禁止在固定流程里套用开放式 Agent Loop，避免多余轮次推高首字/整体延迟。",
+          "对模型输出使用 Schema 校验（JSON Schema / Pydantic / Zod），失败走明确降级分支。",
+          "所有关键节点保留输入输出日志，建立离线回归评测集。"
+        ]
+      },
+      hybrid: {
+        tag: "推荐模式 · Workflow 主控 + 局部 Agent",
+        title: "用 Workflow 管权限、状态与高风险动作，局部探索交给 Agent",
+        summary: "适合既有明确安全/合规要求、又需要处理部分不确定子任务的生产系统（如智能客服、带人工审批的工单流）。这是生产中最稳健的折中方案。",
+        checks: [
+          "把写操作、支付、发消息等高风险节点留在外部确定性 Workflow，必要时暂停等待人工审批。",
+          "局部 Agent 必须配置 max_steps、单步超时和总 Token 预算硬上限。",
+          "为工具调用设计幂等键，并引入 Checkpoint 支持中断后从断点恢复。"
+        ]
+      },
+      single: {
+        tag: "推荐模式 · 单 Agent + 沙箱与审批",
+        title: "单 Agent Loop 配动态工具筛选，辅以沙箱隔离与断点恢复",
+        summary: "任务路径高度依赖中间观察结果，且需要较长时间完成探索（如研发辅助、深度分析），但单一上下文足够承载，无需提前引入多 Agent 通信损耗。",
+        checks: [
+          "控制单次暴露给模型的工具数量（通常动态筛选后保持精简），避免选错工具。",
+          "代码或文件操作必须在容器/微虚拟机沙箱中执行，禁止直接裸跑。",
+          "全链路记录 Trace（Thought / Tool Call / Observation）与 Checkpoint，便于复现排查。"
+        ]
+      },
+      multi: {
+        tag: "推荐模式 · Multi-Agent 分工协作",
+        title: "按上下文隔离边界拆分多 Agent，通过显式协议交接状态",
+        summary: "仅当单 Agent 上下文已被海量工具、无关中间过程撑爆或不同阶段需要独立权限与模型路由时，才引入 Multi-Agent / Handoff，避免为拆而拆。",
+        checks: [
+          "不要把完整聊天历史原封不动透传给子 Agent，使用结构化任务摘要与引用 ID 交接上下文。",
+          "明确 Handoff 终止条件与最大跳转次数，防止子 Agent 之间死循环互相推诿。",
+          "对每个子 Agent 单独做单元级过程评测，再做端到端结果验收。"
+        ]
+      }
+    };
+
+    function getState() {
+      var res = {};
+      DIMS.forEach(function (name) {
+        var checked = document.querySelector('input[name="' + name + '"]:checked');
+        res[name] = checked ? Number(checked.value) : 0;
+      });
+      return res;
+    }
+
+    function applyQuery() {
+      var raw = new URLSearchParams(window.location.search).get("s");
+      if (!raw || raw.length !== DIMS.length) return;
+      DIMS.forEach(function (name, i) {
+        var v = raw[i];
+        var el = document.querySelector('input[name="' + name + '"][value="' + v + '"]');
+        if (el) el.checked = true;
+      });
+    }
+
+    function evaluate(s) {
+      if (s.determinism === 0 && s.complexity === 0 && s.latency === 0) return PLANS.workflow;
+      if (s.risk === 2) return PLANS.hybrid;
+      if (s.complexity === 2 && s.determinism >= 1 && s.latency >= 1) return PLANS.multi;
+      if (s.determinism === 2 && s.latency >= 1) return PLANS.single;
+      var score = s.determinism * 2 + s.latency + s.complexity - (s.risk === 2 ? 2 : 0);
+      if (score <= 1) return PLANS.workflow;
+      if (score <= 4) return PLANS.hybrid;
+      if (s.complexity === 2 && s.hitl === 2) return PLANS.multi;
+      return PLANS.single;
+    }
+
+    var currentPlan = PLANS.workflow;
+    function render() {
+      var s = getState();
+      currentPlan = evaluate(s);
+      document.getElementById("res-tag").textContent = currentPlan.tag;
+      document.getElementById("res-title").textContent = currentPlan.title;
+      document.getElementById("res-summary").textContent = currentPlan.summary;
+      var ul = document.getElementById("res-checklist");
+      ul.innerHTML = currentPlan.checks.map(function (c) { return "<li>" + c + "</li>"; }).join("");
+      var code = DIMS.map(function (d) { return s[d]; }).join("");
+      var u = new URL(window.location.href);
+      u.searchParams.set("s", code);
+      window.history.replaceState(null, "", u.toString());
+    }
+
+    applyQuery();
+    document.getElementById("decision-form").addEventListener("change", render);
+    render();
+
+    document.getElementById("btn-copy-md").addEventListener("click", function () {
+      var md = "### " + currentPlan.tag + "\n\n**" + currentPlan.title + "**\n\n" + currentPlan.summary + "\n\n**关键检查清单：**\n" + currentPlan.checks.map(function (c) { return "- " + c; }).join("\n") + "\n\n来源：Sunday面试指南 " + window.location.href;
+      navigator.clipboard && navigator.clipboard.writeText(md);
+      this.textContent = "已复制 Markdown";
+      var btn = this;
+      setTimeout(function () { btn.textContent = "复制 Markdown 选型结论"; }, 1800);
+    });
+
+    document.getElementById("btn-copy-url").addEventListener("click", function () {
+      navigator.clipboard && navigator.clipboard.writeText(window.location.href);
+      this.textContent = "已复制分享链接";
+      var btn = this;
+      setTimeout(function () { btn.textContent = "复制分享链接"; }, 1800);
+    });
+  })();
+</script>

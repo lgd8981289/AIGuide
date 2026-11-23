@@ -1,5 +1,6 @@
 ---
 import { FOLLOW, SITE } from "../data/site";
+import { url } from "../utils";
 
 const year = new Date().getFullYear();
 ---
@@ -36,7 +37,7 @@ const year = new Date().getFullYear();
           <span>程序员Sunday</span>
         )
       }
-      维护，内容持续更新。正在准备简历？试试同门的
+      维护，内容持续更新。常用工具：<a href={url("/toolbox/")}>AI 工程工具箱</a> · 正在准备简历？试试同门的
       <a href={SITE.mainSite} rel="noopener">{SITE.mainSiteName}</a>，永久免费的简历制作工具。
     </div>
     <div>© {year} {SITE.name} · 转载请注明出处</div>

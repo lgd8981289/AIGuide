@@ -7,10 +7,14 @@ export const SITE = {
 	name: BRAND.name,
 	alternateNames: BRAND.aliases,
 	// 首页明确站点身份；各内页由 BaseLayout 统一追加一次品牌后缀。
-	homeTitle: 'Sunday面试指南｜AI、前端、后端与校招面试题',
+	homeTitle: 'AI 与全栈面试题、学习路线及公司题单｜Sunday面试指南',
 	homeHeading: 'Sunday面试指南：AI 与全栈面试题',
+	// 首页说明、对比表或 FAQ 有实质修订时维护；不使用构建时间。
+	homeUpdated: '2026-10-23',
 	homeIntro:
-		'程序员Sunday 整理的面试备考指南，覆盖 AI、前端、后端与校招，从原理讲到项目取舍和面试追问。',
+		'Sunday面试指南面向开发岗求职者，提供AI与全栈面试题解析、学习路线和公司题单。',
+	homeDescription:
+		'Sunday面试指南提供大模型、RAG、Agent、前端、Java、Python、Go 等面试题解析、学习路线和附公开面经来源的公司题单。本页列出内容范围、技术学习网站对比、公众号解锁条件及系统课收费说明。',
 	description:
 		'Sunday面试指南由程序员Sunday维护，提供大模型、Agent、RAG、前端、后端、数据库与校招面试题解析，配合学习路线和 AI 编程教程，帮助你理解原理、准备项目与面试追问。',
 	author: BRAND.author,
@@ -192,7 +196,7 @@ export const CATEGORIES: Category[] = [
 		seoTitle: 'AI 应用工程面试题及答案：高频考点',
 		module: 'interview',
 		intro:
-			'真实上线才会遇到的问题：效果评测、延迟与成本、稳定性、安全边界。区分「做过 demo」和「上过生产」的分水岭。'
+			'AI 应用工程面试题与解析，覆盖效果评测、延迟、成本、稳定性和安全边界，说明问题排查与工程取舍。'
 	},
 	{
 		slug: 'system-design',
@@ -201,7 +205,7 @@ export const CATEGORIES: Category[] = [
 		seoTitle: 'AI 项目与系统设计面试题及答案',
 		module: 'interview',
 		intro:
-			'从单点答题到整套系统设计：需求拆解、架构选型、技术权衡与迭代演进，检验工程完整度的地方。'
+			'AI 项目与系统设计面试题，围绕需求拆解、架构选型、技术权衡与迭代演进，说明从单点功能到应用系统的设计过程。'
 	},
 	{
 		slug: 'langchain',
@@ -284,7 +288,7 @@ export const CATEGORIES: Category[] = [
 		nav: '工具与平台',
 		seoTitle: 'AI 编程工具教程：安装、配置与使用',
 		module: 'tutorial',
-		intro: '完整工具、客户端和平台的安装、配置与使用。'
+		intro: 'AI 编程工具使用教程，包含 Claude Code 接入 DeepSeek、WorkBuddy 安装配置、Skill 与自动化任务。'
 	},
 	{
 		slug: 'agent-ext',
@@ -301,7 +305,7 @@ export const CATEGORIES: Category[] = [
 		nav: '方法与实践',
 		seoTitle: 'AI 编程方法与工程实践教程',
 		module: 'tutorial',
-		intro: '任务拆解、上下文、测试、审查、重构与多 Agent 协作等工程方法。'
+		intro: 'AI 编程方法与工程实践教程，覆盖任务拆解、上下文管理、测试、代码审查、重构与多 Agent 协作。'
 	},
 	{
 		slug: 'reviews',
@@ -309,7 +313,7 @@ export const CATEGORIES: Category[] = [
 		nav: '模型实测',
 		seoTitle: '大模型实测与选型：新模型能力评测',
 		module: 'tutorial',
-		intro: '新模型、新能力及热门技术事件的实际体验与价值判断。'
+		intro: '大模型实测与选型记录，比较模型在编程、推理与工具调用任务中的表现，说明测试条件和适用范围。'
 	}
 ]
 
@@ -358,11 +362,10 @@ export const COPY_GUARD = {
 	enabled: false
 }
 
-// 页脚「关注公众号」引导开关（控制页脚的「程序员Sunday」按钮与二维码弹窗）
-// 2026-10-07：暂时关闭——现阶段优先把搜索流量做起来，不引导关注。
-// 改回 true 即恢复页脚按钮与二维码弹窗；页脚署名不受影响（关闭时显示为纯文本）。
+// 页脚「关注公众号」与文末非阻塞引导开关（控制公众号按钮与二维码弹窗）
+// 2026-11-23：开启非阻塞公众号引导弹窗，配合文末资料领取卡片替代拦截式锁文。
 export const FOLLOW = {
-	enabled: false
+	enabled: true
 }
 
 // TechGrow 公众号引流配置（https://docs.techgrow.cn）
@@ -372,11 +375,11 @@ export const FOLLOW = {
 //   3. 补齐下方 name / keyword / qrcode，把 enabled 改为 true，重新构建部署
 // 未开启时，本站不加载任何引流脚本，文章全文直接可见
 //
-// 2026-10-07：暂时全量开放。原因是站点上线 4 个月、零外链、搜索几乎无收录，
-// 当前瓶颈是「内容可达性」而非「涨粉」。先让搜索引擎和读者无障碍拿到全文做流量，
-// 门禁留作以后有基础时的可选项——改 enabled 为 true 即可完整恢复（分层抽样逻辑仍在）。
+// 2026-11-23：关闭全文锁文门禁，保留分层抽样逻辑以备后用。原因：桌面端 100% 锁文叠加
+// isAccessibleForFree: false 导致新站桌面跳出率偏高、批量页面「已抓取未编入索引」。
+// 改用文末非阻塞 WechatCta 引导关注公众号，优先保证搜索收录与阅读体验。
 export const TECHGROW = {
-	enabled: true, // 暂时关闭公众号解锁；true 时按下方 random 分层抽样恢复门禁
+	enabled: false, // 关闭文章正文门禁；true 时按下方 random 分层抽样恢复门禁
 	blogId: '77647-4526721610548-557',
 	name: '程序员Sunday', // 微信公众号名称
 	keyword: '验证码', // 读者在公众号里回复的关键词

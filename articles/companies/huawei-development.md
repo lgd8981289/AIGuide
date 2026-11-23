@@ -16,7 +16,7 @@
 - [Python 的 LEGB 作用域是什么？global、nonlocal 和闭包变量怎么理解？](../python/q581-python-legb-global-nonlocal.md)
   LEGB 是理解普通函数名称查找的一种顺序。L 是当前函数，E 是包围它的外层函数，G 是所在模块，B 是内置名称。
 - [Python 的单下划线、双下划线和双端下划线有什么区别？](../python/q592-python-underscore-name-mangling.md)
-  单前导下划线通常表示内部使用的约定，不是强制私有权限。普通 from module import 也会受它影响，但显式导入仍可以访问；__all__ 还能明确导出名单。
+  Python 下划线命名分别涉及内部使用约定、类成员名称改写和语言协议。本文说明导入、继承冲突与访问边界，不把名称改写当作安全权限。
 
 ## 系统设计面试题
 

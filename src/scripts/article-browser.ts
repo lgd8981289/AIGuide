@@ -16,7 +16,7 @@ if (browser) {
   const topics = new Map(topicLinks.map((link) => [link.dataset.filterTopic!, link]));
   const sidebar = browser.querySelector<HTMLElement>("[data-site-sidebar]")!;
   const heading = browser.querySelector<HTMLHeadingElement>("#browse-title")!;
-  const homeStart = browser.querySelector<HTMLElement>("[data-home-start]");
+  const homeSections = browser.querySelectorAll<HTMLElement>("[data-home-start]");
   const intro = browser.querySelector<HTMLElement>("[data-browser-intro]")!;
   const count = browser.querySelector<HTMLElement>("[data-result-count]")!;
   const sort = browser.querySelector<HTMLSelectElement>("[data-browser-sort]")!;
@@ -26,15 +26,36 @@ if (browser) {
   const previous = browser.querySelector<HTMLButtonElement>("[data-page-prev]")!;
   const next = browser.querySelector<HTMLButtonElement>("[data-page-next]")!;
   const defaultCategory = browser.dataset.defaultCategory ?? "";
+  const scopedCategory = browser.dataset.scopedCategory ?? "";
+  const isCapped = browser.dataset.capped === "true";
+  const totalCount = Number(browser.dataset.totalCount ?? rows.length);
   const defaultPath = browser.dataset.defaultPath!;
   const scopePath = browser.dataset.scopePath!;
+
+  const bootParams = new URLSearchParams(window.location.search);
+  const requestedBootCategory = bootParams.get("category") ?? "";
+  const shouldRedirectCategory = Boolean(
+    requestedBootCategory
+    && categories.has(requestedBootCategory)
+    && (isCapped || (scopedCategory && requestedBootCategory !== scopedCategory))
+  );
+  if (shouldRedirectCategory) {
+    const targetUrl = new URL(`/${requestedBootCategory}/`, window.location.origin);
+    for (const key of ["topic", "sort", "page"]) {
+      const value = bootParams.get(key);
+      if (value) targetUrl.searchParams.set(key, value);
+    }
+    window.location.replace(targetUrl.toString());
+  }
 
   function readState() {
     const params = new URLSearchParams(window.location.search);
     const fallback = window.location.pathname === defaultPath ? defaultCategory : "";
     const requestedCategory = params.get("category") ?? fallback;
     const requestedPage = Number(params.get("page") ?? 1);
-    const category = categories.has(requestedCategory) ? requestedCategory : fallback;
+    const category = categories.has(requestedCategory) && (!scopedCategory || requestedCategory === scopedCategory)
+      ? requestedCategory
+      : fallback;
     const requestedTopic = params.get("topic") ?? "";
     return {
       category,
@@ -94,12 +115,14 @@ if (browser) {
     const matching = ordered.filter((row) => (!state.category || row.dataset.articleCategory === state.category) && (!state.topic || row.dataset.articleTopic === state.topic));
     const pages = Math.max(1, Math.ceil(matching.length / pageSize));
     state.page = Math.min(state.page, pages);
-    if (homeStart) homeStart.hidden = Boolean(state.category) || state.page > 1;
+    homeSections.forEach(section => { section.hidden = Boolean(state.category) || state.page > 1; });
     const visible = new Set(matching.slice((state.page - 1) * pageSize, state.page * pageSize));
     const fragment = document.createDocumentFragment();
     ordered.forEach((row) => { row.hidden = !visible.has(row); fragment.append(row); });
     list.append(fragment);
-    count.textContent = `共 ${matching.length} 篇文章${pages > 1 ? ` · 第 ${state.page} / ${pages} 页` : ""}`;
+    count.textContent = isCapped && !state.category
+      ? `最新 ${matching.length} 篇 / 共 ${totalCount} 篇文章${pages > 1 ? ` · 第 ${state.page} / ${pages} 页` : ""}`
+      : `共 ${matching.length} 篇文章${pages > 1 ? ` · 第 ${state.page} / ${pages} 页` : ""}`;
     empty.hidden = matching.length > 0;
     pagination.hidden = pages <= 1;
     pageStatus.textContent = `第 ${state.page} / ${pages} 页`;
@@ -122,10 +145,12 @@ if (browser) {
       } catch {}
     }
     const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[data-filter-category]") : null;
-    // 保留新标签页、复制链接与无 JavaScript 时的原生导航。
+    // 保留新标签页、复制链接与无 JavaScript 时的原生导航；跨分类或精简列表页直接跳转到真实分类网址。
     if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     const category = link.dataset.filterCategory!;
     if (!categories.has(category)) return;
+    const canFilterInPlace = !isCapped && (!scopedCategory || category === scopedCategory);
+    if (!canFilterInPlace) return;
     event.preventDefault();
     state.category = category;
     state.topic = link.dataset.filterTopic ?? "";

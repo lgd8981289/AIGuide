@@ -1,0 +1,270 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { authorSchema, breadcrumbSchema, publisherSchema } from "../../data/structured-data";
+import { absoluteUrl, url } from "../../utils";
+import "../../styles/toolbox.css";
+
+const pagePath = "/toolbox/llm-cost-calculator/";
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "LLM Token、上下文窗口与 API 成本计算器",
+    description: "在线估算中英文提示词 Token 数，模拟 RAG 上下文占用与 Prompt Cache 命中后的大模型月度 API 成本。",
+    url: absoluteUrl(pagePath),
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Any",
+    inLanguage: "zh-CN",
+    dateModified: "2026-11-23",
+    offers: {
+      "@type": "Offer",
+      price: 0,
+      priceCurrency: "CNY",
+    },
+    author: authorSchema,
+    publisher: publisherSchema,
+  },
+  breadcrumbSchema([
+    { name: "首页", href: "/" },
+    { name: "AI 工程工具箱", href: "/toolbox/" },
+    { name: "LLM Token 与 API 成本计算器", href: pagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  title="LLM Token、上下文窗口与 API 成本计算器"
+  description="免费在线估算中文/英文/代码文本 Token 数量，测算 RAG 召回片段、Prompt Cache 命中率与日均请求量下的大模型月度 API 费用。"
+  path={pagePath}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, "\\u003c")} />
+  <div class="toolbox-shell">
+    <nav class="toolbox-crumbs" aria-label="面包屑">
+      <a href={url("/")}>首页</a> / <a href={url("/toolbox/")}>AI 工程工具箱</a> / <span>LLM Token 与 API 成本计算器</span>
+    </nav>
+
+    <header class="toolbox-hero">
+      <p class="toolbox-eyebrow">纯本地计算 · 数据不离开浏览器</p>
+      <h1>LLM Token、上下文窗口与 API 成本计算器</h1>
+      <p class="toolbox-lead">
+        不能按“中文字符数 = Token 数”粗算。这里提供基于字符分布的快速 Token 估算，并结合 RAG 召回切片与 Prompt Cache 命中率，帮助你核算单次上下文占比和月度 API 成本。
+      </p>
+    </header>
+
+    <section class="tool-panel" aria-labelledby="sec-token-estimator">
+      <h2 id="sec-token-estimator">1. 文本 Token 快速估算器</h2>
+      <p class="tool-note">
+        采用透明经验系数做轻量估算（汉字约 1.5–1.8 Token/字，ASCII 词元约 0.28–0.35 Token/字符，标点与代码符号切分更细），仅用于工程容量初估，精确计费请以目标模型实际 Tokenizer 为准。
+      </p>
+      <textarea
+        id="token-input"
+        class="tool-textarea"
+        aria-label="输入需要估算 Token 的提示词或代码"
+        placeholder="粘贴你的 System Prompt、RAG 检索片段或一段代码……"
+      >你是一名严谨的 AI 应用工程师。请仅依据下方提供的检索片段回答用户问题；如果证据不足，请直接回答“资料中未提及”，不要猜测。</textarea>
+      <div class="tool-metrics">
+        <div class="tool-stat">
+          <span class="tool-stat-label">总字符数</span>
+          <span class="tool-stat-value" id="stat-chars">0</span>
+        </div>
+        <div class="tool-stat">
+          <span class="tool-stat-label">中文字符数</span>
+          <span class="tool-stat-value" id="stat-cjk">0</span>
+        </div>
+        <div class="tool-stat">
+          <span class="tool-stat-label">估算 Token（保守下限）</span>
+          <span class="tool-stat-value" id="stat-tok-low">0</span>
+        </div>
+        <div class="tool-stat">
+          <span class="tool-stat-label">估算 Token（工程预算上限）</span>
+          <span class="tool-stat-value" id="stat-tok-high">0</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-panel" aria-labelledby="sec-cost-sim">
+      <h2 id="sec-cost-sim">2. 月度 API 成本与上下文预算模拟器</h2>
+      <p class="tool-note">
+        输入业务流量与 Prompt Cache 命中率，查看单次请求的上下文占比及不同单价档位下的月度费用对比。所有参考单价均支持直接在表格中修改。
+      </p>
+      <div class="tool-form-grid">
+        <div class="tool-field">
+          <label for="sim-sys">固定 System Prompt + 工具定义（Tokens）</label>
+          <input id="sim-sys" class="tool-input" type="number" min="0" step="100" value="1800" />
+        </div>
+        <div class="tool-field">
+          <label for="sim-rag-k">每次 RAG 召回片段数（Top-K）</label>
+          <input id="sim-rag-k" class="tool-input" type="number" min="0" step="1" value="6" />
+        </div>
+        <div class="tool-field">
+          <label for="sim-rag-size">单片段平均长度（Tokens）</label>
+          <input id="sim-rag-size" class="tool-input" type="number" min="0" step="50" value="450" />
+        </div>
+        <div class="tool-field">
+          <label for="sim-user">历史对话 + 本轮用户输入（Tokens）</label>
+          <input id="sim-user" class="tool-input" type="number" min="0" step="100" value="1200" />
+        </div>
+        <div class="tool-field">
+          <label for="sim-out">单次模型输出（Tokens）</label>
+          <input id="sim-out" class="tool-input" type="number" min="0" step="50" value="600" />
+        </div>
+        <div class="tool-field">
+          <label for="sim-req">日均调用次数（Requests / 天）</label>
+          <input id="sim-req" class="tool-input" type="number" min="1" step="500" value="10000" />
+        </div>
+        <div class="tool-field">
+          <label for="sim-cache">Prompt Cache 命中率（% · 作用于 System/工具前缀）</label>
+          <input id="sim-cache" class="tool-input" type="number" min="0" max="95" step="5" value="60" />
+        </div>
+        <div class="tool-field">
+          <label for="sim-ctx">目标模型上下文窗口（Tokens）</label>
+          <select id="sim-ctx" class="tool-select">
+            <option value="32768">32K (32,768)</option>
+            <option value="65536">64K (65,536)</option>
+            <option value="128000" selected>128K (128,000)</option>
+            <option value="200000">200K (200,000)</option>
+            <option value="1000000">1M (1,000,000)</option>
+          </select>
+        </div>
+        <div class="tool-field">
+          <label for="sim-days">每月计费天数</label>
+          <input id="sim-days" class="tool-input" type="number" min="1" max="31" value="30" />
+        </div>
+      </div>
+
+      <div class="ctx-bar-wrap">
+        <div class="ctx-bar-head">
+          <span>单次总上下文：<strong id="ctx-total-label">0</strong> Tokens（输入 <span id="ctx-in-label">0</span> + 输出 <span id="ctx-out-label">0</span>）</span>
+          <span>窗口占比：<strong id="ctx-pct-label">0%</strong></span>
+        </div>
+        <div class="ctx-bar-track">
+          <div class="ctx-bar-fill" id="ctx-bar-fill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="tool-table-wrap">
+        <table class="tool-table">
+          <caption>可编辑参考单价对比表（单位：元 / 百万 Tokens，请以厂商官网最新计费为准）</caption>
+          <thead>
+            <tr>
+              <th>模型档位（可自定义单价）</th>
+              <th>输入单价</th>
+              <th>缓存命中单价</th>
+              <th>输出单价</th>
+              <th>未开缓存月费</th>
+              <th>当前月费</th>
+              <th>月省占比</th>
+            </tr>
+          </thead>
+          <tbody id="pricing-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="toolbox-links-section" aria-labelledby="calc-reading">
+      <h2 id="calc-reading">延伸阅读：为什么成本、Token 与缓存常在面试中被追问？</h2>
+      <ul class="toolbox-reading-list">
+        <li><a href={url("/llm/q020-token-counting-cost/")}>Token 是什么？为什么不能按中文字符数估算上下文和费用？</a></li>
+        <li><a href={url("/llm/q433-bpe-tokenizer/")}>BPE 分词算法是什么？Tokenizer 怎样把文本切成 Token？</a></li>
+        <li><a href={url("/engineering/q032-prompt-cache-answer-cache/")}>Prompt Cache 和答案缓存有什么区别？</a></li>
+        <li><a href={url("/llm/q046-llm-inference-kv-cache/")}>大模型首字延迟为什么高？Prefill、Decode 与 KV Cache</a></li>
+        <li><a href={url("/engineering/q031-model-routing/")}>AI 应用为什么要做模型路由？怎样避免把难题错送给小模型？</a></li>
+        <li><a href={url("/llm/q011-long-context-missed-info/")}>大模型长上下文为什么会漏信息？长文档处理与排查</a></li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    var PRESETS = [
+      { id: "lite", name: "轻量路由档（参考：¥1 / ¥0.2 / ¥3）", inPrice: 1.0, cachePrice: 0.2, outPrice: 3.0 },
+      { id: "balanced", name: "主力推理档（参考：¥2 / ¥0.4 / ¥8）", inPrice: 2.0, cachePrice: 0.4, outPrice: 8.0 },
+      { id: "flagship", name: "高阶复杂推理档（参考：¥15 / ¥3.75 / ¥60）", inPrice: 15.0, cachePrice: 3.75, outPrice: 60.0 },
+      { id: "local", name: "自建 / 高并发折扣档（参考：¥0.8 / ¥0.2 / ¥2）", inPrice: 0.8, cachePrice: 0.2, outPrice: 2.0 }
+    ];
+
+    var textInput = document.getElementById("token-input");
+    function updateTokens() {
+      var text = textInput.value || "";
+      var cjk = (text.match(/[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]/g) || []).length;
+      var spaces = (text.match(/\s/g) || []).length;
+      var other = Math.max(0, text.length - cjk - spaces);
+      var low = Math.round(cjk * 1.35 + other * 0.26 + spaces * 0.15);
+      var high = Math.round(cjk * 1.85 + other * 0.36 + spaces * 0.25);
+      document.getElementById("stat-chars").textContent = text.length.toLocaleString();
+      document.getElementById("stat-cjk").textContent = cjk.toLocaleString();
+      document.getElementById("stat-tok-low").textContent = low.toLocaleString();
+      document.getElementById("stat-tok-high").textContent = high.toLocaleString();
+    }
+    textInput.addEventListener("input", updateTokens);
+    updateTokens();
+
+    var tbody = document.getElementById("pricing-body");
+    PRESETS.forEach(function (row, idx) {
+      var tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + row.name + "</td>" +
+        '<td><input type="number" min="0" step="0.1" data-row="' + idx + '" data-field="inPrice" value="' + row.inPrice + '" aria-label="' + row.name + ' 输入单价"></td>' +
+        '<td><input type="number" min="0" step="0.05" data-row="' + idx + '" data-field="cachePrice" value="' + row.cachePrice + '" aria-label="' + row.name + ' 缓存单价"></td>' +
+        '<td><input type="number" min="0" step="0.1" data-row="' + idx + '" data-field="outPrice" value="' + row.outPrice + '" aria-label="' + row.name + ' 输出单价"></td>' +
+        '<td data-out="raw-' + idx + '">-</td>' +
+        '<td><strong data-out="cached-' + idx + '">-</strong></td>' +
+        '<td data-out="save-' + idx + '">-</td>';
+      tbody.appendChild(tr);
+    });
+
+    function numVal(id) {
+      return Math.max(0, Number(document.getElementById(id).value) || 0);
+    }
+
+    function updateSim() {
+      var sys = numVal("sim-sys");
+      var rag = numVal("sim-rag-k") * numVal("sim-rag-size");
+      var user = numVal("sim-user");
+      var outTok = numVal("sim-out");
+      var reqsPerDay = numVal("sim-req");
+      var cacheRate = Math.min(95, Math.max(0, numVal("sim-cache"))) / 100;
+      var ctxWindow = Math.max(1024, numVal("sim-ctx"));
+      var days = Math.max(1, numVal("sim-days"));
+
+      var totalIn = sys + rag + user;
+      var totalCtx = totalIn + outTok;
+      var pct = Math.min(100, (totalCtx / ctxWindow) * 100);
+      document.getElementById("ctx-in-label").textContent = totalIn.toLocaleString();
+      document.getElementById("ctx-out-label").textContent = outTok.toLocaleString();
+      document.getElementById("ctx-total-label").textContent = totalCtx.toLocaleString();
+      var pctEl = document.getElementById("ctx-pct-label");
+      pctEl.textContent = ((totalCtx / ctxWindow) * 100).toFixed(1) + "%" + (totalCtx > ctxWindow ? "（已超窗！）" : "");
+      var fill = document.getElementById("ctx-bar-fill");
+      fill.style.width = pct.toFixed(1) + "%";
+      fill.style.background = totalCtx > ctxWindow ? "#d9534f" : pct > 75 ? "#e09b2d" : "var(--accent)";
+
+      var monthlyReqs = reqsPerDay * days;
+      var cachedPrefix = sys * cacheRate;
+      var uncachedIn = Math.max(0, totalIn - cachedPrefix);
+
+      PRESETS.forEach(function (row, idx) {
+        var rawCost = (monthlyReqs * (totalIn * row.inPrice + outTok * row.outPrice)) / 1e6;
+        var cachedCost = (monthlyReqs * (uncachedIn * row.inPrice + cachedPrefix * row.cachePrice + outTok * row.outPrice)) / 1e6;
+        var savePct = rawCost > 0 ? ((rawCost - cachedCost) / rawCost) * 100 : 0;
+        document.querySelector('[data-out="raw-' + idx + '"]').textContent = "¥" + rawCost.toFixed(2);
+        document.querySelector('[data-out="cached-' + idx + '"]').textContent = "¥" + cachedCost.toFixed(2);
+        document.querySelector('[data-out="save-' + idx + '"]').textContent = savePct.toFixed(1) + "%";
+      });
+    }
+
+    ["sim-sys", "sim-rag-k", "sim-rag-size", "sim-user", "sim-out", "sim-req", "sim-cache", "sim-ctx", "sim-days"].forEach(function (id) {
+      document.getElementById(id).addEventListener("input", updateSim);
+      document.getElementById(id).addEventListener("change", updateSim);
+    });
+    tbody.addEventListener("input", function (e) {
+      var target = e.target;
+      if (target && target.dataset && target.dataset.row !== undefined) {
+        PRESETS[Number(target.dataset.row)][target.dataset.field] = Math.max(0, Number(target.value) || 0);
+        updateSim();
+      }
+    });
+    updateSim();
+  })();
+</script>

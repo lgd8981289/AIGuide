@@ -7,7 +7,7 @@
 ## Agent面试题
 
 - [Agent 的 Context、Memory 和 State 有什么区别？](../agent/q007-context-memory-state.md)
-  Context 可以理解成这一轮真正交给模型看的信息。用户刚说的话、任务目标、最近的工具结果，都可能放进去；但系统保存过的内容，不代表模型这一轮一定看到了。State 记录的是任务现在进行到哪里。
+  Agent 的 Context 是本轮模型输入，State 保存任务进度，Memory 负责信息保留与取用。本文比较三者边界，并说明跨轮约束与持久化的关系。
 - [Agent 上下文太长怎么办？压缩与关键信息保留](../agent/q056-agent-context-compression.md)
   用报表排查逐步解释 Agent 上下文压缩，讲清预算预留、摘要状态、外部证据、工具调用关系与压缩后验证。
 

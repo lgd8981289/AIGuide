@@ -5,7 +5,7 @@ from pathlib import Path
 import json
 import re
 import sys
-from urllib.parse import unquote, urlsplit
+from urllib.parse import unquote, urlsplit, urldefrag
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -26,6 +26,7 @@ class Page(HTMLParser):
         self.links = []
         self.schemas = []
         self.classes = set()
+        self.ids = set()
         self.h1 = 0
         self.h1_titles = []
         self.search_bodies = 0
@@ -36,6 +37,8 @@ class Page(HTMLParser):
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         self.classes.update((attrs.get("class") or "").split())
+        if attrs.get("id"):
+            self.ids.add(attrs["id"])
         self.search_bodies += "data-pagefind-body" in attrs
         self.h1 += tag == "h1"
         if tag in ("title", "h1") or tag == "script" and attrs.get("type") == "application/ld+json":
@@ -75,9 +78,12 @@ def main():
         if not ok:
             errors.append(message)
     website_titles = json.loads((ROOT / "scripts/article-titles.json").read_text())
+    seo_titles_path = ROOT / "scripts/article-seo-titles.json"
+    seo_titles = json.loads(seo_titles_path.read_text()) if seo_titles_path.is_file() else {}
     content_root = ROOT / "src/content/articles"
     sources = list(content_root.rglob("*.md"))
     expected_titles = {}
+    expected_seo_titles = {}
     course_root = ROOT / "src/content/course"
     course_sources = list(course_root.rglob("*.md"))
     course_free = {}
@@ -98,7 +104,9 @@ def main():
         synced_title = json.loads(re.search(r'^title: (.+)$', frontmatter, re.M)[1])
         expected = website_titles.get(num, synced_title)
         check(synced_title == expected, f"网站标题配置尚未同步，请先运行 npm run sync:content: {num}")
-        expected_titles[ORIGIN + "/" + source.relative_to(content_root).with_suffix("").as_posix() + "/"] = expected
+        url_key = ORIGIN + "/" + source.relative_to(content_root).with_suffix("").as_posix() + "/"
+        expected_titles[url_key] = expected
+        expected_seo_titles[url_key] = seo_titles.get(num, expected)
     urls = [x.text for x in ET.parse(DIST / "sitemap-0.xml").findall("s:url/s:loc", NS)]
     index = [x.text for x in ET.parse(DIST / "sitemap-index.xml").findall("s:sitemap/s:loc", NS)]
     check(index == [ORIGIN + BASE + "sitemap-0.xml"], "sitemap 索引地址错误")
@@ -114,6 +122,27 @@ def main():
             errors.append("sitemap 页面不存在: " + url)
             continue
         page = Page(file.read_text())
+        def schema_nodes(value):
+            if isinstance(value, dict):
+                yield value
+                for child in value.values():
+                    yield from schema_nodes(child)
+            elif isinstance(value, list):
+                for child in value:
+                    yield from schema_nodes(child)
+        for node in schema_nodes(page.schemas):
+            if "sameAs" in node:
+                values = node["sameAs"] if isinstance(node["sameAs"], list) else [node["sameAs"]]
+                check(all(isinstance(value, str) and value.startswith("https://") for value in values), "Schema sameAs 包含空值或非网址: " + url)
+            if node.get("@type") == "Organization":
+                check(node.get("@id") == ORIGIN + "/#publisher" and node.get("url") == ORIGIN + "/", "出版品牌实体引用不一致: " + url)
+            if node.get("@type") == "Person":
+                check(node.get("@id") == ORIGIN + "/#author", "作者实体引用不一致: " + url)
+        if url != ORIGIN + "/":
+            breadcrumb = next((s for s in page.schemas if s.get("@type") == "BreadcrumbList"), {})
+            crumbs = breadcrumb.get("itemListElement", [])
+            check(len(crumbs) >= 2 and crumbs[-1].get("item") == url, "缺少规范面包屑路径: " + url)
+            check(all(c.get("position") == i + 1 and c.get("name") and urldefrag(c.get("item", ""))[0] in urls for i, c in enumerate(crumbs)), "面包屑层级或目标无效: " + url)
         check(page.canonical == [url], "canonical 错误: " + url)
         check(page.meta.get("og:url") == url, "og:url 错误: " + url)
         check(page.meta.get("og:site_name") == "Sunday面试指南", "站点名称错误: " + url)
@@ -125,7 +154,7 @@ def main():
         check(page.h1 == 1, "H1 数量错误: " + url)
         check(len(page.titles) == 1 and bool(page.titles[0]), "title 缺失或重复: " + url)
         check(page.meta.get("description"), "description 缺失: " + url)
-        check("Sunday面试指南" in page.meta.get("description", ""), "description 缺少品牌: " + url)
+        check(not page.meta.get("description", "").endswith("（Sunday面试指南 · 程序员Sunday）"), "description 残留重复品牌后缀: " + url)
         check(bool(page.titles) and "Sunday面试指南" in page.titles[0], "title 缺少品牌: " + url)
         check("noindex" not in page.meta.get("robots", ""), "sitemap 页面被禁止索引: " + url)
         check("max-image-preview:large" in page.meta.get("robots", ""), "缺少大图预览设置: " + url)
@@ -140,8 +169,8 @@ def main():
             expected = expected_titles.get(url)
             check(expected is not None, "文章缺少对应同步源稿: " + url)
             check(page.h1_titles == [expected], "文章 H1 与网站标题不一致: " + url)
-            # BaseLayout 为文章与课程标题追加统一品牌；H1 仍保留具体题目。
-            expected_page_title = f"{expected}｜慕课网 {course_name}" if url in course_free else expected
+            # BaseLayout 为文章与课程标题追加统一品牌；H1 仍保留具体题目；网页 title 允许使用更简短的 seoTitle。
+            expected_page_title = expected_seo_titles.get(url, expected)
             expected_page_title += "｜Sunday面试指南"
             check(page.titles == [expected_page_title], "文章 title 与网站标题不一致: " + url)
             check(article.get("headline") == expected, "文章结构化标题与网站标题不一致: " + url)
@@ -157,7 +186,7 @@ def main():
             if url in course_free:
                 check(article.get("isAccessibleForFree") is course_free[url], "课程付费结构化数据错误: " + url)
                 check(("course-paywall" in page.classes) is not course_free[url], "课程付费提示范围错误: " + url)
-                check("慕课网" in page.meta.get("description", "") and course_name in page.meta.get("description", ""), "课程 SEO 描述缺少品牌: " + url)
+                check(page.meta.get("description", "").startswith(expected + "。") and "Agent 应用开发课程" in page.meta.get("description", ""), "课程摘要未先交代本节知识点: " + url)
                 check("techgrow" not in file.read_text().lower(), "课程误接入公众号验证码: " + url)
         else:
             check(page.search_bodies == 0, "非文章页面进入全文索引: " + url)
@@ -185,12 +214,33 @@ def main():
                 continue
             local = DIST / unquote(target.path[len(BASE):])
             check(local.is_file() or (local / "index.html").is_file(), "站内链接不存在: " + link)
-    check(article_count == len(sources) + len(course_sources), "构建文章数与源稿不一致")
+    free_course_urls = {u for u, is_free in course_free.items() if is_free}
+    check(article_count == len(sources) + len(free_course_urls), "构建文章数与源稿不一致")
+    url_set = set(urls)
+    for course_url, is_free in course_free.items():
+        if is_free:
+            continue
+        check(course_url not in url_set, "截断试读课程页不应进入 sitemap: " + course_url)
+        course_file = DIST / unquote(urlsplit(course_url).path[len(BASE):]) / "index.html"
+        check(course_file.is_file(), "试读课程页不存在: " + course_url)
+        if course_file.is_file():
+            course_page_obj = Page(course_file.read_text())
+            check("noindex" in course_page_obj.meta.get("robots", ""), "截断试读课程页缺少 noindex: " + course_url)
+    companies_dir = DIST / "companies"
+    if companies_dir.is_dir():
+        for html_file in sorted(companies_dir.rglob("index.html")):
+            rel = html_file.relative_to(DIST).parent.as_posix()
+            comp_url = ORIGIN + "/" + rel + "/"
+            if comp_url not in url_set:
+                comp_page = Page(html_file.read_text())
+                check("noindex" in comp_page.meta.get("robots", ""), "未入 sitemap 的薄公司页缺少 noindex: " + comp_url)
     check(len(course_sources) == len(json.loads((ROOT / "scripts/course-lessons.json").read_text())["lessons"]), "课程目录与同步小节数不一致")
     course_page = Page((DIST / "agent-course/index.html").read_text())
     course_schema = next((s for s in course_page.schemas if s.get("@type") == "Course"), {})
     check(course_schema.get("name") == "Agent 大模型 0 到 1 系统课" and course_schema.get("alternateName") == course_name and course_schema.get("offers", {}).get("price") == 499, "课程名称、平台名称或价格标记错误")
     check(len(course_schema.get("hasPart", [])) == len(course_sources), "课程结构化目录不完整")
+    offer_url = urlsplit(course_schema.get("offers", {}).get("url", ""))
+    check(offer_url.path == "/agent-course/" and offer_url.fragment in course_page.ids, "课程购买说明锚点不存在")
     error_page = Page((DIST / "404.html").read_text())
     check("noindex" in error_page.meta.get("robots", ""), "404 页面缺少 noindex")
     check(not any("/404" in u for u in urls), "404 被放入 sitemap")

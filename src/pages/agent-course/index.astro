@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import CoursePurchase from '../../components/CoursePurchase.astro'
 import { COURSE } from '../../data/course'
-import { SITE } from '../../data/site'
+import { authorSchema } from '../../data/structured-data'
 import { getCourseChapters, lessonPath } from '../../data/course-lessons'
 import { absoluteUrl, url } from '../../utils'
 import '../../styles/course.css'
@@ -24,7 +24,7 @@ const jsonLd = [
 		description: COURSE.seoDescription,
 		url: absoluteUrl(COURSE.href),
 		inLanguage: 'zh-CN',
-		provider: { '@type': 'Person', name: SITE.author },
+		provider: authorSchema,
 		isAccessibleForFree: false,
 		offers: {
 			'@type': 'Offer',
@@ -153,7 +153,7 @@ const jsonLd = [
 				))
 			}
 		</section>
-		<section class="course-faq" aria-labelledby="faq-title">
+		<section id="purchase" class="course-faq" aria-labelledby="faq-title">
 			<h2 id="faq-title">阅读与购买说明</h2>
 			<details open>
 				<summary>前两章可以免费阅读哪些内容？</summary><p>

@@ -4,6 +4,10 @@ import ResumeCta from './ResumeCta.astro'
 import { getOrderedArticles, getArticleTopicGroups } from '../data/articles'
 import SidebarCollapse from './SidebarCollapse.astro'
 import HomeStart from './HomeStart.astro'
+import HomeOverview from './HomeOverview.astro'
+import HomeFaq from './HomeFaq.astro'
+import { getHomeFacts } from '../data/home'
+import { authorSchema, publisherSchema, websiteSchema } from '../data/structured-data'
 import {
 	CATEGORIES,
 	MODULE_META,
@@ -20,6 +24,8 @@ interface Props {
 }
 
 const { module, category } = Astro.props
+const isHome = !module && !category
+const pageDescription = category?.intro ?? (module ? MODULE_META[module].description : SITE.homeDescription)
 const meta = module ? MODULE_META[module] : undefined
 const scopePath = meta?.href ?? '/'
 const pagePath = category ? `/${category.slug}/` : scopePath
@@ -37,6 +43,7 @@ const categoryBySlug = new Map(cats.map((c) => [c.slug, c]))
 const ordered = (await getOrderedArticles()).filter(
 	(a) => !module || a.module === module
 )
+const homeFacts = isHome ? getHomeFacts(ordered) : undefined
 const sequence = new Map(ordered.map((a, i) => [a.entry.id, i]))
 const latest = [...ordered].sort(
 	(a, b) =>
@@ -46,6 +53,12 @@ const latest = [...ordered].sort(
 const initialList = latest.filter(
 	(a) => !category || a.entry.data.category === category.slug
 )
+// 分类页渲染该分类全部文章（去掉隐藏的跨分类 DOM 节点）；
+// 首页和模块汇总页在静态 HTML 中只保留最新一批条目，避免 600–900KB 单页摊平链接权重，
+// 全部历史文章均可通过侧边栏与下方分类直达入口一跳到达。
+const STATIC_LIST_CAP = isHome ? 30 : category ? Infinity : 60
+const renderedList = initialList.slice(0, STATIC_LIST_CAP)
+const isCapped = renderedList.length < initialList.length
 const articlesByCategory = new Map(
 	cats.map((c) => [
 		c.slug,
@@ -77,8 +90,8 @@ const jsonLd: Record<string, unknown>[] = [
 		'@context': 'https://schema.org',
 		'@type': 'ItemList',
 		name: category?.name ?? defaultTitle,
-		numberOfItems: initialList.length,
-		itemListElement: initialList.map(({ entry }, i) => ({
+		numberOfItems: renderedList.length,
+		itemListElement: renderedList.map(({ entry }, i) => ({
 			'@type': 'ListItem',
 			position: i + 1,
 			name: entry.data.title,
@@ -93,10 +106,11 @@ if (!module)
 		'@id': `${absoluteUrl('/')}#website`,
 		name: SITE.name,
 		url: absoluteUrl('/'),
-		description: SITE.description,
+		description: SITE.homeDescription,
 		inLanguage: 'zh-CN',
 		alternateName: SITE.alternateNames,
-		publisher: { '@type': 'Person', name: SITE.author, url: SITE.url, sameAs: [SITE.github] }
+		creator: authorSchema,
+		publisher: publisherSchema
 	})
 if (module) {
 	const crumbs = [
@@ -128,21 +142,17 @@ jsonLd.push({
 	'@context': 'https://schema.org',
 	'@type': 'CollectionPage',
 	name: category?.name ?? meta?.title ?? SITE.name,
-	description: category?.intro ?? meta?.description ?? SITE.description,
+	description: pageDescription,
 	url: absoluteUrl(pagePath),
 	inLanguage: 'zh-CN',
-	isPartOf: {
-		'@type': 'WebSite',
-		'@id': `${absoluteUrl('/')}#website`,
-		name: SITE.name,
-		url: absoluteUrl('/')
-	}
+	...(isHome ? { dateModified: [SITE.homeUpdated, ...latest.slice(0, 1).map(a => fmt(a.entry.data.date))].sort().at(-1) } : {}),
+	isPartOf: websiteSchema
 })
 ---
 
 <BaseLayout
 	title={category?.seoTitle ?? category?.name ?? meta?.title ?? SITE.name}
-	description={category?.intro ?? meta?.description ?? SITE.description}
+	description={pageDescription}
 	path={pagePath}
 	customSidebar
 	noindex={initialList.length === 0}
@@ -158,6 +168,9 @@ jsonLd.push({
 		data-scope-path={url(scopePath)}
 		data-default-path={url(pagePath)}
 		data-default-category={category?.slug ?? ''}
+		data-scoped-category={category?.slug ?? ''}
+		data-capped={isCapped ? 'true' : ''}
+		data-total-count={String(initialList.length)}
 		data-title={defaultTitle}
 		data-intro={defaultIntro}
 	>
@@ -244,7 +257,6 @@ jsonLd.push({
 			aria-labelledby="browse-title"
 			data-pagefind-ignore
 		>
-			{!module && !category && <HomeStart />}
 			<header class="browse-heading">
 				<h1 id="browse-title" tabindex="-1">
 					{category?.name ?? defaultTitle}
@@ -253,6 +265,11 @@ jsonLd.push({
 					{category?.intro ?? defaultIntro}
 				</p>
 			</header>
+			{homeFacts && <>
+				<HomeOverview facts={homeFacts} />
+				<HomeStart />
+				<h2 id="home-articles" class="home-articles-heading" data-home-start>按更新时间浏览面试题与教程</h2>
+			</>}
 			<div class="browse-toolbar">
 				<p
 					class="browse-result-count"
@@ -260,7 +277,9 @@ jsonLd.push({
 					aria-live="polite"
 					aria-atomic="true"
 				>
-					共 {initialList.length} 篇文章
+					{isCapped
+						? `最新 ${renderedList.length} 篇（${isHome ? '全站' : '本栏目'}共 ${initialList.length} 篇文章，按分类浏览全部）`
+						: `共 ${initialList.length} 篇文章`}
 				</p>
 				<label class="browse-sort" data-browser-enhanced hidden>
 					<span>排序</span>
@@ -273,7 +292,7 @@ jsonLd.push({
 			</div>
 			<ul class="browse-posts" data-browser-posts>
 				{
-					latest.map(({ entry, module: articleModule }, i) => {
+					renderedList.map(({ entry, module: articleModule }, i) => {
 						const cat = categoryBySlug.get(entry.data.category)!
 						return (
 							<li
@@ -284,7 +303,6 @@ jsonLd.push({
 								data-article-topic={entry.data.topic ?? `${cat.slug}:other`}
 								data-latest-order={i}
 								data-series-order={sequence.get(entry.id)}
-								hidden={!!category && cat.slug !== category.slug}
 							>
 								<article>
 									<div class="browse-post-meta">
@@ -320,6 +338,19 @@ jsonLd.push({
 					})
 				}
 			</ul>
+			{isCapped && (
+				<nav class="browse-category-hub" aria-label="按分类浏览全部文章">
+					<p class="browse-category-hub-title">想看全部 {initialList.length} 篇文章？直接进入对应专题分类：</p>
+					<div class="browse-category-hub-links">
+						{cats.filter((c) => (counts.get(c.slug) ?? 0) > 0).map((c) => (
+							<a href={url(`/${c.slug}/`)}>
+								<span>{c.name}</span>
+								<span class="browse-count">{counts.get(c.slug)} 篇</span>
+							</a>
+						))}
+					</div>
+				</nav>
+			)}
 			<div
 				class="browse-empty"
 				data-browser-empty
@@ -359,6 +390,7 @@ jsonLd.push({
 					>
 				</div>
 			</nav>
+			{homeFacts && <HomeFaq facts={homeFacts} />}
 		</section>
 	</div>
 </BaseLayout>

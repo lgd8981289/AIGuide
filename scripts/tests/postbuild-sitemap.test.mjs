@@ -40,4 +40,9 @@ test('重建保留真实日期，覆盖公司岗位两层，未知日期不冒�
   assert.ok(result.includes('<url><loc>https://note.lgdsunday.club/unknown/</loc></url>'));
   assert.equal(fs.readFileSync(path.join(root, 'dist/sitemap.xml'), 'utf8'), result);
   assert.equal(build(), result, '仅重建不刷新 lastmod');
+  write('dist/index.html', '<script type="application/ld+json">{"dateModified":"2026-10-23"}</script>');
+  const revised = build();
+  assert.ok(revised.includes('<loc>https://note.lgdsunday.club/</loc><lastmod>2026-10-23</lastmod>'));
+  assert.ok(revised.includes('<loc>https://note.lgdsunday.club/agent/q001-example/</loc><lastmod>2026-10-01</lastmod>'));
+  assert.equal(build(), revised, '首页编辑日期同样不随构建刷新');
 });

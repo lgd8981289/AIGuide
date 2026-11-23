@@ -86,8 +86,8 @@ export function getInterviewCoverage(articles, sources = INTERVIEW_SOURCES) {
 }
 
 export function interviewDescription(description, matches) {
-  const tags = [...new Set(matches.filter(m => m.relation === 'mentioned' && m.question).map(m => `${m.company.name}${INTERVIEW_ROLES.find(r => r.id === m.source.roleKey).name}`))];
-  return tags.length ? `${description} 附${tags.slice(0, 2).join('、')}${tags.length > 2 ? '等岗位' : ''}公开面经中的真题题意与来源。` : description;
+  // 单题摘要回答技术问题；公司、岗位与来源由可见标签和公司题单承接。
+  return description.trim();
 }
 
 export function companyTagMarkdown(qnum, origin, linkForTag = tag => `${origin}${tag.href}`) {
